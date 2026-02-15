@@ -8,6 +8,7 @@ CMakeFiles/bebra_tensor.dir/src/main.cpp.o: /home/kirill/Side-Projects/TensorShi
   /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraGraph.hpp \
   /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraNode.hpp \
   /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraTensor.hpp \
+  /home/kirill/Side-Projects/TensorShit/include/bebra/ops/BebraOperations.hpp \
   /home/kirill/Side-Projects/TensorShit/include/onnx_proto/onnx.proto3.pb.h \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
@@ -471,10 +472,6 @@ CMakeFiles/bebra_tensor.dir/src/main.cpp.o:
 
 /usr/include/c++/15/bits/locale_classes.tcc:
 
-/usr/include/c++/15/bits/functional_hash.h:
-
-/usr/include/c++/15/ext/type_traits.h:
-
 /usr/include/asm/bitsperlong.h:
 
 /usr/include/c++/15/bits/alloc_traits.h:
@@ -585,6 +582,8 @@ CMakeFiles/bebra_tensor.dir/src/main.cpp.o:
 
 /usr/include/c++/15/mutex:
 
+/usr/include/bits/types/__locale_t.h:
+
 /usr/include/bits/errno.h:
 
 /usr/include/bits/timex.h:
@@ -647,6 +646,16 @@ CMakeFiles/bebra_tensor.dir/src/main.cpp.o:
 
 /usr/include/c++/15/bits/stl_raw_storage_iter.h:
 
+/usr/include/c++/15/bits/functional_hash.h:
+
+/usr/include/c++/15/ext/type_traits.h:
+
+/home/kirill/Side-Projects/TensorShit/include/bebra/ops/BebraOperations.hpp:
+
+/usr/include/bits/types/struct_tm.h:
+
+/usr/include/c++/15/bits/string_view.tcc:
+
 /usr/include/c++/15/bits/stl_iterator_base_funcs.h:
 
 /usr/include/c++/15/ext/atomicity.h:
@@ -676,14 +685,6 @@ CMakeFiles/bebra_tensor.dir/src/main.cpp.o:
 /usr/include/linux/posix_types.h:
 
 /usr/include/bits/types/FILE.h:
-
-/usr/include/bits/floatn.h:
-
-/usr/include/c++/15/bits/refwrap.h:
-
-/usr/include/c++/15/type_traits:
-
-/usr/include/c++/15/x86_64-redhat-linux/bits/basic_file.h:
 
 /usr/include/bits/endianness.h:
 
@@ -757,6 +758,14 @@ CMakeFiles/bebra_tensor.dir/src/main.cpp.o:
 
 /usr/include/asm-generic/errno.h:
 
+/usr/include/bits/floatn.h:
+
+/usr/include/c++/15/bits/refwrap.h:
+
+/usr/include/c++/15/type_traits:
+
+/usr/include/c++/15/x86_64-redhat-linux/bits/basic_file.h:
+
 /usr/include/bits/libc-header-start.h:
 
 /usr/include/c++/15/x86_64-redhat-linux/bits/ctype_base.h:
@@ -782,12 +791,6 @@ CMakeFiles/bebra_tensor.dir/src/main.cpp.o:
 /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraColors.hpp:
 
 /usr/include/bits/pthreadtypes.h:
-
-/usr/include/c++/15/bits/istream.tcc:
-
-/home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraErr.hpp:
-
-/usr/include/c++/15/bits/allocated_ptr.h:
 
 /usr/include/c++/15/iostream:
 
@@ -817,7 +820,11 @@ CMakeFiles/bebra_tensor.dir/src/main.cpp.o:
 
 /usr/include/asm/errno.h:
 
-/usr/include/bits/types/__locale_t.h:
+/home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraErr.hpp:
+
+/usr/include/c++/15/bits/allocated_ptr.h:
+
+/usr/include/c++/15/bits/istream.tcc:
 
 /usr/include/bits/types/wint_t.h:
 
@@ -956,10 +963,6 @@ CMakeFiles/bebra_tensor.dir/src/main.cpp.o:
 /usr/include/google/protobuf/repeated_ptr_field.h:
 
 /usr/include/c++/15/unordered_set:
-
-/usr/include/bits/types/struct_tm.h:
-
-/usr/include/c++/15/bits/string_view.tcc:
 
 /usr/include/c++/15/bits/uniform_int_dist.h:
 

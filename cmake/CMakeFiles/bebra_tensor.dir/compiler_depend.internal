@@ -9,6 +9,7 @@ CMakeFiles/bebra_tensor.dir/src/main.cpp.o
  /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraGraph.hpp
  /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraNode.hpp
  /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraTensor.hpp
+ /home/kirill/Side-Projects/TensorShit/include/bebra/ops/BebraOperations.hpp
  /home/kirill/Side-Projects/TensorShit/include/onnx_proto/onnx.proto3.pb.h
  /usr/include/alloca.h
  /usr/include/asm-generic/bitsperlong.h

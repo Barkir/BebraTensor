@@ -395,6 +395,30 @@ tests/data/graph_load.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_tests.dir/build.make CMakeFiles/bebra_tests.dir/tests/data/graph_load.cpp.s
 .PHONY : tests/data/graph_load.cpp.s
 
+tests/data/op_load.o: tests/data/op_load.cpp.o
+.PHONY : tests/data/op_load.o
+
+# target to build an object file
+tests/data/op_load.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_tests.dir/build.make CMakeFiles/bebra_tests.dir/tests/data/op_load.cpp.o
+.PHONY : tests/data/op_load.cpp.o
+
+tests/data/op_load.i: tests/data/op_load.cpp.i
+.PHONY : tests/data/op_load.i
+
+# target to preprocess a source file
+tests/data/op_load.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_tests.dir/build.make CMakeFiles/bebra_tests.dir/tests/data/op_load.cpp.i
+.PHONY : tests/data/op_load.cpp.i
+
+tests/data/op_load.s: tests/data/op_load.cpp.s
+.PHONY : tests/data/op_load.s
+
+# target to generate assembly for a file
+tests/data/op_load.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_tests.dir/build.make CMakeFiles/bebra_tests.dir/tests/data/op_load.cpp.s
+.PHONY : tests/data/op_load.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -431,6 +455,9 @@ help:
 	@echo "... tests/data/graph_load.o"
 	@echo "... tests/data/graph_load.i"
 	@echo "... tests/data/graph_load.s"
+	@echo "... tests/data/op_load.o"
+	@echo "... tests/data/op_load.i"
+	@echo "... tests/data/op_load.s"
 .PHONY : help
 
 

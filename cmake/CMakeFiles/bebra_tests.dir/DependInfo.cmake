@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kirill/Side-Projects/TensorShit/tests/data/graph_load.cpp" "CMakeFiles/bebra_tests.dir/tests/data/graph_load.cpp.o" "gcc" "CMakeFiles/bebra_tests.dir/tests/data/graph_load.cpp.o.d"
+  "/home/kirill/Side-Projects/TensorShit/tests/data/op_load.cpp" "CMakeFiles/bebra_tests.dir/tests/data/op_load.cpp.o" "gcc" "CMakeFiles/bebra_tests.dir/tests/data/op_load.cpp.o.d"
   "" "bebra_tests" "gcc" "CMakeFiles/bebra_tests.dir/link.d"
   )
 

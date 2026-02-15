@@ -6,12 +6,12 @@
 #define TEST_DATA_DIR "."
 #endif
 
-std::string get_model_path() {
-    return std::filesystem::path(TEST_DATA_DIR) / "third_party" / "model_quantized.onnx";
+std::string get_model_path(std::string path) {
+    return std::filesystem::path(TEST_DATA_DIR) / "third_party" / path;
 }
 
 TEST(GraphLoading, LoadsWithoutMissingTensors) {
-    const std::string model_path = get_model_path();
+    const std::string model_path = get_model_path("model_quantized.onnx");
     Bebra::Core::BebraGraph graph(model_path);
 
     std::cout << "\n  Loaded " << graph.nodes_.size() << " nodes, "
@@ -27,7 +27,7 @@ TEST(GraphLoading, LoadsWithoutMissingTensors) {
 }
 
 TEST(GraphLoading, HasExpectedStructure) {
-    const std::string model_path = get_model_path();
+    const std::string model_path = get_model_path("model_quantized.onnx");
     Bebra::Core::BebraGraph graph(model_path);
 
     EXPECT_FALSE(graph.nodes_.empty()) << "Graph has no nodes";
@@ -44,5 +44,6 @@ TEST(GraphLoading, HasExpectedStructure) {
     EXPECT_TRUE(has_matmul) << "Expected MatMul in transformer model";
     EXPECT_TRUE(has_softmax) << "Expected Softmax in transformer model";
 }
+
 
 // Main provided by gtest_main

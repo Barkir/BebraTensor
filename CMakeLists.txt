@@ -58,6 +58,7 @@ target_sources(bebra_core
             include/bebra/core/BebraGraph.hpp
             include/bebra/core/BebraNode.hpp
             include/bebra/core/BebraTensor.hpp
+            include/bebra/ops/BebraOperations.hpp
             include/onnx_proto/onnx.proto3.pb.h
 )
 

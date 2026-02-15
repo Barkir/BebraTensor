@@ -30,6 +30,12 @@
   "output": "CMakeFiles/bebra_tests.dir/tests/data/graph_load.cpp.o"
 },
 {
+  "directory": "/home/kirill/Side-Projects/TensorShit/cmake",
+  "command": "/usr/bin/c++ -DBEBRA_TEST_DATA_DIR=\\\"/home/kirill/Side-Projects/TensorShit/tests/data\\\" -DTEST_DATA_DIR=\\\"/home/kirill/Side-Projects/TensorShit\\\" -I/home/kirill/Side-Projects/TensorShit/include -isystem /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googletest/include -isystem /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googletest -isystem /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googlemock/include -isystem /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googlemock -std=c++17 -o CMakeFiles/bebra_tests.dir/tests/data/op_load.cpp.o -c /home/kirill/Side-Projects/TensorShit/tests/data/op_load.cpp",
+  "file": "/home/kirill/Side-Projects/TensorShit/tests/data/op_load.cpp",
+  "output": "CMakeFiles/bebra_tests.dir/tests/data/op_load.cpp.o"
+},
+{
   "directory": "/home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-build/googlemock",
   "command": "/usr/bin/c++  -I/home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googlemock/include -I/home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googlemock -isystem /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googletest/include -isystem /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googletest -std=c++17 -Wall -Wshadow -Wundef -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -o CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googlemock/src/gmock-all.cc",
   "file": "/home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googlemock/src/gmock-all.cc",

@@ -60,6 +60,7 @@ if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT
     "/home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraNode.hpp"
     "/home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraTensor.hpp"
     )
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/bebra/ops" TYPE FILE FILES "/home/kirill/Side-Projects/TensorShit/include/bebra/ops/BebraOperations.hpp")
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/onnx_proto" TYPE FILE FILES "/home/kirill/Side-Projects/TensorShit/include/onnx_proto/onnx.proto3.pb.h")
 endif()
 

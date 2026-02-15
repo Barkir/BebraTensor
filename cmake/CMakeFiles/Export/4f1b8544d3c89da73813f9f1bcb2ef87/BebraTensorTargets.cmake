@@ -69,7 +69,7 @@ if(NOT CMAKE_VERSION VERSION_LESS "3.23.0")
       FILE_SET "HEADERS"
       TYPE "HEADERS"
       BASE_DIRS "${_IMPORT_PREFIX}/include"
-      FILES "${_IMPORT_PREFIX}/include/bebra/core/BebraAttr.hpp" "${_IMPORT_PREFIX}/include/bebra/core/BebraColors.hpp" "${_IMPORT_PREFIX}/include/bebra/core/BebraErr.hpp" "${_IMPORT_PREFIX}/include/bebra/core/BebraGraph.hpp" "${_IMPORT_PREFIX}/include/bebra/core/BebraNode.hpp" "${_IMPORT_PREFIX}/include/bebra/core/BebraTensor.hpp" "${_IMPORT_PREFIX}/include/onnx_proto/onnx.proto3.pb.h"
+      FILES "${_IMPORT_PREFIX}/include/bebra/core/BebraAttr.hpp" "${_IMPORT_PREFIX}/include/bebra/core/BebraColors.hpp" "${_IMPORT_PREFIX}/include/bebra/core/BebraErr.hpp" "${_IMPORT_PREFIX}/include/bebra/core/BebraGraph.hpp" "${_IMPORT_PREFIX}/include/bebra/core/BebraNode.hpp" "${_IMPORT_PREFIX}/include/bebra/core/BebraTensor.hpp" "${_IMPORT_PREFIX}/include/bebra/ops/BebraOperations.hpp" "${_IMPORT_PREFIX}/include/onnx_proto/onnx.proto3.pb.h"
   )
 else()
   set_property(TARGET Bebra::bebra_core

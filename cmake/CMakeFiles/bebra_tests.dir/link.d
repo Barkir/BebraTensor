@@ -3,6 +3,7 @@ bebra_tests: \
   /usr/lib/gcc/x86_64-redhat-linux/15/../../../../lib64/crti.o \
   /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o \
   CMakeFiles/bebra_tests.dir/tests/data/graph_load.cpp.o \
+  CMakeFiles/bebra_tests.dir/tests/data/op_load.cpp.o \
   libbebra_core.a \
   lib/libgtest_main.a \
   lib/libgmock.a \
@@ -44,6 +45,8 @@ bebra_tests: \
 /usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o:
 
 CMakeFiles/bebra_tests.dir/tests/data/graph_load.cpp.o:
+
+CMakeFiles/bebra_tests.dir/tests/data/op_load.cpp.o:
 
 libbebra_core.a:
 

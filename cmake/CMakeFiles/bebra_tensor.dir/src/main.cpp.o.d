@@ -238,4 +238,5 @@ CMakeFiles/bebra_tensor.dir/src/main.cpp.o: \
  /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraAttr.hpp \
  /usr/include/c++/15/variant /usr/include/c++/15/bits/monostate.h \
  /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraErr.hpp \
- /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraColors.hpp
+ /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraColors.hpp \
+ /home/kirill/Side-Projects/TensorShit/include/bebra/ops/BebraOperations.hpp
