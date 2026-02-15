@@ -1,3 +1,5 @@
-GraphLoading.LoadsWithoutMissingTensors 3 0.043386
-GraphLoading.HasExpectedStructure 3 0.0440847
+GraphLoading.LoadsWithoutMissingTensors 8 0.0161787
+GraphLoading.HasExpectedStructure 8 0.0162129
+OpLoading.Conv 3 0.0378789
+OpNotLoading.ThrowOnWrongNode 1 0.116512
 ---

@@ -6,7 +6,7 @@
 #define TEST_DATA_DIR "."
 #endif
 
-std::string get_model_path(std::string path) {
+static std::string get_model_path(std::string path) {
     return std::filesystem::path(TEST_DATA_DIR) / "third_party" / path;
 }
 

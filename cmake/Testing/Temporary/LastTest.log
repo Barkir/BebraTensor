@@ -1,10 +1,10 @@
-Start testing: Feb 15 03:05 MSK
+Start testing: Feb 15 21:41 MSK
 ----------------------------------------------------------
-1/2 Testing: GraphLoading.LoadsWithoutMissingTensors
-1/2 Test: GraphLoading.LoadsWithoutMissingTensors
+1/4 Testing: GraphLoading.LoadsWithoutMissingTensors
+1/4 Test: GraphLoading.LoadsWithoutMissingTensors
 Command: "/home/kirill/Side-Projects/TensorShit/cmake/bebra_tests" "--gtest_filter=GraphLoading.LoadsWithoutMissingTensors" "--gtest_also_run_disabled_tests"
 Directory: /home/kirill/Side-Projects/TensorShit
-"GraphLoading.LoadsWithoutMissingTensors" start time: Feb 15 03:05 MSK
+"GraphLoading.LoadsWithoutMissingTensors" start time: Feb 15 21:41 MSK
 Output:
 ----------------------------------------------------------
 Running main() from /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -8955,15 +8955,15 @@ Created tensor with name: last_hidden_state
 Test time =   0.13 sec
 ----------------------------------------------------------
 Test Passed.
-"GraphLoading.LoadsWithoutMissingTensors" end time: Feb 15 03:05 MSK
+"GraphLoading.LoadsWithoutMissingTensors" end time: Feb 15 21:41 MSK
 "GraphLoading.LoadsWithoutMissingTensors" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-2/2 Testing: GraphLoading.HasExpectedStructure
-2/2 Test: GraphLoading.HasExpectedStructure
+2/4 Testing: GraphLoading.HasExpectedStructure
+2/4 Test: GraphLoading.HasExpectedStructure
 Command: "/home/kirill/Side-Projects/TensorShit/cmake/bebra_tests" "--gtest_filter=GraphLoading.HasExpectedStructure" "--gtest_also_run_disabled_tests"
 Directory: /home/kirill/Side-Projects/TensorShit
-"GraphLoading.HasExpectedStructure" start time: Feb 15 03:05 MSK
+"GraphLoading.HasExpectedStructure" start time: Feb 15 21:41 MSK
 Output:
 ----------------------------------------------------------
 Running main() from /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googletest/src/gtest_main.cc
@@ -17902,18 +17902,2343 @@ Created node with type: Mul
 Created tensor with name: /encoder/layers.11/norm2/Mul_output_0
 Created node with type: Add
 Created tensor with name: last_hidden_state
-[       OK ] GraphLoading.HasExpectedStructure (128 ms)
-[----------] 1 test from GraphLoading (128 ms total)
+[       OK ] GraphLoading.HasExpectedStructure (124 ms)
+[----------] 1 test from GraphLoading (124 ms total)
 
 [----------] Global test environment tear-down
-[==========] 1 test from 1 test suite ran. (128 ms total)
+[==========] 1 test from 1 test suite ran. (124 ms total)
 [  PASSED  ] 1 test.
 <end of output>
 Test time =   0.13 sec
 ----------------------------------------------------------
 Test Passed.
-"GraphLoading.HasExpectedStructure" end time: Feb 15 03:05 MSK
+"GraphLoading.HasExpectedStructure" end time: Feb 15 21:41 MSK
 "GraphLoading.HasExpectedStructure" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: Feb 15 03:05 MSK
+3/4 Testing: OpLoading.Conv
+3/4 Test: OpLoading.Conv
+Command: "/home/kirill/Side-Projects/TensorShit/cmake/bebra_tests" "--gtest_filter=OpLoading.Conv" "--gtest_also_run_disabled_tests"
+Directory: /home/kirill/Side-Projects/TensorShit
+"OpLoading.Conv" start time: Feb 15 21:41 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = OpLoading.Conv
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from OpLoading
+[ RUN      ] OpLoading.Conv
+Created tensor with name: resnetv17_conv0_weight
+Created tensor with name: resnetv17_batchnorm0_gamma
+Created tensor with name: resnetv17_batchnorm0_beta
+Created tensor with name: resnetv17_batchnorm0_running_mean
+Created tensor with name: resnetv17_batchnorm0_running_var
+Created tensor with name: resnetv17_stage1_conv0_weight
+Created tensor with name: resnetv17_stage1_conv0_bias
+Created tensor with name: resnetv17_stage1_batchnorm0_gamma
+Created tensor with name: resnetv17_stage1_batchnorm0_beta
+Created tensor with name: resnetv17_stage1_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm0_running_var
+Created tensor with name: resnetv17_stage1_conv1_weight
+Created tensor with name: resnetv17_stage1_batchnorm1_gamma
+Created tensor with name: resnetv17_stage1_batchnorm1_beta
+Created tensor with name: resnetv17_stage1_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm1_running_var
+Created tensor with name: resnetv17_stage1_conv2_weight
+Created tensor with name: resnetv17_stage1_conv2_bias
+Created tensor with name: resnetv17_stage1_batchnorm2_gamma
+Created tensor with name: resnetv17_stage1_batchnorm2_beta
+Created tensor with name: resnetv17_stage1_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm2_running_var
+Created tensor with name: resnetv17_stage1_conv3_weight
+Created tensor with name: resnetv17_stage1_batchnorm3_gamma
+Created tensor with name: resnetv17_stage1_batchnorm3_beta
+Created tensor with name: resnetv17_stage1_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm3_running_var
+Created tensor with name: resnetv17_stage1_conv4_weight
+Created tensor with name: resnetv17_stage1_conv4_bias
+Created tensor with name: resnetv17_stage1_batchnorm4_gamma
+Created tensor with name: resnetv17_stage1_batchnorm4_beta
+Created tensor with name: resnetv17_stage1_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm4_running_var
+Created tensor with name: resnetv17_stage1_conv5_weight
+Created tensor with name: resnetv17_stage1_batchnorm5_gamma
+Created tensor with name: resnetv17_stage1_batchnorm5_beta
+Created tensor with name: resnetv17_stage1_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm5_running_var
+Created tensor with name: resnetv17_stage1_conv6_weight
+Created tensor with name: resnetv17_stage1_conv6_bias
+Created tensor with name: resnetv17_stage1_batchnorm6_gamma
+Created tensor with name: resnetv17_stage1_batchnorm6_beta
+Created tensor with name: resnetv17_stage1_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm6_running_var
+Created tensor with name: resnetv17_stage1_conv7_weight
+Created tensor with name: resnetv17_stage1_conv7_bias
+Created tensor with name: resnetv17_stage1_batchnorm7_gamma
+Created tensor with name: resnetv17_stage1_batchnorm7_beta
+Created tensor with name: resnetv17_stage1_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm7_running_var
+Created tensor with name: resnetv17_stage1_conv8_weight
+Created tensor with name: resnetv17_stage1_batchnorm8_gamma
+Created tensor with name: resnetv17_stage1_batchnorm8_beta
+Created tensor with name: resnetv17_stage1_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm8_running_var
+Created tensor with name: resnetv17_stage1_conv9_weight
+Created tensor with name: resnetv17_stage1_conv9_bias
+Created tensor with name: resnetv17_stage1_batchnorm9_gamma
+Created tensor with name: resnetv17_stage1_batchnorm9_beta
+Created tensor with name: resnetv17_stage1_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm9_running_var
+Created tensor with name: resnetv17_stage2_conv0_weight
+Created tensor with name: resnetv17_stage2_conv0_bias
+Created tensor with name: resnetv17_stage2_batchnorm0_gamma
+Created tensor with name: resnetv17_stage2_batchnorm0_beta
+Created tensor with name: resnetv17_stage2_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm0_running_var
+Created tensor with name: resnetv17_stage2_conv1_weight
+Created tensor with name: resnetv17_stage2_batchnorm1_gamma
+Created tensor with name: resnetv17_stage2_batchnorm1_beta
+Created tensor with name: resnetv17_stage2_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm1_running_var
+Created tensor with name: resnetv17_stage2_conv2_weight
+Created tensor with name: resnetv17_stage2_conv2_bias
+Created tensor with name: resnetv17_stage2_batchnorm2_gamma
+Created tensor with name: resnetv17_stage2_batchnorm2_beta
+Created tensor with name: resnetv17_stage2_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm2_running_var
+Created tensor with name: resnetv17_stage2_conv3_weight
+Created tensor with name: resnetv17_stage2_batchnorm3_gamma
+Created tensor with name: resnetv17_stage2_batchnorm3_beta
+Created tensor with name: resnetv17_stage2_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm3_running_var
+Created tensor with name: resnetv17_stage2_conv4_weight
+Created tensor with name: resnetv17_stage2_conv4_bias
+Created tensor with name: resnetv17_stage2_batchnorm4_gamma
+Created tensor with name: resnetv17_stage2_batchnorm4_beta
+Created tensor with name: resnetv17_stage2_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm4_running_var
+Created tensor with name: resnetv17_stage2_conv5_weight
+Created tensor with name: resnetv17_stage2_batchnorm5_gamma
+Created tensor with name: resnetv17_stage2_batchnorm5_beta
+Created tensor with name: resnetv17_stage2_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm5_running_var
+Created tensor with name: resnetv17_stage2_conv6_weight
+Created tensor with name: resnetv17_stage2_conv6_bias
+Created tensor with name: resnetv17_stage2_batchnorm6_gamma
+Created tensor with name: resnetv17_stage2_batchnorm6_beta
+Created tensor with name: resnetv17_stage2_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm6_running_var
+Created tensor with name: resnetv17_stage2_conv7_weight
+Created tensor with name: resnetv17_stage2_conv7_bias
+Created tensor with name: resnetv17_stage2_batchnorm7_gamma
+Created tensor with name: resnetv17_stage2_batchnorm7_beta
+Created tensor with name: resnetv17_stage2_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm7_running_var
+Created tensor with name: resnetv17_stage2_conv8_weight
+Created tensor with name: resnetv17_stage2_batchnorm8_gamma
+Created tensor with name: resnetv17_stage2_batchnorm8_beta
+Created tensor with name: resnetv17_stage2_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm8_running_var
+Created tensor with name: resnetv17_stage2_conv9_weight
+Created tensor with name: resnetv17_stage2_conv9_bias
+Created tensor with name: resnetv17_stage2_batchnorm9_gamma
+Created tensor with name: resnetv17_stage2_batchnorm9_beta
+Created tensor with name: resnetv17_stage2_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm9_running_var
+Created tensor with name: resnetv17_stage2_conv10_weight
+Created tensor with name: resnetv17_stage2_conv10_bias
+Created tensor with name: resnetv17_stage2_batchnorm10_gamma
+Created tensor with name: resnetv17_stage2_batchnorm10_beta
+Created tensor with name: resnetv17_stage2_batchnorm10_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm10_running_var
+Created tensor with name: resnetv17_stage2_conv11_weight
+Created tensor with name: resnetv17_stage2_batchnorm11_gamma
+Created tensor with name: resnetv17_stage2_batchnorm11_beta
+Created tensor with name: resnetv17_stage2_batchnorm11_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm11_running_var
+Created tensor with name: resnetv17_stage2_conv12_weight
+Created tensor with name: resnetv17_stage2_conv12_bias
+Created tensor with name: resnetv17_stage2_batchnorm12_gamma
+Created tensor with name: resnetv17_stage2_batchnorm12_beta
+Created tensor with name: resnetv17_stage2_batchnorm12_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm12_running_var
+Created tensor with name: resnetv17_stage3_conv0_weight
+Created tensor with name: resnetv17_stage3_conv0_bias
+Created tensor with name: resnetv17_stage3_batchnorm0_gamma
+Created tensor with name: resnetv17_stage3_batchnorm0_beta
+Created tensor with name: resnetv17_stage3_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm0_running_var
+Created tensor with name: resnetv17_stage3_conv1_weight
+Created tensor with name: resnetv17_stage3_batchnorm1_gamma
+Created tensor with name: resnetv17_stage3_batchnorm1_beta
+Created tensor with name: resnetv17_stage3_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm1_running_var
+Created tensor with name: resnetv17_stage3_conv2_weight
+Created tensor with name: resnetv17_stage3_conv2_bias
+Created tensor with name: resnetv17_stage3_batchnorm2_gamma
+Created tensor with name: resnetv17_stage3_batchnorm2_beta
+Created tensor with name: resnetv17_stage3_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm2_running_var
+Created tensor with name: resnetv17_stage3_conv3_weight
+Created tensor with name: resnetv17_stage3_batchnorm3_gamma
+Created tensor with name: resnetv17_stage3_batchnorm3_beta
+Created tensor with name: resnetv17_stage3_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm3_running_var
+Created tensor with name: resnetv17_stage3_conv4_weight
+Created tensor with name: resnetv17_stage3_conv4_bias
+Created tensor with name: resnetv17_stage3_batchnorm4_gamma
+Created tensor with name: resnetv17_stage3_batchnorm4_beta
+Created tensor with name: resnetv17_stage3_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm4_running_var
+Created tensor with name: resnetv17_stage3_conv5_weight
+Created tensor with name: resnetv17_stage3_batchnorm5_gamma
+Created tensor with name: resnetv17_stage3_batchnorm5_beta
+Created tensor with name: resnetv17_stage3_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm5_running_var
+Created tensor with name: resnetv17_stage3_conv6_weight
+Created tensor with name: resnetv17_stage3_conv6_bias
+Created tensor with name: resnetv17_stage3_batchnorm6_gamma
+Created tensor with name: resnetv17_stage3_batchnorm6_beta
+Created tensor with name: resnetv17_stage3_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm6_running_var
+Created tensor with name: resnetv17_stage3_conv7_weight
+Created tensor with name: resnetv17_stage3_conv7_bias
+Created tensor with name: resnetv17_stage3_batchnorm7_gamma
+Created tensor with name: resnetv17_stage3_batchnorm7_beta
+Created tensor with name: resnetv17_stage3_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm7_running_var
+Created tensor with name: resnetv17_stage3_conv8_weight
+Created tensor with name: resnetv17_stage3_batchnorm8_gamma
+Created tensor with name: resnetv17_stage3_batchnorm8_beta
+Created tensor with name: resnetv17_stage3_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm8_running_var
+Created tensor with name: resnetv17_stage3_conv9_weight
+Created tensor with name: resnetv17_stage3_conv9_bias
+Created tensor with name: resnetv17_stage3_batchnorm9_gamma
+Created tensor with name: resnetv17_stage3_batchnorm9_beta
+Created tensor with name: resnetv17_stage3_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm9_running_var
+Created tensor with name: resnetv17_stage3_conv10_weight
+Created tensor with name: resnetv17_stage3_conv10_bias
+Created tensor with name: resnetv17_stage3_batchnorm10_gamma
+Created tensor with name: resnetv17_stage3_batchnorm10_beta
+Created tensor with name: resnetv17_stage3_batchnorm10_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm10_running_var
+Created tensor with name: resnetv17_stage3_conv11_weight
+Created tensor with name: resnetv17_stage3_batchnorm11_gamma
+Created tensor with name: resnetv17_stage3_batchnorm11_beta
+Created tensor with name: resnetv17_stage3_batchnorm11_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm11_running_var
+Created tensor with name: resnetv17_stage3_conv12_weight
+Created tensor with name: resnetv17_stage3_conv12_bias
+Created tensor with name: resnetv17_stage3_batchnorm12_gamma
+Created tensor with name: resnetv17_stage3_batchnorm12_beta
+Created tensor with name: resnetv17_stage3_batchnorm12_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm12_running_var
+Created tensor with name: resnetv17_stage3_conv13_weight
+Created tensor with name: resnetv17_stage3_conv13_bias
+Created tensor with name: resnetv17_stage3_batchnorm13_gamma
+Created tensor with name: resnetv17_stage3_batchnorm13_beta
+Created tensor with name: resnetv17_stage3_batchnorm13_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm13_running_var
+Created tensor with name: resnetv17_stage3_conv14_weight
+Created tensor with name: resnetv17_stage3_batchnorm14_gamma
+Created tensor with name: resnetv17_stage3_batchnorm14_beta
+Created tensor with name: resnetv17_stage3_batchnorm14_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm14_running_var
+Created tensor with name: resnetv17_stage3_conv15_weight
+Created tensor with name: resnetv17_stage3_conv15_bias
+Created tensor with name: resnetv17_stage3_batchnorm15_gamma
+Created tensor with name: resnetv17_stage3_batchnorm15_beta
+Created tensor with name: resnetv17_stage3_batchnorm15_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm15_running_var
+Created tensor with name: resnetv17_stage3_conv16_weight
+Created tensor with name: resnetv17_stage3_conv16_bias
+Created tensor with name: resnetv17_stage3_batchnorm16_gamma
+Created tensor with name: resnetv17_stage3_batchnorm16_beta
+Created tensor with name: resnetv17_stage3_batchnorm16_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm16_running_var
+Created tensor with name: resnetv17_stage3_conv17_weight
+Created tensor with name: resnetv17_stage3_batchnorm17_gamma
+Created tensor with name: resnetv17_stage3_batchnorm17_beta
+Created tensor with name: resnetv17_stage3_batchnorm17_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm17_running_var
+Created tensor with name: resnetv17_stage3_conv18_weight
+Created tensor with name: resnetv17_stage3_conv18_bias
+Created tensor with name: resnetv17_stage3_batchnorm18_gamma
+Created tensor with name: resnetv17_stage3_batchnorm18_beta
+Created tensor with name: resnetv17_stage3_batchnorm18_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm18_running_var
+Created tensor with name: resnetv17_stage4_conv0_weight
+Created tensor with name: resnetv17_stage4_conv0_bias
+Created tensor with name: resnetv17_stage4_batchnorm0_gamma
+Created tensor with name: resnetv17_stage4_batchnorm0_beta
+Created tensor with name: resnetv17_stage4_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm0_running_var
+Created tensor with name: resnetv17_stage4_conv1_weight
+Created tensor with name: resnetv17_stage4_batchnorm1_gamma
+Created tensor with name: resnetv17_stage4_batchnorm1_beta
+Created tensor with name: resnetv17_stage4_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm1_running_var
+Created tensor with name: resnetv17_stage4_conv2_weight
+Created tensor with name: resnetv17_stage4_conv2_bias
+Created tensor with name: resnetv17_stage4_batchnorm2_gamma
+Created tensor with name: resnetv17_stage4_batchnorm2_beta
+Created tensor with name: resnetv17_stage4_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm2_running_var
+Created tensor with name: resnetv17_stage4_conv3_weight
+Created tensor with name: resnetv17_stage4_batchnorm3_gamma
+Created tensor with name: resnetv17_stage4_batchnorm3_beta
+Created tensor with name: resnetv17_stage4_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm3_running_var
+Created tensor with name: resnetv17_stage4_conv4_weight
+Created tensor with name: resnetv17_stage4_conv4_bias
+Created tensor with name: resnetv17_stage4_batchnorm4_gamma
+Created tensor with name: resnetv17_stage4_batchnorm4_beta
+Created tensor with name: resnetv17_stage4_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm4_running_var
+Created tensor with name: resnetv17_stage4_conv5_weight
+Created tensor with name: resnetv17_stage4_batchnorm5_gamma
+Created tensor with name: resnetv17_stage4_batchnorm5_beta
+Created tensor with name: resnetv17_stage4_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm5_running_var
+Created tensor with name: resnetv17_stage4_conv6_weight
+Created tensor with name: resnetv17_stage4_conv6_bias
+Created tensor with name: resnetv17_stage4_batchnorm6_gamma
+Created tensor with name: resnetv17_stage4_batchnorm6_beta
+Created tensor with name: resnetv17_stage4_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm6_running_var
+Created tensor with name: resnetv17_stage4_conv7_weight
+Created tensor with name: resnetv17_stage4_conv7_bias
+Created tensor with name: resnetv17_stage4_batchnorm7_gamma
+Created tensor with name: resnetv17_stage4_batchnorm7_beta
+Created tensor with name: resnetv17_stage4_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm7_running_var
+Created tensor with name: resnetv17_stage4_conv8_weight
+Created tensor with name: resnetv17_stage4_batchnorm8_gamma
+Created tensor with name: resnetv17_stage4_batchnorm8_beta
+Created tensor with name: resnetv17_stage4_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm8_running_var
+Created tensor with name: resnetv17_stage4_conv9_weight
+Created tensor with name: resnetv17_stage4_conv9_bias
+Created tensor with name: resnetv17_stage4_batchnorm9_gamma
+Created tensor with name: resnetv17_stage4_batchnorm9_beta
+Created tensor with name: resnetv17_stage4_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm9_running_var
+Created tensor with name: resnetv17_dense0_weight
+Created tensor with name: resnetv17_dense0_bias
+Created tensor with name: data
+Created tensor with name: resnetv17_conv0_weight
+Created tensor with name: resnetv17_batchnorm0_gamma
+Created tensor with name: resnetv17_batchnorm0_beta
+Created tensor with name: resnetv17_batchnorm0_running_mean
+Created tensor with name: resnetv17_batchnorm0_running_var
+Created tensor with name: resnetv17_stage1_conv0_weight
+Created tensor with name: resnetv17_stage1_conv0_bias
+Created tensor with name: resnetv17_stage1_batchnorm0_gamma
+Created tensor with name: resnetv17_stage1_batchnorm0_beta
+Created tensor with name: resnetv17_stage1_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm0_running_var
+Created tensor with name: resnetv17_stage1_conv1_weight
+Created tensor with name: resnetv17_stage1_batchnorm1_gamma
+Created tensor with name: resnetv17_stage1_batchnorm1_beta
+Created tensor with name: resnetv17_stage1_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm1_running_var
+Created tensor with name: resnetv17_stage1_conv2_weight
+Created tensor with name: resnetv17_stage1_conv2_bias
+Created tensor with name: resnetv17_stage1_batchnorm2_gamma
+Created tensor with name: resnetv17_stage1_batchnorm2_beta
+Created tensor with name: resnetv17_stage1_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm2_running_var
+Created tensor with name: resnetv17_stage1_conv3_weight
+Created tensor with name: resnetv17_stage1_batchnorm3_gamma
+Created tensor with name: resnetv17_stage1_batchnorm3_beta
+Created tensor with name: resnetv17_stage1_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm3_running_var
+Created tensor with name: resnetv17_stage1_conv4_weight
+Created tensor with name: resnetv17_stage1_conv4_bias
+Created tensor with name: resnetv17_stage1_batchnorm4_gamma
+Created tensor with name: resnetv17_stage1_batchnorm4_beta
+Created tensor with name: resnetv17_stage1_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm4_running_var
+Created tensor with name: resnetv17_stage1_conv5_weight
+Created tensor with name: resnetv17_stage1_batchnorm5_gamma
+Created tensor with name: resnetv17_stage1_batchnorm5_beta
+Created tensor with name: resnetv17_stage1_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm5_running_var
+Created tensor with name: resnetv17_stage1_conv6_weight
+Created tensor with name: resnetv17_stage1_conv6_bias
+Created tensor with name: resnetv17_stage1_batchnorm6_gamma
+Created tensor with name: resnetv17_stage1_batchnorm6_beta
+Created tensor with name: resnetv17_stage1_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm6_running_var
+Created tensor with name: resnetv17_stage1_conv7_weight
+Created tensor with name: resnetv17_stage1_conv7_bias
+Created tensor with name: resnetv17_stage1_batchnorm7_gamma
+Created tensor with name: resnetv17_stage1_batchnorm7_beta
+Created tensor with name: resnetv17_stage1_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm7_running_var
+Created tensor with name: resnetv17_stage1_conv8_weight
+Created tensor with name: resnetv17_stage1_batchnorm8_gamma
+Created tensor with name: resnetv17_stage1_batchnorm8_beta
+Created tensor with name: resnetv17_stage1_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm8_running_var
+Created tensor with name: resnetv17_stage1_conv9_weight
+Created tensor with name: resnetv17_stage1_conv9_bias
+Created tensor with name: resnetv17_stage1_batchnorm9_gamma
+Created tensor with name: resnetv17_stage1_batchnorm9_beta
+Created tensor with name: resnetv17_stage1_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm9_running_var
+Created tensor with name: resnetv17_stage2_conv0_weight
+Created tensor with name: resnetv17_stage2_conv0_bias
+Created tensor with name: resnetv17_stage2_batchnorm0_gamma
+Created tensor with name: resnetv17_stage2_batchnorm0_beta
+Created tensor with name: resnetv17_stage2_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm0_running_var
+Created tensor with name: resnetv17_stage2_conv1_weight
+Created tensor with name: resnetv17_stage2_batchnorm1_gamma
+Created tensor with name: resnetv17_stage2_batchnorm1_beta
+Created tensor with name: resnetv17_stage2_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm1_running_var
+Created tensor with name: resnetv17_stage2_conv2_weight
+Created tensor with name: resnetv17_stage2_conv2_bias
+Created tensor with name: resnetv17_stage2_batchnorm2_gamma
+Created tensor with name: resnetv17_stage2_batchnorm2_beta
+Created tensor with name: resnetv17_stage2_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm2_running_var
+Created tensor with name: resnetv17_stage2_conv3_weight
+Created tensor with name: resnetv17_stage2_batchnorm3_gamma
+Created tensor with name: resnetv17_stage2_batchnorm3_beta
+Created tensor with name: resnetv17_stage2_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm3_running_var
+Created tensor with name: resnetv17_stage2_conv4_weight
+Created tensor with name: resnetv17_stage2_conv4_bias
+Created tensor with name: resnetv17_stage2_batchnorm4_gamma
+Created tensor with name: resnetv17_stage2_batchnorm4_beta
+Created tensor with name: resnetv17_stage2_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm4_running_var
+Created tensor with name: resnetv17_stage2_conv5_weight
+Created tensor with name: resnetv17_stage2_batchnorm5_gamma
+Created tensor with name: resnetv17_stage2_batchnorm5_beta
+Created tensor with name: resnetv17_stage2_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm5_running_var
+Created tensor with name: resnetv17_stage2_conv6_weight
+Created tensor with name: resnetv17_stage2_conv6_bias
+Created tensor with name: resnetv17_stage2_batchnorm6_gamma
+Created tensor with name: resnetv17_stage2_batchnorm6_beta
+Created tensor with name: resnetv17_stage2_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm6_running_var
+Created tensor with name: resnetv17_stage2_conv7_weight
+Created tensor with name: resnetv17_stage2_conv7_bias
+Created tensor with name: resnetv17_stage2_batchnorm7_gamma
+Created tensor with name: resnetv17_stage2_batchnorm7_beta
+Created tensor with name: resnetv17_stage2_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm7_running_var
+Created tensor with name: resnetv17_stage2_conv8_weight
+Created tensor with name: resnetv17_stage2_batchnorm8_gamma
+Created tensor with name: resnetv17_stage2_batchnorm8_beta
+Created tensor with name: resnetv17_stage2_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm8_running_var
+Created tensor with name: resnetv17_stage2_conv9_weight
+Created tensor with name: resnetv17_stage2_conv9_bias
+Created tensor with name: resnetv17_stage2_batchnorm9_gamma
+Created tensor with name: resnetv17_stage2_batchnorm9_beta
+Created tensor with name: resnetv17_stage2_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm9_running_var
+Created tensor with name: resnetv17_stage2_conv10_weight
+Created tensor with name: resnetv17_stage2_conv10_bias
+Created tensor with name: resnetv17_stage2_batchnorm10_gamma
+Created tensor with name: resnetv17_stage2_batchnorm10_beta
+Created tensor with name: resnetv17_stage2_batchnorm10_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm10_running_var
+Created tensor with name: resnetv17_stage2_conv11_weight
+Created tensor with name: resnetv17_stage2_batchnorm11_gamma
+Created tensor with name: resnetv17_stage2_batchnorm11_beta
+Created tensor with name: resnetv17_stage2_batchnorm11_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm11_running_var
+Created tensor with name: resnetv17_stage2_conv12_weight
+Created tensor with name: resnetv17_stage2_conv12_bias
+Created tensor with name: resnetv17_stage2_batchnorm12_gamma
+Created tensor with name: resnetv17_stage2_batchnorm12_beta
+Created tensor with name: resnetv17_stage2_batchnorm12_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm12_running_var
+Created tensor with name: resnetv17_stage3_conv0_weight
+Created tensor with name: resnetv17_stage3_conv0_bias
+Created tensor with name: resnetv17_stage3_batchnorm0_gamma
+Created tensor with name: resnetv17_stage3_batchnorm0_beta
+Created tensor with name: resnetv17_stage3_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm0_running_var
+Created tensor with name: resnetv17_stage3_conv1_weight
+Created tensor with name: resnetv17_stage3_batchnorm1_gamma
+Created tensor with name: resnetv17_stage3_batchnorm1_beta
+Created tensor with name: resnetv17_stage3_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm1_running_var
+Created tensor with name: resnetv17_stage3_conv2_weight
+Created tensor with name: resnetv17_stage3_conv2_bias
+Created tensor with name: resnetv17_stage3_batchnorm2_gamma
+Created tensor with name: resnetv17_stage3_batchnorm2_beta
+Created tensor with name: resnetv17_stage3_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm2_running_var
+Created tensor with name: resnetv17_stage3_conv3_weight
+Created tensor with name: resnetv17_stage3_batchnorm3_gamma
+Created tensor with name: resnetv17_stage3_batchnorm3_beta
+Created tensor with name: resnetv17_stage3_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm3_running_var
+Created tensor with name: resnetv17_stage3_conv4_weight
+Created tensor with name: resnetv17_stage3_conv4_bias
+Created tensor with name: resnetv17_stage3_batchnorm4_gamma
+Created tensor with name: resnetv17_stage3_batchnorm4_beta
+Created tensor with name: resnetv17_stage3_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm4_running_var
+Created tensor with name: resnetv17_stage3_conv5_weight
+Created tensor with name: resnetv17_stage3_batchnorm5_gamma
+Created tensor with name: resnetv17_stage3_batchnorm5_beta
+Created tensor with name: resnetv17_stage3_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm5_running_var
+Created tensor with name: resnetv17_stage3_conv6_weight
+Created tensor with name: resnetv17_stage3_conv6_bias
+Created tensor with name: resnetv17_stage3_batchnorm6_gamma
+Created tensor with name: resnetv17_stage3_batchnorm6_beta
+Created tensor with name: resnetv17_stage3_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm6_running_var
+Created tensor with name: resnetv17_stage3_conv7_weight
+Created tensor with name: resnetv17_stage3_conv7_bias
+Created tensor with name: resnetv17_stage3_batchnorm7_gamma
+Created tensor with name: resnetv17_stage3_batchnorm7_beta
+Created tensor with name: resnetv17_stage3_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm7_running_var
+Created tensor with name: resnetv17_stage3_conv8_weight
+Created tensor with name: resnetv17_stage3_batchnorm8_gamma
+Created tensor with name: resnetv17_stage3_batchnorm8_beta
+Created tensor with name: resnetv17_stage3_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm8_running_var
+Created tensor with name: resnetv17_stage3_conv9_weight
+Created tensor with name: resnetv17_stage3_conv9_bias
+Created tensor with name: resnetv17_stage3_batchnorm9_gamma
+Created tensor with name: resnetv17_stage3_batchnorm9_beta
+Created tensor with name: resnetv17_stage3_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm9_running_var
+Created tensor with name: resnetv17_stage3_conv10_weight
+Created tensor with name: resnetv17_stage3_conv10_bias
+Created tensor with name: resnetv17_stage3_batchnorm10_gamma
+Created tensor with name: resnetv17_stage3_batchnorm10_beta
+Created tensor with name: resnetv17_stage3_batchnorm10_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm10_running_var
+Created tensor with name: resnetv17_stage3_conv11_weight
+Created tensor with name: resnetv17_stage3_batchnorm11_gamma
+Created tensor with name: resnetv17_stage3_batchnorm11_beta
+Created tensor with name: resnetv17_stage3_batchnorm11_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm11_running_var
+Created tensor with name: resnetv17_stage3_conv12_weight
+Created tensor with name: resnetv17_stage3_conv12_bias
+Created tensor with name: resnetv17_stage3_batchnorm12_gamma
+Created tensor with name: resnetv17_stage3_batchnorm12_beta
+Created tensor with name: resnetv17_stage3_batchnorm12_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm12_running_var
+Created tensor with name: resnetv17_stage3_conv13_weight
+Created tensor with name: resnetv17_stage3_conv13_bias
+Created tensor with name: resnetv17_stage3_batchnorm13_gamma
+Created tensor with name: resnetv17_stage3_batchnorm13_beta
+Created tensor with name: resnetv17_stage3_batchnorm13_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm13_running_var
+Created tensor with name: resnetv17_stage3_conv14_weight
+Created tensor with name: resnetv17_stage3_batchnorm14_gamma
+Created tensor with name: resnetv17_stage3_batchnorm14_beta
+Created tensor with name: resnetv17_stage3_batchnorm14_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm14_running_var
+Created tensor with name: resnetv17_stage3_conv15_weight
+Created tensor with name: resnetv17_stage3_conv15_bias
+Created tensor with name: resnetv17_stage3_batchnorm15_gamma
+Created tensor with name: resnetv17_stage3_batchnorm15_beta
+Created tensor with name: resnetv17_stage3_batchnorm15_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm15_running_var
+Created tensor with name: resnetv17_stage3_conv16_weight
+Created tensor with name: resnetv17_stage3_conv16_bias
+Created tensor with name: resnetv17_stage3_batchnorm16_gamma
+Created tensor with name: resnetv17_stage3_batchnorm16_beta
+Created tensor with name: resnetv17_stage3_batchnorm16_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm16_running_var
+Created tensor with name: resnetv17_stage3_conv17_weight
+Created tensor with name: resnetv17_stage3_batchnorm17_gamma
+Created tensor with name: resnetv17_stage3_batchnorm17_beta
+Created tensor with name: resnetv17_stage3_batchnorm17_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm17_running_var
+Created tensor with name: resnetv17_stage3_conv18_weight
+Created tensor with name: resnetv17_stage3_conv18_bias
+Created tensor with name: resnetv17_stage3_batchnorm18_gamma
+Created tensor with name: resnetv17_stage3_batchnorm18_beta
+Created tensor with name: resnetv17_stage3_batchnorm18_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm18_running_var
+Created tensor with name: resnetv17_stage4_conv0_weight
+Created tensor with name: resnetv17_stage4_conv0_bias
+Created tensor with name: resnetv17_stage4_batchnorm0_gamma
+Created tensor with name: resnetv17_stage4_batchnorm0_beta
+Created tensor with name: resnetv17_stage4_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm0_running_var
+Created tensor with name: resnetv17_stage4_conv1_weight
+Created tensor with name: resnetv17_stage4_batchnorm1_gamma
+Created tensor with name: resnetv17_stage4_batchnorm1_beta
+Created tensor with name: resnetv17_stage4_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm1_running_var
+Created tensor with name: resnetv17_stage4_conv2_weight
+Created tensor with name: resnetv17_stage4_conv2_bias
+Created tensor with name: resnetv17_stage4_batchnorm2_gamma
+Created tensor with name: resnetv17_stage4_batchnorm2_beta
+Created tensor with name: resnetv17_stage4_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm2_running_var
+Created tensor with name: resnetv17_stage4_conv3_weight
+Created tensor with name: resnetv17_stage4_batchnorm3_gamma
+Created tensor with name: resnetv17_stage4_batchnorm3_beta
+Created tensor with name: resnetv17_stage4_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm3_running_var
+Created tensor with name: resnetv17_stage4_conv4_weight
+Created tensor with name: resnetv17_stage4_conv4_bias
+Created tensor with name: resnetv17_stage4_batchnorm4_gamma
+Created tensor with name: resnetv17_stage4_batchnorm4_beta
+Created tensor with name: resnetv17_stage4_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm4_running_var
+Created tensor with name: resnetv17_stage4_conv5_weight
+Created tensor with name: resnetv17_stage4_batchnorm5_gamma
+Created tensor with name: resnetv17_stage4_batchnorm5_beta
+Created tensor with name: resnetv17_stage4_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm5_running_var
+Created tensor with name: resnetv17_stage4_conv6_weight
+Created tensor with name: resnetv17_stage4_conv6_bias
+Created tensor with name: resnetv17_stage4_batchnorm6_gamma
+Created tensor with name: resnetv17_stage4_batchnorm6_beta
+Created tensor with name: resnetv17_stage4_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm6_running_var
+Created tensor with name: resnetv17_stage4_conv7_weight
+Created tensor with name: resnetv17_stage4_conv7_bias
+Created tensor with name: resnetv17_stage4_batchnorm7_gamma
+Created tensor with name: resnetv17_stage4_batchnorm7_beta
+Created tensor with name: resnetv17_stage4_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm7_running_var
+Created tensor with name: resnetv17_stage4_conv8_weight
+Created tensor with name: resnetv17_stage4_batchnorm8_gamma
+Created tensor with name: resnetv17_stage4_batchnorm8_beta
+Created tensor with name: resnetv17_stage4_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm8_running_var
+Created tensor with name: resnetv17_stage4_conv9_weight
+Created tensor with name: resnetv17_stage4_conv9_bias
+Created tensor with name: resnetv17_stage4_batchnorm9_gamma
+Created tensor with name: resnetv17_stage4_batchnorm9_beta
+Created tensor with name: resnetv17_stage4_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm9_running_var
+Created tensor with name: resnetv17_dense0_weight
+Created tensor with name: resnetv17_dense0_bias
+Created tensor with name: resnetv17_dense0_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_conv0_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_batchnorm0_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_relu0_fwd
+Created node with type: MaxPool
+Created tensor with name: resnetv17_pool0_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv0_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm0_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_relu0_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv1_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm1_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_relu1_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv2_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv3_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm3_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage1__plus0
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_activation0
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv4_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm4_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_relu2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv5_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm5_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_relu3_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv6_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm6_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage1__plus1
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_activation1
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv7_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm7_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_relu4_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv8_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm8_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_relu5_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv9_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm9_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage1__plus2
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_activation2
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv0_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm0_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu0_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv1_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm1_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu1_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv2_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv3_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm3_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage2__plus0
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_activation0
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv4_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm4_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv5_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm5_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu3_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv6_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm6_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage2__plus1
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_activation1
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv7_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm7_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu4_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv8_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm8_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu5_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv9_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm9_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage2__plus2
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_activation2
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv10_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm10_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu6_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv11_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm11_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu7_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv12_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm12_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage2__plus3
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_activation3
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv0_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm0_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu0_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv1_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm1_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu1_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv2_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv3_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm3_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage3__plus0
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_activation0
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv4_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm4_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv5_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm5_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu3_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv6_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm6_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage3__plus1
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_activation1
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv7_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm7_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu4_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv8_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm8_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu5_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv9_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm9_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage3__plus2
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_activation2
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv10_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm10_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu6_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv11_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm11_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu7_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv12_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm12_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage3__plus3
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_activation3
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv13_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm13_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu8_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv14_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm14_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu9_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv15_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm15_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage3__plus4
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_activation4
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv16_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm16_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu10_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv17_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm17_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu11_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv18_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm18_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage3__plus5
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_activation5
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv0_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm0_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_relu0_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv1_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm1_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_relu1_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv2_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv3_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm3_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage4__plus0
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_activation0
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv4_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm4_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_relu2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv5_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm5_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_relu3_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv6_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm6_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage4__plus1
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_activation1
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv7_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm7_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_relu4_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv8_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm8_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_relu5_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv9_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm9_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage4__plus2
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_activation2
+Created node with type: GlobalAveragePool
+Created tensor with name: resnetv17_pool1_fwd
+Created node with type: Flatten
+Created tensor with name: flatten_473
+Created node with type: Gemm
+Created tensor with name: resnetv17_dense0_fwd
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[4;32mGot Conv node![0m
+[4;32mGot Conv node![0m
+[38;2;255;215;0mGot kernel_shape attr[0m
+[38;2;255;215;0mGot group attr.[0m
+[38;2;255;215;0mGot dilations attr.[0m
+[38;2;255;215;0mGot pads attr.[0m
+[38;2;255;215;0mGot strides attr.[0m
+[       OK ] OpLoading.Conv (107 ms)
+[----------] 1 test from OpLoading (107 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (107 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.11 sec
+----------------------------------------------------------
+Test Passed.
+"OpLoading.Conv" end time: Feb 15 21:41 MSK
+"OpLoading.Conv" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/4 Testing: OpNotLoading.ThrowOnWrongNode
+4/4 Test: OpNotLoading.ThrowOnWrongNode
+Command: "/home/kirill/Side-Projects/TensorShit/cmake/bebra_tests" "--gtest_filter=OpNotLoading.ThrowOnWrongNode" "--gtest_also_run_disabled_tests"
+Directory: /home/kirill/Side-Projects/TensorShit
+"OpNotLoading.ThrowOnWrongNode" start time: Feb 15 21:41 MSK
+Output:
+----------------------------------------------------------
+Running main() from /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googletest/src/gtest_main.cc
+Note: Google Test filter = OpNotLoading.ThrowOnWrongNode
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from OpNotLoading
+[ RUN      ] OpNotLoading.ThrowOnWrongNode
+Created tensor with name: resnetv17_conv0_weight
+Created tensor with name: resnetv17_batchnorm0_gamma
+Created tensor with name: resnetv17_batchnorm0_beta
+Created tensor with name: resnetv17_batchnorm0_running_mean
+Created tensor with name: resnetv17_batchnorm0_running_var
+Created tensor with name: resnetv17_stage1_conv0_weight
+Created tensor with name: resnetv17_stage1_conv0_bias
+Created tensor with name: resnetv17_stage1_batchnorm0_gamma
+Created tensor with name: resnetv17_stage1_batchnorm0_beta
+Created tensor with name: resnetv17_stage1_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm0_running_var
+Created tensor with name: resnetv17_stage1_conv1_weight
+Created tensor with name: resnetv17_stage1_batchnorm1_gamma
+Created tensor with name: resnetv17_stage1_batchnorm1_beta
+Created tensor with name: resnetv17_stage1_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm1_running_var
+Created tensor with name: resnetv17_stage1_conv2_weight
+Created tensor with name: resnetv17_stage1_conv2_bias
+Created tensor with name: resnetv17_stage1_batchnorm2_gamma
+Created tensor with name: resnetv17_stage1_batchnorm2_beta
+Created tensor with name: resnetv17_stage1_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm2_running_var
+Created tensor with name: resnetv17_stage1_conv3_weight
+Created tensor with name: resnetv17_stage1_batchnorm3_gamma
+Created tensor with name: resnetv17_stage1_batchnorm3_beta
+Created tensor with name: resnetv17_stage1_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm3_running_var
+Created tensor with name: resnetv17_stage1_conv4_weight
+Created tensor with name: resnetv17_stage1_conv4_bias
+Created tensor with name: resnetv17_stage1_batchnorm4_gamma
+Created tensor with name: resnetv17_stage1_batchnorm4_beta
+Created tensor with name: resnetv17_stage1_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm4_running_var
+Created tensor with name: resnetv17_stage1_conv5_weight
+Created tensor with name: resnetv17_stage1_batchnorm5_gamma
+Created tensor with name: resnetv17_stage1_batchnorm5_beta
+Created tensor with name: resnetv17_stage1_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm5_running_var
+Created tensor with name: resnetv17_stage1_conv6_weight
+Created tensor with name: resnetv17_stage1_conv6_bias
+Created tensor with name: resnetv17_stage1_batchnorm6_gamma
+Created tensor with name: resnetv17_stage1_batchnorm6_beta
+Created tensor with name: resnetv17_stage1_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm6_running_var
+Created tensor with name: resnetv17_stage1_conv7_weight
+Created tensor with name: resnetv17_stage1_conv7_bias
+Created tensor with name: resnetv17_stage1_batchnorm7_gamma
+Created tensor with name: resnetv17_stage1_batchnorm7_beta
+Created tensor with name: resnetv17_stage1_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm7_running_var
+Created tensor with name: resnetv17_stage1_conv8_weight
+Created tensor with name: resnetv17_stage1_batchnorm8_gamma
+Created tensor with name: resnetv17_stage1_batchnorm8_beta
+Created tensor with name: resnetv17_stage1_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm8_running_var
+Created tensor with name: resnetv17_stage1_conv9_weight
+Created tensor with name: resnetv17_stage1_conv9_bias
+Created tensor with name: resnetv17_stage1_batchnorm9_gamma
+Created tensor with name: resnetv17_stage1_batchnorm9_beta
+Created tensor with name: resnetv17_stage1_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm9_running_var
+Created tensor with name: resnetv17_stage2_conv0_weight
+Created tensor with name: resnetv17_stage2_conv0_bias
+Created tensor with name: resnetv17_stage2_batchnorm0_gamma
+Created tensor with name: resnetv17_stage2_batchnorm0_beta
+Created tensor with name: resnetv17_stage2_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm0_running_var
+Created tensor with name: resnetv17_stage2_conv1_weight
+Created tensor with name: resnetv17_stage2_batchnorm1_gamma
+Created tensor with name: resnetv17_stage2_batchnorm1_beta
+Created tensor with name: resnetv17_stage2_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm1_running_var
+Created tensor with name: resnetv17_stage2_conv2_weight
+Created tensor with name: resnetv17_stage2_conv2_bias
+Created tensor with name: resnetv17_stage2_batchnorm2_gamma
+Created tensor with name: resnetv17_stage2_batchnorm2_beta
+Created tensor with name: resnetv17_stage2_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm2_running_var
+Created tensor with name: resnetv17_stage2_conv3_weight
+Created tensor with name: resnetv17_stage2_batchnorm3_gamma
+Created tensor with name: resnetv17_stage2_batchnorm3_beta
+Created tensor with name: resnetv17_stage2_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm3_running_var
+Created tensor with name: resnetv17_stage2_conv4_weight
+Created tensor with name: resnetv17_stage2_conv4_bias
+Created tensor with name: resnetv17_stage2_batchnorm4_gamma
+Created tensor with name: resnetv17_stage2_batchnorm4_beta
+Created tensor with name: resnetv17_stage2_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm4_running_var
+Created tensor with name: resnetv17_stage2_conv5_weight
+Created tensor with name: resnetv17_stage2_batchnorm5_gamma
+Created tensor with name: resnetv17_stage2_batchnorm5_beta
+Created tensor with name: resnetv17_stage2_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm5_running_var
+Created tensor with name: resnetv17_stage2_conv6_weight
+Created tensor with name: resnetv17_stage2_conv6_bias
+Created tensor with name: resnetv17_stage2_batchnorm6_gamma
+Created tensor with name: resnetv17_stage2_batchnorm6_beta
+Created tensor with name: resnetv17_stage2_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm6_running_var
+Created tensor with name: resnetv17_stage2_conv7_weight
+Created tensor with name: resnetv17_stage2_conv7_bias
+Created tensor with name: resnetv17_stage2_batchnorm7_gamma
+Created tensor with name: resnetv17_stage2_batchnorm7_beta
+Created tensor with name: resnetv17_stage2_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm7_running_var
+Created tensor with name: resnetv17_stage2_conv8_weight
+Created tensor with name: resnetv17_stage2_batchnorm8_gamma
+Created tensor with name: resnetv17_stage2_batchnorm8_beta
+Created tensor with name: resnetv17_stage2_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm8_running_var
+Created tensor with name: resnetv17_stage2_conv9_weight
+Created tensor with name: resnetv17_stage2_conv9_bias
+Created tensor with name: resnetv17_stage2_batchnorm9_gamma
+Created tensor with name: resnetv17_stage2_batchnorm9_beta
+Created tensor with name: resnetv17_stage2_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm9_running_var
+Created tensor with name: resnetv17_stage2_conv10_weight
+Created tensor with name: resnetv17_stage2_conv10_bias
+Created tensor with name: resnetv17_stage2_batchnorm10_gamma
+Created tensor with name: resnetv17_stage2_batchnorm10_beta
+Created tensor with name: resnetv17_stage2_batchnorm10_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm10_running_var
+Created tensor with name: resnetv17_stage2_conv11_weight
+Created tensor with name: resnetv17_stage2_batchnorm11_gamma
+Created tensor with name: resnetv17_stage2_batchnorm11_beta
+Created tensor with name: resnetv17_stage2_batchnorm11_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm11_running_var
+Created tensor with name: resnetv17_stage2_conv12_weight
+Created tensor with name: resnetv17_stage2_conv12_bias
+Created tensor with name: resnetv17_stage2_batchnorm12_gamma
+Created tensor with name: resnetv17_stage2_batchnorm12_beta
+Created tensor with name: resnetv17_stage2_batchnorm12_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm12_running_var
+Created tensor with name: resnetv17_stage3_conv0_weight
+Created tensor with name: resnetv17_stage3_conv0_bias
+Created tensor with name: resnetv17_stage3_batchnorm0_gamma
+Created tensor with name: resnetv17_stage3_batchnorm0_beta
+Created tensor with name: resnetv17_stage3_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm0_running_var
+Created tensor with name: resnetv17_stage3_conv1_weight
+Created tensor with name: resnetv17_stage3_batchnorm1_gamma
+Created tensor with name: resnetv17_stage3_batchnorm1_beta
+Created tensor with name: resnetv17_stage3_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm1_running_var
+Created tensor with name: resnetv17_stage3_conv2_weight
+Created tensor with name: resnetv17_stage3_conv2_bias
+Created tensor with name: resnetv17_stage3_batchnorm2_gamma
+Created tensor with name: resnetv17_stage3_batchnorm2_beta
+Created tensor with name: resnetv17_stage3_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm2_running_var
+Created tensor with name: resnetv17_stage3_conv3_weight
+Created tensor with name: resnetv17_stage3_batchnorm3_gamma
+Created tensor with name: resnetv17_stage3_batchnorm3_beta
+Created tensor with name: resnetv17_stage3_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm3_running_var
+Created tensor with name: resnetv17_stage3_conv4_weight
+Created tensor with name: resnetv17_stage3_conv4_bias
+Created tensor with name: resnetv17_stage3_batchnorm4_gamma
+Created tensor with name: resnetv17_stage3_batchnorm4_beta
+Created tensor with name: resnetv17_stage3_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm4_running_var
+Created tensor with name: resnetv17_stage3_conv5_weight
+Created tensor with name: resnetv17_stage3_batchnorm5_gamma
+Created tensor with name: resnetv17_stage3_batchnorm5_beta
+Created tensor with name: resnetv17_stage3_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm5_running_var
+Created tensor with name: resnetv17_stage3_conv6_weight
+Created tensor with name: resnetv17_stage3_conv6_bias
+Created tensor with name: resnetv17_stage3_batchnorm6_gamma
+Created tensor with name: resnetv17_stage3_batchnorm6_beta
+Created tensor with name: resnetv17_stage3_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm6_running_var
+Created tensor with name: resnetv17_stage3_conv7_weight
+Created tensor with name: resnetv17_stage3_conv7_bias
+Created tensor with name: resnetv17_stage3_batchnorm7_gamma
+Created tensor with name: resnetv17_stage3_batchnorm7_beta
+Created tensor with name: resnetv17_stage3_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm7_running_var
+Created tensor with name: resnetv17_stage3_conv8_weight
+Created tensor with name: resnetv17_stage3_batchnorm8_gamma
+Created tensor with name: resnetv17_stage3_batchnorm8_beta
+Created tensor with name: resnetv17_stage3_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm8_running_var
+Created tensor with name: resnetv17_stage3_conv9_weight
+Created tensor with name: resnetv17_stage3_conv9_bias
+Created tensor with name: resnetv17_stage3_batchnorm9_gamma
+Created tensor with name: resnetv17_stage3_batchnorm9_beta
+Created tensor with name: resnetv17_stage3_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm9_running_var
+Created tensor with name: resnetv17_stage3_conv10_weight
+Created tensor with name: resnetv17_stage3_conv10_bias
+Created tensor with name: resnetv17_stage3_batchnorm10_gamma
+Created tensor with name: resnetv17_stage3_batchnorm10_beta
+Created tensor with name: resnetv17_stage3_batchnorm10_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm10_running_var
+Created tensor with name: resnetv17_stage3_conv11_weight
+Created tensor with name: resnetv17_stage3_batchnorm11_gamma
+Created tensor with name: resnetv17_stage3_batchnorm11_beta
+Created tensor with name: resnetv17_stage3_batchnorm11_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm11_running_var
+Created tensor with name: resnetv17_stage3_conv12_weight
+Created tensor with name: resnetv17_stage3_conv12_bias
+Created tensor with name: resnetv17_stage3_batchnorm12_gamma
+Created tensor with name: resnetv17_stage3_batchnorm12_beta
+Created tensor with name: resnetv17_stage3_batchnorm12_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm12_running_var
+Created tensor with name: resnetv17_stage3_conv13_weight
+Created tensor with name: resnetv17_stage3_conv13_bias
+Created tensor with name: resnetv17_stage3_batchnorm13_gamma
+Created tensor with name: resnetv17_stage3_batchnorm13_beta
+Created tensor with name: resnetv17_stage3_batchnorm13_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm13_running_var
+Created tensor with name: resnetv17_stage3_conv14_weight
+Created tensor with name: resnetv17_stage3_batchnorm14_gamma
+Created tensor with name: resnetv17_stage3_batchnorm14_beta
+Created tensor with name: resnetv17_stage3_batchnorm14_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm14_running_var
+Created tensor with name: resnetv17_stage3_conv15_weight
+Created tensor with name: resnetv17_stage3_conv15_bias
+Created tensor with name: resnetv17_stage3_batchnorm15_gamma
+Created tensor with name: resnetv17_stage3_batchnorm15_beta
+Created tensor with name: resnetv17_stage3_batchnorm15_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm15_running_var
+Created tensor with name: resnetv17_stage3_conv16_weight
+Created tensor with name: resnetv17_stage3_conv16_bias
+Created tensor with name: resnetv17_stage3_batchnorm16_gamma
+Created tensor with name: resnetv17_stage3_batchnorm16_beta
+Created tensor with name: resnetv17_stage3_batchnorm16_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm16_running_var
+Created tensor with name: resnetv17_stage3_conv17_weight
+Created tensor with name: resnetv17_stage3_batchnorm17_gamma
+Created tensor with name: resnetv17_stage3_batchnorm17_beta
+Created tensor with name: resnetv17_stage3_batchnorm17_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm17_running_var
+Created tensor with name: resnetv17_stage3_conv18_weight
+Created tensor with name: resnetv17_stage3_conv18_bias
+Created tensor with name: resnetv17_stage3_batchnorm18_gamma
+Created tensor with name: resnetv17_stage3_batchnorm18_beta
+Created tensor with name: resnetv17_stage3_batchnorm18_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm18_running_var
+Created tensor with name: resnetv17_stage4_conv0_weight
+Created tensor with name: resnetv17_stage4_conv0_bias
+Created tensor with name: resnetv17_stage4_batchnorm0_gamma
+Created tensor with name: resnetv17_stage4_batchnorm0_beta
+Created tensor with name: resnetv17_stage4_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm0_running_var
+Created tensor with name: resnetv17_stage4_conv1_weight
+Created tensor with name: resnetv17_stage4_batchnorm1_gamma
+Created tensor with name: resnetv17_stage4_batchnorm1_beta
+Created tensor with name: resnetv17_stage4_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm1_running_var
+Created tensor with name: resnetv17_stage4_conv2_weight
+Created tensor with name: resnetv17_stage4_conv2_bias
+Created tensor with name: resnetv17_stage4_batchnorm2_gamma
+Created tensor with name: resnetv17_stage4_batchnorm2_beta
+Created tensor with name: resnetv17_stage4_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm2_running_var
+Created tensor with name: resnetv17_stage4_conv3_weight
+Created tensor with name: resnetv17_stage4_batchnorm3_gamma
+Created tensor with name: resnetv17_stage4_batchnorm3_beta
+Created tensor with name: resnetv17_stage4_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm3_running_var
+Created tensor with name: resnetv17_stage4_conv4_weight
+Created tensor with name: resnetv17_stage4_conv4_bias
+Created tensor with name: resnetv17_stage4_batchnorm4_gamma
+Created tensor with name: resnetv17_stage4_batchnorm4_beta
+Created tensor with name: resnetv17_stage4_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm4_running_var
+Created tensor with name: resnetv17_stage4_conv5_weight
+Created tensor with name: resnetv17_stage4_batchnorm5_gamma
+Created tensor with name: resnetv17_stage4_batchnorm5_beta
+Created tensor with name: resnetv17_stage4_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm5_running_var
+Created tensor with name: resnetv17_stage4_conv6_weight
+Created tensor with name: resnetv17_stage4_conv6_bias
+Created tensor with name: resnetv17_stage4_batchnorm6_gamma
+Created tensor with name: resnetv17_stage4_batchnorm6_beta
+Created tensor with name: resnetv17_stage4_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm6_running_var
+Created tensor with name: resnetv17_stage4_conv7_weight
+Created tensor with name: resnetv17_stage4_conv7_bias
+Created tensor with name: resnetv17_stage4_batchnorm7_gamma
+Created tensor with name: resnetv17_stage4_batchnorm7_beta
+Created tensor with name: resnetv17_stage4_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm7_running_var
+Created tensor with name: resnetv17_stage4_conv8_weight
+Created tensor with name: resnetv17_stage4_batchnorm8_gamma
+Created tensor with name: resnetv17_stage4_batchnorm8_beta
+Created tensor with name: resnetv17_stage4_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm8_running_var
+Created tensor with name: resnetv17_stage4_conv9_weight
+Created tensor with name: resnetv17_stage4_conv9_bias
+Created tensor with name: resnetv17_stage4_batchnorm9_gamma
+Created tensor with name: resnetv17_stage4_batchnorm9_beta
+Created tensor with name: resnetv17_stage4_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm9_running_var
+Created tensor with name: resnetv17_dense0_weight
+Created tensor with name: resnetv17_dense0_bias
+Created tensor with name: data
+Created tensor with name: resnetv17_conv0_weight
+Created tensor with name: resnetv17_batchnorm0_gamma
+Created tensor with name: resnetv17_batchnorm0_beta
+Created tensor with name: resnetv17_batchnorm0_running_mean
+Created tensor with name: resnetv17_batchnorm0_running_var
+Created tensor with name: resnetv17_stage1_conv0_weight
+Created tensor with name: resnetv17_stage1_conv0_bias
+Created tensor with name: resnetv17_stage1_batchnorm0_gamma
+Created tensor with name: resnetv17_stage1_batchnorm0_beta
+Created tensor with name: resnetv17_stage1_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm0_running_var
+Created tensor with name: resnetv17_stage1_conv1_weight
+Created tensor with name: resnetv17_stage1_batchnorm1_gamma
+Created tensor with name: resnetv17_stage1_batchnorm1_beta
+Created tensor with name: resnetv17_stage1_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm1_running_var
+Created tensor with name: resnetv17_stage1_conv2_weight
+Created tensor with name: resnetv17_stage1_conv2_bias
+Created tensor with name: resnetv17_stage1_batchnorm2_gamma
+Created tensor with name: resnetv17_stage1_batchnorm2_beta
+Created tensor with name: resnetv17_stage1_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm2_running_var
+Created tensor with name: resnetv17_stage1_conv3_weight
+Created tensor with name: resnetv17_stage1_batchnorm3_gamma
+Created tensor with name: resnetv17_stage1_batchnorm3_beta
+Created tensor with name: resnetv17_stage1_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm3_running_var
+Created tensor with name: resnetv17_stage1_conv4_weight
+Created tensor with name: resnetv17_stage1_conv4_bias
+Created tensor with name: resnetv17_stage1_batchnorm4_gamma
+Created tensor with name: resnetv17_stage1_batchnorm4_beta
+Created tensor with name: resnetv17_stage1_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm4_running_var
+Created tensor with name: resnetv17_stage1_conv5_weight
+Created tensor with name: resnetv17_stage1_batchnorm5_gamma
+Created tensor with name: resnetv17_stage1_batchnorm5_beta
+Created tensor with name: resnetv17_stage1_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm5_running_var
+Created tensor with name: resnetv17_stage1_conv6_weight
+Created tensor with name: resnetv17_stage1_conv6_bias
+Created tensor with name: resnetv17_stage1_batchnorm6_gamma
+Created tensor with name: resnetv17_stage1_batchnorm6_beta
+Created tensor with name: resnetv17_stage1_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm6_running_var
+Created tensor with name: resnetv17_stage1_conv7_weight
+Created tensor with name: resnetv17_stage1_conv7_bias
+Created tensor with name: resnetv17_stage1_batchnorm7_gamma
+Created tensor with name: resnetv17_stage1_batchnorm7_beta
+Created tensor with name: resnetv17_stage1_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm7_running_var
+Created tensor with name: resnetv17_stage1_conv8_weight
+Created tensor with name: resnetv17_stage1_batchnorm8_gamma
+Created tensor with name: resnetv17_stage1_batchnorm8_beta
+Created tensor with name: resnetv17_stage1_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm8_running_var
+Created tensor with name: resnetv17_stage1_conv9_weight
+Created tensor with name: resnetv17_stage1_conv9_bias
+Created tensor with name: resnetv17_stage1_batchnorm9_gamma
+Created tensor with name: resnetv17_stage1_batchnorm9_beta
+Created tensor with name: resnetv17_stage1_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage1_batchnorm9_running_var
+Created tensor with name: resnetv17_stage2_conv0_weight
+Created tensor with name: resnetv17_stage2_conv0_bias
+Created tensor with name: resnetv17_stage2_batchnorm0_gamma
+Created tensor with name: resnetv17_stage2_batchnorm0_beta
+Created tensor with name: resnetv17_stage2_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm0_running_var
+Created tensor with name: resnetv17_stage2_conv1_weight
+Created tensor with name: resnetv17_stage2_batchnorm1_gamma
+Created tensor with name: resnetv17_stage2_batchnorm1_beta
+Created tensor with name: resnetv17_stage2_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm1_running_var
+Created tensor with name: resnetv17_stage2_conv2_weight
+Created tensor with name: resnetv17_stage2_conv2_bias
+Created tensor with name: resnetv17_stage2_batchnorm2_gamma
+Created tensor with name: resnetv17_stage2_batchnorm2_beta
+Created tensor with name: resnetv17_stage2_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm2_running_var
+Created tensor with name: resnetv17_stage2_conv3_weight
+Created tensor with name: resnetv17_stage2_batchnorm3_gamma
+Created tensor with name: resnetv17_stage2_batchnorm3_beta
+Created tensor with name: resnetv17_stage2_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm3_running_var
+Created tensor with name: resnetv17_stage2_conv4_weight
+Created tensor with name: resnetv17_stage2_conv4_bias
+Created tensor with name: resnetv17_stage2_batchnorm4_gamma
+Created tensor with name: resnetv17_stage2_batchnorm4_beta
+Created tensor with name: resnetv17_stage2_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm4_running_var
+Created tensor with name: resnetv17_stage2_conv5_weight
+Created tensor with name: resnetv17_stage2_batchnorm5_gamma
+Created tensor with name: resnetv17_stage2_batchnorm5_beta
+Created tensor with name: resnetv17_stage2_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm5_running_var
+Created tensor with name: resnetv17_stage2_conv6_weight
+Created tensor with name: resnetv17_stage2_conv6_bias
+Created tensor with name: resnetv17_stage2_batchnorm6_gamma
+Created tensor with name: resnetv17_stage2_batchnorm6_beta
+Created tensor with name: resnetv17_stage2_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm6_running_var
+Created tensor with name: resnetv17_stage2_conv7_weight
+Created tensor with name: resnetv17_stage2_conv7_bias
+Created tensor with name: resnetv17_stage2_batchnorm7_gamma
+Created tensor with name: resnetv17_stage2_batchnorm7_beta
+Created tensor with name: resnetv17_stage2_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm7_running_var
+Created tensor with name: resnetv17_stage2_conv8_weight
+Created tensor with name: resnetv17_stage2_batchnorm8_gamma
+Created tensor with name: resnetv17_stage2_batchnorm8_beta
+Created tensor with name: resnetv17_stage2_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm8_running_var
+Created tensor with name: resnetv17_stage2_conv9_weight
+Created tensor with name: resnetv17_stage2_conv9_bias
+Created tensor with name: resnetv17_stage2_batchnorm9_gamma
+Created tensor with name: resnetv17_stage2_batchnorm9_beta
+Created tensor with name: resnetv17_stage2_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm9_running_var
+Created tensor with name: resnetv17_stage2_conv10_weight
+Created tensor with name: resnetv17_stage2_conv10_bias
+Created tensor with name: resnetv17_stage2_batchnorm10_gamma
+Created tensor with name: resnetv17_stage2_batchnorm10_beta
+Created tensor with name: resnetv17_stage2_batchnorm10_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm10_running_var
+Created tensor with name: resnetv17_stage2_conv11_weight
+Created tensor with name: resnetv17_stage2_batchnorm11_gamma
+Created tensor with name: resnetv17_stage2_batchnorm11_beta
+Created tensor with name: resnetv17_stage2_batchnorm11_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm11_running_var
+Created tensor with name: resnetv17_stage2_conv12_weight
+Created tensor with name: resnetv17_stage2_conv12_bias
+Created tensor with name: resnetv17_stage2_batchnorm12_gamma
+Created tensor with name: resnetv17_stage2_batchnorm12_beta
+Created tensor with name: resnetv17_stage2_batchnorm12_running_mean
+Created tensor with name: resnetv17_stage2_batchnorm12_running_var
+Created tensor with name: resnetv17_stage3_conv0_weight
+Created tensor with name: resnetv17_stage3_conv0_bias
+Created tensor with name: resnetv17_stage3_batchnorm0_gamma
+Created tensor with name: resnetv17_stage3_batchnorm0_beta
+Created tensor with name: resnetv17_stage3_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm0_running_var
+Created tensor with name: resnetv17_stage3_conv1_weight
+Created tensor with name: resnetv17_stage3_batchnorm1_gamma
+Created tensor with name: resnetv17_stage3_batchnorm1_beta
+Created tensor with name: resnetv17_stage3_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm1_running_var
+Created tensor with name: resnetv17_stage3_conv2_weight
+Created tensor with name: resnetv17_stage3_conv2_bias
+Created tensor with name: resnetv17_stage3_batchnorm2_gamma
+Created tensor with name: resnetv17_stage3_batchnorm2_beta
+Created tensor with name: resnetv17_stage3_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm2_running_var
+Created tensor with name: resnetv17_stage3_conv3_weight
+Created tensor with name: resnetv17_stage3_batchnorm3_gamma
+Created tensor with name: resnetv17_stage3_batchnorm3_beta
+Created tensor with name: resnetv17_stage3_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm3_running_var
+Created tensor with name: resnetv17_stage3_conv4_weight
+Created tensor with name: resnetv17_stage3_conv4_bias
+Created tensor with name: resnetv17_stage3_batchnorm4_gamma
+Created tensor with name: resnetv17_stage3_batchnorm4_beta
+Created tensor with name: resnetv17_stage3_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm4_running_var
+Created tensor with name: resnetv17_stage3_conv5_weight
+Created tensor with name: resnetv17_stage3_batchnorm5_gamma
+Created tensor with name: resnetv17_stage3_batchnorm5_beta
+Created tensor with name: resnetv17_stage3_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm5_running_var
+Created tensor with name: resnetv17_stage3_conv6_weight
+Created tensor with name: resnetv17_stage3_conv6_bias
+Created tensor with name: resnetv17_stage3_batchnorm6_gamma
+Created tensor with name: resnetv17_stage3_batchnorm6_beta
+Created tensor with name: resnetv17_stage3_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm6_running_var
+Created tensor with name: resnetv17_stage3_conv7_weight
+Created tensor with name: resnetv17_stage3_conv7_bias
+Created tensor with name: resnetv17_stage3_batchnorm7_gamma
+Created tensor with name: resnetv17_stage3_batchnorm7_beta
+Created tensor with name: resnetv17_stage3_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm7_running_var
+Created tensor with name: resnetv17_stage3_conv8_weight
+Created tensor with name: resnetv17_stage3_batchnorm8_gamma
+Created tensor with name: resnetv17_stage3_batchnorm8_beta
+Created tensor with name: resnetv17_stage3_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm8_running_var
+Created tensor with name: resnetv17_stage3_conv9_weight
+Created tensor with name: resnetv17_stage3_conv9_bias
+Created tensor with name: resnetv17_stage3_batchnorm9_gamma
+Created tensor with name: resnetv17_stage3_batchnorm9_beta
+Created tensor with name: resnetv17_stage3_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm9_running_var
+Created tensor with name: resnetv17_stage3_conv10_weight
+Created tensor with name: resnetv17_stage3_conv10_bias
+Created tensor with name: resnetv17_stage3_batchnorm10_gamma
+Created tensor with name: resnetv17_stage3_batchnorm10_beta
+Created tensor with name: resnetv17_stage3_batchnorm10_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm10_running_var
+Created tensor with name: resnetv17_stage3_conv11_weight
+Created tensor with name: resnetv17_stage3_batchnorm11_gamma
+Created tensor with name: resnetv17_stage3_batchnorm11_beta
+Created tensor with name: resnetv17_stage3_batchnorm11_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm11_running_var
+Created tensor with name: resnetv17_stage3_conv12_weight
+Created tensor with name: resnetv17_stage3_conv12_bias
+Created tensor with name: resnetv17_stage3_batchnorm12_gamma
+Created tensor with name: resnetv17_stage3_batchnorm12_beta
+Created tensor with name: resnetv17_stage3_batchnorm12_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm12_running_var
+Created tensor with name: resnetv17_stage3_conv13_weight
+Created tensor with name: resnetv17_stage3_conv13_bias
+Created tensor with name: resnetv17_stage3_batchnorm13_gamma
+Created tensor with name: resnetv17_stage3_batchnorm13_beta
+Created tensor with name: resnetv17_stage3_batchnorm13_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm13_running_var
+Created tensor with name: resnetv17_stage3_conv14_weight
+Created tensor with name: resnetv17_stage3_batchnorm14_gamma
+Created tensor with name: resnetv17_stage3_batchnorm14_beta
+Created tensor with name: resnetv17_stage3_batchnorm14_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm14_running_var
+Created tensor with name: resnetv17_stage3_conv15_weight
+Created tensor with name: resnetv17_stage3_conv15_bias
+Created tensor with name: resnetv17_stage3_batchnorm15_gamma
+Created tensor with name: resnetv17_stage3_batchnorm15_beta
+Created tensor with name: resnetv17_stage3_batchnorm15_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm15_running_var
+Created tensor with name: resnetv17_stage3_conv16_weight
+Created tensor with name: resnetv17_stage3_conv16_bias
+Created tensor with name: resnetv17_stage3_batchnorm16_gamma
+Created tensor with name: resnetv17_stage3_batchnorm16_beta
+Created tensor with name: resnetv17_stage3_batchnorm16_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm16_running_var
+Created tensor with name: resnetv17_stage3_conv17_weight
+Created tensor with name: resnetv17_stage3_batchnorm17_gamma
+Created tensor with name: resnetv17_stage3_batchnorm17_beta
+Created tensor with name: resnetv17_stage3_batchnorm17_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm17_running_var
+Created tensor with name: resnetv17_stage3_conv18_weight
+Created tensor with name: resnetv17_stage3_conv18_bias
+Created tensor with name: resnetv17_stage3_batchnorm18_gamma
+Created tensor with name: resnetv17_stage3_batchnorm18_beta
+Created tensor with name: resnetv17_stage3_batchnorm18_running_mean
+Created tensor with name: resnetv17_stage3_batchnorm18_running_var
+Created tensor with name: resnetv17_stage4_conv0_weight
+Created tensor with name: resnetv17_stage4_conv0_bias
+Created tensor with name: resnetv17_stage4_batchnorm0_gamma
+Created tensor with name: resnetv17_stage4_batchnorm0_beta
+Created tensor with name: resnetv17_stage4_batchnorm0_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm0_running_var
+Created tensor with name: resnetv17_stage4_conv1_weight
+Created tensor with name: resnetv17_stage4_batchnorm1_gamma
+Created tensor with name: resnetv17_stage4_batchnorm1_beta
+Created tensor with name: resnetv17_stage4_batchnorm1_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm1_running_var
+Created tensor with name: resnetv17_stage4_conv2_weight
+Created tensor with name: resnetv17_stage4_conv2_bias
+Created tensor with name: resnetv17_stage4_batchnorm2_gamma
+Created tensor with name: resnetv17_stage4_batchnorm2_beta
+Created tensor with name: resnetv17_stage4_batchnorm2_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm2_running_var
+Created tensor with name: resnetv17_stage4_conv3_weight
+Created tensor with name: resnetv17_stage4_batchnorm3_gamma
+Created tensor with name: resnetv17_stage4_batchnorm3_beta
+Created tensor with name: resnetv17_stage4_batchnorm3_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm3_running_var
+Created tensor with name: resnetv17_stage4_conv4_weight
+Created tensor with name: resnetv17_stage4_conv4_bias
+Created tensor with name: resnetv17_stage4_batchnorm4_gamma
+Created tensor with name: resnetv17_stage4_batchnorm4_beta
+Created tensor with name: resnetv17_stage4_batchnorm4_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm4_running_var
+Created tensor with name: resnetv17_stage4_conv5_weight
+Created tensor with name: resnetv17_stage4_batchnorm5_gamma
+Created tensor with name: resnetv17_stage4_batchnorm5_beta
+Created tensor with name: resnetv17_stage4_batchnorm5_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm5_running_var
+Created tensor with name: resnetv17_stage4_conv6_weight
+Created tensor with name: resnetv17_stage4_conv6_bias
+Created tensor with name: resnetv17_stage4_batchnorm6_gamma
+Created tensor with name: resnetv17_stage4_batchnorm6_beta
+Created tensor with name: resnetv17_stage4_batchnorm6_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm6_running_var
+Created tensor with name: resnetv17_stage4_conv7_weight
+Created tensor with name: resnetv17_stage4_conv7_bias
+Created tensor with name: resnetv17_stage4_batchnorm7_gamma
+Created tensor with name: resnetv17_stage4_batchnorm7_beta
+Created tensor with name: resnetv17_stage4_batchnorm7_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm7_running_var
+Created tensor with name: resnetv17_stage4_conv8_weight
+Created tensor with name: resnetv17_stage4_batchnorm8_gamma
+Created tensor with name: resnetv17_stage4_batchnorm8_beta
+Created tensor with name: resnetv17_stage4_batchnorm8_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm8_running_var
+Created tensor with name: resnetv17_stage4_conv9_weight
+Created tensor with name: resnetv17_stage4_conv9_bias
+Created tensor with name: resnetv17_stage4_batchnorm9_gamma
+Created tensor with name: resnetv17_stage4_batchnorm9_beta
+Created tensor with name: resnetv17_stage4_batchnorm9_running_mean
+Created tensor with name: resnetv17_stage4_batchnorm9_running_var
+Created tensor with name: resnetv17_dense0_weight
+Created tensor with name: resnetv17_dense0_bias
+Created tensor with name: resnetv17_dense0_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_conv0_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_batchnorm0_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_relu0_fwd
+Created node with type: MaxPool
+Created tensor with name: resnetv17_pool0_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv0_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm0_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_relu0_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv1_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm1_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_relu1_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv2_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv3_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm3_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage1__plus0
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_activation0
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv4_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm4_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_relu2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv5_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm5_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_relu3_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv6_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm6_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage1__plus1
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_activation1
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv7_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm7_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_relu4_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv8_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm8_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_relu5_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage1_conv9_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage1_batchnorm9_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage1__plus2
+Created node with type: Relu
+Created tensor with name: resnetv17_stage1_activation2
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv0_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm0_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu0_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv1_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm1_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu1_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv2_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv3_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm3_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage2__plus0
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_activation0
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv4_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm4_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv5_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm5_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu3_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv6_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm6_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage2__plus1
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_activation1
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv7_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm7_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu4_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv8_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm8_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu5_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv9_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm9_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage2__plus2
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_activation2
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv10_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm10_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu6_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv11_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm11_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_relu7_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage2_conv12_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage2_batchnorm12_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage2__plus3
+Created node with type: Relu
+Created tensor with name: resnetv17_stage2_activation3
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv0_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm0_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu0_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv1_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm1_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu1_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv2_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv3_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm3_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage3__plus0
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_activation0
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv4_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm4_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv5_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm5_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu3_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv6_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm6_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage3__plus1
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_activation1
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv7_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm7_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu4_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv8_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm8_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu5_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv9_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm9_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage3__plus2
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_activation2
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv10_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm10_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu6_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv11_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm11_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu7_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv12_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm12_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage3__plus3
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_activation3
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv13_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm13_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu8_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv14_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm14_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu9_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv15_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm15_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage3__plus4
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_activation4
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv16_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm16_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu10_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv17_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm17_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_relu11_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage3_conv18_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage3_batchnorm18_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage3__plus5
+Created node with type: Relu
+Created tensor with name: resnetv17_stage3_activation5
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv0_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm0_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_relu0_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv1_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm1_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_relu1_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv2_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv3_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm3_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage4__plus0
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_activation0
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv4_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm4_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_relu2_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv5_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm5_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_relu3_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv6_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm6_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage4__plus1
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_activation1
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv7_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm7_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_relu4_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv8_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm8_fwd
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_relu5_fwd
+Created node with type: Conv
+Created tensor with name: resnetv17_stage4_conv9_fwd
+Created node with type: BatchNormalization
+Created tensor with name: resnetv17_stage4_batchnorm9_fwd
+Created node with type: Add
+Created tensor with name: resnetv17_stage4__plus2
+Created node with type: Relu
+Created tensor with name: resnetv17_stage4_activation2
+Created node with type: GlobalAveragePool
+Created tensor with name: resnetv17_pool1_fwd
+Created node with type: Flatten
+Created tensor with name: flatten_473
+Created node with type: Gemm
+Created tensor with name: resnetv17_dense0_fwd
+[       OK ] OpNotLoading.ThrowOnWrongNode (109 ms)
+[----------] 1 test from OpNotLoading (109 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (109 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"OpNotLoading.ThrowOnWrongNode" end time: Feb 15 21:41 MSK
+"OpNotLoading.ThrowOnWrongNode" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Feb 15 21:41 MSK
