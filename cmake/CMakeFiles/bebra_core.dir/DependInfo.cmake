@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/kirill/Side-Projects/TensorShit/include/onnx_proto/onnx.proto3.pb.cc" "CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o" "gcc" "CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o.d"
+  "/home/kirill/Side-Projects/TensorShit/src/BebraAttr.cpp" "CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o" "gcc" "CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o.d"
   "/home/kirill/Side-Projects/TensorShit/src/BebraGraph.cpp" "CMakeFiles/bebra_core.dir/src/BebraGraph.cpp.o" "gcc" "CMakeFiles/bebra_core.dir/src/BebraGraph.cpp.o.d"
   )
 

@@ -149,7 +149,8 @@ CMakeFiles/bebra_core.dir/src/BebraGraph.cpp.o: \
  /usr/include/c++/15/bits/istream.tcc /usr/include/c++/15/bits/codecvt.h \
  /usr/include/c++/15/x86_64-redhat-linux/bits/basic_file.h \
  /usr/include/c++/15/x86_64-redhat-linux/bits/c++io.h \
- /usr/include/c++/15/bits/fstream.tcc \
+ /usr/include/c++/15/bits/fstream.tcc /usr/include/c++/15/iostream \
+ /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraTensor.hpp \
  /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraNode.hpp \
  /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraAttr.hpp \
  /usr/include/c++/15/variant /usr/include/c++/15/bits/monostate.h \
@@ -181,9 +182,8 @@ CMakeFiles/bebra_core.dir/src/BebraGraph.cpp.o: \
  /usr/include/c++/15/bits/uniform_int_dist.h \
  /usr/include/c++/15/bits/stl_tempbuf.h \
  /usr/include/c++/15/pstl/glue_algorithm_defs.h \
- /usr/include/c++/15/pstl/execution_defs.h /usr/include/c++/15/iostream \
- /usr/include/c++/15/map /usr/include/c++/15/bits/stl_tree.h \
- /usr/include/c++/15/bits/stl_map.h \
+ /usr/include/c++/15/pstl/execution_defs.h /usr/include/c++/15/map \
+ /usr/include/c++/15/bits/stl_tree.h /usr/include/c++/15/bits/stl_map.h \
  /usr/include/c++/15/bits/stl_multimap.h /usr/include/c++/15/memory \
  /usr/include/c++/15/bits/stl_raw_storage_iter.h \
  /usr/include/c++/15/bits/align.h /usr/include/c++/15/bits/unique_ptr.h \
@@ -236,5 +236,4 @@ CMakeFiles/bebra_core.dir/src/BebraGraph.cpp.o: \
  /usr/include/google/protobuf/any.h \
  /usr/include/google/protobuf/has_bits.h \
  /usr/include/google/protobuf/map_field_lite.h \
- /usr/include/google/protobuf/extension_set.h /usr/include/c++/15/cassert \
- /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraTensor.hpp
+ /usr/include/google/protobuf/extension_set.h /usr/include/c++/15/cassert

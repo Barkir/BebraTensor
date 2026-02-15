@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/bebra_tests.dir/link.d CMakeFiles/bebra_tests.dir/tests/data/graph_load.cpp.o -o bebra_tests  libbebra_core.a lib/libgtest_main.a lib/libgmock.a /usr/lib64/libprotobuf.so lib/libgtest.a

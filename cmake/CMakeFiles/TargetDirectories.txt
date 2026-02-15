@@ -1,5 +1,7 @@
 /home/kirill/Side-Projects/TensorShit/cmake/CMakeFiles/bebra_core.dir
 /home/kirill/Side-Projects/TensorShit/cmake/CMakeFiles/bebra_tensor.dir
+/home/kirill/Side-Projects/TensorShit/cmake/CMakeFiles/bebra_tests.dir
+/home/kirill/Side-Projects/TensorShit/cmake/CMakeFiles/test_verbose.dir
 /home/kirill/Side-Projects/TensorShit/cmake/CMakeFiles/test.dir
 /home/kirill/Side-Projects/TensorShit/cmake/CMakeFiles/edit_cache.dir
 /home/kirill/Side-Projects/TensorShit/cmake/CMakeFiles/rebuild_cache.dir

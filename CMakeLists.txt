@@ -46,6 +46,7 @@ add_library(bebra_core STATIC)
 target_sources(bebra_core
     PRIVATE
         src/BebraGraph.cpp
+        src/BebraAttr.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/onnx_proto/onnx.proto3.pb.cc
     PUBLIC
         FILE_SET HEADERS
@@ -95,44 +96,48 @@ target_link_libraries(bebra_tensor PRIVATE bebra_core)
 # ============================================================================
 # Testing System
 # ============================================================================
-# if(BEBRA_BUILD_TESTS)
-#     # Collect all test files
-#     file(GLOB TEST_SOURCES tests/*.cpp tests/**/*.cpp)
-#
-#     if(TEST_SOURCES)
-#         add_executable(bebra_tests ${TEST_SOURCES})
-#
-#         target_link_libraries(bebra_tests
-#             PRIVATE
-#                 bebra_core
-#                 GTest::gtest_main
-#                 GTest::gmock
-#         )
-#
-#         # Register tests with CTest
-#         include(GoogleTest)
-#         gtest_discover_tests(bebra_tests
-#             WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-#             PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-#         )
-#
-#         # Add custom test target for convenience
-#         add_custom_target(test_verbose
-#             COMMAND ${CMAKE_CTEST_COMMAND} --verbose
-#             DEPENDS bebra_tests
-#         )
-#     else()
-#         message(WARNING "No test files found in tests/ directory")
-#     endif()
-#
-#     # Optional: Add test data directory
-#     set(BEBRA_TEST_DATA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tests/data)
-#     if(EXISTS ${BEBRA_TEST_DATA_DIR})
-#         target_compile_definitions(bebra_tests PRIVATE
-#             BEBRA_TEST_DATA_DIR="${BEBRA_TEST_DATA_DIR}"
-#         )
-#     endif()
-# endif()
+if(BEBRA_BUILD_TESTS)
+    # Collect all test files
+    file(GLOB TEST_SOURCES tests/*.cpp tests/**/*.cpp)
+
+    if(TEST_SOURCES)
+        add_executable(bebra_tests ${TEST_SOURCES})
+
+        target_link_libraries(bebra_tests
+            PRIVATE
+                bebra_core
+                GTest::gtest_main
+                GTest::gmock
+        )
+
+        target_compile_definitions(bebra_tests PRIVATE
+        TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}"
+        )
+
+        # Register tests with CTest
+        include(GoogleTest)
+        gtest_discover_tests(bebra_tests
+            WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+            PROPERTIES VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+        )
+
+        # Add custom test target for convenience
+        add_custom_target(test_verbose
+            COMMAND ${CMAKE_CTEST_COMMAND} --verbose
+            DEPENDS bebra_tests
+        )
+    else()
+        message(WARNING "No test files found in tests/ directory")
+    endif()
+
+    # Optional: Add test data directory
+    set(BEBRA_TEST_DATA_DIR ${CMAKE_CURRENT_SOURCE_DIR}/tests/data)
+    if(EXISTS ${BEBRA_TEST_DATA_DIR})
+        target_compile_definitions(bebra_tests PRIVATE
+            BEBRA_TEST_DATA_DIR="${BEBRA_TEST_DATA_DIR}"
+        )
+    endif()
+endif()
 
 # ============================================================================
 # Sanitizers (Debug builds)

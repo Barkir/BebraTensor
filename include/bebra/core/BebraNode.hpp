@@ -16,7 +16,6 @@ struct BebraNode {
 
     BebraNode(std::string op_type) : op_type_(op_type) {
         std::cout << "Created node with type: " << op_type_ << std::endl;
-
         //TODO add inputs bla-bla-bla
     }
 

@@ -7,6 +7,12 @@
 },
 {
   "directory": "/home/kirill/Side-Projects/TensorShit/cmake",
+  "command": "/usr/bin/c++  -I/home/kirill/Side-Projects/TensorShit/include -std=c++17 -Wall -Wextra -Wpedantic -O2 -march=native -o CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o -c /home/kirill/Side-Projects/TensorShit/src/BebraAttr.cpp",
+  "file": "/home/kirill/Side-Projects/TensorShit/src/BebraAttr.cpp",
+  "output": "CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o"
+},
+{
+  "directory": "/home/kirill/Side-Projects/TensorShit/cmake",
   "command": "/usr/bin/c++  -I/home/kirill/Side-Projects/TensorShit/include -std=c++17 -Wall -Wextra -Wpedantic -O2 -march=native -o CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o -c /home/kirill/Side-Projects/TensorShit/include/onnx_proto/onnx.proto3.pb.cc",
   "file": "/home/kirill/Side-Projects/TensorShit/include/onnx_proto/onnx.proto3.pb.cc",
   "output": "CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o"
@@ -16,6 +22,12 @@
   "command": "/usr/bin/c++  -I/home/kirill/Side-Projects/TensorShit/include -std=c++17 -o CMakeFiles/bebra_tensor.dir/src/main.cpp.o -c /home/kirill/Side-Projects/TensorShit/src/main.cpp",
   "file": "/home/kirill/Side-Projects/TensorShit/src/main.cpp",
   "output": "CMakeFiles/bebra_tensor.dir/src/main.cpp.o"
+},
+{
+  "directory": "/home/kirill/Side-Projects/TensorShit/cmake",
+  "command": "/usr/bin/c++ -DBEBRA_TEST_DATA_DIR=\\\"/home/kirill/Side-Projects/TensorShit/tests/data\\\" -DTEST_DATA_DIR=\\\"/home/kirill/Side-Projects/TensorShit\\\" -I/home/kirill/Side-Projects/TensorShit/include -isystem /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googletest/include -isystem /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googletest -isystem /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googlemock/include -isystem /home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-src/googlemock -std=c++17 -o CMakeFiles/bebra_tests.dir/tests/data/graph_load.cpp.o -c /home/kirill/Side-Projects/TensorShit/tests/data/graph_load.cpp",
+  "file": "/home/kirill/Side-Projects/TensorShit/tests/data/graph_load.cpp",
+  "output": "CMakeFiles/bebra_tests.dir/tests/data/graph_load.cpp.o"
 },
 {
   "directory": "/home/kirill/Side-Projects/TensorShit/cmake/_deps/googletest-build/googlemock",

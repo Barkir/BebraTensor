@@ -1,0 +1,5 @@
+add_test([=[GraphLoading.LoadsWithoutMissingTensors]=]  /home/kirill/Side-Projects/TensorShit/cmake/bebra_tests [==[--gtest_filter=GraphLoading.LoadsWithoutMissingTensors]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[GraphLoading.LoadsWithoutMissingTensors]=]  PROPERTIES WORKING_DIRECTORY /home/kirill/Side-Projects/TensorShit SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==] VS_DEBUGGER_WORKING_DIRECTORY /home/kirill/Side-Projects/TensorShit)
+add_test([=[GraphLoading.HasExpectedStructure]=]  /home/kirill/Side-Projects/TensorShit/cmake/bebra_tests [==[--gtest_filter=GraphLoading.HasExpectedStructure]==] --gtest_also_run_disabled_tests)
+set_tests_properties([=[GraphLoading.HasExpectedStructure]=]  PROPERTIES WORKING_DIRECTORY /home/kirill/Side-Projects/TensorShit SKIP_REGULAR_EXPRESSION [==[\[  SKIPPED \]]==] VS_DEBUGGER_WORKING_DIRECTORY /home/kirill/Side-Projects/TensorShit)
+set(  bebra_tests_TESTS GraphLoading.LoadsWithoutMissingTensors GraphLoading.HasExpectedStructure)

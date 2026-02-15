@@ -86,10 +86,24 @@ CMakeFiles/bebra_core.dir/src/BebraGraph.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/bebra_core.dir/src/BebraGraph.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kirill/Side-Projects/TensorShit/src/BebraGraph.cpp -o CMakeFiles/bebra_core.dir/src/BebraGraph.cpp.s
 
+CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o: CMakeFiles/bebra_core.dir/flags.make
+CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o: /home/kirill/Side-Projects/TensorShit/src/BebraAttr.cpp
+CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o: CMakeFiles/bebra_core.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kirill/Side-Projects/TensorShit/cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o -MF CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o.d -o CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o -c /home/kirill/Side-Projects/TensorShit/src/BebraAttr.cpp
+
+CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kirill/Side-Projects/TensorShit/src/BebraAttr.cpp > CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.i
+
+CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kirill/Side-Projects/TensorShit/src/BebraAttr.cpp -o CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.s
+
 CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o: CMakeFiles/bebra_core.dir/flags.make
 CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o: /home/kirill/Side-Projects/TensorShit/include/onnx_proto/onnx.proto3.pb.cc
 CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o: CMakeFiles/bebra_core.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kirill/Side-Projects/TensorShit/cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/kirill/Side-Projects/TensorShit/cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o -MF CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o.d -o CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o -c /home/kirill/Side-Projects/TensorShit/include/onnx_proto/onnx.proto3.pb.cc
 
 CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.i: cmake_force
@@ -103,16 +117,18 @@ CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.s: cmake_force
 # Object files for target bebra_core
 bebra_core_OBJECTS = \
 "CMakeFiles/bebra_core.dir/src/BebraGraph.cpp.o" \
+"CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o" \
 "CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o"
 
 # External object files for target bebra_core
 bebra_core_EXTERNAL_OBJECTS =
 
 libbebra_core.a: CMakeFiles/bebra_core.dir/src/BebraGraph.cpp.o
+libbebra_core.a: CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o
 libbebra_core.a: CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.o
 libbebra_core.a: CMakeFiles/bebra_core.dir/build.make
 libbebra_core.a: CMakeFiles/bebra_core.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kirill/Side-Projects/TensorShit/cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libbebra_core.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/kirill/Side-Projects/TensorShit/cmake/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX static library libbebra_core.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/bebra_core.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/bebra_core.dir/link.txt --verbose=$(VERBOSE)
 

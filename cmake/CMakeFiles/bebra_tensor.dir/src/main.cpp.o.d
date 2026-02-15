@@ -233,9 +233,9 @@ CMakeFiles/bebra_tensor.dir/src/main.cpp.o: \
  /usr/include/google/protobuf/map_field_lite.h \
  /usr/include/google/protobuf/extension_set.h /usr/include/c++/15/cassert \
  /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraGraph.hpp \
+ /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraTensor.hpp \
  /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraNode.hpp \
  /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraAttr.hpp \
  /usr/include/c++/15/variant /usr/include/c++/15/bits/monostate.h \
  /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraErr.hpp \
- /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraColors.hpp \
- /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraTensor.hpp
+ /home/kirill/Side-Projects/TensorShit/include/bebra/core/BebraColors.hpp

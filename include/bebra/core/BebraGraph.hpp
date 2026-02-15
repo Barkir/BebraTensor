@@ -5,10 +5,11 @@
 #include <unordered_map>
 #include <string>
 #include <fstream>
+#include <iostream>
 
-#include "BebraNode.hpp"
+// #include "BebraAttr.hpp"
 #include "BebraTensor.hpp"
-#include "BebraAttr.hpp"
+#include "BebraNode.hpp"
 #include "BebraErr.hpp"
 
 #include "onnx_proto/onnx.proto3.pb.h"
@@ -18,7 +19,7 @@ namespace Core {
 
 struct BebraGraph {
 
-    private:
+
     std::vector<BebraNode> nodes_;
     std::unordered_map<std::string, BebraTensor> tensor_map_; // this is bcs all tensor have different names in graph, so we can identify them by names
 
@@ -35,13 +36,15 @@ struct BebraGraph {
         }
 
         // then converting to own graph
+        convertOnnxToBebraGraph(model.graph());
     }
 
     public: // methods
-        void convertOnnxToBebraGraph(onnx::GraphProto& graph);
-        void convertOnnxToBebraInput(onnx::GraphProto& graph);
-        void convertOnnxToBebraInitializer(onnx::GraphProto& graph);
-        void convertOnnxToBebraNode(onnx::GraphProto& graph);
+        void convertOnnxToBebraGraph(const onnx::GraphProto& graph);
+        void convertOnnxToBebraInput(const onnx::GraphProto& graph);
+        void convertOnnxToBebraInitializer(const onnx::GraphProto& graph);
+        void convertOnnxToBebraNode(const onnx::GraphProto& graph);
+        void convertOnnxToBebraOutput(const onnx::GraphProto& graph);
 
 
 };

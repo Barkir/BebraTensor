@@ -53,6 +53,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake/Modules/FindPython3.cmake"
   "/usr/share/cmake/Modules/FindThreads.cmake"
   "/usr/share/cmake/Modules/GNUInstallDirs.cmake"
+  "/usr/share/cmake/Modules/GoogleTest.cmake"
   "/usr/share/cmake/Modules/Internal/CMakeCLinkerInformation.cmake"
   "/usr/share/cmake/Modules/Internal/CMakeCXXLinkerInformation.cmake"
   "/usr/share/cmake/Modules/Internal/CMakeCommonLinkerInformation.cmake"
@@ -101,6 +102,8 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/bebra_core.dir/DependInfo.cmake"
   "CMakeFiles/bebra_tensor.dir/DependInfo.cmake"
+  "CMakeFiles/bebra_tests.dir/DependInfo.cmake"
+  "CMakeFiles/test_verbose.dir/DependInfo.cmake"
   "_deps/googletest-build/googlemock/CMakeFiles/gmock.dir/DependInfo.cmake"
   "_deps/googletest-build/googlemock/CMakeFiles/gmock_main.dir/DependInfo.cmake"
   "_deps/googletest-build/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"

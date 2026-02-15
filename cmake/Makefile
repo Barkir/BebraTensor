@@ -198,6 +198,32 @@ bebra_tensor/fast:
 .PHONY : bebra_tensor/fast
 
 #=============================================================================
+# Target rules for targets named bebra_tests
+
+# Build rule for target.
+bebra_tests: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 bebra_tests
+.PHONY : bebra_tests
+
+# fast build rule for target.
+bebra_tests/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_tests.dir/build.make CMakeFiles/bebra_tests.dir/build
+.PHONY : bebra_tests/fast
+
+#=============================================================================
+# Target rules for targets named test_verbose
+
+# Build rule for target.
+test_verbose: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 test_verbose
+.PHONY : test_verbose
+
+# fast build rule for target.
+test_verbose/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/test_verbose.dir/build.make CMakeFiles/test_verbose.dir/build
+.PHONY : test_verbose/fast
+
+#=============================================================================
 # Target rules for targets named gmock
 
 # Build rule for target.
@@ -273,6 +299,30 @@ include/onnx_proto/onnx.proto3.pb.cc.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_core.dir/build.make CMakeFiles/bebra_core.dir/include/onnx_proto/onnx.proto3.pb.cc.s
 .PHONY : include/onnx_proto/onnx.proto3.pb.cc.s
 
+src/BebraAttr.o: src/BebraAttr.cpp.o
+.PHONY : src/BebraAttr.o
+
+# target to build an object file
+src/BebraAttr.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_core.dir/build.make CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.o
+.PHONY : src/BebraAttr.cpp.o
+
+src/BebraAttr.i: src/BebraAttr.cpp.i
+.PHONY : src/BebraAttr.i
+
+# target to preprocess a source file
+src/BebraAttr.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_core.dir/build.make CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.i
+.PHONY : src/BebraAttr.cpp.i
+
+src/BebraAttr.s: src/BebraAttr.cpp.s
+.PHONY : src/BebraAttr.s
+
+# target to generate assembly for a file
+src/BebraAttr.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_core.dir/build.make CMakeFiles/bebra_core.dir/src/BebraAttr.cpp.s
+.PHONY : src/BebraAttr.cpp.s
+
 src/BebraGraph.o: src/BebraGraph.cpp.o
 .PHONY : src/BebraGraph.o
 
@@ -321,6 +371,30 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_tensor.dir/build.make CMakeFiles/bebra_tensor.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+tests/data/graph_load.o: tests/data/graph_load.cpp.o
+.PHONY : tests/data/graph_load.o
+
+# target to build an object file
+tests/data/graph_load.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_tests.dir/build.make CMakeFiles/bebra_tests.dir/tests/data/graph_load.cpp.o
+.PHONY : tests/data/graph_load.cpp.o
+
+tests/data/graph_load.i: tests/data/graph_load.cpp.i
+.PHONY : tests/data/graph_load.i
+
+# target to preprocess a source file
+tests/data/graph_load.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_tests.dir/build.make CMakeFiles/bebra_tests.dir/tests/data/graph_load.cpp.i
+.PHONY : tests/data/graph_load.cpp.i
+
+tests/data/graph_load.s: tests/data/graph_load.cpp.s
+.PHONY : tests/data/graph_load.s
+
+# target to generate assembly for a file
+tests/data/graph_load.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bebra_tests.dir/build.make CMakeFiles/bebra_tests.dir/tests/data/graph_load.cpp.s
+.PHONY : tests/data/graph_load.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -334,8 +408,10 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... test_verbose"
 	@echo "... bebra_core"
 	@echo "... bebra_tensor"
+	@echo "... bebra_tests"
 	@echo "... gmock"
 	@echo "... gmock_main"
 	@echo "... gtest"
@@ -343,12 +419,18 @@ help:
 	@echo "... include/onnx_proto/onnx.proto3.pb.o"
 	@echo "... include/onnx_proto/onnx.proto3.pb.i"
 	@echo "... include/onnx_proto/onnx.proto3.pb.s"
+	@echo "... src/BebraAttr.o"
+	@echo "... src/BebraAttr.i"
+	@echo "... src/BebraAttr.s"
 	@echo "... src/BebraGraph.o"
 	@echo "... src/BebraGraph.i"
 	@echo "... src/BebraGraph.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... tests/data/graph_load.o"
+	@echo "... tests/data/graph_load.i"
+	@echo "... tests/data/graph_load.s"
 .PHONY : help
 
 
