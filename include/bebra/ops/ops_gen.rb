@@ -99,7 +99,7 @@ end
 def main
 
     ops = YAML.load_file(YAML_PATH)
-    code_gen = File.open("BebraOperations.hpp", "w")
+    code_gen = File.open("BebraOperators.hpp", "w")
 
     code_gen.write(generate_header())
 

@@ -4,7 +4,7 @@
 
 #include "onnx_proto/onnx.proto3.pb.h"
 #include "bebra/core/BebraGraph.hpp"
-#include "bebra/ops/BebraOperations.hpp"
+#include "bebra/ops/BebraOperators.hpp"
 
 const std::string some_model = "../third_party/model_quantized.onnx";
 const std::string other_model = "../third_party/resnet50-v1-7.onnx";

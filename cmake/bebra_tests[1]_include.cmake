@@ -1,5 +1,0 @@
-if(EXISTS "/home/kirill/Side-Projects/TensorShit/cmake/bebra_tests[1]_tests.cmake")
-  include("/home/kirill/Side-Projects/TensorShit/cmake/bebra_tests[1]_tests.cmake")
-else()
-  add_test(bebra_tests_NOT_BUILT bebra_tests_NOT_BUILT)
-endif()
