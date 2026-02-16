@@ -6,12 +6,12 @@
 #define TEST_DATA_DIR "."
 #endif
 
-static std::string get_model_path(std::string path) {
-    return std::filesystem::path(TEST_DATA_DIR) / "third_party" / path;
-}
+    static std::string get_model_path(std::string path) {
+        return std::filesystem::path(TEST_DATA_DIR) / "third_party" / path;
+    }
 
 TEST(GraphLoading, LoadsWithoutMissingTensors) {
-    const std::string model_path = get_model_path("model_quantized.onnx");
+    const std::string model_path = get_model_path("resnet50-v1-7.onnx");
     Bebra::Core::BebraGraph graph(model_path);
 
     std::cout << "\n  Loaded " << graph.nodes_.size() << " nodes, "
@@ -27,22 +27,22 @@ TEST(GraphLoading, LoadsWithoutMissingTensors) {
 }
 
 TEST(GraphLoading, HasExpectedStructure) {
-    const std::string model_path = get_model_path("model_quantized.onnx");
+    const std::string model_path = get_model_path("resnet50-v1-7.onnx");
     Bebra::Core::BebraGraph graph(model_path);
 
     EXPECT_FALSE(graph.nodes_.empty()) << "Graph has no nodes";
     EXPECT_FALSE(graph.tensor_map_.empty()) << "Graph has no tensors";
 
     // Check for transformer-specific ops
-    bool has_matmul = false;
-    bool has_softmax = false;
+    bool has_gemm = false;
+    bool has_relu = false;
     for (const auto& node : graph.nodes_) {
-        if (node.op_type_ == "MatMul") has_matmul = true;
-        if (node.op_type_ == "Softmax") has_softmax = true;
+        if (node.op_type_ == "Gemm") has_gemm = true;
+        if (node.op_type_ == "Relu") has_relu = true;
     }
 
-    EXPECT_TRUE(has_matmul) << "Expected MatMul in transformer model";
-    EXPECT_TRUE(has_softmax) << "Expected Softmax in transformer model";
+    EXPECT_TRUE(has_gemm) << "Expected Gemm in transformer model";
+    EXPECT_TRUE(has_relu) << "Expected Softmax in transformer model";
 }
 
 

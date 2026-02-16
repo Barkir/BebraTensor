@@ -43,6 +43,22 @@ ruby ops_gen.rb
 
 you can also add your instructions, now I have only 7 of them.
 
+### GRAPHVIZ
+![img](./dot/png/mnist-8.png)
+
+This is a graph for MNIST-8 Neural Network.
+To generate graphs for your Neural Networks use `--dump <filename>` syntax when running a program. Then use `python3 dot2png.py` to generate `.png`
+
+##### Usecase for generating dump
+```bash
+./cmake/bebra_tensor --dump third_party/mnist-8.onnx
+
+python3 dot2png.py
+? Choose a .dot file you want to generate .png from (Use arrow keys)
+ » dot/mnist-8.dot
+
+```
+
 -----
 
 #### Future plans
@@ -50,7 +66,6 @@ you can also add your instructions, now I have only 7 of them.
 | Task | Stage |
 |------|-------|
 | Implement static polimorphism. | maybe
-| Add graphviz dump | thinking about architecture
 
 
 

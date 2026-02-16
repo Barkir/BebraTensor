@@ -5,6 +5,9 @@
 #ifndef ANSI_COLORS_H
 #define ANSI_COLORS_H
 
+
+#include <string>
+
 /* ============================================
  * ANSI ESCAPE SEQUENCES FOR C
  * ============================================ */
@@ -196,5 +199,53 @@
 #define SEP_LINE \
         std::cout << FG_CORAL << "---------------------------------------------" << RESET << std::endl;
 
+
+/* MNIST ONNX Node Color Definitions - BEBRA_CONV_NODE Theme */
+/* Format: 0xRRGGBB (24-bit RGB) */
+
+/* Convolution & Core Layers */
+#define BEBRA_CONV_NODE       "#FF6B6B"    /* Coral Red - signature color */
+#define BEBRA_CONV2D_NODE     "#FF6B6B"    /* Coral Red */
+#define BEBRA_RELU_NODE       "#4ECDC4"    /* Turquoise */
+#define BEBRA_LEAKYRELU_NODE  "#45B7AA"    /* Deep Turquoise */
+#define BEBRA_MAXPOOL_NODE    "#96CEB4"    /* Sage Green */
+#define BEBRA_AVGPOOL_NODE    "#88C9A1"    /* Soft Green */
+#define BEBRA_GLOBALPOOL_NODE "#7AB893"    /* Forest Green */
+
+/* Normalization & Regularization */
+#define BEBRA_BATCHNORM_NODE  "#FFEAA7"    /* Cream Yellow */
+#define BEBRA_DROPOUT_NODE    "#DDA0DD"    /* Plum */
+#define BEBRA_SOFTMAX_NODE    "#98D8C8"    /* Mint */
+
+/* Fully Connected / Dense */
+#define BEBRA_GEMM_NODE       "#6C5CE7"    /* Royal Purple */
+#define BEBRA_MATMUL_NODE     "#A29BFE"    /* Lavender */
+#define BEBRA_LINEAR_NODE     "#6C5CE7"    /* Royal Purple */
+
+/* Reshape & Tensor Ops */
+#define BEBRA_FLATTEN_NODE    "#FDCB6E"    /* Golden Yellow */
+#define BEBRA_RESHAPE_NODE    "#E17055"    /* Burnt Orange */
+#define BEBRA_TRANSPOSE_NODE  "#FDCB6E"    /* Golden Yellow */
+#define BEBRA_CONCAT_NODE     "#74B9FF"    /* Sky Blue */
+#define BEBRA_SPLIT_NODE      "#0984E3"    /* Azure Blue */
+
+/* Input/Output */
+#define BEBRA_INPUT_NODE      "#00B894"    /* Teal */
+#define BEBRA_OUTPUT_NODE     "#E84393"    /* Hot Pink */
+
+/* Arithmetic & Activations */
+#define BEBRA_ADD_NODE        "#FDCB6E"    /* Golden Yellow */
+#define BEBRA_MUL_NODE        "#FDCB6E"    /* Golden Yellow */
+#define BEBRA_SIGMOID_NODE    "#A29BFE"    /* Lavender */
+#define BEBRA_TANH_NODE       "#74B9FF"    /* Sky Blue */
+
+/* Fallback */
+#define BEBRA_DEFAULT_NODE    "#B2BEC3"    /* Cool Gray */
+#define BEBRA_UNKNOWN_NODE    "#636E72"    /* Slate Gray */
+
+#define BEBRA_TENSOR          "#A45E72"
+
+
+std::string getNodeColor(const std::string& nodeName);
 
 #endif /* ANSI_COLORS_H */

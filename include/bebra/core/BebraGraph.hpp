@@ -46,6 +46,8 @@ struct BebraGraph {
         void convertOnnxToBebraNode(const onnx::GraphProto& graph);
         void convertOnnxToBebraOutput(const onnx::GraphProto& graph);
 
+        void dumpBebra(std::ofstream& stream);
+
 
 };
 

@@ -1,5 +1,7 @@
 // BebraGraph.cpp
 
+#include <fstream>
+
 #include "bebra/core/BebraGraph.hpp"
 #include "bebra/core/BebraTensor.hpp"
 
@@ -63,6 +65,27 @@ void BebraGraph::convertOnnxToBebraInitializer(const onnx::GraphProto& graph) {
         //TODO add dtype
         //TODO add data
     }
+}
+
+void BebraGraph::dumpBebra(std::ofstream& stream) {
+    stream << "digraph{" << std::endl;
+    for (const auto& node : nodes_) {
+        stream << "node" << &node << "[label=" << node.op_type_ << ",shape=Mrecord style=filled, fillcolor=\"" << getNodeColor(node.op_type_) << "\"]" << std::endl;
+
+        for (const auto& input : node.inputs_) {
+            stream << "tensor" << input << "[label=" << input << ", shape=cylinder, style=filled, fillcolor=\"" << BEBRA_TENSOR << "\"]" << std::endl;
+            stream << "tensor" << input << "->" << "node" << &node << std::endl;
+        }
+
+        for (const auto& output : node.outputs_) {
+
+
+            stream << "tensor" << output << "[label=" << output << ", shape=cylinder, style=filled, fillcolor=\"" << BEBRA_TENSOR << "\"]" << std::endl;
+            stream << "node" << &node << "->" << "tensor" << output << std::endl;
+        }
+    }
+    stream << "}" << std::endl;
+
 }
 
 } // end of Core :0

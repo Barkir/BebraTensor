@@ -43,10 +43,16 @@ endif()
 # ============================================================================
 add_library(bebra_core STATIC)
 
+target_compile_definitions(bebra_core PUBLIC
+    PROJECT_ROOT="${CMAKE_CURRENT_SOURCE_DIR}"
+)
+
+
 target_sources(bebra_core
     PRIVATE
         src/BebraGraph.cpp
         src/BebraAttr.cpp
+        src/BebraColors.cpp
         ${CMAKE_CURRENT_SOURCE_DIR}/include/onnx_proto/onnx.proto3.pb.cc
     PUBLIC
         FILE_SET HEADERS
@@ -58,6 +64,7 @@ target_sources(bebra_core
             include/bebra/core/BebraGraph.hpp
             include/bebra/core/BebraNode.hpp
             include/bebra/core/BebraTensor.hpp
+            include/bebra/core/BebraConst.hpp
             include/bebra/ops/BebraOperators.hpp
             include/onnx_proto/onnx.proto3.pb.h
 )
