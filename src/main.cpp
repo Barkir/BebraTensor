@@ -7,6 +7,7 @@
 #include "bebra/core/BebraGraph.hpp"
 #include "bebra/core/BebraConst.hpp"
 #include "bebra/ops/BebraOperators.hpp"
+#include "bebra/core/BebraPassManager.hpp"
 
 #ifndef PROJECT_ROOT
 #define PROJECT_ROOT "."
@@ -48,16 +49,12 @@ int main(int argc, char* argv[]) {
 
         if (strcmp(argv[i], "--dump")) {
             Bebra::Core::BebraGraph graph(argv[i]);
+
+            Bebra::Pass::BebraPassManager pm;
+            pm.registerPass(std::make_unique<Bebra::Pass::ShapeInferencePass>());
+            pm.run(graph);
             // ... do smth here
             return 0;
         }
     }
-    // std::ofstream stream;
-    // stream.open("nigga.dot");
-    // if (!stream.is_open()) {
-        // throw Bebra::Core::BebraErr("Stream for graphviz not opened!");
-    // }
-
-    // graph.dumpBebra(stream);
-
 }

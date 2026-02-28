@@ -6,7 +6,7 @@
 namespace Bebra {
 namespace Core {
 
-Attr parseAttr(const onnx::AttributeProto& attr) {
+AttrVal parseAttr(const onnx::AttributeProto& attr) {
     switch (attr.type()) {
         case onnx::AttributeProto::INT:
             return attr.i();

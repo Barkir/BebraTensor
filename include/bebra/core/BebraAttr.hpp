@@ -37,7 +37,8 @@ enum AttributeProto_AttributeType : int {
 
 namespace Bebra {
 namespace Core {
-using Attr = std::variant<
+
+using AttrVal = std::variant<
     float,
     int64_t,
     std::string,
@@ -50,9 +51,33 @@ using Attr = std::variant<
     std::vector<BebraTensor>
 
     //TODO also add BebraTensor, BebraGraph :'
->;
+  >;
 
-Attr parseAttr(const onnx::AttributeProto& attr);
+class Attr {
+
+  AttrVal val_;
+
+  public:
+    template<typename T>
+    Attr(T val) : val_(val) {}
+
+    template<typename T>
+    const T& getValRef() const {return std::get<T>(val_); }
+
+    template<typename T>
+    T& getValRef() {return std::get<T>(val_); }
+
+    template<typename T>
+    const T getVal() const {return std::get<T>(val_); }
+
+
+    template<typename T>
+    T getVal() {return std::get<T>(val_); }
+
+};
+
+
+AttrVal parseAttr(const onnx::AttributeProto& attr);
 
 } // end of Core :0
 } // end of Bebra :0

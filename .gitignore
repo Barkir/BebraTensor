@@ -1,3 +1,5 @@
 model_quantized.onnx
 nomic-embed-text-v1
 third_party/*.onnx
+cmake
+build

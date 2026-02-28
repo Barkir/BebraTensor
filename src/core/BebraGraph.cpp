@@ -50,7 +50,7 @@ void BebraGraph::convertOnnxToBebraNode(const onnx::GraphProto& graph) {
         }
 
         for (const auto& attr : onnx_node.attribute()) {
-            node.attrs_[attr.name()] = parseAttr(attr);
+            node.attrs_.emplace(attr.name(), parseAttr(attr));
         }
 
         nodes_.push_back(std::move(node));
@@ -70,7 +70,11 @@ void BebraGraph::convertOnnxToBebraInitializer(const onnx::GraphProto& graph) {
 void BebraGraph::dumpBebra(std::ofstream& stream) {
     stream << "digraph{" << std::endl;
     for (const auto& node : nodes_) {
-        stream << "node" << &node << "[label=" << node.op_type_ << ",shape=Mrecord style=filled, fillcolor=\"" << getNodeColor(node.op_type_) << "\"]" << std::endl;
+        stream << "node" << &node << "[\"label\"=\"{" << node.op_type_;
+        for (const auto& attr : node.attrs_) {
+            stream << "|" << attr.first << std::endl;
+        }
+        stream << "}\",shape=Mrecord style=filled, fillcolor=\"" << getNodeColor(node.op_type_) << "\"]" << std::endl;
 
         for (const auto& input : node.inputs_) {
             stream << "tensor" << input << "[label=" << input << ", shape=cylinder, style=filled, fillcolor=\"" << BEBRA_TENSOR << "\"]" << std::endl;

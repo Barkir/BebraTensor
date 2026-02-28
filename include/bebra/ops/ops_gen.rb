@@ -55,7 +55,7 @@ def generate_attr(attr, op_name)
             }
 
             std::cout << FG_GOLD_RGB "Got #{name} attr." RESET << std::endl;
-            return std::get<#{type}>(it->second);
+            return it->second.getValRef<#{type}>();
         }
     CPP
     else
@@ -67,7 +67,7 @@ def generate_attr(attr, op_name)
             }
 
             std::cout << FG_GOLD_RGB "Got #{name} attr" << RESET << std::endl;
-            return std::get<#{type}>(it->second);
+            return it->second.getValRef<#{type}>();
         }
     CPP
     end

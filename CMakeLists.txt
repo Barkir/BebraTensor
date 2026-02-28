@@ -47,25 +47,39 @@ target_compile_definitions(bebra_core PUBLIC
     PROJECT_ROOT="${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
+SET(BEBRA_SRC_DIRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/core
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/passes
+)
+SET(BEBRA_INCLUDE_DIRS
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/bebra/core
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/bebra/ops
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/bebra/passes
+)
+
+set(BEBRA_SOURCES "")
+foreach(dir ${BEBRA_SRC_DIRS})
+    file(GLOB_RECURSE dir_sources "${dir}/*.cpp")
+    list(APPEND BEBRA_SOURCES ${dir_sources})
+endforeach()
+
+set(BEBRA_INCLUDES "")
+foreach(dir ${BEBRA_INCLUDE_DIRS})
+    file(GLOB_RECURSE dir_sources "${dir}/*.hpp")
+    list(APPEND BEBRA_INCLUDES ${dir_sources})
+endforeach()
+
+
 
 target_sources(bebra_core
     PRIVATE
-        src/BebraGraph.cpp
-        src/BebraAttr.cpp
-        src/BebraColors.cpp
+        ${BEBRA_SOURCES}
         ${CMAKE_CURRENT_SOURCE_DIR}/include/onnx_proto/onnx.proto3.pb.cc
     PUBLIC
         FILE_SET HEADERS
         BASE_DIRS include
         FILES
-            include/bebra/core/BebraAttr.hpp
-            include/bebra/core/BebraColors.hpp
-            include/bebra/core/BebraErr.hpp
-            include/bebra/core/BebraGraph.hpp
-            include/bebra/core/BebraNode.hpp
-            include/bebra/core/BebraTensor.hpp
-            include/bebra/core/BebraConst.hpp
-            include/bebra/ops/BebraOperators.hpp
+            ${BEBRA_INCLUDES}
             include/onnx_proto/onnx.proto3.pb.h
 )
 

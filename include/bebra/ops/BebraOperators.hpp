@@ -21,7 +21,7 @@ struct OpConv {
     }
 
     std::cout << FG_GOLD_RGB "Got kernel_shape attr" << RESET << std::endl;
-    return std::get<std::vector<int64_t>>(it->second);
+    return it->second.getValRef<std::vector<int64_t>>();
 }
 
 int64_t group() const  {
@@ -33,7 +33,7 @@ int64_t group() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got group attr." RESET << std::endl;
-    return std::get<int64_t>(it->second);
+    return it->second.getValRef<int64_t>();
 }
 
 std::vector<int64_t> dilations() const  {
@@ -45,7 +45,7 @@ std::vector<int64_t> dilations() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got dilations attr." RESET << std::endl;
-    return std::get<std::vector<int64_t>>(it->second);
+    return it->second.getValRef<std::vector<int64_t>>();
 }
 
 std::vector<int64_t> pads() const  {
@@ -57,7 +57,7 @@ std::vector<int64_t> pads() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got pads attr." RESET << std::endl;
-    return std::get<std::vector<int64_t>>(it->second);
+    return it->second.getValRef<std::vector<int64_t>>();
 }
 
 std::vector<int64_t> strides() const  {
@@ -69,7 +69,7 @@ std::vector<int64_t> strides() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got strides attr." RESET << std::endl;
-    return std::get<std::vector<int64_t>>(it->second);
+    return it->second.getValRef<std::vector<int64_t>>();
 }
 
     };
@@ -91,7 +91,7 @@ struct OpGemm {
     }
 
     std::cout << FG_GOLD_RGB "Got alpha attr." RESET << std::endl;
-    return std::get<float>(it->second);
+    return it->second.getValRef<float>();
 }
 
 float beta() const  {
@@ -103,7 +103,7 @@ float beta() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got beta attr." RESET << std::endl;
-    return std::get<float>(it->second);
+    return it->second.getValRef<float>();
 }
 
 int64_t transA() const  {
@@ -115,7 +115,7 @@ int64_t transA() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got transA attr." RESET << std::endl;
-    return std::get<int64_t>(it->second);
+    return it->second.getValRef<int64_t>();
 }
 
 int64_t transB() const  {
@@ -127,7 +127,7 @@ int64_t transB() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got transB attr." RESET << std::endl;
-    return std::get<int64_t>(it->second);
+    return it->second.getValRef<int64_t>();
 }
 
     };
@@ -191,7 +191,7 @@ struct OpMaxPool {
     }
 
     std::cout << FG_GOLD_RGB "Got kernel_shape attr" << RESET << std::endl;
-    return std::get<std::vector<int64_t>>(it->second);
+    return it->second.getValRef<std::vector<int64_t>>();
 }
 
 std::string auto_pad() const  {
@@ -203,7 +203,7 @@ std::string auto_pad() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got auto_pad attr." RESET << std::endl;
-    return std::get<std::string>(it->second);
+    return it->second.getValRef<std::string>();
 }
 
 int64_t ceil_mode() const  {
@@ -215,7 +215,7 @@ int64_t ceil_mode() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got ceil_mode attr." RESET << std::endl;
-    return std::get<int64_t>(it->second);
+    return it->second.getValRef<int64_t>();
 }
 
 std::vector<int64_t> dilations() const  {
@@ -227,7 +227,7 @@ std::vector<int64_t> dilations() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got dilations attr." RESET << std::endl;
-    return std::get<std::vector<int64_t>>(it->second);
+    return it->second.getValRef<std::vector<int64_t>>();
 }
 
 std::vector<int64_t> pads() const  {
@@ -239,7 +239,7 @@ std::vector<int64_t> pads() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got pads attr." RESET << std::endl;
-    return std::get<std::vector<int64_t>>(it->second);
+    return it->second.getValRef<std::vector<int64_t>>();
 }
 
 int64_t storage_order() const  {
@@ -251,7 +251,7 @@ int64_t storage_order() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got storage_order attr." RESET << std::endl;
-    return std::get<int64_t>(it->second);
+    return it->second.getValRef<int64_t>();
 }
 
 std::vector<int64_t> strides() const  {
@@ -263,7 +263,7 @@ std::vector<int64_t> strides() const  {
     }
 
     std::cout << FG_GOLD_RGB "Got strides attr." RESET << std::endl;
-    return std::get<std::vector<int64_t>>(it->second);
+    return it->second.getValRef<std::vector<int64_t>>();
 }
 
     };
