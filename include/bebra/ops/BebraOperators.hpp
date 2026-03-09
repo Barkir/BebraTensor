@@ -1,271 +1,235 @@
 #pragma once
 #include <string>
-#include "bebra/core/BebraNode.hpp"
+namespace Bebra { namespace Core { class BebraGraph; } }
+#include <vector>
+#include <iostream>
 #include "bebra/core/BebraErr.hpp"
 #include "bebra/core/BebraColors.hpp"
 namespace Bebra {
 namespace Ops {
 struct OpConv {
-    const Core::BebraNode* node_;
-
-    explicit OpConv(const Core::BebraNode* node) : node_(node) {
-        if (node_->op_type_ != "Conv") {
-            throw Core::BebraErr("Not a Conv node...");
-        }
-        std::cout << UNDERLINE_GREEN "Got Conv node!" RESET << std::endl;
-    }
-    std::vector<int64_t> kernel_shape() const  {
-    auto it = node_->attrs_.find("kernel_shape");
-    if (it == node_->attrs_.end()) {
-        throw Core::BebraErr("Missing kernel_shape at Conv!");
-    }
-
-    std::cout << FG_GOLD_RGB "Got kernel_shape attr" << RESET << std::endl;
-    return it->second.getValRef<std::vector<int64_t>>();
+static constexpr const char* getOpType() { return "Conv"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        "kernel_shape",
+"group",
+"dilations",
+"pads",
+"strides"
+    };
 }
 
-int64_t group() const  {
-    auto it = node_->attrs_.find("group");
-    if (it == node_->attrs_.end()) {
+        std::string input;
+        std::string weight;
+        std::string bias;
 
-    std::cout << FG_GOLD_RGB "Got group attr" RESET<< " by default." << std::endl;
-        return int64_t(1);
-    }
+        std::string output;
 
-    std::cout << FG_GOLD_RGB "Got group attr." RESET << std::endl;
-    return it->second.getValRef<int64_t>();
-}
+    std::vector<int64_t> kernel_shape;
+    int64_t group = int64_t(1);
+    std::vector<int64_t> dilations = std::vector<int64_t>({1, 1});
+    std::vector<int64_t> pads = std::vector<int64_t>({0, 0});
+    std::vector<int64_t> strides = std::vector<int64_t>({1, 1});
 
-std::vector<int64_t> dilations() const  {
-    auto it = node_->attrs_.find("dilations");
-    if (it == node_->attrs_.end()) {
-
-    std::cout << FG_GOLD_RGB "Got dilations attr" RESET<< " by default." << std::endl;
-        return std::vector<int64_t>({1, 1});
-    }
-
-    std::cout << FG_GOLD_RGB "Got dilations attr." RESET << std::endl;
-    return it->second.getValRef<std::vector<int64_t>>();
-}
-
-std::vector<int64_t> pads() const  {
-    auto it = node_->attrs_.find("pads");
-    if (it == node_->attrs_.end()) {
-
-    std::cout << FG_GOLD_RGB "Got pads attr" RESET<< " by default." << std::endl;
-        return std::vector<int64_t>({0, 0});
-    }
-
-    std::cout << FG_GOLD_RGB "Got pads attr." RESET << std::endl;
-    return it->second.getValRef<std::vector<int64_t>>();
-}
-
-std::vector<int64_t> strides() const  {
-    auto it = node_->attrs_.find("strides");
-    if (it == node_->attrs_.end()) {
-
-    std::cout << FG_GOLD_RGB "Got strides attr" RESET<< " by default." << std::endl;
-        return std::vector<int64_t>({1, 1});
-    }
-
-    std::cout << FG_GOLD_RGB "Got strides attr." RESET << std::endl;
-    return it->second.getValRef<std::vector<int64_t>>();
-}
-
+bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpGemm {
-    const Core::BebraNode* node_;
-
-    explicit OpGemm(const Core::BebraNode* node) : node_(node) {
-        if (node_->op_type_ != "Gemm") {
-            throw Core::BebraErr("Not a Gemm node...");
-        }
-        std::cout << UNDERLINE_GREEN "Got Gemm node!" RESET << std::endl;
-    }
-    float alpha() const  {
-    auto it = node_->attrs_.find("alpha");
-    if (it == node_->attrs_.end()) {
-
-    std::cout << FG_GOLD_RGB "Got alpha attr" RESET<< " by default." << std::endl;
-        return float(1.0f);
-    }
-
-    std::cout << FG_GOLD_RGB "Got alpha attr." RESET << std::endl;
-    return it->second.getValRef<float>();
+static constexpr const char* getOpType() { return "Gemm"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        "alpha",
+"beta",
+"transA",
+"transB"
+    };
 }
 
-float beta() const  {
-    auto it = node_->attrs_.find("beta");
-    if (it == node_->attrs_.end()) {
+        std::string input_a;
+        std::string input_b;
+        std::string bias;
 
-    std::cout << FG_GOLD_RGB "Got beta attr" RESET<< " by default." << std::endl;
-        return float(1.0f);
-    }
+        std::string output;
 
-    std::cout << FG_GOLD_RGB "Got beta attr." RESET << std::endl;
-    return it->second.getValRef<float>();
-}
+    float alpha = float(1.0f);
+    float beta = float(1.0f);
+    int64_t transA = int64_t(0);
+    int64_t transB = int64_t(0);
 
-int64_t transA() const  {
-    auto it = node_->attrs_.find("transA");
-    if (it == node_->attrs_.end()) {
-
-    std::cout << FG_GOLD_RGB "Got transA attr" RESET<< " by default." << std::endl;
-        return int64_t(0);
-    }
-
-    std::cout << FG_GOLD_RGB "Got transA attr." RESET << std::endl;
-    return it->second.getValRef<int64_t>();
-}
-
-int64_t transB() const  {
-    auto it = node_->attrs_.find("transB");
-    if (it == node_->attrs_.end()) {
-
-    std::cout << FG_GOLD_RGB "Got transB attr" RESET<< " by default." << std::endl;
-        return int64_t(0);
-    }
-
-    std::cout << FG_GOLD_RGB "Got transB attr." RESET << std::endl;
-    return it->second.getValRef<int64_t>();
-}
-
+bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpAdd {
-    const Core::BebraNode* node_;
+static constexpr const char* getOpType() { return "Add"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        
+    };
+}
 
-    explicit OpAdd(const Core::BebraNode* node) : node_(node) {
-        if (node_->op_type_ != "Add") {
-            throw Core::BebraErr("Not a Add node...");
-        }
-        std::cout << UNDERLINE_GREEN "Got Add node!" RESET << std::endl;
-    }
-    
+        std::string input_1;
+        std::string input_2;
+
+        std::string output;
+
+
+bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpRelu {
-    const Core::BebraNode* node_;
+static constexpr const char* getOpType() { return "Relu"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        
+    };
+}
 
-    explicit OpRelu(const Core::BebraNode* node) : node_(node) {
-        if (node_->op_type_ != "Relu") {
-            throw Core::BebraErr("Not a Relu node...");
-        }
-        std::cout << UNDERLINE_GREEN "Got Relu node!" RESET << std::endl;
-    }
-    
+        std::string input;
+
+        std::string output;
+
+
+bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpMul {
-    const Core::BebraNode* node_;
+static constexpr const char* getOpType() { return "Mul"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        
+    };
+}
 
-    explicit OpMul(const Core::BebraNode* node) : node_(node) {
-        if (node_->op_type_ != "Mul") {
-            throw Core::BebraErr("Not a Mul node...");
-        }
-        std::cout << UNDERLINE_GREEN "Got Mul node!" RESET << std::endl;
-    }
-    
+        std::string input_1;
+        std::string input_2;
+
+        std::string output;
+
+
+bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpMatMul {
-    const Core::BebraNode* node_;
+static constexpr const char* getOpType() { return "MatMul"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        
+    };
+}
 
-    explicit OpMatMul(const Core::BebraNode* node) : node_(node) {
-        if (node_->op_type_ != "MatMul") {
-            throw Core::BebraErr("Not a MatMul node...");
-        }
-        std::cout << UNDERLINE_GREEN "Got MatMul node!" RESET << std::endl;
-    }
-    
+        std::string input_a;
+        std::string input_b;
+
+        std::string output;
+
+
+bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpMaxPool {
-    const Core::BebraNode* node_;
-
-    explicit OpMaxPool(const Core::BebraNode* node) : node_(node) {
-        if (node_->op_type_ != "MaxPool") {
-            throw Core::BebraErr("Not a MaxPool node...");
-        }
-        std::cout << UNDERLINE_GREEN "Got MaxPool node!" RESET << std::endl;
-    }
-    std::vector<int64_t> kernel_shape() const  {
-    auto it = node_->attrs_.find("kernel_shape");
-    if (it == node_->attrs_.end()) {
-        throw Core::BebraErr("Missing kernel_shape at MaxPool!");
-    }
-
-    std::cout << FG_GOLD_RGB "Got kernel_shape attr" << RESET << std::endl;
-    return it->second.getValRef<std::vector<int64_t>>();
+static constexpr const char* getOpType() { return "MaxPool"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        "kernel_shape",
+"auto_pad",
+"ceil_mode",
+"dilations",
+"pads",
+"storage_order",
+"strides"
+    };
 }
 
-std::string auto_pad() const  {
-    auto it = node_->attrs_.find("auto_pad");
-    if (it == node_->attrs_.end()) {
+        std::string input;
 
-    std::cout << FG_GOLD_RGB "Got auto_pad attr" RESET<< " by default." << std::endl;
-        return std::string("NOTSET");
-    }
+        std::string output;
+        std::string indices;
 
-    std::cout << FG_GOLD_RGB "Got auto_pad attr." RESET << std::endl;
-    return it->second.getValRef<std::string>();
+    std::vector<int64_t> kernel_shape;
+    std::string auto_pad = std::string("NOTSET");
+    int64_t ceil_mode = int64_t(0);
+    std::vector<int64_t> dilations = std::vector<int64_t>({1, 1});
+    std::vector<int64_t> pads = std::vector<int64_t>({0, 0});
+    int64_t storage_order = int64_t(0);
+    std::vector<int64_t> strides = std::vector<int64_t>({1, 1});
+
+bool verify(const Core::BebraGraph& graph) const;
+    };
+struct OpReduceMean {
+static constexpr const char* getOpType() { return "ReduceMean"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        "axes",
+"keepdims"
+    };
 }
 
-int64_t ceil_mode() const  {
-    auto it = node_->attrs_.find("ceil_mode");
-    if (it == node_->attrs_.end()) {
+        std::string input;
+        std::string axes_t;
 
-    std::cout << FG_GOLD_RGB "Got ceil_mode attr" RESET<< " by default." << std::endl;
-        return int64_t(0);
-    }
+        std::string output;
 
-    std::cout << FG_GOLD_RGB "Got ceil_mode attr." RESET << std::endl;
-    return it->second.getValRef<int64_t>();
+    std::vector<int64_t> axes;
+    int64_t keepdims = int64_t(1);
+
+bool verify(const Core::BebraGraph& graph) const;
+    };
+struct OpReshape {
+static constexpr const char* getOpType() { return "Reshape"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        "shape"
+    };
 }
 
-std::vector<int64_t> dilations() const  {
-    auto it = node_->attrs_.find("dilations");
-    if (it == node_->attrs_.end()) {
+        std::string input;
+        std::string shape_t;
 
-    std::cout << FG_GOLD_RGB "Got dilations attr" RESET<< " by default." << std::endl;
-        return std::vector<int64_t>({1, 1});
-    }
+        std::string output;
 
-    std::cout << FG_GOLD_RGB "Got dilations attr." RESET << std::endl;
-    return it->second.getValRef<std::vector<int64_t>>();
+    std::vector<int64_t> shape;
+
+bool verify(const Core::BebraGraph& graph) const;
+    };
+struct OpSigmoid {
+static constexpr const char* getOpType() { return "Sigmoid"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        
+    };
 }
 
-std::vector<int64_t> pads() const  {
-    auto it = node_->attrs_.find("pads");
-    if (it == node_->attrs_.end()) {
+        std::string input;
 
-    std::cout << FG_GOLD_RGB "Got pads attr" RESET<< " by default." << std::endl;
-        return std::vector<int64_t>({0, 0});
-    }
+        std::string output;
 
-    std::cout << FG_GOLD_RGB "Got pads attr." RESET << std::endl;
-    return it->second.getValRef<std::vector<int64_t>>();
+
+bool verify(const Core::BebraGraph& graph) const;
+    };
+struct OpGlobalAveragePool {
+static constexpr const char* getOpType() { return "GlobalAveragePool"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        
+    };
 }
 
-int64_t storage_order() const  {
-    auto it = node_->attrs_.find("storage_order");
-    if (it == node_->attrs_.end()) {
+        std::string input;
 
-    std::cout << FG_GOLD_RGB "Got storage_order attr" RESET<< " by default." << std::endl;
-        return int64_t(0);
-    }
+        std::string output;
 
-    std::cout << FG_GOLD_RGB "Got storage_order attr." RESET << std::endl;
-    return it->second.getValRef<int64_t>();
+
+bool verify(const Core::BebraGraph& graph) const;
+    };
+struct OpFlatten {
+static constexpr const char* getOpType() { return "Flatten"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        "axis"
+    };
 }
 
-std::vector<int64_t> strides() const  {
-    auto it = node_->attrs_.find("strides");
-    if (it == node_->attrs_.end()) {
+        std::string input;
 
-    std::cout << FG_GOLD_RGB "Got strides attr" RESET<< " by default." << std::endl;
-        return std::vector<int64_t>({1, 1});
-    }
+        std::string output;
 
-    std::cout << FG_GOLD_RGB "Got strides attr." RESET << std::endl;
-    return it->second.getValRef<std::vector<int64_t>>();
-}
+    int64_t axis = int64_t(1);
 
+bool verify(const Core::BebraGraph& graph) const;
     };
 } // end of Ops :0
 } // end of Bebra :0

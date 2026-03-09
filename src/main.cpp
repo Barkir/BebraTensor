@@ -50,7 +50,11 @@ int main(int argc, char* argv[]) {
         if (strcmp(argv[i], "--dump")) {
             Bebra::Core::BebraGraph graph(argv[i]);
 
+            // VerifyGraph
+
             Bebra::Pass::BebraPassManager pm;
+
+            // need to add plugin linkage
             pm.registerPass(std::make_unique<Bebra::Pass::ShapeInferencePass>());
             pm.run(graph);
             // ... do smth here

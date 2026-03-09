@@ -18,6 +18,10 @@ struct BebraTensor {
 
     }
 
+    bool hasShape() const {
+        return shape_.size() != 0;
+    }
+
 };
 
 } // end of Core :0

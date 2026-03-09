@@ -50,6 +50,7 @@ target_compile_definitions(bebra_core PUBLIC
 SET(BEBRA_SRC_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core
     ${CMAKE_CURRENT_SOURCE_DIR}/src/passes
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/ops
 )
 SET(BEBRA_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/bebra/core

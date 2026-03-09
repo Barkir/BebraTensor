@@ -45,8 +45,18 @@ struct BebraGraph {
         void convertOnnxToBebraInitializer(const onnx::GraphProto& graph);
         void convertOnnxToBebraNode(const onnx::GraphProto& graph);
         void convertOnnxToBebraOutput(const onnx::GraphProto& graph);
-
+        bool verifyGraph();
         void dumpBebra(std::ofstream& stream);
+
+    public: // helper methods
+        const BebraTensor& getTensor(const std::string& tensor_name) const {
+            auto&& tensor = tensor_map_.find(tensor_name);
+            if (tensor != tensor_map_.end()) {
+                return tensor->second;
+            }
+
+            throw BebraErr("No such tensor " + tensor_name + " in tensor_map_...");
+        }
 
 
 };

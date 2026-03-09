@@ -18,10 +18,15 @@ TEST(GraphLoading, LoadsWithoutMissingTensors) {
               << graph.tensor_map_.size() << " tensors" << std::endl;
 
     for (const auto& node : graph.nodes_) {
+        std::string op_type;
+        std::visit([&op_type](const auto& op) {
+            op_type = op.getOpType();
+        }, node.op_);
+
         for (const auto& input_name : node.inputs_) {
             auto it = graph.tensor_map_.find(input_name);
             ASSERT_NE(it, graph.tensor_map_.end())
-                << "Node '" << node.op_type_ << "' missing input: " << input_name;
+                << "Node '" << op_type << "' missing input: " << input_name;
         }
     }
 }
@@ -33,12 +38,18 @@ TEST(GraphLoading, HasExpectedStructure) {
     EXPECT_FALSE(graph.nodes_.empty()) << "Graph has no nodes";
     EXPECT_FALSE(graph.tensor_map_.empty()) << "Graph has no tensors";
 
+
     // Check for transformer-specific ops
     bool has_gemm = false;
     bool has_relu = false;
     for (const auto& node : graph.nodes_) {
-        if (node.op_type_ == "Gemm") has_gemm = true;
-        if (node.op_type_ == "Relu") has_relu = true;
+        std::string op_type;
+        std::visit([&op_type](const auto& op) {
+            op_type = op.getOpType();
+        }, node.op_);
+
+        if (op_type == "Gemm") has_gemm = true;
+        if (op_type == "Relu") has_relu = true;
     }
 
     EXPECT_TRUE(has_gemm) << "Expected Gemm in transformer model";

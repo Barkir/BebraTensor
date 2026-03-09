@@ -1,9 +1,11 @@
 // BebraGraph.cpp
 
 #include <fstream>
+#include <functional>
 
 #include "bebra/core/BebraGraph.hpp"
 #include "bebra/core/BebraTensor.hpp"
+#include "bebra/ops/BebraFactory.hpp"
 
 namespace Bebra {
 namespace Core {
@@ -33,7 +35,7 @@ void BebraGraph::convertOnnxToBebraOutput(const onnx::GraphProto& graph) {
 
 void BebraGraph::convertOnnxToBebraNode(const onnx::GraphProto& graph) {
     for (const auto& onnx_node : graph.node()) {
-        BebraNode node(onnx_node.op_type());
+        BebraNode node;
 
         for (const auto& input : onnx_node.input()) {
             if (tensor_map_.find(input) == tensor_map_.end()) {
@@ -49,9 +51,20 @@ void BebraGraph::convertOnnxToBebraNode(const onnx::GraphProto& graph) {
             node.outputs_.push_back(output);
         }
 
+        std::unordered_map<std::string, Attr> attrs;
         for (const auto& attr : onnx_node.attribute()) {
-            node.attrs_.emplace(attr.name(), parseAttr(attr));
+            attrs.emplace(attr.name(), Attr(parseAttr(attr)));
         }
+
+
+        const std::string& op_type = onnx_node.op_type();
+        node.op_ = Ops::CreateOp(op_type, onnx_node, node.inputs_, node.outputs_, attrs);
+
+        std::visit([this](const auto& op) {
+            if (!op.verify(*this)) {
+                throw BebraErr("Verification failed for op: " + std::string(typeid(op).name()));
+            }
+            }, node.op_);
 
         nodes_.push_back(std::move(node));
     }
@@ -70,11 +83,20 @@ void BebraGraph::convertOnnxToBebraInitializer(const onnx::GraphProto& graph) {
 void BebraGraph::dumpBebra(std::ofstream& stream) {
     stream << "digraph{" << std::endl;
     for (const auto& node : nodes_) {
-        stream << "node" << &node << "[\"label\"=\"{" << node.op_type_;
-        for (const auto& attr : node.attrs_) {
-            stream << "|" << attr.first << std::endl;
+
+        std::string op_type;
+        std::vector<std::string> attrs;
+        std::visit([&op_type, &attrs](const auto& op) {
+            op_type = op.getOpType();
+            attrs = op.getAttrsString();
+
+        }, node.op_);
+
+        stream << "node" << &node << "[\"label\"=\"{" << op_type;
+        for (const auto& attr : attrs) {
+            stream << "|" << attr << std::endl;
         }
-        stream << "}\",shape=Mrecord style=filled, fillcolor=\"" << getNodeColor(node.op_type_) << "\"]" << std::endl;
+        stream << "}\",shape=Mrecord style=filled, fillcolor=\"" << getNodeColor(op_type) << "\"]" << std::endl;
 
         for (const auto& input : node.inputs_) {
             stream << "tensor" << input << "[label=" << input << ", shape=cylinder, style=filled, fillcolor=\"" << BEBRA_TENSOR << "\"]" << std::endl;
@@ -91,6 +113,9 @@ void BebraGraph::dumpBebra(std::ofstream& stream) {
     stream << "}" << std::endl;
 
 }
+
+
+
 
 } // end of Core :0
 } // end of Bebra :0

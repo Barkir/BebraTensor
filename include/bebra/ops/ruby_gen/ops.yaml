@@ -1,0 +1,275 @@
+# yaml file for generating code for new instructions
+
+#######################################################
+
+- name: Conv
+  category: spatial
+  inputs:
+    - name: input
+      description: "Input feature map"
+      required: true
+    - name: weight
+      description: "Convolution weights"
+      required: true
+    - name: bias
+      description: "Bias vector"
+      required: false
+  outputs:
+    - name: output
+      description: "Output feature map"
+      required: true
+  attributes:
+    - name: kernel_shape
+      type: int64[]
+      required: true
+
+    - name: group
+      type: int64
+      default: 1
+
+    - name: dilations
+      type: int64[]
+      default: [1, 1]
+
+    - name: pads
+      type: int64[]
+      default: [0, 0]
+
+    - name: strides
+      type: int64[]
+      default: [1, 1]
+
+#######################################################
+
+- name: Gemm
+  category: matmul
+  inputs:
+    - name: input_a
+      description: "First input matrix"
+      required: true
+    - name: input_b
+      description: "Second input matrix"
+      required: true
+    - name: bias
+      description: "Bias vector/matrix"
+      required: false
+  outputs:
+    - name: output
+      description: "Output matrix"
+      required: true
+  attributes:
+    - name: alpha
+      type: float32
+      default: 1.0
+
+    - name: beta
+      type: float32
+      default: 1.0
+
+    - name: transA
+      type: int64
+      default: 0
+
+    - name: transB
+      type: int64
+      default: 0
+
+#######################################################
+
+- name: Add
+  category: broadcast
+  inputs:
+    - name: input_1
+      description: "First input tensor"
+      required: true
+    - name: input_2
+      description: "Second input tensor"
+      required: true
+  outputs:
+    - name: output
+      description: "Output tensor"
+      required: true
+  attributes:
+
+#######################################################
+
+- name: Relu
+  category: elementwise
+  inputs:
+    - name: input
+      description: "Input tensor"
+      required: true
+  outputs:
+    - name: output
+      description: "Output tensor"
+      required: true
+  attributes:
+
+#######################################################
+
+- name: Mul
+  category: broadcast
+  inputs:
+    - name: input_1
+      description: "First input tensor"
+      required: true
+    - name: input_2
+      description: "Second input tensor"
+      required: true
+  outputs:
+    - name: output
+      description: "Output tensor"
+      required: true
+  attributes:
+
+#######################################################
+
+- name: MatMul
+  category: matmul
+  inputs:
+    - name: input_a
+      description: "First input matrix"
+      required: true
+    - name: input_b
+      description: "Second input matrix"
+      required: true
+  outputs:
+    - name: output
+      description: "Output matrix"
+      required: true
+  attributes:
+
+#######################################################
+
+- name: MaxPool
+  category: spatial
+  inputs:
+    - name: input
+      description: "Input feature map"
+      required: true
+  outputs:
+    - name: output
+      description: "Output feature map"
+      required: true
+    - name: indices
+      description: "Argmax indices for backward pass"
+      required: false
+  attributes:
+    - name: kernel_shape
+      type: int64[]
+      required: true
+
+    - name: auto_pad
+      type: string
+      default: '"NOTSET"'
+
+    - name: ceil_mode
+      type: int64
+      default: 0
+
+    - name: dilations
+      type: int64[]
+      default: [1, 1]
+
+    - name: pads
+      type: int64[]
+      default: [0, 0]
+
+    - name: storage_order
+      type: int64
+      default: 0
+
+    - name: strides
+      type: int64[]
+      default: [1, 1]
+
+#######################################################
+
+- name: ReduceMean
+  category: reduce
+  inputs:
+    - name: input
+      description: "Input tensor to reduce"
+      required: true
+    - name: axes_t
+      description: "Axes to reduce along"
+      required: false
+  outputs:
+    - name: output
+      description: "Reduced tensor"
+      required: true
+  attributes:
+    - name: axes
+      type: int64[]
+      required: true
+
+    - name: keepdims
+      type: int64
+      default: 1
+
+#######################################################
+
+- name: Reshape
+  category: reshape
+  inputs:
+    - name: input
+      description: "Input tensor to reshape"
+      required: true
+    - name: shape_t
+      description: "Target shape"
+      required: true
+  outputs:
+    - name: output
+      description: "Reshaped tensor"
+      required: true
+  attributes:
+    - name: shape
+      type: int64[]
+      required: true
+
+#######################################################
+
+- name: Sigmoid
+  category: elementwise
+  inputs:
+    - name: input
+      description: "Input tensor"
+      required: true
+  outputs:
+    - name: output
+      description: "Output tensor"
+      required: true
+  attributes:
+
+#######################################################
+
+- name: GlobalAveragePool
+  category: reduce
+  inputs:
+    - name: input
+      description: "Input feature map"
+      required: true
+  outputs:
+    - name: output
+      description: "Pooled output"
+      required: true
+  attributes:
+
+#######################################################
+
+- name: Flatten
+  category: reshape
+  inputs:
+    - name: input
+      description: "Input tensor"
+      required: true
+  outputs:
+    - name: output
+      description: "Flattened tensor"
+      required: true
+  attributes:
+    - name: axis
+      type: int64
+      default: 1
+
+#######################################################

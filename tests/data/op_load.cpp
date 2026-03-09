@@ -17,130 +17,70 @@ TEST(OpLoading, Conv) {
     Bebra::Core::BebraGraph graph(model_path);
 
     for (const auto& node : graph.nodes_) {
-        if (node.op_type_ == "Conv") {
-            ASSERT_NO_THROW(Bebra::Ops::OpConv op(&node));
+            std::string op_type;
+        std::visit([&op_type](const auto& op) {
+            op_type = op.getOpType();
+        }, node.op_);
 
-            Bebra::Ops::OpConv op(&node);
+        if (op_type == "Conv") {
+
+            Bebra::Ops::OpConv op;
             EXPECT_NO_THROW({
-                auto k1 = op.kernel_shape();
+                auto k1 = op.kernel_shape;
             });
 
             EXPECT_NO_THROW({
-                auto k2 = op.group();
+                auto k2 = op.group;
             });
 
 
             EXPECT_NO_THROW({
-                auto k3 = op.dilations();
+                auto k3 = op.dilations;
             });
 
             EXPECT_NO_THROW({
-                auto k4 = op.pads();
+                auto k4 = op.pads;
             });
 
             EXPECT_NO_THROW({
-                auto k4 = op.strides();
+                auto k4 = op.strides;
             });
         }
     }
 }
 
-TEST(OpNotLoading, ConvThrow) {
-    const std::string model_path = get_model_path("resnet50-v1-7.onnx");
-    Bebra::Core::BebraGraph graph(model_path);
 
-    for (const auto& node : graph.nodes_) {
-        if (node.op_type_ == "MatMul") {
-            EXPECT_THROW({
-                Bebra::Ops::OpConv op(&node);
-                }, Bebra::Core::BebraErr);
-        }
-    }
-}
 
 TEST(OpLoading, Gemm) {
     const std::string model_path = get_model_path("resnet50-v1-7.onnx");
     Bebra::Core::BebraGraph graph(model_path);
 
     for (const auto& node : graph.nodes_) {
-        if (node.op_type_ == "Gemm") {
-            ASSERT_NO_THROW(Bebra::Ops::OpGemm op(&node));
+            std::string op_type;
+        std::visit([&op_type](const auto& op) {
+            op_type = op.getOpType();
+        }, node.op_);
 
-            Bebra::Ops::OpGemm op(&node);
+        if (op_type == "Gemm") {
+            ASSERT_NO_THROW(Bebra::Ops::OpGemm op);
+
+            Bebra::Ops::OpGemm op;
             EXPECT_NO_THROW({
-                auto k1 = op.alpha();
+                auto k1 = op.alpha;
             });
 
             EXPECT_NO_THROW({
-                auto k2 = op.beta();
+                auto k2 = op.beta;
             });
 
 
             EXPECT_NO_THROW({
-                auto k3 = op.transA();
+                auto k3 = op.transA;
             });
 
             EXPECT_NO_THROW({
-                auto k4 = op.transB();
+                auto k4 = op.transB;
             });
-        }
-    }
-}
-
-TEST(OpNotLoading, GemmThrow) {
-    const std::string model_path = get_model_path("resnet50-v1-7.onnx");
-    Bebra::Core::BebraGraph graph(model_path);
-
-    for (const auto& node : graph.nodes_) {
-        if (node.op_type_ == "Conv") {
-            EXPECT_THROW({
-                Bebra::Ops::OpGemm op(&node);
-                }, Bebra::Core::BebraErr);
-        }
-    }
-}
-
-TEST(OpLoading, MatMul) {
-    auto model_path = get_model_path("resnet50-v1-7.onnx");
-    Bebra::Core::BebraGraph graph(model_path);
-    for (auto& node : graph.nodes_) {
-        if (node.op_type_ == "MatMul") {
-            ASSERT_NO_THROW(Bebra::Ops::OpMatMul op(&node));
-        }
-    }
-}
-
-
-TEST(OpLoading, Relu) {
-    auto model_path = get_model_path("resnet50-v1-7.onnx");
-
-    Bebra::Core::BebraGraph graph(model_path);
-    for (auto& node : graph.nodes_) {
-        if (node.op_type_ == "Relu") {
-            ASSERT_NO_THROW(Bebra::Ops::OpRelu op(&node));
-        }
-    }
-}
-
-
-TEST(OpLoading, Add) {
-    auto model_path = get_model_path("resnet50-v1-7.onnx");
-
-    Bebra::Core::BebraGraph graph(model_path);
-    for (auto& node : graph.nodes_) {
-        if (node.op_type_ == "Add") {
-            ASSERT_NO_THROW(Bebra::Ops::OpAdd op(&node));
-        }
-    }
-}
-
-
-TEST(OpLoading, Mul) {
-    auto model_path = get_model_path("resnet50-v1-7.onnx");
-    Bebra::Core::BebraGraph graph(model_path);
-    for (auto& node : graph.nodes_) {
-        if (node.op_type_ == "Mul") {
-            ASSERT_NO_THROW(Bebra::Ops::OpMul op(&node));
         }
     }
 }
@@ -150,36 +90,40 @@ TEST(OpLoading, MaxPool) {
     auto model_path = get_model_path("resnet50-v1-7.onnx");
     Bebra::Core::BebraGraph graph(model_path);
     for (auto& node : graph.nodes_) {
-        if (node.op_type_ == "MaxPool") {
-            ASSERT_NO_THROW(Bebra::Ops::OpMaxPool op(&node));
+            std::string op_type;
+        std::visit([&op_type](const auto& op) {
+            op_type = op.getOpType();
+        }, node.op_);
 
-        Bebra::Ops::OpMaxPool op(&node);
+        if (op_type == "MaxPool") {
+
+        Bebra::Ops::OpMaxPool op;
         EXPECT_NO_THROW({
-            auto k1 = op.kernel_shape();
+            auto k1 = op.kernel_shape;
         });
 
         EXPECT_NO_THROW({
-            auto k2 = op.auto_pad();
+            auto k2 = op.auto_pad;
         });
 
         EXPECT_NO_THROW({
-            auto k3 = op.ceil_mode();
+            auto k3 = op.ceil_mode;
         });
 
         EXPECT_NO_THROW({
-            auto k4 = op.dilations();
+            auto k4 = op.dilations;
         });
 
         EXPECT_NO_THROW({
-            auto k4 = op.pads();
+            auto k4 = op.pads;
         });
 
         EXPECT_NO_THROW({
-            auto k4 = op.storage_order();
+            auto k4 = op.storage_order;
         });
 
         EXPECT_NO_THROW({
-            auto k4 = op.strides();
+            auto k4 = op.strides;
         });
         }
     }

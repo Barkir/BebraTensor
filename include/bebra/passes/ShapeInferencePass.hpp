@@ -3,10 +3,17 @@
 // by traversing the graph
 
 #pragma once
+#include <unordered_map>
+#include <functional>
+#include <string>
+
 #include "bebra/core/BebraPass.hpp"
 
 namespace Bebra {
 namespace Pass {
+
+using ShapeInferenceFunc = std::function<bool (Core::BebraNode&)>;
+
 
 class ShapeInferencePass : public BebraPass {
     public:
@@ -15,7 +22,7 @@ class ShapeInferencePass : public BebraPass {
         std::vector<std::string> deps() const {return {};}
         bool run(Core::BebraGraph& graph) override;
 
-    private: // codegen ???
+    public: // codegen ???
         bool inferConv(Core::BebraNode& node);
         bool inferGemm(Core::BebraNode& node);
         bool inferAdd(Core::BebraNode& node);
