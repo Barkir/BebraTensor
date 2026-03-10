@@ -13,39 +13,49 @@ ELWISE_VERIFY =
 MATMUL_VERIFY =
     <<-CPP
 
-        const auto& tensor_a = graph.getTensor(input_a);
-        const auto& tensor_b = graph.getTensor(input_b);
+ const auto& tensor_a = graph.getTensor(input_a);
+    const auto& tensor_b = graph.getTensor(input_b);
 
-        if (!tensor_a.hasShape() || !tensor_b.hasShape()) {
-            return false;
-        }
+    if (!tensor_a.hasShape() || !tensor_b.hasShape()) {
+        return true;
+    }
 
-        const auto& shape_a = tensor_a.shape_;
-        const auto& shape_b = tensor_b.shape_;
+    const auto& shape_a = tensor_a.shape_;
+    const auto& shape_b = tensor_b.shape_;
 
-        if (shape_a.size() < 2 || shape_b.size() < 2) {
-            return false;
-        }
+    if (shape_a.size() < 2 || shape_b.size() < 2) {
+        std::cerr << "MatMul: inputs must have at least 2 dimensions" << std::endl;
+        return false;
+    }
 
-        int64_t k_a = transA ? shape_a[shape_a.size() - 2] : shape_a[shape_a.size() - 1];
-        int64_t k_b = transB ? shape_b[shape_b.size() - 1] : shape_b[shape_b.size() - 2];
+    int64_t k_a = shape_a[shape_a.size() - 1];
+    int64_t k_b = shape_b[shape_b.size() - 2];
 
-        if (k_a != k_b) {
-            std::cerr << "MatMul dimension mismatch: " << k_a << " vs " << k_b << std::endl;
-            return false;
-        }
+    // Игнорируем динамические размеры (-1)
+    if (k_a > 0 && k_b > 0 && k_a != k_b) {
+        std::cerr << "MatMul dimension mismatch: K_a=" << k_a << " vs K_b=" << k_b << std::endl;
+        return false;
+    }
 
-        if (!bias.empty()) {
-            const auto& tensor_c = graph.getTensor(bias);
-            if (tensor_c.hasShape()) {
-                if (tensor_c.shape_.size() > 2) {
-                    std::cerr << "MatMul bias should be 1D or 2D" << std::endl;
-                    return false;
-                }
+    if (shape_a.size() > 2 || shape_b.size() > 2) {
+        size_t rank_a = shape_a.size();
+        size_t rank_b = shape_b.size();
+        size_t max_rank = std::max(rank_a, rank_b);
+
+        for (size_t i = 0; i < max_rank - 2; ++i) {
+            int64_t dim_a = (i < rank_a - 2) ? shape_a[rank_a - 3 - i] : 1;
+            int64_t dim_b = (i < rank_b - 2) ? shape_b[rank_b - 3 - i] : 1;
+
+
+            if (dim_a != dim_b && dim_a != 1 && dim_b != 1) {
+                std::cerr << "MatMul broadcast mismatch at batch dim " << i
+                          << ": " << dim_a << " vs " << dim_b << std::endl;
+                return false;
             }
         }
+    }
 
-        return true;
+    return true;
     CPP
 
 REDUCE_VERIFY =
@@ -54,7 +64,7 @@ REDUCE_VERIFY =
         const auto& tensor_in = graph.getTensor(input);
 
         if (!tensor_in.hasShape()) {
-            return false;
+            return true;
         }
 
         const auto& shape = tensor_in.shape_;
@@ -88,7 +98,7 @@ BROADCAST_VERIFY =
         const auto& tensor_2 = graph.getTensor(input_2);
 
         if (!tensor_1.hasShape() || !tensor_2.hasShape()) {
-            return false;
+            return true;
         }
 
         const auto& shape_1 = tensor_1.shape_;
@@ -119,7 +129,7 @@ SPATIAL_VERIFY =
         const auto& tensor_in = graph.getTensor(input);
 
         if (!tensor_in.hasShape()) {
-            return false;
+            return true;
         }
 
         const auto& shape = tensor_in.shape_;
@@ -174,77 +184,6 @@ SPATIAL_VERIFY =
 
 RESHAPE_VERIFY =
     <<-CPP
-
-        const auto& tensor_in = graph.getTensor(input);
-
-        if (!tensor_in.hasShape()) {
-            return false;
-        }
-
-        const auto& shape_in = tensor_in.shape_;
-
-        int64_t num_elements_in = 1;
-        for (int64_t dim : shape_in) {
-            if (dim < 0) {
-                continue;
-            }
-            num_elements_in *= dim;
-        }
-
-
-        int64_t num_elements_out = 1;
-        int64_t infer_dim_idx = -1;
-
-        for (size_t i = 0; i < shape.size(); ++i) {
-            int64_t dim = shape[i];
-
-            if (dim == -1) {
-
-                if (infer_dim_idx != -1) {
-                    std::cerr << "Reshape can have at most one -1 dimension" << std::endl;
-                    return false;
-                }
-                infer_dim_idx = static_cast<int64_t>(i);
-                continue;
-            }
-
-            if (dim < 0) {
-                std::cerr << "Reshape dimensions must be non-negative, got " << dim << std::endl;
-                return false;
-            }
-
-            num_elements_out *= dim;
-        }
-
-
-        if (infer_dim_idx != -1) {
-            if (num_elements_in % num_elements_out != 0) {
-                std::cerr << "Cannot infer dimension: " << num_elements_in
-                          << " not divisible by " << num_elements_out << std::endl;
-                return false;
-            }
-
-        } else {
-
-            if (num_elements_in != num_elements_out) {
-                std::cerr << "Reshape element count mismatch: "
-                          << num_elements_in << " vs " << num_elements_out << std::endl;
-                return false;
-            }
-        }
-
-
-        if constexpr (std::is_same_v<decltype(*this), OpFlatten>) {
-            int64_t rank = static_cast<int64_t>(shape_in.size());
-            int64_t normalized_axis = axis < 0 ? axis + rank : axis;
-
-            if (normalized_axis < 0 || normalized_axis > rank) {
-                std::cerr << "Flatten axis " << axis << " out of bounds for rank "
-                          << rank << std::endl;
-                return false;
-            }
-        }
-
         return true;
     CPP
 
@@ -254,7 +193,7 @@ ELEMENTWISE_VERIFY =
         const auto& tensor_in = graph.getTensor(input);
 
         if (!tensor_in.hasShape()) {
-            return false;
+            return true;
         }
 
         for (int64_t dim : tensor_in.shape_) {
@@ -267,5 +206,7 @@ ELEMENTWISE_VERIFY =
         return true;
     CPP
 
-
-
+NO_VERIFY =
+    <<-CPP
+    return true;
+    CPP

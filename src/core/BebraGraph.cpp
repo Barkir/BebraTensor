@@ -19,7 +19,7 @@ void BebraGraph::convertOnnxToBebraGraph(const onnx::GraphProto& graph) {
 
 void BebraGraph::convertOnnxToBebraInput(const onnx::GraphProto& graph) {
     for (const auto& input : graph.input()) {
-        BebraTensor t(input.name());
+        BebraTensor t(input);
         tensor_map_.emplace(t.name_, std::move(t));
     }
 
@@ -28,7 +28,7 @@ void BebraGraph::convertOnnxToBebraInput(const onnx::GraphProto& graph) {
 
 void BebraGraph::convertOnnxToBebraOutput(const onnx::GraphProto& graph) {
     for (const auto& output : graph.output()) {
-        BebraTensor t(output.name());
+        BebraTensor t(output);
         tensor_map_.emplace(t.name_, std::move(t));
     }
 }
@@ -52,10 +52,19 @@ void BebraGraph::convertOnnxToBebraNode(const onnx::GraphProto& graph) {
         }
 
         std::unordered_map<std::string, Attr> attrs;
-        for (const auto& attr : onnx_node.attribute()) {
-            attrs.emplace(attr.name(), Attr(parseAttr(attr)));
-        }
+        if (onnx_node.attribute_size() != 0) {
+            auto&& sz = onnx_node.attribute_size();
+            for (int i = 0; i < sz; ++i) {
+                auto&& attr = onnx_node.attribute(i);
+                if (!attr.IsInitialized()) {
+                    std::cout << "attr#" << i << " not initialized!" << std::endl;
+                    continue;
+                }
+                std::cout << "initialized attr with name "<< attr.name() << std::endl;
+                attrs.emplace(attr.name(), Attr(parseAttr(attr)));
+            }
 
+        }
 
         const std::string& op_type = onnx_node.op_type();
         node.op_ = Ops::CreateOp(op_type, onnx_node, node.inputs_, node.outputs_, attrs);
@@ -72,7 +81,7 @@ void BebraGraph::convertOnnxToBebraNode(const onnx::GraphProto& graph) {
 
 void BebraGraph::convertOnnxToBebraInitializer(const onnx::GraphProto& graph) {
     for (const auto& initializer : graph.initializer()) {
-        BebraTensor t(initializer.name());
+        BebraTensor t(initializer);
         tensor_map_.emplace(t.name_, std::move(t));
 
         //TODO add dtype

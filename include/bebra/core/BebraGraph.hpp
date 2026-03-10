@@ -19,7 +19,7 @@ namespace Core {
 
 struct BebraGraph {
 
-
+    onnx::ModelProto model_;
     std::vector<BebraNode> nodes_;
     std::unordered_map<std::string, BebraTensor> tensor_map_; // this is bcs all tensor have different names in graph, so we can identify them by names
 
@@ -30,13 +30,12 @@ struct BebraGraph {
             throw BebraErr("Cannot open file: " + modelPath);
         }
 
-        onnx::ModelProto model;
-        if (!model.ParseFromIstream(&file)) {
+        if (!model_.ParseFromIstream(&file)) {
             throw BebraErr("Cannot parse model from file: " + modelPath);
         }
 
         // then converting to own graph
-        convertOnnxToBebraGraph(model.graph());
+        convertOnnxToBebraGraph(model_.graph());
     }
 
     public: // methods

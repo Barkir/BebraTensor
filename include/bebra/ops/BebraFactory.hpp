@@ -10,6 +10,10 @@ OpVariant CreateOp(const std::string& op_type,
                    const std::vector<std::string>& inputs,
                    const std::vector<std::string>& outputs,
                    const std::unordered_map<std::string, Core::Attr>& attrs);
+OpVariant CreateOpVoid (const onnx::NodeProto& node,
+                            const std::vector<std::string>& inputs,
+                            const std::vector<std::string>& outputs,
+                            const std::unordered_map<std::string, Core::Attr>& attrs);
 OpVariant CreateOpConv (const onnx::NodeProto& node,
                             const std::vector<std::string>& inputs,
                             const std::vector<std::string>& outputs,
@@ -47,10 +51,6 @@ OpVariant CreateOpReshape (const onnx::NodeProto& node,
                             const std::vector<std::string>& outputs,
                             const std::unordered_map<std::string, Core::Attr>& attrs);
 OpVariant CreateOpSigmoid (const onnx::NodeProto& node,
-                            const std::vector<std::string>& inputs,
-                            const std::vector<std::string>& outputs,
-                            const std::unordered_map<std::string, Core::Attr>& attrs);
-OpVariant CreateOpGlobalAveragePool (const onnx::NodeProto& node,
                             const std::vector<std::string>& inputs,
                             const std::vector<std::string>& outputs,
                             const std::unordered_map<std::string, Core::Attr>& attrs);

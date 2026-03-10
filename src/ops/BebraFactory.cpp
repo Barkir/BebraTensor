@@ -8,7 +8,10 @@ OpVariant CreateOp(const std::string& op_type,
                    const std::unordered_map<std::string, Core::Attr>& attrs)
 
 {
-        if (op_type == "Conv") {
+        if (op_type == "Void") {
+        return CreateOpVoid(onnx_node, inputs, outputs, attrs);
+    }
+    if (op_type == "Conv") {
         return CreateOpConv(onnx_node, inputs, outputs, attrs);
     }
     if (op_type == "Gemm") {
@@ -38,13 +41,19 @@ OpVariant CreateOp(const std::string& op_type,
     if (op_type == "Sigmoid") {
         return CreateOpSigmoid(onnx_node, inputs, outputs, attrs);
     }
-    if (op_type == "GlobalAveragePool") {
-        return CreateOpGlobalAveragePool(onnx_node, inputs, outputs, attrs);
-    }
     if (op_type == "Flatten") {
         return CreateOpFlatten(onnx_node, inputs, outputs, attrs);
     }
 
+
+    return CreateOpVoid(onnx_node, inputs, outputs, attrs);
+}
+OpVariant CreateOpVoid (const onnx::NodeProto& node,
+                            const std::vector<std::string>& inputs,
+                            const std::vector<std::string>& outputs,
+                            const std::unordered_map<std::string, Core::Attr>& attrs) {
+    OpVoid op;
+	return op;
 }
 OpVariant CreateOpConv (const onnx::NodeProto& node,
                             const std::vector<std::string>& inputs,
@@ -305,18 +314,13 @@ OpVariant CreateOpReshape (const onnx::NodeProto& node,
             throw Core::BebraErr("Reshape: expected 2 required input(s)");
         }
         op.input = inputs[0];
-        op.shape_t = inputs[1];
+        op.shape = inputs[1];
 
         if (outputs.size() < 1) {
             throw Core::BebraErr("Reshape: expected 1 required output(s)");
         }
         op.output = outputs[0];
 
-        {
-            auto it = attrs.find("shape");
-            if (it == attrs.end()) throw Core::BebraErr("Reshape: missing required attr 'shape'");
-            op.shape = it->second.getValRef<std::vector<int64_t>>();
-        }
 	return op;
 }
 OpVariant CreateOpSigmoid (const onnx::NodeProto& node,
@@ -331,23 +335,6 @@ OpVariant CreateOpSigmoid (const onnx::NodeProto& node,
 
         if (outputs.size() < 1) {
             throw Core::BebraErr("Sigmoid: expected 1 required output(s)");
-        }
-        op.output = outputs[0];
-
-	return op;
-}
-OpVariant CreateOpGlobalAveragePool (const onnx::NodeProto& node,
-                            const std::vector<std::string>& inputs,
-                            const std::vector<std::string>& outputs,
-                            const std::unordered_map<std::string, Core::Attr>& attrs) {
-    OpGlobalAveragePool op;
-        if (inputs.size() < 1) {
-            throw Core::BebraErr("GlobalAveragePool: expected 1 required input(s)");
-        }
-        op.input = inputs[0];
-
-        if (outputs.size() < 1) {
-            throw Core::BebraErr("GlobalAveragePool: expected 1 required output(s)");
         }
         op.output = outputs[0];
 

@@ -27,11 +27,17 @@ AttrVal parseAttr(const onnx::AttributeProto& attr) {
             return std::vector<std::string>(attr.strings().begin(), attr.strings().end());
 
         case onnx::AttributeProto::TENSOR:
-            return BebraTensor(attr.name());
-
+        {
+            std::vector<BebraTensor> tensors;
+            tensors.reserve(static_cast<long unsigned int>(attr.tensors_size()));
+            for (auto&& t : attr.tensors()) {
+                tensors.push_back(BebraTensor(t));
+            }
+            return tensors;
+        }
 
         default:
-            throw BebraErr("Unknown AttributeType: " + std::to_string(attr.type()));
+            throw BebraErr("Unknown AttributeType: " + std::to_string(static_cast<unsigned int>(attr.type())));
 
         //TODO BebraTensor and stuff...
 

@@ -72,6 +72,8 @@ OpVariant CreateOp(const std::string& op_type,
 
 {
     #{op_ifs.join()}
+
+    return CreateOpVoid(onnx_node, inputs, outputs, attrs);
 }
 HEADER
 end
@@ -150,6 +152,8 @@ def generate_shape_verify(shape, name)
         cpp << REDUCE_VERIFY
     when "reshape"
         cpp <<RESHAPE_VERIFY
+    else
+        cpp << NO_VERIFY
     end
     cpp << "}\n"
     cpp

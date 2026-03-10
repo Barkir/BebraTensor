@@ -1,5 +1,9 @@
 # yaml file for generating code for new instructions
 
+
+- name: Void
+  category: no_verify
+
 #######################################################
 
 - name: Conv
@@ -215,16 +219,12 @@
     - name: input
       description: "Input tensor to reshape"
       required: true
-    - name: shape_t
+    - name: shape
       description: "Target shape"
       required: true
   outputs:
     - name: output
       description: "Reshaped tensor"
-      required: true
-  attributes:
-    - name: shape
-      type: int64[]
       required: true
 
 #######################################################
@@ -238,20 +238,6 @@
   outputs:
     - name: output
       description: "Output tensor"
-      required: true
-  attributes:
-
-#######################################################
-
-- name: GlobalAveragePool
-  category: reduce
-  inputs:
-    - name: input
-      description: "Input feature map"
-      required: true
-  outputs:
-    - name: output
-      description: "Pooled output"
       required: true
   attributes:
 

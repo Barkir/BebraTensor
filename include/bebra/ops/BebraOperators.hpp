@@ -7,6 +7,19 @@ namespace Bebra { namespace Core { class BebraGraph; } }
 #include "bebra/core/BebraColors.hpp"
 namespace Bebra {
 namespace Ops {
+struct OpVoid {
+static constexpr const char* getOpType() { return "Void"; }
+const std::vector<std::string> getAttrsString() const {
+    return {
+        
+    };
+}
+
+
+
+
+bool verify(const Core::BebraGraph& graph) const;
+    };
 struct OpConv {
 static constexpr const char* getOpType() { return "Conv"; }
 const std::vector<std::string> getAttrsString() const {
@@ -172,36 +185,20 @@ struct OpReshape {
 static constexpr const char* getOpType() { return "Reshape"; }
 const std::vector<std::string> getAttrsString() const {
     return {
-        "shape"
-    };
-}
-
-        std::string input;
-        std::string shape_t;
-
-        std::string output;
-
-    std::vector<int64_t> shape;
-
-bool verify(const Core::BebraGraph& graph) const;
-    };
-struct OpSigmoid {
-static constexpr const char* getOpType() { return "Sigmoid"; }
-const std::vector<std::string> getAttrsString() const {
-    return {
         
     };
 }
 
         std::string input;
+        std::string shape;
 
         std::string output;
 
 
 bool verify(const Core::BebraGraph& graph) const;
     };
-struct OpGlobalAveragePool {
-static constexpr const char* getOpType() { return "GlobalAveragePool"; }
+struct OpSigmoid {
+static constexpr const char* getOpType() { return "Sigmoid"; }
 const std::vector<std::string> getAttrsString() const {
     return {
         

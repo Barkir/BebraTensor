@@ -55,7 +55,7 @@ int main(int argc, char* argv[]) {
             Bebra::Pass::BebraPassManager pm;
 
             // need to add plugin linkage
-            pm.registerPass(std::make_unique<Bebra::Pass::ShapeInferencePass>());
+            // pm.registerPass(std::make_unique<Bebra::Pass::ShapeInferencePass>());
             pm.run(graph);
             // ... do smth here
             return 0;
