@@ -7,6 +7,7 @@ namespace Bebra { namespace Core { class BebraGraph; } }
 #include <iostream>
 #include "bebra/core/BebraErr.hpp"
 #include "bebra/core/BebraColors.hpp"
+#include "bebra/ops/BebraVisitor.hpp"
 namespace Bebra {
 namespace Ops {
 HEADER
@@ -187,6 +188,8 @@ def generate_op(op)
 
     <<~CPP
     struct Op#{name} {
+    void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+    void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
     static constexpr const char* getOpType() { return "#{name}"; }
     const std::vector<std::string> getAttrsString() const {
         return {
@@ -315,4 +318,27 @@ if op["attributes"]&.any?
 end
 cpp << "\treturn op;\n}\n"
 cpp
+end
+
+def generate_visitor_class(ops)
+    hpp = <<-CPP
+        #pragma once
+        namespace Bebra::Ops {
+    CPP
+
+    ops.each do |op|
+    hpp << "struct Op#{op["name"]};\n"
+    end
+
+    hpp << "class BebraVisitor {\npublic:\n"
+    ops.each do |op|
+    hpp << "\tvirtual void Visit(Op#{op["name"]}& node) = 0;\n"
+    hpp << "\tvirtual void Visit(const Op#{op["name"]}& node) const = 0;\n"
+    end
+    hpp << "\tvirtual ~BebraVisitor() = default;\n"
+    hpp << "};\n"
+
+    hpp << "}\n"
+    return hpp
+
 end

@@ -45,6 +45,10 @@ def write_variant(op_variant, ops)
     op_variant.write(generate_variant(ops))
 end
 
+def write_visitor(visitor, ops)
+    visitor.write(generate_visitor_class(ops))
+end
+
 def main
 
     ops = YAML.load_file(YAML_PATH)
@@ -53,11 +57,13 @@ def main
     code_factory_hpp = File.open("../BebraFactory.hpp", "w")
     code_factory_cpp = File.open("../../../../src/ops/BebraFactory.cpp", "w")
     op_variant = File.open("../BebraVariant.hpp", "w")
+    visitor = File.open("../BebraVisitor.hpp", "w")
 
     write_code_gen(code_gen, ops)
     write_code_factory(code_factory_hpp, code_factory_cpp, ops)
     write_variant(op_variant, ops)
     write_verify(verifiers, ops)
+    write_visitor(visitor, ops)
 
 
 end

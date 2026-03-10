@@ -5,9 +5,12 @@ namespace Bebra { namespace Core { class BebraGraph; } }
 #include <iostream>
 #include "bebra/core/BebraErr.hpp"
 #include "bebra/core/BebraColors.hpp"
+#include "bebra/ops/BebraVisitor.hpp"
 namespace Bebra {
 namespace Ops {
 struct OpVoid {
+void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Void"; }
 const std::vector<std::string> getAttrsString() const {
     return {
@@ -21,6 +24,8 @@ const std::vector<std::string> getAttrsString() const {
 bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpConv {
+void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Conv"; }
 const std::vector<std::string> getAttrsString() const {
     return {
@@ -47,6 +52,8 @@ const std::vector<std::string> getAttrsString() const {
 bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpGemm {
+void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Gemm"; }
 const std::vector<std::string> getAttrsString() const {
     return {
@@ -71,6 +78,8 @@ const std::vector<std::string> getAttrsString() const {
 bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpAdd {
+void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Add"; }
 const std::vector<std::string> getAttrsString() const {
     return {
@@ -87,6 +96,8 @@ const std::vector<std::string> getAttrsString() const {
 bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpRelu {
+void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Relu"; }
 const std::vector<std::string> getAttrsString() const {
     return {
@@ -102,6 +113,8 @@ const std::vector<std::string> getAttrsString() const {
 bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpMul {
+void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Mul"; }
 const std::vector<std::string> getAttrsString() const {
     return {
@@ -118,6 +131,8 @@ const std::vector<std::string> getAttrsString() const {
 bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpMatMul {
+void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "MatMul"; }
 const std::vector<std::string> getAttrsString() const {
     return {
@@ -134,6 +149,8 @@ const std::vector<std::string> getAttrsString() const {
 bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpMaxPool {
+void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "MaxPool"; }
 const std::vector<std::string> getAttrsString() const {
     return {
@@ -163,6 +180,8 @@ const std::vector<std::string> getAttrsString() const {
 bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpReduceMean {
+void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "ReduceMean"; }
 const std::vector<std::string> getAttrsString() const {
     return {
@@ -182,6 +201,8 @@ const std::vector<std::string> getAttrsString() const {
 bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpReshape {
+void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Reshape"; }
 const std::vector<std::string> getAttrsString() const {
     return {
@@ -198,6 +219,8 @@ const std::vector<std::string> getAttrsString() const {
 bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpSigmoid {
+void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Sigmoid"; }
 const std::vector<std::string> getAttrsString() const {
     return {
@@ -213,6 +236,8 @@ const std::vector<std::string> getAttrsString() const {
 bool verify(const Core::BebraGraph& graph) const;
     };
 struct OpFlatten {
+void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
+void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Flatten"; }
 const std::vector<std::string> getAttrsString() const {
     return {

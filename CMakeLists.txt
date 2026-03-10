@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
-project(BebraTensor VERSION 0.1.0 LANGUAGES CXX)
+project(BebraTensor VERSION 0.1.0 LANGUAGES CXX C)
 
 # ============================================================================
 # C++ Standard & Compiler Settings
@@ -20,6 +20,11 @@ option(BEBRA_ENABLE_SANITIZERS "Enable AddressSanitizer/UBSan for debug builds" 
 # Find Dependencies
 # ============================================================================
 find_package(Protobuf REQUIRED)
+find_package(MLIR REQUIRED CONFIG)
+list(APPEND CMAKE_MODULE_PATH "${MLIR_CMAKE_DIR}")
+include(TableGen)
+include(AddMLIR)
+
 
 include(FetchContent)
 if(BEBRA_BUILD_TESTS)
@@ -34,9 +39,8 @@ if(BEBRA_BUILD_TESTS)
 endif()
 
 # ============================================================================
-# Глобальные флаги компиляции (только для твоего кода)
-# ============================================================================
-# Базовые варнинги (без -Werror, его добавим ниже условно)
+
+
 set(BEBRA_BASE_FLAGS
     -Wall -Wextra
     -Wc++14-compat
@@ -80,12 +84,11 @@ set(BEBRA_BASE_FLAGS
     -Werror=vla
 )
 
-# Санитайзеры (только если включена опция)
+
 if(BEBRA_ENABLE_SANITIZERS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
         set(SANITIZER_FLAGS "-fsanitize=address,undefined")
         list(APPEND BEBRA_BASE_FLAGS ${SANITIZER_FLAGS})
-        # Глобально для линковки всех таргетов
         set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${SANITIZER_FLAGS}")
         set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} ${SANITIZER_FLAGS}")
     endif()
@@ -100,7 +103,6 @@ target_compile_definitions(bebra_core PUBLIC
     PROJECT_ROOT="${CMAKE_CURRENT_SOURCE_DIR}"
 )
 
-# Сбор исходников
 set(BEBRA_SRC_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core
     ${CMAKE_CURRENT_SOURCE_DIR}/src/passes
@@ -124,7 +126,6 @@ foreach(dir ${BEBRA_INCLUDE_DIRS})
     list(APPEND BEBRA_INCLUDES ${dir_sources})
 endforeach()
 
-# Протобуфер-файлы (отдельная переменная для удобного управления флагами)
 set(PROTO_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/include/onnx_proto/onnx.proto3.pb.cc
 )
@@ -153,20 +154,27 @@ target_link_libraries(bebra_core
     PUBLIC
         protobuf::libprotobuf
 )
-
-# === Флаги для ТВОЕГО кода (со строгими варнингами) ===
-target_compile_options(bebra_core PRIVATE
-    ${BEBRA_BASE_FLAGS}
-    -Werror                    # ← Все варнинги → ошибки (для твоего кода)
-    -Wno-error=unused-parameter  # кроме этого
+target_link_libraries(bebra_core PRIVATE
+    MLIRIR
+    MLIRPass
+    MLIRTransforms
+    MLIRLinalgDialect
+    MLIRTensorDialect
+    MLIRFuncDialect
 )
 
-# === Флаги для protobuf-файлов (без -Werror, чтобы не ломалось) ===
+target_compile_options(bebra_core PRIVATE
+    ${BEBRA_BASE_FLAGS}
+    -Werror
+    -Wno-error=unused-parameter
+)
+
 set_source_files_properties(
     ${PROTO_SOURCES}
     PROPERTIES
-        COMPILE_FLAGS "-w -Wno-error"  # ← Полностью тихая компиляция для сгенерированного кода
+        COMPILE_FLAGS "-w -Wno-error"
 )
+
 
 # ============================================================================
 # Main Executable
