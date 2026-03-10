@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
 
         if (strcmp(argv[i], "--dump")) {
             Bebra::Core::BebraGraph graph(argv[i]);
-
+            graph.convertToMlir();
             // VerifyGraph
 
             Bebra::Pass::BebraPassManager pm;

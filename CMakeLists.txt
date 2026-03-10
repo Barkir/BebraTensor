@@ -107,11 +107,13 @@ set(BEBRA_SRC_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/src/core
     ${CMAKE_CURRENT_SOURCE_DIR}/src/passes
     ${CMAKE_CURRENT_SOURCE_DIR}/src/ops
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/mlir
 )
 set(BEBRA_INCLUDE_DIRS
     ${CMAKE_CURRENT_SOURCE_DIR}/include/bebra/core
     ${CMAKE_CURRENT_SOURCE_DIR}/include/bebra/ops
     ${CMAKE_CURRENT_SOURCE_DIR}/include/bebra/passes
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/bebra/mlir
 )
 
 set(BEBRA_SOURCES "")

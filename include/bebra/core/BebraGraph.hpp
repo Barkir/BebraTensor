@@ -11,6 +11,7 @@
 #include "BebraTensor.hpp"
 #include "BebraNode.hpp"
 #include "BebraErr.hpp"
+#include "bebra/mlir/MLIRPrinter.hpp"
 
 #include "onnx_proto/onnx.proto3.pb.h"
 
@@ -55,6 +56,12 @@ struct BebraGraph {
             }
 
             throw BebraErr("No such tensor " + tensor_name + " in tensor_map_...");
+        }
+
+        void convertToMlir() {
+            std::cout << "MLIR PRINTER" << std::endl;
+            MLIR::MLIRPrinter printer;
+            printer.generate(*this);
         }
 
 
