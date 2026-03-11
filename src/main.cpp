@@ -3,11 +3,11 @@
 #include <iostream>
 #include <filesystem>
 
-#include "onnx_proto/onnx.proto3.pb.h"
 #include "bebra/core/BebraGraph.hpp"
 #include "bebra/core/BebraConst.hpp"
 #include "bebra/ops/BebraOperators.hpp"
 #include "bebra/core/BebraPassManager.hpp"
+#include "onnx_proto/onnx.proto3.pb.h"
 
 #ifndef PROJECT_ROOT
 #define PROJECT_ROOT "."
@@ -20,8 +20,8 @@ static std::string get_dot_path(const std::string& filename) {
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
-        std::cerr << DIM ITALIC "Please enter model to parse..." RESET_DIM << std::endl;
-        std::cerr << FG_TURQUOISE BOLD "hint: enter `--dump` flag to get your graph image" RESET << std::endl;
+        std::cerr << BEBRA_DIM BEBRA_ITALIC "Please enter model to parse..." RESET_DIM << std::endl;
+        std::cerr << FG_TURQUOISE BEBRA_BOLD "hint: enter `--dump` flag to get your graph image" BEBRA_RESET << std::endl;
         return 0;
     }
 
@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
                 graph.dumpBebra(stream);
                 return 0;
             } else {
-                std::cerr << DIM ITALIC "No model entered to parse after --dump flag!" RESET_DIM << std::endl;
+                std::cerr << BEBRA_DIM BEBRA_ITALIC "No model entered to parse after --dump flag!" RESET_DIM << std::endl;
                 return 0;
             }
         }

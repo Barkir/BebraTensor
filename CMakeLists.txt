@@ -163,6 +163,8 @@ target_link_libraries(bebra_core PRIVATE
     MLIRLinalgDialect
     MLIRTensorDialect
     MLIRFuncDialect
+    LLVMCore
+    LLVMSupport
 )
 
 target_compile_options(bebra_core PRIVATE

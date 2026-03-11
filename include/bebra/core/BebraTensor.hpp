@@ -4,7 +4,9 @@
 #include <string>
 #include <iostream>
 
+#include "bebra/core/BebraType.hpp"
 #include "onnx_proto/onnx.proto3.pb.h"
+#include "mlir/IR/BuiltinTypes.h"
 
 namespace Bebra {
 namespace Core {
@@ -13,7 +15,7 @@ struct BebraTensor {
     std::string name_;
     std::vector<int64_t> shape_;
     std::vector<int8_t> data_;
-    int64_t dtype;
+    BebraType dtype;
     bool isDynamicShape = false;
 
 public: // constructors && destructor
@@ -28,7 +30,7 @@ public: // constructors && destructor
     BebraTensor(const std::string& name,
                 const std::vector<int64_t> shape,
                 const std::vector<int8_t> data,
-                int64_t dtype);
+                BebraType dtype);
 
     explicit BebraTensor(const onnx::ValueInfoProto& value_info);
     explicit BebraTensor(const onnx::TensorProto& tensor);
@@ -39,17 +41,16 @@ public: // constructors && destructor
 
 
 public: // helper methods
-    bool hasDynamicShape() const {
-        return isDynamicShape;
-    }
-    bool hasShape() const {
-        return shape_.size() != 0;
-    }
-
+    [[nodiscard]] bool hasDynamicShape() const { return isDynamicShape; }
+    [[nodiscard]] bool hasShape() const { return shape_.size() != 0; }
     [[nodiscard]] bool hasData() const noexcept { return !data_.empty(); }
     [[nodiscard]] const std::vector<int8_t>& data() const noexcept { return data_; }
+    [[nodiscard]] const std::string& getName() const { return name_; }
+    [[nodiscard]] std::vector<int64_t> getShape() const { return shape_; }
+    [[nodiscard]] BebraType getBebraType() const { return dtype; }
+    [[nodiscard]] onnx::TensorProto::DataType getOnnxType() const { return BebraToOnnxDtype(dtype); }
 
-    template<typename T>
+    template <typename T>
     [[nodiscard]] const T* dataAs() const noexcept {
         return reinterpret_cast<const T*>(data_.data());
     }

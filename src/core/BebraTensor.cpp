@@ -3,7 +3,7 @@
 namespace Bebra::Core {
 
 BebraTensor::BebraTensor(const onnx::TensorProto& tensor) : name_(tensor.name()),
-                                                            dtype(tensor.data_type()) {
+                                                            dtype(OnnxDtypeToBebra(tensor.data_type())) {
     auto&& dsize = tensor.dims_size();
     shape_.reserve(static_cast<size_t>(dsize));
     for (int i = 0; i < dsize; ++i) {
@@ -31,7 +31,7 @@ BebraTensor::BebraTensor(const onnx::TensorProto& tensor) : name_(tensor.name())
 BebraTensor::BebraTensor(const std::string& name,
     const std::vector<int64_t> shape,
     const std::vector<int8_t> data,
-    int64_t dtype_) :
+    BebraType dtype_) :
     name_(name), shape_(shape), data_(data), dtype(dtype_) {
     std::cout << "-----------------------------------------" << std::endl;
     std::cout << "Created tensor with name" << name << std::endl;
@@ -47,7 +47,7 @@ BebraTensor::BebraTensor(const onnx::ValueInfoProto& value_info)
     if (type.has_tensor_type()) {
         auto&& tensor_type = type.tensor_type();
 
-        dtype = tensor_type.elem_type();
+        dtype = OnnxDtypeToBebra(tensor_type.elem_type());
 
         if (tensor_type.has_shape()) {
             const auto& shape = tensor_type.shape();

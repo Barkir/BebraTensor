@@ -8,12 +8,12 @@
 #include <iostream>
 
 // #include "BebraAttr.hpp"
+#include "bebra/mlir/MLIRPrinter.hpp"
 #include "BebraTensor.hpp"
 #include "BebraNode.hpp"
 #include "BebraErr.hpp"
-#include "bebra/mlir/MLIRPrinter.hpp"
 
-#include "onnx_proto/onnx.proto3.pb.h"
+// #include "onnx_proto/onnx.proto3.pb.h"
 
 namespace Bebra {
 namespace Core {
@@ -23,6 +23,8 @@ struct BebraGraph {
     onnx::ModelProto model_;
     std::vector<BebraNode> nodes_;
     std::unordered_map<std::string, BebraTensor> tensor_map_; // this is bcs all tensor have different names in graph, so we can identify them by names
+    std::vector<std::string> inputs_;
+    std::vector<std::string> outputs_;
 
     public: // constructors
     BebraGraph(const std::string& modelPath) {
@@ -60,7 +62,7 @@ struct BebraGraph {
 
         void convertToMlir() {
             std::cout << "MLIR PRINTER" << std::endl;
-            MLIR::MLIRPrinter printer;
+            MLIR::MLIRPrinter printer(*this);
             printer.generate(*this);
         }
 
