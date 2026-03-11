@@ -1,9 +1,9 @@
 #pragma once
-#include <vector>
-#include <memory>
-#include <string>
 #include "bebra/core/BebraGraph.hpp"
 #include "bebra/core/BebraPass.hpp"
+#include <memory>
+#include <string>
+#include <vector>
 
 #include "bebra/passes/ShapeInferencePass.hpp"
 
@@ -24,5 +24,5 @@ private:
     std::vector<std::unique_ptr<BebraPass>> passes_;
 };
 
-} // namespace Pass :0
-} // namespace Bebra :0
+} // namespace Pass
+} // namespace Bebra

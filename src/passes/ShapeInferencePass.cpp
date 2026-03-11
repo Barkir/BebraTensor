@@ -126,5 +126,5 @@ namespace Pass {
 //
 //
 
-} // end of Pass :0
-} // end of Bebra :0
+} // namespace Pass
+} // namespace Bebra

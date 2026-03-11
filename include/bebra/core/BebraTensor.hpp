@@ -1,17 +1,16 @@
 // BebraTensor.hpp
 
 #pragma once
-#include <string>
 #include <iostream>
+#include <string>
 
 #include "bebra/core/BebraType.hpp"
-#include "onnx_proto/onnx.proto3.pb.h"
 #include "mlir/IR/BuiltinTypes.h"
+#include "onnx_proto/onnx.proto3.pb.h"
 
 namespace Bebra {
 namespace Core {
 struct BebraTensor {
-
     std::string name_;
     std::vector<int64_t> shape_;
     std::vector<int8_t> data_;
@@ -35,32 +34,44 @@ public: // constructors && destructor
     explicit BebraTensor(const onnx::ValueInfoProto& value_info);
     explicit BebraTensor(const onnx::TensorProto& tensor);
 
-
-
     ~BebraTensor() = default;
 
-
 public: // helper methods
-    [[nodiscard]] bool hasDynamicShape() const { return isDynamicShape; }
-    [[nodiscard]] bool hasShape() const { return shape_.size() != 0; }
-    [[nodiscard]] bool hasData() const noexcept { return !data_.empty(); }
-    [[nodiscard]] const std::vector<int8_t>& data() const noexcept { return data_; }
-    [[nodiscard]] const std::string& getName() const { return name_; }
-    [[nodiscard]] std::vector<int64_t> getShape() const { return shape_; }
-    [[nodiscard]] BebraType getBebraType() const { return dtype; }
-    [[nodiscard]] onnx::TensorProto::DataType getOnnxType() const { return BebraToOnnxDtype(dtype); }
+    [[nodiscard]] bool hasDynamicShape() const {
+        return isDynamicShape;
+    }
+    [[nodiscard]] bool hasShape() const {
+        return shape_.size() != 0;
+    }
+    [[nodiscard]] bool hasData() const noexcept {
+        return !data_.empty();
+    }
+    [[nodiscard]] const std::vector<int8_t>& data() const noexcept {
+        return data_;
+    }
+    [[nodiscard]] const std::string& getName() const {
+        return name_;
+    }
+    [[nodiscard]] std::vector<int64_t> getShape() const {
+        return shape_;
+    }
+    [[nodiscard]] BebraType getBebraType() const {
+        return dtype;
+    }
+    [[nodiscard]] onnx::TensorProto::DataType getOnnxType() const {
+        return BebraToOnnxDtype(dtype);
+    }
 
     template <typename T>
     [[nodiscard]] const T* dataAs() const noexcept {
         return reinterpret_cast<const T*>(data_.data());
     }
 
-    template<typename T>
+    template <typename T>
     [[nodiscard]] bool hasCorrectDataType() const noexcept {
         return data_.size() % sizeof(T) == 0;
     }
-
 };
 
-} // end of Core :0
-} // end of Bebra :0
+} // namespace Core
+} // namespace Bebra

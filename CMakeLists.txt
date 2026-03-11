@@ -284,6 +284,30 @@ install(FILES
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/BebraTensor
 )
 
+
+# ============================================================================
+# Clang-format
+# ============================================================================
+
+find_program(CLANG_FORMAT_BIN clang-format)
+
+if(CLANG_FORMAT_BIN)
+    file(GLOB_RECURSE ALL_CXX_SOURCE_FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+        ${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp
+    )
+
+    add_custom_target(format-check
+        COMMAND ${CLANG_FORMAT_BIN} --dry-run --Werror ${ALL_CXX_SOURCE_FILES}
+        COMMENT "Checking code formatting..."
+    )
+
+    add_custom_target(format
+        COMMAND ${CLANG_FORMAT_BIN} -i ${ALL_CXX_SOURCE_FILES}
+        COMMENT "Formatting code..."
+    )
+endif()
+
 # ============================================================================
 # Summary
 # ============================================================================
@@ -298,3 +322,5 @@ if(BEBRA_ENABLE_SANITIZERS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     message(STATUS "  Sanitizer Flags: ${SANITIZER_FLAGS}")
 endif()
 message(STATUS "")
+
+

@@ -2,8 +2,8 @@
 
 namespace Bebra::Core {
 
-BebraTensor::BebraTensor(const onnx::TensorProto& tensor) : name_(tensor.name()),
-                                                            dtype(OnnxDtypeToBebra(tensor.data_type())) {
+BebraTensor::BebraTensor(const onnx::TensorProto& tensor)
+    : name_(tensor.name()), dtype(OnnxDtypeToBebra(tensor.data_type())) {
     auto&& dsize = tensor.dims_size();
     shape_.reserve(static_cast<size_t>(dsize));
     for (int i = 0; i < dsize; ++i) {
@@ -27,12 +27,11 @@ BebraTensor::BebraTensor(const onnx::TensorProto& tensor) : name_(tensor.name())
     std::cout << "-----------------------------------------\n";
 }
 
-
 BebraTensor::BebraTensor(const std::string& name,
-    const std::vector<int64_t> shape,
-    const std::vector<int8_t> data,
-    BebraType dtype_) :
-    name_(name), shape_(shape), data_(data), dtype(dtype_) {
+                         const std::vector<int64_t> shape,
+                         const std::vector<int8_t> data,
+                         BebraType dtype_)
+    : name_(name), shape_(shape), data_(data), dtype(dtype_) {
     std::cout << "-----------------------------------------" << std::endl;
     std::cout << "Created tensor with name" << name << std::endl;
     std::cout << "ndims = " << shape_.size() << std::endl;
@@ -40,8 +39,7 @@ BebraTensor::BebraTensor(const std::string& name,
     std::cout << "-----------------------------------------" << std::endl;
 }
 
-BebraTensor::BebraTensor(const onnx::ValueInfoProto& value_info)
-    : name_(value_info.name()) {
+BebraTensor::BebraTensor(const onnx::ValueInfoProto& value_info) : name_(value_info.name()) {
     auto&& type = value_info.type();
 
     if (type.has_tensor_type()) {
@@ -55,7 +53,6 @@ BebraTensor::BebraTensor(const onnx::ValueInfoProto& value_info)
                 if (dim.has_dim_value()) {
                     shape_.push_back(dim.dim_value());
                 } else if (dim.has_dim_param()) {
-
                     // shape can be dynamic, so we mark it by -1
                     // example: batch_size
 
@@ -71,6 +68,5 @@ BebraTensor::BebraTensor(const onnx::ValueInfoProto& value_info)
     } else {
         std::cerr << "Warning: ValueInfoProto '" << name_ << "' is not a tensor type\n";
     }
-
 }
-}
+} // namespace Bebra::Core

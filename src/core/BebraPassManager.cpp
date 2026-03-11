@@ -19,5 +19,5 @@ void BebraPassManager::run(Core::BebraGraph& graph) {
     }
 }
 
-} // namespace Pass :0
-} // namespace Bebra :0
+} // namespace Pass
+} // namespace Bebra
