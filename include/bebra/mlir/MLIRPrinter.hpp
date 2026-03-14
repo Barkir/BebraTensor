@@ -3,9 +3,11 @@
 #include "llvm/Support/raw_ostream.h"
 #include "mlir/Dialect/Arith/IR/Arith.h"
 #include "mlir/Dialect/Func/IR/FuncOps.h"
+#include "mlir/Dialect/Tensor/IR/Tensor.h"
 #include "mlir/IR/Builders.h"
 #include "mlir/IR/BuiltinOps.h"
 #include "mlir/IR/BuiltinTypes.h"
+#include "mlir/IR/TypeUtilities.h"
 
 #include "bebra/core/BebraErr.hpp"
 #include "bebra/ops/BebraOperators.hpp"
@@ -33,32 +35,47 @@ public: // helpers
 
 public: // mlir-specific methods
     mlir::OwningOpRef<mlir::ModuleOp> createModule();
-    mlir::Value* getSSA(std::string& val_name) {
+    mlir::Value* getSSA(const std::string& val_name) {
         auto&& val = ssa_map_.find(val_name);
 
         if (val != ssa_map_.end()) {
             return val->second;
         }
 
-        throw Core::BebraErr("can't find ssa with such name " + val_name + "!");
+        return nullptr;
+        // throw Core::BebraErr("can't find ssa with such name " + val_name + "!");
     }
 
-    mlir::Type createTensorType(const Core::BebraTensor& tensor);
+    void setSSA(const std::string& val_name, mlir::Value* val) {
+        ssa_map_[val_name] = val;
+        Core::BebraGreen("Setting ssa " + val_name);
+    }
+
+    mlir::RankedTensorType createTensorType(const Core::BebraTensor& tensor);
+    // mlir::DenseElementsAttr getI64TensorAttr(std::vector<int64_t>& elems) {
+    //     auto elementType = builder_.getI64Type();
+    //     mlir::DenseElementsAttr denseAttr = mlir::DenseArrayAttr::get(
+    //         elementType,
+    //         elems.size(),
+    //         llvm::ArrayRef(elems)
+    //     );
+        // return denseAttr;
+    // }
 
 public: // Visitors
-    void Visit(const Ops::OpVoid& node) const;
-    void Visit(const Ops::OpConv& node) const;
-    void Visit(const Ops::OpGemm& node) const;
-    void Visit(const Ops::OpAdd& node) const;
-    void Visit(const Ops::OpRelu& node) const;
-    void Visit(const Ops::OpMul& node) const;
-    void Visit(const Ops::OpMatMul& node) const;
-    void Visit(const Ops::OpMaxPool& node) const;
-    void Visit(const Ops::OpReduceMean& node) const;
-    void Visit(const Ops::OpReshape& node) const;
-    void Visit(const Ops::OpSigmoid& node) const;
-    void Visit(const Ops::OpFlatten& node) const;
-    void Visit(const Core::BebraTensor& tensor) const;
+    void Visit(const Ops::OpVoid& node);
+    void Visit(const Ops::OpConv& node);
+    void Visit(const Ops::OpGemm& node);
+    void Visit(const Ops::OpAdd& node);
+    void Visit(const Ops::OpRelu& node);
+    void Visit(const Ops::OpMul& node);
+    void Visit(const Ops::OpMatMul& node);
+    void Visit(const Ops::OpMaxPool& node);
+    void Visit(const Ops::OpReduceMean& node);
+    void Visit(const Ops::OpReshape& node);
+    void Visit(const Ops::OpSigmoid& node);
+    void Visit(const Ops::OpFlatten& node);
+    void Visit(const Core::BebraTensor& tensor);
 };
 
 } // namespace Bebra::MLIR

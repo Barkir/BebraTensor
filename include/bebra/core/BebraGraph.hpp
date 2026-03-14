@@ -25,6 +25,7 @@ struct BebraGraph {
         tensor_map_; // this is bcs all tensor have different names in graph, so we can identify them by names
     std::vector<std::string> inputs_;
     std::vector<std::string> outputs_;
+    std::vector<std::string> initializers_;
 
 public: // constructors
     BebraGraph(const std::string& modelPath) {
@@ -62,6 +63,17 @@ public: // helper methods
 
     void convertToMlir() {
         std::cout << "MLIR PRINTER" << std::endl;
+        std::cout << "// \t\tINITIALIZERS" << std::endl;
+        for (auto&& initializer : initializers_) {
+            std::cout << initializer << " ";
+        }
+        std::cout << "\n\t\t // // //" << std::endl;
+        std::cout << "// \t\tINPUTS" << std::endl;
+        for (auto&& input : inputs_) {
+            std::cout << input << " ";
+        }
+
+        std::cout << "\n\t\t // // //" << std::endl;
         MLIR::MLIRPrinter printer(*this);
         printer.generate(*this);
     }

@@ -21,6 +21,7 @@ void BebraGraph::convertOnnxToBebraInput(const onnx::GraphProto& graph) {
     for (const auto& input : graph.input()) {
         BebraTensor t(input);
         tensor_map_.emplace(t.name_, std::move(t));
+        inputs_.push_back(t.name_);
     }
 
     // TODO add dtype, bla-bla-bla
@@ -30,6 +31,7 @@ void BebraGraph::convertOnnxToBebraOutput(const onnx::GraphProto& graph) {
     for (const auto& output : graph.output()) {
         BebraTensor t(output);
         tensor_map_.emplace(t.name_, std::move(t));
+        outputs_.push_back(t.name_);
     }
 }
 
@@ -84,7 +86,7 @@ void BebraGraph::convertOnnxToBebraInitializer(const onnx::GraphProto& graph) {
     for (const auto& initializer : graph.initializer()) {
         BebraTensor t(initializer);
         tensor_map_.emplace(t.name_, std::move(t));
-
+        initializers_.push_back(t.name_);
         // TODO add dtype
         // TODO add data
     }

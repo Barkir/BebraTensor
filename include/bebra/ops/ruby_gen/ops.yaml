@@ -43,6 +43,10 @@
       type: int64[]
       default: [1, 1]
 
+    - name: auto_pad
+      type: string
+      default: '"NOTSET"'
+
 #######################################################
 
 - name: Gemm

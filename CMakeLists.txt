@@ -81,6 +81,7 @@ set(BEBRA_BASE_FLAGS
     -fstrict-overflow
     -fno-omit-frame-pointer
     -fPIE
+    -fdiagnostics-all-candidates
     -Werror=vla
 )
 
@@ -171,6 +172,7 @@ target_compile_options(bebra_core PRIVATE
     ${BEBRA_BASE_FLAGS}
     -Werror
     -Wno-error=unused-parameter
+    -Wno-error=unused-variable
 )
 
 set_source_files_properties(
