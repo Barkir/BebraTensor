@@ -1,11 +1,11 @@
 #include "bebra/ops/CountShapeHelpers.hpp"
 
-#include <vector>
-#include <numeric>
-#include <string>
-#include <stdexcept>
 #include <algorithm>
 #include <iostream>
+#include <numeric>
+#include <stdexcept>
+#include <string>
+#include <vector>
 
 namespace Bebra::Ops {
 shapeVec calculateBroadcastShape(shapeVec shapeA, shapeVec shapeB) {
@@ -19,7 +19,7 @@ shapeVec calculateBroadcastShape(shapeVec shapeA, shapeVec shapeB) {
         int64_t dimB = (i < rankB) ? shapeB[rankB - 1 - i] : 1;
 
         if (dimA != dimB && dimA != 1 && dimB != 1) {
-            throw std::runtime_error("Incompatible shapes for broadcasting");
+            throw Core::BebraErr("Incompatible shapes for broadcasting");
         }
         result[outRank - 1 - i] = std::max(dimA, dimB);
     }
@@ -28,14 +28,14 @@ shapeVec calculateBroadcastShape(shapeVec shapeA, shapeVec shapeB) {
 
 shapeVec calculateMatMulShape(shapeVec shapeA, shapeVec shapeB) {
     if (shapeA.size() < 2 || shapeB.size() < 2) {
-        throw std::runtime_error("MatMul requires at least 2D tensors");
+        throw Core::BebraErr("MatMul requires at least 2D tensors");
     }
 
     size_t rankA = shapeA.size();
     size_t rankB = shapeB.size();
 
     if (shapeA.back() != shapeB[rankB - 2]) {
-        throw std::runtime_error("MatMul: Inner dimensions must match");
+        throw Core::BebraErr("MatMul: Inner dimensions must match");
     }
 
     shapeVec batchA(shapeA.begin(), shapeA.end() - 2);
@@ -48,31 +48,33 @@ shapeVec calculateMatMulShape(shapeVec shapeA, shapeVec shapeB) {
     return result;
 }
 
-
 shapeVec calculateReduceShape(shapeVec inputShape, shapeVec axes, int64_t keepdims) {
     shapeVec result;
     std::vector<int64_t> normAxes = axes;
     for (auto& axis : normAxes) {
-        if (axis < 0) axis += inputShape.size();
+        if (axis < 0)
+            axis += inputShape.size();
     }
 
     for (size_t i = 0; i < inputShape.size(); ++i) {
         bool isReduced = std::find(normAxes.begin(), normAxes.end(), i) != normAxes.end();
 
         if (isReduced) {
-            if (keepdims) result.push_back(1);
+            if (keepdims)
+                result.push_back(1);
         } else {
             result.push_back(inputShape[i]);
         }
     }
 
-    if (result.empty()) return {1};
+    if (result.empty())
+        return {1};
     return result;
 }
 
-
 shapeVec calculateFlattenShape(shapeVec inputShape, int64_t axis) {
-    if (axis < 0) axis += inputShape.size();
+    if (axis < 0)
+        axis += inputShape.size();
 
     int64_t dim0 = 1;
     for (int i = 0; i < axis; ++i) {
@@ -86,4 +88,4 @@ shapeVec calculateFlattenShape(shapeVec inputShape, int64_t axis) {
 
     return {dim0, dim1};
 }
-}
+} // namespace Bebra::Ops
