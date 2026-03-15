@@ -22,7 +22,7 @@ namespace Bebra::MLIR {
 class MLIRPrinter {
     mlir::MLIRContext context_;
     mlir::OpBuilder builder_;
-    std::unordered_map<std::string, mlir::Value*> ssa_map_;
+    std::unordered_map<std::string, mlir::Value> ssa_map_;
     std::unordered_map<std::string, mlir::Type> type_map_;
 
 public: // constructor
@@ -35,34 +35,28 @@ public: // helpers
 
 public: // mlir-specific methods
     mlir::OwningOpRef<mlir::ModuleOp> createModule();
-    mlir::Value* getSSA(const std::string& val_name) {
+    mlir::Value getSSA(const std::string& val_name) {
         auto&& val = ssa_map_.find(val_name);
 
         if (val != ssa_map_.end()) {
             return val->second;
         }
 
-        return nullptr;
-        // throw Core::BebraErr("can't find ssa with such name " + val_name + "!");
+        return {};
+        throw Core::BebraErr("can't find ssa with such name " + val_name + "!");
     }
 
-    void setSSA(const std::string& val_name, mlir::Value* val) {
-        ssa_map_[val_name] = val;
+    void setSSA(const std::string& val_name, mlir::Value val) {
+        ssa_map_[val_name] = std::move(val);
         Core::BebraGreen("Setting ssa " + val_name);
     }
 
-    mlir::RankedTensorType createTensorType(const Core::BebraTensor& tensor);
-    // mlir::DenseElementsAttr getI64TensorAttr(std::vector<int64_t>& elems) {
-    //     auto elementType = builder_.getI64Type();
-    //     mlir::DenseElementsAttr denseAttr = mlir::DenseArrayAttr::get(
-    //         elementType,
-    //         elems.size(),
-    //         llvm::ArrayRef(elems)
-    //     );
-        // return denseAttr;
-    // }
+private: // mlir-specific
 
-public: // Visitors
+    void loadAllNeededDialects();
+    mlir::RankedTensorType createTensorType(const Core::BebraTensor& tensor);
+
+private: // Visitors
     void Visit(const Ops::OpVoid& node);
     void Visit(const Ops::OpConv& node);
     void Visit(const Ops::OpGemm& node);

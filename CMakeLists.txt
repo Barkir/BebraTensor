@@ -14,7 +14,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # ============================================================================
 option(BEBRA_BUILD_TESTS "Build test suite" ON)
 option(BEBRA_BUILD_EXAMPLES "Build example applications" ON)
-option(BEBRA_ENABLE_SANITIZERS "Enable AddressSanitizer/UBSan for debug builds" OFF)
+option(BEBRA_ENABLE_SANITIZERS "Enable AddressSanitizer/UBSan for debug builds" ON)
 
 # ============================================================================
 # Find Dependencies
@@ -173,6 +173,8 @@ target_compile_options(bebra_core PRIVATE
     -Werror
     -Wno-error=unused-parameter
     -Wno-error=unused-variable
+    -Wno-error=unused-but-set-variable
+    -Wno-error=sign-conversion
 )
 
 set_source_files_properties(
@@ -189,11 +191,9 @@ add_executable(bebra_tensor src/main.cpp)
 
 target_link_libraries(bebra_tensor PRIVATE bebra_core)
 
-# ← ВАЖНО: Исполняемый файл тоже должен иметь флаги санитайзеров для линковки!
 if(BEBRA_ENABLE_SANITIZERS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
     if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
         target_compile_options(bebra_tensor PRIVATE ${SANITIZER_FLAGS})
-        # target_link_options не нужен, т.к. мы задали CMAKE_EXE_LINKER_FLAGS глобально
     endif()
 endif()
 
@@ -217,7 +217,6 @@ if(BEBRA_BUILD_TESTS)
             TEST_DATA_DIR="${CMAKE_CURRENT_SOURCE_DIR}"
         )
 
-        # Тесты тоже должны быть с санитайзерами, если они включены
         if(BEBRA_ENABLE_SANITIZERS AND CMAKE_BUILD_TYPE STREQUAL "Debug")
             if(CMAKE_CXX_COMPILER_ID MATCHES "Clang|GNU")
                 target_compile_options(bebra_tests PRIVATE ${SANITIZER_FLAGS})

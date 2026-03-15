@@ -15,5 +15,6 @@ check_required_components(BebraTensor)
 pip3 install questionary
 
 cmake ..
+cmake -S . -B -DCMAKE_BUILD_TYPE=Debug
 cmake --build .
 ctest

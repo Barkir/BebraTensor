@@ -10,10 +10,8 @@ BebraTensor::BebraTensor(const onnx::TensorProto& tensor)
         shape_.push_back(tensor.dims(i));
     }
 
-    auto&& raw = tensor.raw_data();
-    if (!raw.empty()) {
-        data_.assign(raw.begin(), raw.end());
-    }
+    assignDataByType(tensor, dtype);
+
 
     std::cout << "-----------------------------------------\n";
     std::cout << "Created tensor: \"" << name_ << "\"\n";

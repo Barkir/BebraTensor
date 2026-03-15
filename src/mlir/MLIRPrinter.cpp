@@ -26,21 +26,9 @@ void MLIRPrinter::Visit(const Ops::OpVoid& node) {
 void MLIRPrinter::Visit(const Ops::OpConv& node) {
 
     // inputs
-    mlir::Value* input = getSSA(node.input);
-    if (!input) {
-        Core::BebraWarn(node.input + " not found!");
-        return;
-    }
-    mlir::Value* bias = getSSA(node.bias);
-    if (!bias) {
-        Core::BebraWarn(node.bias + " not found!");
-        return;
-    }
-    mlir::Value* weight = getSSA(node.weight);
-    if (!weight) {
-        Core::BebraWarn(node.weight + " not found!");
-        return;
-    }
+    auto input = getSSA(node.input);
+    auto bias = getSSA(node.bias);
+    auto weight = getSSA(node.weight);
 
     // attrs
     auto kernel_shape = node.kernel_shape;
@@ -65,14 +53,14 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     auto output = builder_.create<mlir::linalg::Conv2DNchwFchwOp>(
         builder_.getUnknownLoc(),
         mlir::TypeRange{},
-        mlir::ValueRange{*input, *weight},
+        mlir::ValueRange{input, weight},
         mlir::ValueRange{}, //FIXME - HAHAHAHAH
         stridesDenseAttr,
         dilationsDenseAttr
 
     );
 
-    setSSA(node.output, reinterpret_cast<mlir::Value*>(&output));
+    // setSSA(node.output, output);
     std::cout << "visited conv" << std::endl;
 }
 
@@ -82,32 +70,25 @@ void MLIRPrinter::Visit(const Ops::OpGemm& node) {
 
 void MLIRPrinter::Visit(const Ops::OpAdd& node) {
 
-    mlir::Value* lhs = getSSA(node.input_1);
-    if (!lhs) {
-        Core::BebraWarn(node.input_1 + " not found!");
-        return;
-    }
-    mlir::Value* rhs = getSSA(node.input_2);
-    if (!rhs) {
-        Core::BebraWarn(node.input_2 + " not found!");
-        return;
-    }
+    auto lhs = getSSA(node.input_1);
+    auto rhs = getSSA(node.input_2);
+
 
     auto fastmath = mlir::arith::FastMathFlagsAttr::get(
         builder_.getContext(),
         mlir::arith::FastMathFlags::none
     );
 
-    mlir::Type type = lhs->getType();
+    mlir::Type type = lhs.getType();
 
     mlir::Value output = builder_.create<mlir::arith::AddFOp>(
         builder_.getUnknownLoc(),
         type,
-        *lhs, *rhs,
+        lhs, rhs,
         fastmath
     );
 
-    setSSA(node.output, &output);
+    setSSA(node.output, output);
     std::cerr << "visited add" << std::endl;
 }
 
@@ -117,32 +98,25 @@ void MLIRPrinter::Visit(const Ops::OpRelu& node) {
 
 void MLIRPrinter::Visit(const Ops::OpMul& node)  {
 
-    mlir::Value* lhs = getSSA(node.input_1);
-    if (!lhs) {
-        Core::BebraWarn(node.input_1 + " not found!");
-        return;
-    }
-    mlir::Value* rhs = getSSA(node.input_2);
-    if (!rhs) {
-        Core::BebraWarn(node.input_2 + " not found!");
-        return;
-    }
+    auto lhs = getSSA(node.input_1);
+    auto rhs = getSSA(node.input_2);
+
 
     auto fastmath = mlir::arith::FastMathFlagsAttr::get(
         builder_.getContext(),
         mlir::arith::FastMathFlags::none
     );
 
-    mlir::Type type = lhs->getType();
+    mlir::Type type = lhs.getType();
 
     mlir::Value output = builder_.create<mlir::arith::MulFOp>(
         builder_.getUnknownLoc(),
         type,
-        *lhs, *rhs,
+        lhs, rhs,
         fastmath
     );
 
-    setSSA(node.output, &output);
+    setSSA(node.output, output);
     std::cerr << "visited mul" << std::endl;
 }
 
@@ -160,6 +134,7 @@ void MLIRPrinter::Visit(const Ops::OpReduceMean& node)  {
 
 void MLIRPrinter::Visit(const Ops::OpReshape& node)  {
     std::cout << "reshape" << std::endl;
+
 }
 
 void MLIRPrinter::Visit(const Ops::OpSigmoid& node)  {
@@ -172,25 +147,31 @@ void MLIRPrinter::Visit(const Ops::OpFlatten& node)  {
 
 void MLIRPrinter::Visit(const Core::BebraTensor& tensor)  {
     auto name = tensor.getName();
-    mlir::Value* ssa = getSSA(name);
+    auto ssa = getSSA(name);
     if (!ssa) {
         Core::BebraWarn("SSA not set for tensor " + name);
         mlir::RankedTensorType ttype = createTensorType(tensor);
 
+        auto& data = tensor.data();
 
+        llvm::outs() << "tensor of type := " << ttype <<  " // data size := " << data.size() << "\n";
         auto denseAttr = mlir::DenseElementsAttr::get(
         ttype,
-        llvm::ArrayRef(tensor.data())
+        llvm::ArrayRef(data)
         );
+        denseAttr.dump();
 
         mlir::Value ssa_val = builder_.create<mlir::arith::ConstantOp>(
             builder_.getUnknownLoc(),
             denseAttr
         );
-        setSSA(name, &ssa_val);
-    }
+        setSSA(name, ssa_val);
+        llvm::outs() << "visited tensor " << name << " // -> " << ssa_val << "\n";
+        return;
 
-    std::cout << "visited tensor " << name << std::endl;
+    }
+    llvm::outs() << "visited tensor " << name << ssa << "\n";
+    return;
 }
 
 MLIRPrinter::MLIRPrinter(Core::BebraGraph& graph) : builder_(&context_) {
@@ -204,9 +185,7 @@ MLIRPrinter::MLIRPrinter(Core::BebraGraph& graph) : builder_(&context_) {
 
 std::string MLIRPrinter::generate(const Core::BebraGraph& graph) {
 
-    context_.loadDialect<mlir::arith::ArithDialect>();
-    context_.loadDialect<mlir::tensor::TensorDialect>();
-    context_.loadDialect<mlir::func::FuncDialect>();
+    loadAllNeededDialects();
     auto module = mlir::ModuleOp::create(mlir::UnknownLoc::get(&context_));
     builder_.setInsertionPointToStart(module.getBody());
 
@@ -215,6 +194,7 @@ std::string MLIRPrinter::generate(const Core::BebraGraph& graph) {
     // need to init a neural network
 
 // ==================================================================
+
     for (auto&& initializer_name : graph.initializers_) {
         auto&& initializer = graph.getTensor(initializer_name);
         Visit(initializer);
@@ -236,6 +216,14 @@ std::string MLIRPrinter::generate(const Core::BebraGraph& graph) {
 }
 
 // ================= mlir-specific ==========================
+
+void MLIRPrinter::loadAllNeededDialects() {
+    context_.loadDialect<mlir::arith::ArithDialect>();
+    context_.loadDialect<mlir::tensor::TensorDialect>();
+    context_.loadDialect<mlir::func::FuncDialect>();
+    context_.loadDialect<mlir::linalg::LinalgDialect>();
+
+}
 
 mlir::RankedTensorType MLIRPrinter::createTensorType(const Core::BebraTensor& tensor) {
     mlir::Type elementType;
