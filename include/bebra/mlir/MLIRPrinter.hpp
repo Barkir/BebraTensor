@@ -54,6 +54,8 @@ public: // mlir-specific methods
 private: // mlir-specific
     void loadAllNeededDialects();
     mlir::RankedTensorType createTensorType(const Core::BebraTensor& tensor);
+    mlir::RankedTensorType createDynamicTensorType(mlir::Value& tensor);
+    mlir::Type getElementType(Core::BebraType type);
 
 private: // Visitors
     void Visit(const Ops::OpVoid& node);

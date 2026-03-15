@@ -45,10 +45,10 @@ end
 def generate_verify_footer()
 <<-FOOTER
 }
-FOOTER~
+FOOTER
 end
 
-def generate_factory_hpp_footer
+def generate_factory_hpp_footer()
 <<-FOOTER
 }
 FOOTER
@@ -155,7 +155,7 @@ def generate_shape_verify(shape, name)
 end
 
 def generate_count_output_shape(shape, name)
-    cpp = "std::vector<int64_t> Op#{name}::countOutputShape(const Core::BebraGraph& graph) {"
+    cpp = "std::vector<int64_t> Op#{name}::countOutputShape(Core::BebraGraph& graph) {"
 
     template = COUNT_SHAPE_TEMPLATES[shape.to_sym]
     if template.nil?
@@ -198,7 +198,7 @@ def generate_op(op)
     void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
     void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
     static constexpr const char* getOpType() { return "#{name}"; }
-    std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
+    std::vector<int64_t> countOutputShape(Core::BebraGraph& graph);
     const std::vector<std::string> getAttrsString() const {
         return {
             #{attrs_line}

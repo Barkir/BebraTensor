@@ -49,6 +49,7 @@ public: // methods
     void convertOnnxToBebraNode(const onnx::GraphProto& graph);
     void convertOnnxToBebraOutput(const onnx::GraphProto& graph);
     bool verifyGraph();
+    void countOutputShapes();
     void dumpBebra(std::ofstream& stream);
 
 public: // helper methods

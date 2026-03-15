@@ -1,4 +1,5 @@
 #include "bebra/ops/CountShapeHelpers.hpp"
+#include "bebra/core/BebraErr.hpp"
 
 #include <algorithm>
 #include <iostream>

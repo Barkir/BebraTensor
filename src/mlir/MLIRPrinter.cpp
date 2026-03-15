@@ -48,11 +48,29 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     auto dilationsDenseAttr = builder_.getI64TensorAttr(dilations);
     std::cout << "got tensor attrs for strides and dilations for builder\n";
 
+    auto outtype = createDynamicTensorType(input);
+
+    mlir::Value emptyTensor = builder_.create<mlir::tensor::EmptyOp>(
+        builder_.getUnknownLoc(),
+        outtype.getShape(),
+        outtype.getElementType());
+
+    mlir::Value zero = builder_.create<mlir::arith::ConstantOp>(
+        builder_.getUnknownLoc(),
+        outtype.getElementType(),
+        builder_.getZeroAttr(outtype.getElementType()));
+
+    mlir::Value filledTensor = builder_.create<mlir::linalg::FillOp>(
+        builder_.getUnknownLoc(),
+        mlir::ValueRange{zero},
+        mlir::ValueRange{emptyTensor}).getResult(0);
+
+
     // counting output
     auto output = builder_.create<mlir::linalg::Conv2DNchwFchwOp>(builder_.getUnknownLoc(),
-                                                                  mlir::TypeRange{}, // FIXME - count output type
+                                                                  outtype,
                                                                   mlir::ValueRange{input, weight},
-                                                                  mlir::ValueRange{}, // FIXME -
+                                                                  mlir::ValueRange{filledTensor}, // FIXME -
                                                                   stridesDenseAttr,
                                                                   dilationsDenseAttr
 
@@ -195,9 +213,9 @@ void MLIRPrinter::loadAllNeededDialects() {
     context_.loadDialect<mlir::linalg::LinalgDialect>();
 }
 
-mlir::RankedTensorType MLIRPrinter::createTensorType(const Core::BebraTensor& tensor) {
+mlir::Type MLIRPrinter::getElementType(Core::BebraType type) {
     mlir::Type elementType;
-    switch (tensor.dtype) {
+    switch (type) {
         case Core::BebraType::FLOAT:
             elementType = builder_.getF32Type();
             break;
@@ -222,8 +240,24 @@ mlir::RankedTensorType MLIRPrinter::createTensorType(const Core::BebraTensor& te
         default:
             elementType = builder_.getF32Type();
     }
+    return elementType;
+}
 
+mlir::RankedTensorType MLIRPrinter::createTensorType(const Core::BebraTensor& tensor) {
+    mlir::Type elementType = getElementType(tensor.dtype);
     return mlir::RankedTensorType::get(tensor.getShape(), elementType);
+}
+
+
+mlir::RankedTensorType MLIRPrinter::createDynamicTensorType(mlir::Value& tensor) {
+    auto ttype = mlir::dyn_cast<mlir::RankedTensorType>(tensor.getType());
+    if (!ttype) {
+        throw Core::BebraErr("Value is not a RankedTensor while creating dynamic tensor...");
+    }
+    auto ndims = ttype.getRank();
+    auto eltype = ttype.getElementType();;
+    llvm::SmallVector<int64_t> shape(ndims, mlir::ShapedType::kDynamic);
+    return mlir::RankedTensorType::get(shape, eltype);
 }
 
 } // namespace Bebra::MLIR

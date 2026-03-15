@@ -21,37 +21,12 @@ COUNT_SHAPE_TEMPLATES = {
 
   maxpool: ->(op) {
   <<-CPP
-  const auto& inputShape = graph.getTensor(input).getShape();
-    if (inputShape.size() < 3) {
-        throw Core::BebraErr("MaxPool: input tensor must have at least 3 dimensions [N, C, D1...]");
+    if (kernel_shape.size() != 2) {
+        throw Core::BebraErr("only 2D MaxPool is supported for now!");
     }
 
-    std::vector<int64_t> outputShape;
-    outputShape.push_back(inputShape[0]); // N
-    outputShape.push_back(inputShape[1]); // C
 
-    size_t spatial_dims = kernel_shape.size();
-    for (size_t i = 0; i < spatial_dims; ++i) {
-        int64_t dim_in = inputShape[i + 2];
-        int64_t d_kernel = dilations[i] * (kernel_shape[i] - 1) + 1;
-        int64_t dim_out = 0  ;
-
-        if (auto_pad == "SAME_UPPER" || auto_pad == "SAME_LOWER") {
-            dim_out = (dim_in + strides[i] - 1) / strides[i];
-        } else {
-            // "NOTSET" or "VALID"
-            int64_t p_total = (auto_pad != "NOTSET") ? 0 : (pads[i] + pads[i + spatial_dims]);
-            double val = static_cast<double>(dim_in + p_total - d_kernel) / static_cast<double>(strides[i]) + 1.0;
-
-            if (ceil_mode) {
-                dim_out = static_cast<int64_t>(std::ceil(val));
-            } else {
-                dim_out = static_cast<int64_t>(std::floor(val));
-            }
-        }
-        outputShape.push_back(dim_out);
-    }
-    return outputShape;
+    return {};
     CPP
   },
 
@@ -62,16 +37,46 @@ COUNT_SHAPE_TEMPLATES = {
     CPP
   },
 
+
   spatial: ->(op) {
     <<-CPP
-    auto inputShape = graph.getTensor(input).getShape(); // [N, C, H, W]
+    auto inputShape = graph.getTensor(input).getShape();
     auto weightsShape = graph.getTensor(weight).getShape();
-    int64_t outH = (inputShape[2] + pads[0] + pads[2] - kernel_shape[0]) / strides[0] + 1;
-    int64_t outW = (inputShape[3] + pads[1] + pads[3] - kernel_shape[1]) / strides[1] + 1;
 
-    auto op_type = getOpType();
+    if (inputShape.size() < 3) {
+        throw Core::BebraErr("Input tensor rank must be >= 3 (N, C, H, ...)");
+    }
+    size_t spatial_dims = inputShape.size() - 2;
 
-    return { inputShape[0], (!strcmp(op_type, "Conv") ? weightsShape[0] : inputShape[1]), outH, outW };
+    int64_t outC = (strcmp(getOpType(), "Conv") == 0) ? weightsShape[0] : inputShape[1];
+
+    std::vector<int64_t> outputShape;
+    outputShape.push_back(inputShape[0]); // N
+    outputShape.push_back(outC);          // C_out
+
+    for (size_t i = 0; i < spatial_dims; ++i) {
+        int64_t dim_in = inputShape[i + 2];
+        int64_t kernel = kernel_shape[i];
+        int64_t stride = (strides.size() > i) ? strides[i] : 1;
+
+        int64_t p_start = 0;
+        int64_t p_end = 0;
+
+        if (pads.size() == spatial_dims * 2) {
+            p_start = pads[i];
+            p_end = pads[i + spatial_dims];
+        } else if (pads.size() == spatial_dims) {
+            p_start = p_end = pads[i];
+        }
+
+
+        int64_t effective_kernel = kernel;
+
+        int64_t dim_out = (dim_in + p_start + p_end - effective_kernel) / stride + 1;
+        outputShape.push_back(dim_out);
+    }
+
+    return outputShape;
     CPP
   },
 
