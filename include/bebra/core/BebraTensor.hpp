@@ -2,11 +2,11 @@
 
 #pragma once
 #include <iostream>
-#include <string>
 #include <memory>
+#include <string>
 
-#include "bebra/core/BebraType.hpp"
 #include "bebra/core/BebraErr.hpp"
+#include "bebra/core/BebraType.hpp"
 #include "mlir/IR/BuiltinTypes.h"
 #include "onnx_proto/onnx.proto3.pb.h"
 
@@ -74,50 +74,52 @@ public: // helper methods
         return data_.size() % sizeof(T) == 0;
     }
 
+    void setShape(std::vector<int64_t>&& shape) noexcept {
+        shape_ = std::move(shape);
+    }
+
     void assignDataByType(const onnx::TensorProto& tensor, BebraType t) {
-
         switch (t) {
-        case BebraType::FLOAT: {
-            auto dfloat = tensor.float_data();
-            auto nbytes = tensor.float_data_size() * sizeof(float);
-            data_.resize(nbytes);
-            std::memcpy(data_.data(), dfloat.data(), nbytes);
-            break;
-        }
+            case BebraType::FLOAT: {
+                auto dfloat = tensor.float_data();
+                auto nbytes = tensor.float_data_size() * sizeof(float);
+                data_.resize(nbytes);
+                std::memcpy(data_.data(), dfloat.data(), nbytes);
+                break;
+            }
 
-        case BebraType::DOUBLE: {
-            auto ddouble = tensor.double_data();
-            auto nbytes = tensor.double_data_size() * sizeof(double);
-            data_.resize(nbytes);
-            std::memcpy(data_.data(), ddouble.data(), nbytes);
-            break;
-        }
+            case BebraType::DOUBLE: {
+                auto ddouble = tensor.double_data();
+                auto nbytes = tensor.double_data_size() * sizeof(double);
+                data_.resize(nbytes);
+                std::memcpy(data_.data(), ddouble.data(), nbytes);
+                break;
+            }
 
-        case BebraType::INT64: {
-            auto dint64 = tensor.int64_data();
-            auto nbytes = tensor.int64_data_size() * sizeof(int64_t);
-            data_.resize(nbytes);
-            std::memcpy(data_.data(), dint64.data(), nbytes);
-            break;
-        }
+            case BebraType::INT64: {
+                auto dint64 = tensor.int64_data();
+                auto nbytes = tensor.int64_data_size() * sizeof(int64_t);
+                data_.resize(nbytes);
+                std::memcpy(data_.data(), dint64.data(), nbytes);
+                break;
+            }
 
-        case BebraType::INT32: {
-            auto dint32 = tensor.int32_data();
-            auto nbytes = tensor.int32_data_size() * sizeof(int32_t);
-            data_.resize(nbytes);
-            std::memcpy(data_.data(), dint32.data(), nbytes);
-            break;
-        }
+            case BebraType::INT32: {
+                auto dint32 = tensor.int32_data();
+                auto nbytes = tensor.int32_data_size() * sizeof(int32_t);
+                data_.resize(nbytes);
+                std::memcpy(data_.data(), dint32.data(), nbytes);
+                break;
+            }
 
-        default: {
-            throw BebraErr("unsupported BebraType in assignDataByType");
+            default: {
+                throw BebraErr("unsupported BebraType in assignDataByType");
+            }
+        }
+        if (data_.empty()) {
+            BebraWarn("data_ is empty after assignment !!! ");
         }
     }
-    if (data_.empty()) {
-        BebraWarn("data_ is empty after assignment !!! ");
-    }
-
-}
 };
 
 } // namespace Core

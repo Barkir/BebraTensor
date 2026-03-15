@@ -1,3 +1,5 @@
+require_relative "count_output.rb"
+
 def generate_header
 <<-HEADER
 #pragma once
@@ -8,6 +10,7 @@ namespace Bebra { namespace Core { class BebraGraph; } }
 #include "bebra/core/BebraErr.hpp"
 #include "bebra/core/BebraColors.hpp"
 #include "bebra/ops/BebraVisitor.hpp"
+#include "bebra/ops/CountShapeHelpers.hpp"
 namespace Bebra {
 namespace Ops {
 HEADER
@@ -34,6 +37,7 @@ def generate_verify_header()
 <<-HEADER
 #include "bebra/ops/BebraOperators.hpp"
 #include "bebra/core/BebraGraph.hpp"
+#include "bebra/ops/CountShapeHelpers.hpp"
 namespace Bebra::Ops {
 HEADER
 end
@@ -41,7 +45,7 @@ end
 def generate_verify_footer()
 <<-FOOTER
 }
-FOOTER
+FOOTER~
 end
 
 def generate_factory_hpp_footer
@@ -140,22 +144,25 @@ end
 
 def generate_shape_verify(shape, name)
     cpp = "bool Op#{name}::verify(const Core::BebraGraph& graph) const {\n"
-    case shape
-    when "elementwise"
-        cpp << ELWISE_VERIFY
-    when "matmul"
-        cpp << MATMUL_VERIFY
-    when "broadcast"
-        cpp << BROADCAST_VERIFY
-    when "spatial"
-        cpp << SPATIAL_VERIFY
-    when "reduce"
-        cpp << REDUCE_VERIFY
-    when "reshape"
-        cpp <<RESHAPE_VERIFY
-    else
-        cpp << NO_VERIFY
+    template = VERIFY_TEMPLATES[shape.to_sym]
+    if template.nil?
+        puts "Nil verify shape template for " + name + " " + shape
+        return;
     end
+    cpp << template.call(name)
+    cpp << "}\n"
+    cpp
+end
+
+def generate_count_output_shape(shape, name)
+    cpp = "std::vector<int64_t> Op#{name}::countOutputShape(const Core::BebraGraph& graph) {"
+
+    template = COUNT_SHAPE_TEMPLATES[shape.to_sym]
+    if template.nil?
+        puts "Nil count shape template for " + name + " category:" + shape
+        return;
+    end
+    cpp << template.call(name)
     cpp << "}\n"
     cpp
 end
@@ -191,6 +198,7 @@ def generate_op(op)
     void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
     void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
     static constexpr const char* getOpType() { return "#{name}"; }
+    std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
     const std::vector<std::string> getAttrsString() const {
         return {
             #{attrs_line}

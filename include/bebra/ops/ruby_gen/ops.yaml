@@ -150,7 +150,7 @@
 #######################################################
 
 - name: MaxPool
-  category: spatial
+  category: maxpool
   inputs:
     - name: input
       description: "Input feature map"

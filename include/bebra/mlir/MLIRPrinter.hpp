@@ -52,7 +52,6 @@ public: // mlir-specific methods
     }
 
 private: // mlir-specific
-
     void loadAllNeededDialects();
     mlir::RankedTensorType createTensorType(const Core::BebraTensor& tensor);
 

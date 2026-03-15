@@ -1,16 +1,5 @@
-ELWISE_VERIFY =
-    <<-CPP
-        auto&& input_tensor = graph.getTensor(input);
-        auto&& output_tensor = graph.getTensor(output);
-
-            if (output_tensor.shape_ != input_tensor.shape_) {
-                return false;
-            }
-
-        return true;
-    CPP
-
-MATMUL_VERIFY =
+VERIFY_TEMPLATES = {
+matmul: ->(op) {
     <<-CPP
 
  const auto& tensor_a = graph.getTensor(input_a);
@@ -31,7 +20,6 @@ MATMUL_VERIFY =
     int64_t k_a = shape_a[shape_a.size() - 1];
     int64_t k_b = shape_b[shape_b.size() - 2];
 
-    // Игнорируем динамические размеры (-1)
     if (k_a > 0 && k_b > 0 && k_a != k_b) {
         std::cerr << "MatMul dimension mismatch: K_a=" << k_a << " vs K_b=" << k_b << std::endl;
         return false;
@@ -57,8 +45,9 @@ MATMUL_VERIFY =
 
     return true;
     CPP
+},
 
-REDUCE_VERIFY =
+reduce: ->(op) {
     <<-CPP
 
         const auto& tensor_in = graph.getTensor(input);
@@ -90,8 +79,8 @@ REDUCE_VERIFY =
 
         return true;
     CPP
-
-BROADCAST_VERIFY =
+},
+broadcast: ->(op) {
     <<-CPP
 
         const auto& tensor_1 = graph.getTensor(input_1);
@@ -122,8 +111,13 @@ BROADCAST_VERIFY =
 
         return true;
     CPP
-
-SPATIAL_VERIFY =
+},
+maxpool: ->(op) {
+    <<-CPP
+    return true;
+    CPP
+},
+spatial: ->(op) {
     <<-CPP
 
         const auto& tensor_in = graph.getTensor(input);
@@ -181,13 +175,13 @@ SPATIAL_VERIFY =
 
         return true;
     CPP
-
-RESHAPE_VERIFY =
+},
+reshape: ->(op) {
     <<-CPP
         return true;
     CPP
-
-ELEMENTWISE_VERIFY =
+},
+elementwise: ->(op) {
     <<-CPP
 
         const auto& tensor_in = graph.getTensor(input);
@@ -205,8 +199,10 @@ ELEMENTWISE_VERIFY =
 
         return true;
     CPP
-
-NO_VERIFY =
+},
+no_verify: ->(op) {
     <<-CPP
     return true;
     CPP
+}
+}

@@ -38,6 +38,11 @@ def write_verify(verifiers, ops)
     ops.each do |op|
         verifiers.write(generate_shape_verify(op["category"], op["name"]))
     end
+
+    ops.each do |op|
+        verifiers.write(generate_count_output_shape(op["category"], op["name"]))
+    end
+
     verifiers.write(generate_verify_footer())
 end
 

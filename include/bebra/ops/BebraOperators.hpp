@@ -6,12 +6,14 @@ namespace Bebra { namespace Core { class BebraGraph; } }
 #include "bebra/core/BebraErr.hpp"
 #include "bebra/core/BebraColors.hpp"
 #include "bebra/ops/BebraVisitor.hpp"
+#include "bebra/ops/CountShapeHelpers.hpp"
 namespace Bebra {
 namespace Ops {
 struct OpVoid {
 void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
 void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Void"; }
+std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
 const std::vector<std::string> getAttrsString() const {
     return {
         
@@ -27,6 +29,7 @@ struct OpConv {
 void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
 void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Conv"; }
+std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
 const std::vector<std::string> getAttrsString() const {
     return {
         "kernel_shape",
@@ -57,6 +60,7 @@ struct OpGemm {
 void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
 void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Gemm"; }
+std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
 const std::vector<std::string> getAttrsString() const {
     return {
         "alpha",
@@ -83,6 +87,7 @@ struct OpAdd {
 void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
 void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Add"; }
+std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
 const std::vector<std::string> getAttrsString() const {
     return {
         
@@ -101,6 +106,7 @@ struct OpRelu {
 void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
 void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Relu"; }
+std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
 const std::vector<std::string> getAttrsString() const {
     return {
         
@@ -118,6 +124,7 @@ struct OpMul {
 void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
 void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Mul"; }
+std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
 const std::vector<std::string> getAttrsString() const {
     return {
         
@@ -136,6 +143,7 @@ struct OpMatMul {
 void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
 void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "MatMul"; }
+std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
 const std::vector<std::string> getAttrsString() const {
     return {
         
@@ -154,6 +162,7 @@ struct OpMaxPool {
 void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
 void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "MaxPool"; }
+std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
 const std::vector<std::string> getAttrsString() const {
     return {
         "kernel_shape",
@@ -185,6 +194,7 @@ struct OpReduceMean {
 void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
 void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "ReduceMean"; }
+std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
 const std::vector<std::string> getAttrsString() const {
     return {
         "axes",
@@ -206,6 +216,7 @@ struct OpReshape {
 void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
 void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Reshape"; }
+std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
 const std::vector<std::string> getAttrsString() const {
     return {
         
@@ -224,6 +235,7 @@ struct OpSigmoid {
 void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
 void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Sigmoid"; }
+std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
 const std::vector<std::string> getAttrsString() const {
     return {
         
@@ -241,6 +253,7 @@ struct OpFlatten {
 void accept(BebraVisitor& visitor) { visitor.Visit(*this); }
 void accept(const BebraVisitor& visitor) { visitor.Visit(*this); }
 static constexpr const char* getOpType() { return "Flatten"; }
+std::vector<int64_t> countOutputShape(const Core::BebraGraph& graph);
 const std::vector<std::string> getAttrsString() const {
     return {
         "axis"

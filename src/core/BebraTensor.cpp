@@ -12,7 +12,6 @@ BebraTensor::BebraTensor(const onnx::TensorProto& tensor)
 
     assignDataByType(tensor, dtype);
 
-
     std::cout << "-----------------------------------------\n";
     std::cout << "Created tensor: \"" << name_ << "\"\n";
     std::cout << "  Shape: [";

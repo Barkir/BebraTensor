@@ -3,9 +3,9 @@
 #pragma once
 
 #include "BebraColors.hpp"
+#include <iostream>
 #include <stdexcept>
 #include <string>
-#include <iostream>
 
 namespace Bebra {
 namespace Core {
