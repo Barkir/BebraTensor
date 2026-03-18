@@ -164,6 +164,7 @@ target_link_libraries(bebra_core PRIVATE
     MLIRLinalgDialect
     MLIRTensorDialect
     MLIRFuncDialect
+    MLIRTosaDialect
     LLVMCore
     LLVMSupport
 )

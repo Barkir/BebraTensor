@@ -17,7 +17,7 @@ bool OpConv::verify(const Core::BebraGraph& graph) const {
 
         if (shape.size() < 3) {
             std::cerr << "Spatial op requires at least 3D input, got "
-                      << shape.size() << "D" << std::endl;
+                      << shape.size() << "D" << "\n";
             return false;
         }
 
@@ -25,29 +25,29 @@ bool OpConv::verify(const Core::BebraGraph& graph) const {
         size_t spatial_dims = shape.size() - 2;
         if (kernel_shape.size() != spatial_dims) {
             std::cerr << "Kernel shape rank " << kernel_shape.size()
-                      << " doesn't match input spatial dims " << spatial_dims << std::endl;
+                      << " doesn't match input spatial dims " << spatial_dims << "\n";
             return false;
         }
 
         if (!strides.empty() && strides.size() != spatial_dims) {
-            std::cerr << "Strides rank mismatch" << std::endl;
+            std::cerr << "Strides rank mismatch" << "\n";
             return false;
         }
 
         if (!dilations.empty() && dilations.size() != spatial_dims) {
-            std::cerr << "Dilations rank mismatch" << std::endl;
+            std::cerr << "Dilations rank mismatch" << "\n";
             return false;
         }
 
         if (!pads.empty() && pads.size() != spatial_dims && pads.size() != 2 * spatial_dims) {
-            std::cerr << "Pads rank mismatch" << std::endl;
+            std::cerr << "Pads rank mismatch" << "\n";
             return false;
         }
 
 
         for (int64_t k : kernel_shape) {
             if (k <= 0) {
-                std::cerr << "Kernel shape must be positive, got " << k << std::endl;
+                std::cerr << "Kernel shape must be positive, got " << k << "\n";
                 return false;
             }
         }
@@ -55,7 +55,7 @@ bool OpConv::verify(const Core::BebraGraph& graph) const {
 
         for (int64_t s : strides) {
             if (s <= 0) {
-                std::cerr << "Strides must be positive, got " << s << std::endl;
+                std::cerr << "Strides must be positive, got " << s << "\n";
                 return false;
             }
         }
@@ -75,7 +75,7 @@ bool OpGemm::verify(const Core::BebraGraph& graph) const {
     const auto& shape_b = tensor_b.shape_;
 
     if (shape_a.size() < 2 || shape_b.size() < 2) {
-        std::cerr << "MatMul: inputs must have at least 2 dimensions" << std::endl;
+        std::cerr << "MatMul: inputs must have at least 2 dimensions" << "\n";
         return false;
     }
 
@@ -83,7 +83,7 @@ bool OpGemm::verify(const Core::BebraGraph& graph) const {
     int64_t k_b = shape_b[shape_b.size() - 2];
 
     if (k_a > 0 && k_b > 0 && k_a != k_b) {
-        std::cerr << "MatMul dimension mismatch: K_a=" << k_a << " vs K_b=" << k_b << std::endl;
+        std::cerr << "MatMul dimension mismatch: K_a=" << k_a << " vs K_b=" << k_b << "\n";
         return false;
     }
 
@@ -99,7 +99,7 @@ bool OpGemm::verify(const Core::BebraGraph& graph) const {
 
             if (dim_a != dim_b && dim_a != 1 && dim_b != 1) {
                 std::cerr << "MatMul broadcast mismatch at batch dim " << i
-                          << ": " << dim_a << " vs " << dim_b << std::endl;
+                          << ": " << dim_a << " vs " << dim_b << "\n";
                 return false;
             }
         }
@@ -130,7 +130,7 @@ bool OpAdd::verify(const Core::BebraGraph& graph) const {
 
             if (dim_1 != dim_2 && dim_1 != 1 && dim_2 != 1) {
                 std::cerr << "Broadcast incompatible at dim " << i
-                          << ": " << dim_1 << " vs " << dim_2 << std::endl;
+                          << ": " << dim_1 << " vs " << dim_2 << "\n";
                 return false;
             }
         }
@@ -147,7 +147,7 @@ bool OpRelu::verify(const Core::BebraGraph& graph) const {
 
         for (int64_t dim : tensor_in.shape_) {
             if (dim <= 0) {
-                std::cerr << "Invalid dimension size " << dim << std::endl;
+                std::cerr << "Invalid dimension size " << dim << "\n";
                 return false;
             }
         }
@@ -177,7 +177,7 @@ bool OpMul::verify(const Core::BebraGraph& graph) const {
 
             if (dim_1 != dim_2 && dim_1 != 1 && dim_2 != 1) {
                 std::cerr << "Broadcast incompatible at dim " << i
-                          << ": " << dim_1 << " vs " << dim_2 << std::endl;
+                          << ": " << dim_1 << " vs " << dim_2 << "\n";
                 return false;
             }
         }
@@ -197,7 +197,7 @@ bool OpMatMul::verify(const Core::BebraGraph& graph) const {
     const auto& shape_b = tensor_b.shape_;
 
     if (shape_a.size() < 2 || shape_b.size() < 2) {
-        std::cerr << "MatMul: inputs must have at least 2 dimensions" << std::endl;
+        std::cerr << "MatMul: inputs must have at least 2 dimensions" << "\n";
         return false;
     }
 
@@ -205,7 +205,7 @@ bool OpMatMul::verify(const Core::BebraGraph& graph) const {
     int64_t k_b = shape_b[shape_b.size() - 2];
 
     if (k_a > 0 && k_b > 0 && k_a != k_b) {
-        std::cerr << "MatMul dimension mismatch: K_a=" << k_a << " vs K_b=" << k_b << std::endl;
+        std::cerr << "MatMul dimension mismatch: K_a=" << k_a << " vs K_b=" << k_b << "\n";
         return false;
     }
 
@@ -221,7 +221,7 @@ bool OpMatMul::verify(const Core::BebraGraph& graph) const {
 
             if (dim_a != dim_b && dim_a != 1 && dim_b != 1) {
                 std::cerr << "MatMul broadcast mismatch at batch dim " << i
-                          << ": " << dim_a << " vs " << dim_b << std::endl;
+                          << ": " << dim_a << " vs " << dim_b << "\n";
                 return false;
             }
         }
@@ -250,14 +250,14 @@ bool OpReduceMean::verify(const Core::BebraGraph& graph) const {
 
             if (normalized_axis < 0 || normalized_axis >= num_dims) {
                 std::cerr << "Reduce axis " << axis << " out of bounds for tensor with "
-                          << num_dims << " dimensions" << std::endl;
+                          << num_dims << " dimensions" << "\n";
                 return false;
             }
         }
 
 
         if (keepdims != 0 && keepdims != 1) {
-            std::cerr << "ReduceMean keepdims must be 0 or 1, got " << keepdims << std::endl;
+            std::cerr << "ReduceMean keepdims must be 0 or 1, got " << keepdims << "\n";
             return false;
         }
 
@@ -276,7 +276,7 @@ bool OpSigmoid::verify(const Core::BebraGraph& graph) const {
 
         for (int64_t dim : tensor_in.shape_) {
             if (dim <= 0) {
-                std::cerr << "Invalid dimension size " << dim << std::endl;
+                std::cerr << "Invalid dimension size " << dim << "\n";
                 return false;
             }
         }

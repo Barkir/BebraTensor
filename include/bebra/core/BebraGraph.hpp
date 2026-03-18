@@ -62,21 +62,24 @@ public: // helper methods
         throw BebraErr("No such tensor " + tensor_name + " in tensor_map_...");
     }
 
-    void convertToMlir() {
-        std::cout << "MLIR PRINTER" << std::endl;
-        std::cout << "// \t\tINITIALIZERS" << std::endl;
+    void convertToMlir(const std::string& file_name) {
+        std::cout << "MLIR PRINTER" << "\n";
+        std::cout << "// \t\tINITIALIZERS" << "\n";
         for (auto&& initializer : initializers_) {
             std::cout << initializer << " ";
         }
-        std::cout << "\n\t\t // // //" << std::endl;
-        std::cout << "// \t\tINPUTS" << std::endl;
+        std::cout << "\n\t\t // // //" << "\n";
+        std::cout << "// \t\tINPUTS" << "\n";
         for (auto&& input : inputs_) {
             std::cout << input << " ";
         }
 
-        std::cout << "\n\t\t // // //" << std::endl;
+        std::cout << "\n\t\t // // //" << "\n";
         MLIR::MLIRPrinter printer(*this);
-        printer.generate(*this);
+
+        std::string result;
+        printer.generate(*this, result);
+        printer.dump(file_name, result);
     }
 };
 

@@ -24,7 +24,7 @@ void BebraGraph::convertOnnxToBebraGraph(const onnx::GraphProto& graph) {
 void BebraGraph::countOutputShapes() {
     for (auto&& node : nodes_) {
         std::visit([this](auto& op) {
-            std::cout << "counting output shape of op" << op.getOpType() << std::endl;
+            std::cout << "counting output shape of op" << op.getOpType() << "\n";
             op.countOutputShape(*this);
         },
 
@@ -38,8 +38,6 @@ void BebraGraph::convertOnnxToBebraInput(const onnx::GraphProto& graph) {
         tensor_map_.emplace(t.name_, std::move(t));
         inputs_.push_back(t.name_);
     }
-
-    // TODO add dtype, bla-bla-bla
 }
 
 void BebraGraph::convertOnnxToBebraOutput(const onnx::GraphProto& graph) {
@@ -74,10 +72,10 @@ void BebraGraph::convertOnnxToBebraNode(const onnx::GraphProto& graph) {
             for (int i = 0; i < sz; ++i) {
                 auto&& attr = onnx_node.attribute(i);
                 if (!attr.IsInitialized()) {
-                    std::cout << "attr#" << i << " not initialized!" << std::endl;
+                    std::cout << "attr#" << i << " not initialized!" << "\n";
                     continue;
                 }
-                std::cout << "initialized attr with name " << attr.name() << std::endl;
+                std::cout << "initialized attr with name " << attr.name() << "\n";
                 attrs.emplace(attr.name(), Attr(parseAttr(attr)));
             }
         }
@@ -102,13 +100,11 @@ void BebraGraph::convertOnnxToBebraInitializer(const onnx::GraphProto& graph) {
         BebraTensor t(initializer);
         tensor_map_.emplace(t.name_, std::move(t));
         initializers_.push_back(t.name_);
-        // TODO add dtype
-        // TODO add data
     }
 }
 
 void BebraGraph::dumpBebra(std::ofstream& stream) {
-    stream << "digraph{" << std::endl;
+    stream << "digraph{" << "\n";
     for (const auto& node : nodes_) {
         std::string op_type;
         std::vector<std::string> attrs;
@@ -121,23 +117,23 @@ void BebraGraph::dumpBebra(std::ofstream& stream) {
 
         stream << "node" << &node << "[\"label\"=\"{" << op_type;
         for (const auto& attr : attrs) {
-            stream << "|" << attr << std::endl;
+            stream << "|" << attr << "\n";
         }
-        stream << "}\",shape=Mrecord style=filled, fillcolor=\"" << getNodeColor(op_type) << "\"]" << std::endl;
+        stream << "}\",shape=Mrecord style=filled, fillcolor=\"" << getNodeColor(op_type) << "\"]" << "\n";
 
         for (const auto& input : node.inputs_) {
             stream << "tensor" << input << "[label=" << input << ", shape=cylinder, style=filled, fillcolor=\""
-                   << BEBRA_TENSOR << "\"]" << std::endl;
-            stream << "tensor" << input << "->" << "node" << &node << std::endl;
+                   << BEBRA_TENSOR << "\"]" << "\n";
+            stream << "tensor" << input << "->" << "node" << &node << "\n";
         }
 
         for (const auto& output : node.outputs_) {
             stream << "tensor" << output << "[label=" << output << ", shape=cylinder, style=filled, fillcolor=\""
-                   << BEBRA_TENSOR << "\"]" << std::endl;
-            stream << "node" << &node << "->" << "tensor" << output << std::endl;
+                   << BEBRA_TENSOR << "\"]" << "\n";
+            stream << "node" << &node << "->" << "tensor" << output << "\n";
         }
     }
-    stream << "}" << std::endl;
+    stream << "}" << "\n";
 }
 
 } // namespace Core

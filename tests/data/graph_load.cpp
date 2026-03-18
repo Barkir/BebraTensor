@@ -15,7 +15,7 @@ TEST(GraphLoading, LoadsWithoutMissingTensors) {
     Bebra::Core::BebraGraph graph(model_path);
 
     std::cout << "\n  Loaded " << graph.nodes_.size() << " nodes, "
-              << graph.tensor_map_.size() << " tensors" << std::endl;
+              << graph.tensor_map_.size() << " tensors" << "\n";
 
     for (const auto& node : graph.nodes_) {
         std::string op_type;

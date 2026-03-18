@@ -192,9 +192,9 @@
  * printf(FG_256(196) "Bright red using 256 colors" RESET "\n");
  * ============================================ */
 
-#define BIG_LINE std::cout << FG_VIOLET << "=============================================" << RESET << std::endl;
+#define BIG_LINE std::cout << FG_VIOLET << "=============================================" << RESET << "\n";
 
-#define SEP_LINE std::cout << FG_CORAL << "---------------------------------------------" << RESET << std::endl;
+#define SEP_LINE std::cout << FG_CORAL << "---------------------------------------------" << RESET << "\n";
 
 /* MNIST ONNX Node Color Definitions - BEBRA_CONV_NODE Theme */
 /* Format: 0xRRGGBB (24-bit RGB) */

@@ -20,9 +20,9 @@ static std::string get_dot_path(const std::string& filename) {
 
 int main(int argc, char* argv[]) {
     if (argc < 2) {
-        std::cerr << BEBRA_DIM BEBRA_ITALIC "Please enter model to parse..." RESET_DIM << std::endl;
+        std::cerr << BEBRA_DIM BEBRA_ITALIC "Please enter model to parse..." RESET_DIM << "\n";
         std::cerr << FG_TURQUOISE BEBRA_BOLD "hint: enter `--dump` flag to get your graph image" BEBRA_RESET
-                  << std::endl;
+                  << "\n";
         return 0;
     }
 
@@ -44,14 +44,14 @@ int main(int argc, char* argv[]) {
                 return 0;
             } else {
                 std::cerr << BEBRA_DIM BEBRA_ITALIC "No model entered to parse after --dump flag!" RESET_DIM
-                          << std::endl;
+                          << "\n";
                 return 0;
             }
         }
 
         if (strcmp(argv[i], "--dump")) {
             Bebra::Core::BebraGraph graph(argv[i]);
-            graph.convertToMlir();
+            graph.convertToMlir("ir.ll");
             // VerifyGraph
 
             Bebra::Pass::BebraPassManager pm;

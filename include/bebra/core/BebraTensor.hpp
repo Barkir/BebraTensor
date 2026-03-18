@@ -21,10 +21,10 @@ struct BebraTensor {
 
 public: // constructors && destructor
     explicit BebraTensor(const std::string& name) : name_(name) {
-        std::cout << "-----------------------------------------" << std::endl;
-        std::cout << "Created tensor with name: " << name << std::endl;
-        std::cout << "WARNING! NO SHAPE INFO PROVIDED!" << std::endl;
-        std::cout << "-----------------------------------------" << std::endl;
+        std::cout << "-----------------------------------------" << "\n";
+        std::cout << "Created tensor with name: " << name << "\n";
+        std::cout << "WARNING! NO SHAPE INFO PROVIDED!" << "\n";
+        std::cout << "-----------------------------------------" << "\n";
         isDynamicShape = true;
     }
 

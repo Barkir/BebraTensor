@@ -8,6 +8,7 @@
 #include "mlir/IR/BuiltinOps.h"
 #include "mlir/IR/BuiltinTypes.h"
 #include "mlir/IR/TypeUtilities.h"
+#include <optional>
 
 #include "bebra/core/BebraErr.hpp"
 #include "bebra/ops/BebraOperators.hpp"
@@ -31,30 +32,34 @@ public: // constructor
     ~MLIRPrinter() = default;
 
 public: // helpers
-    std::string generate(const Core::BebraGraph& graph);
+    void generate(const Core::BebraGraph& graph, std::string& out_str);
+    void dump(const std::string& filename, const std::string& dumped);
 
 public: // mlir-specific methods
     mlir::OwningOpRef<mlir::ModuleOp> createModule();
-    mlir::Value getSSA(const std::string& val_name) {
+    std::optional<mlir::Value> getSSA(const std::string& val_name) {
         auto&& val = ssa_map_.find(val_name);
 
         if (val != ssa_map_.end()) {
-            return val->second;
+            return std::optional<mlir::Value>(val->second);
         }
 
-        return {};
-        throw Core::BebraErr("can't find ssa with such name " + val_name + "!");
+        return std::nullopt;
+        // throw Core::BebraErr("can't find ssa with such name " + val_name + "!");
     }
 
     void setSSA(const std::string& val_name, mlir::Value val) {
-        ssa_map_[val_name] = std::move(val);
+        // // std::cout << "setting " << val_name << "\n";
+        // // std::cout << val << "\n";
         Core::BebraGreen("Setting ssa " + val_name);
+        ssa_map_[val_name] = std::move(val);
     }
 
 private: // mlir-specific
     void loadAllNeededDialects();
     mlir::RankedTensorType createTensorType(const Core::BebraTensor& tensor);
     mlir::RankedTensorType createDynamicTensorType(mlir::Value& tensor);
+    mlir::Value createFilledTensor(mlir::RankedTensorType& type);
     mlir::Type getElementType(Core::BebraType type);
 
 private: // Visitors

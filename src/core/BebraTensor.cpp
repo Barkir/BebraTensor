@@ -19,7 +19,7 @@ BebraTensor::BebraTensor(const onnx::TensorProto& tensor)
         std::cout << shape_[i] << (i + 1 < shape_.size() ? ", " : "");
     }
     std::cout << "]\n";
-    std::cout << "  Dtype: " << dtype << "\n";
+    std::cout << "  Dtype: " << static_cast<int>(dtype) << "\n";
     std::cout << "  Data size: " << data_.size() << " bytes\n";
     std::cout << "-----------------------------------------\n";
 }
@@ -29,11 +29,11 @@ BebraTensor::BebraTensor(const std::string& name,
                          const std::vector<int8_t> data,
                          BebraType dtype_)
     : name_(name), shape_(shape), data_(data), dtype(dtype_) {
-    std::cout << "-----------------------------------------" << std::endl;
-    std::cout << "Created tensor with name" << name << std::endl;
-    std::cout << "ndims = " << shape_.size() << std::endl;
-    std::cout << "dtype = " << dtype << std::endl;
-    std::cout << "-----------------------------------------" << std::endl;
+    std::cout << "-----------------------------------------" << "\n";
+    std::cout << "Created tensor with name" << name << "\n";
+    std::cout << "ndims = " << shape_.size() << "\n";
+    std::cout << "dtype = " << static_cast<int>(dtype) << "\n";
+    std::cout << "-----------------------------------------" << "\n";
 }
 
 BebraTensor::BebraTensor(const onnx::ValueInfoProto& value_info) : name_(value_info.name()) {
