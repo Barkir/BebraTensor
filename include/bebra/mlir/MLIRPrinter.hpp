@@ -10,6 +10,17 @@
 #include "mlir/IR/TypeUtilities.h"
 #include <optional>
 
+#include "mlir/Pass/PassManager.h"
+#include "mlir/Transforms/Passes.h"
+#include "mlir/Dialect/Func/Transforms/Passes.h"
+#include "mlir/Conversion/TosaToArith/TosaToArith.h"
+#include "mlir/Conversion/TosaToLinalg/TosaToLinalg.h"
+#include "mlir/Conversion/SCFToControlFlow/SCFToControlFlow.h"
+#include "mlir/Conversion/ArithToLLVM/ArithToLLVM.h"
+#include "mlir/Conversion/FuncToLLVM/ConvertFuncToLLVMPass.h"
+#include "mlir/Target/LLVMIR/Dialect/LLVMIR/LLVMToLLVMIRTranslation.h"
+
+
 #include "bebra/core/BebraErr.hpp"
 #include "bebra/ops/BebraOperators.hpp"
 
@@ -55,12 +66,23 @@ public: // mlir-specific methods
         ssa_map_[val_name] = std::move(val);
     }
 
+    std::optional<mlir::Type> getType(const std::string& name) {
+        auto found = type_map_.find(name);
+        if (found != type_map_.end()) {
+            return std::optional<mlir::Type>(found->second);
+        }
+
+        return std::nullopt;
+    }
+
 private: // mlir-specific
     void loadAllNeededDialects();
     mlir::RankedTensorType createTensorType(const Core::BebraTensor& tensor);
     mlir::RankedTensorType createDynamicTensorType(mlir::Value& tensor);
-    mlir::Value createFilledTensor(mlir::RankedTensorType& type);
+    mlir::Value createFilledTensor(mlir::RankedTensorType type, mlir::Value sourceTensor);
     mlir::Type getElementType(Core::BebraType type);
+    mlir::LogicalResult compileToLLVM(mlir::ModuleOp module, llvm::raw_string_ostream& stream);
+    mlir::DenseI64ArrayAttr getDenseI64ArrayAttrFromValue(mlir::Value value);
 
 private: // Visitors
     void Visit(const Ops::OpVoid& node);

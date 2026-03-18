@@ -62,7 +62,7 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     std::cout << "got tensor attrs for strides and dilations for builder\n";
 
     auto outtype = createDynamicTensorType(*input);
-    auto filledTensor = createFilledTensor(outtype);
+    auto filledTensor = createFilledTensor(outtype, *input);
 
     // std::cout << filledTensor << "\n";
     // counting output
@@ -182,7 +182,7 @@ void MLIRPrinter::Visit(const Ops::OpMatMul& node) {
     }
 
     auto outtype = createDynamicTensorType(*input_a);
-    mlir::Value filledTensor = createFilledTensor(outtype);
+    mlir::Value filledTensor = createFilledTensor(outtype, *input_a);
 
     auto output = builder_.create<mlir::linalg::MatmulOp>(
         builder_.getUnknownLoc(),
@@ -221,7 +221,7 @@ void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
     auto padsAttr = builder_.getDenseI64ArrayAttr(pads);
 
     auto outtype = createDynamicTensorType(*input);
-    mlir::Value filledTensor = createFilledTensor(outtype);
+    mlir::Value filledTensor = createFilledTensor(outtype, *input);
     // output
     std::cout << "creating output" << std::endl;
     auto output = builder_.create<mlir::tosa::MaxPool2dOp>(
@@ -251,13 +251,27 @@ void MLIRPrinter::Visit(const Ops::OpReshape& node) {
     if (!shape) {
         Core::BebraWarn("no shape at reshape: " + node.shape);
     }
+    auto shapeDense = getDenseI64ArrayAttrFromValue(*shape);
+    llvm::ArrayRef<int64_t> shapeData = shapeDense.asArrayRef();
 
-    auto outtype = createDynamicTensorType(*shape);
+    auto intype = (*input).getType();
+    auto inCastType = mlir::dyn_cast<mlir::RankedTensorType>(intype);
+    if (!inCastType) {
+        throw Core::BebraErr("no cast to ranked tensor type in reshape!");
+    }
+
+    auto outtype = mlir::RankedTensorType::get(shapeData, inCastType.getElementType());
+
+    // auto outtype = mlir::dyn_cast<mlir::RankedTensorType>(*getType(node.shape));
+    // if (!outtype) {
+    //     throw Core::BebraErr("Can't dyn_cast to ranked tensor type in OpReshape");
+    // }
 
     auto output = builder_.create<mlir::tosa::ReshapeOp>(
         builder_.getUnknownLoc(),
         outtype,
-        mlir::ValueRange{*input, *shape}
+        *input,
+        shapeDense
     );
 
     setSSA(node.output, output);
@@ -314,6 +328,43 @@ void MLIRPrinter::dump(const std::string& filename, const std::string& dumped) {
 
 }
 
+mlir::LogicalResult MLIRPrinter::compileToLLVM(mlir::ModuleOp module, llvm::raw_string_ostream& stream) {
+
+    mlir::OpPrintingFlags flags;
+    // stream << "===== START OF PIPELINE ====" << "\n";
+
+    mlir::PassManager pm(&context_);
+
+    pm.addNestedPass<mlir::func::FuncOp>(
+        mlir::tosa::createTosaInferShapesPass()
+    );
+
+    // pm.addPass(mlir::createCanonicalizerPass());
+    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaOptionalDecompositions());
+    pm.addPass(mlir::createCSEPass());
+    pm.addNestedPass<mlir::func::FuncOp>(
+        mlir::tosa::createTosaToLinalgNamed()
+    );
+    pm.addNestedPass<mlir::func::FuncOp>(
+        mlir::tosa::createTosaToLinalg()
+    );
+    pm.addNestedPass<mlir::func::FuncOp>(
+        mlir::tosa::createTosaToArith()
+    );
+    pm.addPass(mlir::createConvertSCFToCFPass());
+    pm.addPass(mlir::createConvertFuncToLLVMPass());
+    pm.addPass(mlir::createArithToLLVMConversionPass());
+
+    auto result = pm.run(module);
+    if (mlir::failed(result)) {
+        llvm::errs() << "Pass pipeline failed!\n";
+        return mlir::failure();
+    }
+
+    module.print(stream, flags);
+    return mlir::success();
+}
+
 
 void MLIRPrinter::generate(const Core::BebraGraph& graph, std::string& out_str) {
     loadAllNeededDialects();
@@ -345,8 +396,13 @@ void MLIRPrinter::generate(const Core::BebraGraph& graph, std::string& out_str) 
 
     llvm::raw_string_ostream ss(out_str);
 
-    mlir::OpPrintingFlags flags;
-    module.print(ss, flags);
+    auto result = compileToLLVM(module, ss);
+    if (mlir::succeeded(result)) {
+        Core::BebraGreen("successfully compiled model to llvm!");
+
+        // mlir::OpPrintingFlags flags;
+        // module.print(ss, flags);
+    }
 }
 
 // ================= mlir-specific ==========================
@@ -357,50 +413,32 @@ void MLIRPrinter::loadAllNeededDialects() {
     context_.loadDialect<mlir::func::FuncDialect>();
     context_.loadDialect<mlir::linalg::LinalgDialect>();
     context_.loadDialect<mlir::tosa::TosaDialect>();
+}
 
+mlir::DenseI64ArrayAttr MLIRPrinter::getDenseI64ArrayAttrFromValue(mlir::Value value) {
+    auto defOp = value.getDefiningOp();
+    auto constOp = mlir::dyn_cast<mlir::arith::ConstantOp>(defOp);
+    if (!constOp) {
+        std::cout << " ALERT! " << "\n";
+        value.dump();
+        throw Core::BebraErr("can't get dense attr from value");
+    }
 
+    mlir::Attribute attr = constOp.getValue();
 
+    if (auto denseAttr = mlir::dyn_cast<mlir::DenseI64ArrayAttr>(attr)) {
+        return denseAttr;
+    }
 
+    if (auto elementsAttr = mlir::dyn_cast<mlir::DenseElementsAttr>(attr)) {
+        if (elementsAttr.getElementType().isInteger(64)) {
+            std::vector<int64_t> data(elementsAttr.value_begin<int64_t>(), elementsAttr.value_end<int64_t>());
+            return mlir::DenseI64ArrayAttr::get(value.getContext(), data);
+        }
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    Core::BebraWarn("can't cast to denseI64 in getDenseI64ArrayAttrFromValue");
+    return nullptr;
 }
 
 mlir::Type MLIRPrinter::getElementType(Core::BebraType type) {
@@ -449,19 +487,33 @@ mlir::RankedTensorType MLIRPrinter::createDynamicTensorType(mlir::Value& tensor)
     llvm::SmallVector<int64_t> shape(ndims, mlir::ShapedType::kDynamic);
     return mlir::RankedTensorType::get(shape, eltype);
 }
-mlir::Value MLIRPrinter::createFilledTensor(mlir::RankedTensorType& type) {
-    mlir::Value emptyTensor = builder_.create<mlir::tensor::EmptyOp>(
-        builder_.getUnknownLoc(),
-        type.getShape(),
-        type.getElementType());
+mlir::Value MLIRPrinter::createFilledTensor(mlir::RankedTensorType type,
+                                            mlir::Value sourceTensor) {
+    mlir::Location loc = builder_.getUnknownLoc();
 
-    mlir::Value zero = builder_.create<mlir::arith::ConstantOp>(
-        builder_.getUnknownLoc(),
+    llvm::SmallVector<mlir::Value> dynamicDims;
+    for (int64_t i = 0; i < type.getRank(); ++i) {
+        if (type.isDynamicDim(static_cast<unsigned int>(i))) {
+
+            auto dim = builder_.create<mlir::tensor::DimOp>(loc, sourceTensor, i);
+            dynamicDims.push_back(dim);
+        }
+    }
+
+    mlir::Value emptyTensor;
+    if (dynamicDims.empty()) {
+        emptyTensor = builder_.create<mlir::tensor::EmptyOp>(loc, type.getShape(), type);
+    } else {
+        emptyTensor = builder_.create<mlir::tensor::EmptyOp>(loc, type, mlir::ValueRange{dynamicDims});
+    }
+
+    auto zero = builder_.create<mlir::arith::ConstantOp>(
+        loc,
         type.getElementType(),
         builder_.getZeroAttr(type.getElementType()));
 
-    mlir::Value filledTensor = builder_.create<mlir::linalg::FillOp>(
-        builder_.getUnknownLoc(),
+    auto filledTensor = builder_.create<mlir::linalg::FillOp>(
+        loc,
         mlir::ValueRange{zero},
         mlir::ValueRange{emptyTensor}).getResult(0);
 
