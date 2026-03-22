@@ -62,8 +62,14 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     auto padsDenseAttr = builder_.getDenseI64ArrayAttr(pads);
     std::cout << "got tensor attrs for strides and dilations for builder\n";
 
-    auto outtype = createDynamicTensorType(*input);
-    auto eltype = outtype.getElementType();
+    auto intype = mlir::dyn_cast<mlir::RankedTensorType>((*input).getType());
+    auto eltype = intype.getElementType();
+
+    // auto outtype = createDynamicTensorType(*input);
+    auto outtype = computeConv2DOutputType(*input, *weight,
+                                            stridesDenseAttr, padsDenseAttr,
+                                            dilationsDenseAttr, eltype);
+
     auto accTypeAttr = mlir::TypeAttr::get(eltype);
 
     if (!bias) {
@@ -528,7 +534,6 @@ mlir::LogicalResult MLIRPrinter::compileToLLVM(mlir::ModuleOp module, llvm::raw_
 
     pm.addPass(mlir::createConvertSCFToCFPass());
     pm.addPass(mlir::createConvertFuncToLLVMPass());
-    pm.addPass(mlir::createArithToLLVMConversionPass());
 
 
     stream << "===== AFTER OPT ====" << "\n";
@@ -754,5 +759,68 @@ mlir::Value MLIRPrinter::createFilledTensor(mlir::RankedTensorType type,
         mlir::ValueRange{emptyTensor}).getResult(0);
 
     return filledTensor;
+}
+
+mlir::RankedTensorType MLIRPrinter::computeConv2DOutputType(
+    mlir::Value input,
+    mlir::Value weight,
+    mlir::DenseArrayAttr stride,
+    mlir::DenseArrayAttr pad,
+    mlir::DenseArrayAttr dilation,
+    mlir::Type accType) {
+
+    MSG("Computing conv2d output type...\n");
+    auto inputType =  mlir::dyn_cast<mlir::RankedTensorType>(input.getType());
+    auto weightType = mlir::dyn_cast<mlir::RankedTensorType>(weight.getType());
+
+    auto padValues = pad.getData();
+    auto strideValues = stride.getData();
+    auto dilationValues = dilation.getData();
+
+    if (!inputType || !weightType) {
+      return mlir::RankedTensorType::get({}, accType);
+    }
+
+    auto inputShape = inputType.getShape();
+    auto weightShape = weightType.getShape();
+
+    int64_t N = inputShape[0];      LOG("N = {}\n", N);
+    int64_t C_in = inputShape[1];   LOG("C = {}\n", C_in);
+    int64_t H_in = inputShape[2];   LOG("H = {}\n", H_in);
+    int64_t W_in = inputShape[3];   LOG("W = {}\n", W_in);
+
+    int64_t C_out = weightShape[0]; LOG("C_out = {}\n", C_out);
+    int64_t K_h = weightShape[2];   LOG("K_h = {}\n", K_h);
+    int64_t K_w = weightShape[3];   LOG("K_w = {}\n", K_w);
+
+    auto strSz = strideValues.size();
+    int64_t stride_h = strSz > 0 ? strideValues[0] : 1; LOG("stride_h = {}\n", stride_h);
+    if (!stride_h) {
+        stride_h = 1;
+    }
+    int64_t stride_w = strSz > 1 ? strideValues[1] : 1; LOG("stride_w = {}\n", stride_w);
+    if (!stride_w) {
+        stride_w = 1;
+    }
+
+
+    auto dilationSz = dilationValues.size();
+    int64_t dilation_h = dilationSz > 0 ? dilationValues[0] : 1; LOG("dilation_h = {}\n", dilation_h);
+    int64_t dilation_w = dilationSz > 1 ? dilationValues[1] : 1; LOG("dilation_h = {}\n", dilation_w);
+
+    auto padSz = padValues.size();
+    int64_t pad_top =    padSz > 0 ? padValues[0] : 0;
+    int64_t pad_bottom = padSz > 1 ? padValues[1] : 0;
+    int64_t pad_left =   padSz > 2 ? padValues[2] : 0;
+    int64_t pad_right =  padSz > 3 ? padValues[3] : 0;
+
+    int64_t H_out = (H_in + pad_top + pad_bottom - dilation_h * (K_h - 1) - 1) / stride_h + 1;
+    int64_t W_out = (W_in + pad_left + pad_right - dilation_w * (K_w - 1) - 1) / stride_w + 1;
+
+    llvm::SmallVector<int64_t> outputShape = {N, C_out, H_out, W_out};
+    auto elementType = inputType.getElementType();
+
+    MSG("Finished computing conv2d output\n");
+    return mlir::RankedTensorType::get(outputShape, elementType);
 }
 } // namespace Bebra::MLIR

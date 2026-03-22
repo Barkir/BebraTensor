@@ -95,7 +95,11 @@ private: // mlir-specific
     mlir::LogicalResult compileToLLVM(mlir::ModuleOp module, llvm::raw_string_ostream& stream);
     mlir::DenseI64ArrayAttr getDenseI64ArrayAttrFromValue(mlir::Value value);
     mlir::RankedTensorType broadCastType(mlir::RankedTensorType type, size_t toRank);
+    mlir::RankedTensorType computeConv2DOutputType(mlir::Value input, mlir::Value weight,
+                                                                mlir::DenseArrayAttr stride, mlir::DenseArrayAttr pad,
+                                                                mlir::DenseArrayAttr dilation, mlir::Type accType);
     llvm::SmallVector<mlir::Value> collectReturnValues(const Core::BebraGraph& graph);
+
 
     llvm::SmallVector<mlir::Type> createInputTypes(const Core::BebraGraph& graph);
     llvm::SmallVector<mlir::Type> createOutputTypes(const Core::BebraGraph& graph);

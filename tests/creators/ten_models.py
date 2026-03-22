@@ -108,55 +108,102 @@ def create_gemm_classifier():
 # 3. Reshape + MatMul (Multi-layer Perceptron)
 # ============================================================
 def create_reshape_matmul():
-    """MLP с явным reshape для flatten операции"""
+    """MLP с явным reshape для совместимости с tosa.matmul (3D тензоры)"""
+    import numpy as np
+    from onnx import helper, TensorProto, numpy_helper, save
 
+    # Вход: [1, 1, 28, 28]
     input_x = helper.make_tensor_value_info('input', TensorProto.FLOAT, [1, 1, 28, 28])
 
-    # Flatten: [1, 1, 28, 28] -> [1, 784]
+    # === Flatten: [1, 1, 28, 28] -> [1, 784] ===
     flatten_shape = np.ascontiguousarray([1, 784], dtype=np.int64)
     flatten_shape_tensor = numpy_helper.from_array(flatten_shape, name='flatten_shape')
-
     flatten_node = helper.make_node(
         'Reshape', inputs=['input', 'flatten_shape'], outputs=['flattened']
     )
 
-    # Dense layer
+    # === Слой 1: Подготовка к 3D MatMul ===
+    # Веса ONNX: [out, in] = [256, 784]. Для TOSA нужно [B, K, N] = [1, 784, 256]
     w1 = np.ascontiguousarray(np.random.randn(256, 784).astype(np.float32))
+    w1_t = w1.T  # Транспонируем: [784, 256]
+    w1_3d = w1_t.reshape(1, 784, 256)  # Добавляем батч: [1, 784, 256]
+
+    # Bias должен соответствовать выходу MatMul: [1, 1, 256]
     b1 = np.ascontiguousarray(np.random.randn(256).astype(np.float32))
+    b1_3d = b1.reshape(1, 1, 256)
 
-    w1_tensor = numpy_helper.from_array(w1, name='w1')
-    b1_tensor = numpy_helper.from_array(b1, name='b1')
+    w1_tensor = numpy_helper.from_array(w1_3d, name='w1')
+    b1_tensor = numpy_helper.from_array(b1_3d, name='b1')
 
-    mm1_node = helper.make_node(
-        'MatMul', inputs=['flattened', 'w1'], outputs=['mm1_out']
+    # Reshape перед умножением: [1, 784] -> [1, 1, 784]
+    input_shape_1 = np.ascontiguousarray([1, 1, 784], dtype=np.int64)
+    input_shape_1_tensor = numpy_helper.from_array(input_shape_1, name='input_shape_1')
+    reshape_in1_node = helper.make_node(
+        'Reshape', inputs=['flattened', 'input_shape_1'], outputs=['input_3d']
     )
+
+    # MatMul: [1, 1, 784] @ [1, 784, 256] -> [1, 1, 256]
+    mm1_node = helper.make_node(
+        'MatMul', inputs=['input_3d', 'w1'], outputs=['mm1_out']
+    )
+
     add1_node = helper.make_node(
         'Add', inputs=['mm1_out', 'b1'], outputs=['dense1_out']
     )
     act1_node = helper.make_node('Relu', inputs=['dense1_out'], outputs=['act1_out'])
 
-    # Выходной слой
+    # === Слой 2: Подготовка к 3D MatMul ===
+    # Веса ONNX: [10, 256]. Для TOSA нужно [1, 256, 10]
     w2 = np.ascontiguousarray(np.random.randn(10, 256).astype(np.float32))
+    w2_t = w2.T  # [256, 10]
+    w2_3d = w2_t.reshape(1, 256, 10)  # [1, 256, 10]
+
+    # Bias: [1, 1, 10]
     b2 = np.ascontiguousarray(np.random.randn(10).astype(np.float32))
+    b2_3d = b2.reshape(1, 1, 10)
 
-    w2_tensor = numpy_helper.from_array(w2, name='w2')
-    b2_tensor = numpy_helper.from_array(b2, name='b2')
+    w2_tensor = numpy_helper.from_array(w2_3d, name='w2')
+    b2_tensor = numpy_helper.from_array(b2_3d, name='b2')
 
-    mm2_node = helper.make_node('MatMul', inputs=['act1_out', 'w2'], outputs=['output_raw'])
-    add2_node = helper.make_node('Add', inputs=['output_raw', 'b2'], outputs=['output'])
+    # Reshape перед умножением: [1, 256] -> [1, 1, 256]
+    # (act1_out имеет форму [1, 1, 256] после Add, но для явности можно добавить reshape)
+    # Если Add сохранил 3D, этот ресайп может быть опущен, но для надежности оставим
+    input_shape_2 = np.ascontiguousarray([1, 1, 256], dtype=np.int64)
+    input_shape_2_tensor = numpy_helper.from_array(input_shape_2, name='input_shape_2')
+    reshape_in2_node = helper.make_node(
+        'Reshape', inputs=['act1_out', 'input_shape_2'], outputs=['input_3d_2']
+    )
+
+    # MatMul: [1, 1, 256] @ [1, 256, 10] -> [1, 1, 10]
+    mm2_node = helper.make_node('MatMul', inputs=['input_3d_2', 'w2'], outputs=['output_raw'])
+    add2_node = helper.make_node('Add', inputs=['output_raw', 'b2'], outputs=['output_3d'])
+
+    # Финальный Reshape: [1, 1, 10] -> [1, 10] (классический выход)
+    final_shape = np.ascontiguousarray([1, 10], dtype=np.int64)
+    final_shape_tensor = numpy_helper.from_array(final_shape, name='final_shape')
+    final_reshape_node = helper.make_node(
+        'Reshape', inputs=['output_3d', 'final_shape'], outputs=['output']
+    )
 
     output = helper.make_tensor_value_info('output', TensorProto.FLOAT, [1, 10])
 
     graph = helper.make_graph(
-        [flatten_node, mm1_node, add1_node, act1_node, mm2_node, add2_node],
-        'reshape_matmul_mlp',
+        [flatten_node, reshape_in1_node, mm1_node, add1_node, act1_node,
+         reshape_in2_node, mm2_node, add2_node, final_reshape_node],
+        'reshape_matmul_mlp_3d',
         [input_x], [output],
-        initializer=[flatten_shape_tensor, w1_tensor, b1_tensor, w2_tensor, b2_tensor]
+        initializer=[flatten_shape_tensor, input_shape_1_tensor, w1_tensor, b1_tensor,
+                     input_shape_2_tensor, w2_tensor, b2_tensor, final_shape_tensor]
     )
 
     model = helper.make_model(graph, opset_imports=[helper.make_opsetid("", 15)])
-    onnx.save(model, './tiny_onnx/03_reshape_matmul.onnx')
-    print("✓ 03_reshape_matmul.onnx создан")
+
+    # Валидация
+    from onnx.checker import check_model
+    check_model(model)
+
+    save(model, './tiny_onnx/03_reshape_matmul_3d.onnx')
+    print("✓ 03_reshape_matmul_3d.onnx создан")
 
 
 # ============================================================
