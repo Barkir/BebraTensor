@@ -16,19 +16,20 @@ void BebraGraph::convertOnnxToBebraGraph(const onnx::GraphProto& graph) {
     convertOnnxToBebraOutput(graph);
     convertOnnxToBebraNode(graph);
 
-// =====================================
+    // =====================================
 
     // countOutputShapes();
 }
 
 void BebraGraph::countOutputShapes() {
     for (auto&& node : nodes_) {
-        std::visit([this](auto& op) {
-            std::cout << "counting output shape of op" << op.getOpType() << "\n";
-            op.countOutputShape(*this);
-        },
+        std::visit(
+            [this](auto& op) {
+                std::cout << "counting output shape of op" << op.getOpType() << "\n";
+                op.countOutputShape(*this);
+            },
 
-        node.op_);
+            node.op_);
     }
 }
 

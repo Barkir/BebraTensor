@@ -10,19 +10,19 @@
 #include "mlir/IR/TypeUtilities.h"
 #include <optional>
 
-#include "mlir/Pass/PassManager.h"
-#include "mlir/Transforms/Passes.h"
-#include "mlir/Dialect/Func/Transforms/Passes.h"
-#include "mlir/Conversion/TosaToArith/TosaToArith.h"
-#include "mlir/Conversion/TosaToLinalg/TosaToLinalg.h"
-#include "mlir/Conversion/SCFToControlFlow/SCFToControlFlow.h"
 #include "mlir/Conversion/ArithToLLVM/ArithToLLVM.h"
 #include "mlir/Conversion/FuncToLLVM/ConvertFuncToLLVMPass.h"
+#include "mlir/Conversion/SCFToControlFlow/SCFToControlFlow.h"
+#include "mlir/Conversion/TosaToArith/TosaToArith.h"
+#include "mlir/Conversion/TosaToLinalg/TosaToLinalg.h"
+#include "mlir/Dialect/Func/Transforms/Passes.h"
+#include "mlir/Pass/PassManager.h"
 #include "mlir/Target/LLVMIR/Dialect/LLVMIR/LLVMToLLVMIRTranslation.h"
-
+#include "mlir/Transforms/Passes.h"
 
 #include "bebra/core/BebraErr.hpp"
 #include "bebra/ops/BebraOperators.hpp"
+#include "bebra/core/BebraLog.hpp"
 
 namespace Bebra::Core {
 class BebraGraph;
@@ -49,12 +49,15 @@ public: // helpers
 public: // mlir-specific methods
     mlir::OwningOpRef<mlir::ModuleOp> createModule();
     std::optional<mlir::Value> getSSA(const std::string& val_name) {
+        LOG("Getting SSA of name: {}\n", val_name);
         auto&& val = ssa_map_.find(val_name);
 
         if (val != ssa_map_.end()) {
+            LOG("Found SSA of name {}\n", val_name);
             return std::optional<mlir::Value>(val->second);
         }
 
+        LOG("Not found SSA of name {}\n", val_name);
         return std::nullopt;
         // throw Core::BebraErr("can't find ssa with such name " + val_name + "!");
     }
@@ -64,6 +67,10 @@ public: // mlir-specific methods
         // // std::cout << val << "\n";
         Core::BebraGreen("Setting ssa " + val_name);
         ssa_map_[val_name] = std::move(val);
+    }
+
+    void setType(const std::string& val_name, mlir::Type type) {
+        type_map_[val_name] = type;
     }
 
     std::optional<mlir::Type> getType(const std::string& name) {
@@ -79,10 +86,19 @@ private: // mlir-specific
     void loadAllNeededDialects();
     mlir::RankedTensorType createTensorType(const Core::BebraTensor& tensor);
     mlir::RankedTensorType createDynamicTensorType(mlir::Value& tensor);
+    mlir::RankedTensorType createDynamicTensorType(size_t ndims, mlir::Type eltype);
+    mlir::RankedTensorType createDynamicTensorType(mlir::Value& tensor, size_t ndims);
+    mlir::UnrankedTensorType createUnrankedTensorType(mlir::Type eltype);
+    mlir::UnrankedTensorType createUnrankedTensorType(mlir::Value& tensor);
     mlir::Value createFilledTensor(mlir::RankedTensorType type, mlir::Value sourceTensor);
     mlir::Type getElementType(Core::BebraType type);
     mlir::LogicalResult compileToLLVM(mlir::ModuleOp module, llvm::raw_string_ostream& stream);
     mlir::DenseI64ArrayAttr getDenseI64ArrayAttrFromValue(mlir::Value value);
+    mlir::RankedTensorType broadCastType(mlir::RankedTensorType type, size_t toRank);
+    llvm::SmallVector<mlir::Value> collectReturnValues(const Core::BebraGraph& graph);
+
+    llvm::SmallVector<mlir::Type> createInputTypes(const Core::BebraGraph& graph);
+    llvm::SmallVector<mlir::Type> createOutputTypes(const Core::BebraGraph& graph);
 
 private: // Visitors
     void Visit(const Ops::OpVoid& node);

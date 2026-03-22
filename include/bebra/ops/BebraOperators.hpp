@@ -50,7 +50,7 @@ const std::vector<std::string> getAttrsString() const {
     std::vector<int64_t> kernel_shape;
     int64_t group = int64_t(1);
     std::vector<int64_t> dilations = std::vector<int64_t>({1, 1});
-    std::vector<int64_t> pads = std::vector<int64_t>({0, 0});
+    std::vector<int64_t> pads = std::vector<int64_t>({0, 0, 0, 0});
     std::vector<int64_t> strides = std::vector<int64_t>({1, 1});
     std::string auto_pad = std::string("NOTSET");
 

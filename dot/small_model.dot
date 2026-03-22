@@ -1,0 +1,21 @@
+digraph{
+node0x2f42e520["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+tensorinput_a[label=input_a, shape=cylinder, style=filled, fillcolor="#A45E72"]
+tensorinput_a->node0x2f42e520
+tensorinput_b[label=input_b, shape=cylinder, style=filled, fillcolor="#A45E72"]
+tensorinput_b->node0x2f42e520
+tensorafter_add[label=after_add, shape=cylinder, style=filled, fillcolor="#A45E72"]
+node0x2f42e520->tensorafter_add
+node0x2f42e660["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+tensorafter_add[label=after_add, shape=cylinder, style=filled, fillcolor="#A45E72"]
+tensorafter_add->node0x2f42e660
+tensorafter_relu[label=after_relu, shape=cylinder, style=filled, fillcolor="#A45E72"]
+node0x2f42e660->tensorafter_relu
+node0x2f42e7a0["label"="{Mul}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+tensorafter_relu[label=after_relu, shape=cylinder, style=filled, fillcolor="#A45E72"]
+tensorafter_relu->node0x2f42e7a0
+tensorconst_scale[label=const_scale, shape=cylinder, style=filled, fillcolor="#A45E72"]
+tensorconst_scale->node0x2f42e7a0
+tensoroutput[label=output, shape=cylinder, style=filled, fillcolor="#A45E72"]
+node0x2f42e7a0->tensoroutput
+}

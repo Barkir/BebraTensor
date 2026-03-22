@@ -7,6 +7,7 @@
 
 #include "bebra/core/BebraErr.hpp"
 #include "bebra/core/BebraType.hpp"
+#include "bebra/core/BebraLog.hpp"
 #include "mlir/IR/BuiltinTypes.h"
 #include "onnx_proto/onnx.proto3.pb.h"
 
@@ -81,32 +82,40 @@ public: // helper methods
     void assignDataByType(const onnx::TensorProto& tensor, BebraType t) {
         switch (t) {
             case BebraType::FLOAT: {
+                MSG("ASSIGNING FLOAT DATA\n");
                 auto dfloat = tensor.float_data();
                 auto nbytes = tensor.float_data_size() * sizeof(float);
+                LOG("BYTES IN DSIZE: {}\n", nbytes);
                 data_.resize(nbytes);
                 std::memcpy(data_.data(), dfloat.data(), nbytes);
                 break;
             }
 
             case BebraType::DOUBLE: {
+                MSG("ASSIGNING DOUBLE DATA\n");
                 auto ddouble = tensor.double_data();
                 auto nbytes = tensor.double_data_size() * sizeof(double);
+                LOG("BYTES IN DSIZE: {}\n", nbytes);
                 data_.resize(nbytes);
                 std::memcpy(data_.data(), ddouble.data(), nbytes);
                 break;
             }
 
             case BebraType::INT64: {
+                MSG("ASSIGNING INT64 DATA\n");
                 auto dint64 = tensor.int64_data();
                 auto nbytes = tensor.int64_data_size() * sizeof(int64_t);
+                LOG("BYTES IN DSIZE: {}", nbytes);
                 data_.resize(nbytes);
                 std::memcpy(data_.data(), dint64.data(), nbytes);
                 break;
             }
 
             case BebraType::INT32: {
+                MSG("ASSIGNING INT32 DATA\n");
                 auto dint32 = tensor.int32_data();
                 auto nbytes = tensor.int32_data_size() * sizeof(int32_t);
+                LOG("BYTES IN DSIZE: {}\n", nbytes);
                 data_.resize(nbytes);
                 std::memcpy(data_.data(), dint32.data(), nbytes);
                 break;
@@ -118,6 +127,11 @@ public: // helper methods
         }
         if (data_.empty()) {
             BebraWarn("data_ is empty after assignment !!! ");
+            MSG("Trying to get raw_data");
+            auto data_raw = tensor.raw_data();
+            auto nbytes = data_raw.size();
+            data_.resize(nbytes);
+            std::memcpy(data_.data(), data_raw.data(), nbytes);
         }
     }
 };

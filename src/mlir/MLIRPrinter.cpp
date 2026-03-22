@@ -13,17 +13,20 @@
 #include "bebra/core/BebraTensor.hpp"
 #include "bebra/core/BebraType.hpp"
 #include "bebra/mlir/MLIRPrinter.hpp"
+#include "bebra/core/BebraLog.hpp"
 
 #include <iostream>
 
 namespace Bebra::MLIR {
 
 void MLIRPrinter::Visit(const Ops::OpVoid& node) {
-    std::cout << "void" << "\n";
+    MSG("VOID\n");
+
+    MSG("VISITED VOID\n");
 }
 
 void MLIRPrinter::Visit(const Ops::OpConv& node) {
-    std::cout << "conv" << "\n";
+    MSG("CONV\n");
 
     // inputs
     auto input = getSSA(node.input);
@@ -35,13 +38,10 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     if (!bias) {
         Core::BebraWarn("no bias provided + " + node.bias);
     }
-
     auto weight = getSSA(node.weight);
     if (!weight) {
         Core::BebraWarn("no weight provided + " + node.weight);
     }
-
-    std::cout << "got ssa\n";
 
     // attrs
     auto kernel_shape = node.kernel_shape;
@@ -57,31 +57,55 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     }
     auto dilations = node.dilations;
 
-    auto stridesDenseAttr = builder_.getI64TensorAttr(strides);
-    auto dilationsDenseAttr = builder_.getI64TensorAttr(dilations);
+    auto stridesDenseAttr = builder_.getDenseI64ArrayAttr(strides);
+    auto dilationsDenseAttr = builder_.getDenseI64ArrayAttr(dilations);
+    auto padsDenseAttr = builder_.getDenseI64ArrayAttr(pads);
     std::cout << "got tensor attrs for strides and dilations for builder\n";
 
     auto outtype = createDynamicTensorType(*input);
-    auto filledTensor = createFilledTensor(outtype, *input);
+    auto eltype = outtype.getElementType();
+    auto accTypeAttr = mlir::TypeAttr::get(eltype);
 
-    // std::cout << filledTensor << "\n";
-    // counting output
-    auto output = builder_.create<mlir::linalg::Conv2DNchwFchwOp>(builder_.getUnknownLoc(),
+    if (!bias) {
+        auto zeroAttr = builder_.getZeroAttr(eltype);
+        auto biasType = createDynamicTensorType(1, eltype);
+        auto denseAttr = mlir::DenseElementsAttr::get(biasType, zeroAttr);
+
+        bias = builder_.create<mlir::tosa::ConstOp>(
+            builder_.getUnknownLoc(),
+            biasType,
+            denseAttr
+        ).getResult();
+    }
+
+    Core::BebraWarn("==================");
+    llvm::outs() << "input_type = " << (*input).getType() << "\n";
+    llvm::outs() << "weights_type =" << (*weight).getType() << "\n";
+    llvm::outs() << "bias_type =" << (*bias).getType() << "\n";
+    llvm::outs() <<  "strides_type" << stridesDenseAttr.getElementType() << "\n";
+    llvm::outs() <<  "dilations_type" << dilationsDenseAttr.getElementType() << "\n";
+    llvm::outs() <<  "pads_type = " << padsDenseAttr.getElementType() << "\n";
+    llvm::outs() <<  "outtype = " << outtype << "\n";
+    Core::BebraWarn("==================");
+
+    auto output = builder_.create<mlir::tosa::Conv2DOp>(builder_.getUnknownLoc(),
                                                                   outtype,
-                                                                  mlir::ValueRange{*input, *weight},
-                                                                  mlir::ValueRange{filledTensor}, // FIXME -
+                                                                  *input,
+                                                                  *weight,
+                                                                  *bias,
+                                                                  padsDenseAttr,
                                                                   stridesDenseAttr,
-                                                                  dilationsDenseAttr
-
-    ).getResult(0);
+                                                                  dilationsDenseAttr,
+                                                                  accTypeAttr
+    );
     std::cout << "created output\n";
 
     setSSA(node.output, output);
-    std::cout << "visited conv" << "\n";
+    MSG("VISITED CONV\n");
 }
 
 void MLIRPrinter::Visit(const Ops::OpGemm& node) {
-    std::cout << "gemm" << "\n";
+    MSG("GEMM\n");
 
     // inputs
     auto input_a = getSSA(node.input_a);
@@ -93,14 +117,13 @@ void MLIRPrinter::Visit(const Ops::OpGemm& node) {
         Core::BebraWarn("No input_a in gemm: " + node.input_a);
     }
 
-    // attrs
-
-    // output
-    // auto output =
+    MSG("VISITED GEMM\n");
 }
 
 void MLIRPrinter::Visit(const Ops::OpAdd& node) {
-    std::cout << "add" << "\n";
+    MSG("ADD\n");
+    mlir::Value output;
+
     auto lhs = getSSA(node.input_1);
     if (!lhs) {
         Core::BebraWarn("no lhs provided in OpAdd: " + node.input_1);
@@ -110,45 +133,65 @@ void MLIRPrinter::Visit(const Ops::OpAdd& node) {
         Core::BebraWarn("no rhs provided in OpAdd:" + node.input_2);
     }
 
-    auto fastmath = mlir::arith::FastMathFlagsAttr::get(builder_.getContext(), mlir::arith::FastMathFlags::none);
+    auto ltype = mlir::dyn_cast<mlir::RankedTensorType>((*lhs).getType());
+    auto rtype = mlir::dyn_cast<mlir::RankedTensorType>((*rhs).getType());
 
-    mlir::Type type = (*lhs).getType();
+    mlir::Value processedRhs = *rhs;
 
-    mlir::Value output = builder_.create<mlir::arith::AddFOp>(builder_.getUnknownLoc(), type, *lhs, *rhs, fastmath);
+    // broadcasting
+    if (ltype.getRank() != rtype.getRank()) {
+        Core::BebraWarn("Ranks are not equal in add, choosing max rank");
 
+        auto maxRank = std::max(ltype.getRank(), rtype.getRank());
+        auto newType = broadCastType(rtype, maxRank);
+
+        processedRhs = builder_.create<mlir::tosa::ReshapeOp>(
+            builder_.getUnknownLoc(),
+            newType,
+            *rhs,
+            builder_.getDenseI64ArrayAttr(newType.getShape())
+        ).getResult();
+    }
+
+    Core::BebraWarn("==================");
+    llvm::outs() << "lhs_type = " << ltype << "\n";
+    llvm::outs() << "rhs_type = " << processedRhs.getType() << "\n";
+    llvm::outs() << "output_type = " << ltype << "\n";
+    Core::BebraWarn("==================");
+
+    output = builder_.create<mlir::tosa::AddOp>(builder_.getUnknownLoc(),
+                                                            ltype, *lhs, processedRhs);
     setSSA(node.output, output);
-    std::cerr << "visited add" << "\n";
+    MSG("VISITED ADD\n");
+    return;
 }
 
+
 void MLIRPrinter::Visit(const Ops::OpRelu& node) {
-    std::cout << "relu" << std::endl;
+    MSG("RELU\n");
 
     auto input = getSSA(node.input);
     if (!input) {
         Core::BebraWarn("no input at relu: " + node.input);
     }
 
-    auto outtype = createDynamicTensorType(*input);
+    auto outtype = (*input).getType();
 
-    mlir::Value zero = builder_.create<mlir::arith::ConstantOp>(
+    auto output = builder_.create<mlir::tosa::ClampOp>(
     builder_.getUnknownLoc(),
-    outtype.getElementType(),
-    builder_.getZeroAttr(outtype.getElementType()));
-
-
-    auto output = builder_.create<mlir::arith::MaximumFOp>(
-        builder_.getUnknownLoc(),
-        outtype,
-        zero,
-        *input
-    );
+    outtype,
+    *input,
+    builder_.getI64IntegerAttr(0),
+    builder_.getI64IntegerAttr(std::numeric_limits<int32_t>::max()),
+    builder_.getF32FloatAttr(0.0f),
+    builder_.getF32FloatAttr(std::numeric_limits<float>::max()));
 
     setSSA(node.output, output);
-    std::cout << "visited relu" << "\n";
+    MSG("VISITED RELU\n");
 }
 
 void MLIRPrinter::Visit(const Ops::OpMul& node) {
-    std::cout << "mul" << "\n";
+    MSG("MUL\n");
     auto lhs = getSSA(node.input_1);
     if (!lhs) {
         Core::BebraWarn("no lhs provided in OpMul: " + node.input_1);
@@ -158,18 +201,44 @@ void MLIRPrinter::Visit(const Ops::OpMul& node) {
         Core::BebraWarn("no rhs provided in OpMul:" + node.input_2);
     }
 
-    auto fastmath = mlir::arith::FastMathFlagsAttr::get(builder_.getContext(), mlir::arith::FastMathFlags::none);
+    auto ltype = mlir::dyn_cast<mlir::RankedTensorType>((*lhs).getType());
+    auto rtype = mlir::dyn_cast<mlir::RankedTensorType>((*rhs).getType());
 
-    mlir::Type type = (*lhs).getType();
+    mlir::Value processedRhs = *rhs;
 
-    mlir::Value output = builder_.create<mlir::arith::MulFOp>(builder_.getUnknownLoc(), type, *lhs, *rhs, fastmath);
+    // broadcasting
+    if (ltype.getRank() != rtype.getRank()) {
+        Core::BebraWarn("Ranks are not equal in add, choosing max rank");
+
+        auto maxRank = std::max(ltype.getRank(), rtype.getRank());
+        auto newType = broadCastType(rtype, maxRank);
+
+        processedRhs = builder_.create<mlir::tosa::ReshapeOp>(
+            builder_.getUnknownLoc(),
+            newType,
+            *rhs,
+            builder_.getDenseI64ArrayAttr(newType.getShape())
+        ).getResult();
+    }
+
+
+    auto outtype = (*lhs).getType();
+    mlir::Value shift;
+
+    mlir::Value output = builder_.create<mlir::tosa::MulOp>(
+        builder_.getUnknownLoc(),
+        outtype,
+        *lhs,
+        processedRhs,
+        shift
+    );
 
     setSSA(node.output, output);
-    std::cerr << "visited mul" << "\n";
+    MSG("VISITED MUL\n");
 }
 
 void MLIRPrinter::Visit(const Ops::OpMatMul& node) {
-    std::cout << "matmul" << "\n";
+    MSG("MATMUL\n");
 
     auto input_a = getSSA(node.input_a);
     if (!input_a) {
@@ -184,18 +253,20 @@ void MLIRPrinter::Visit(const Ops::OpMatMul& node) {
     auto outtype = createDynamicTensorType(*input_a);
     mlir::Value filledTensor = createFilledTensor(outtype, *input_a);
 
-    auto output = builder_.create<mlir::linalg::MatmulOp>(
+    auto output = builder_.create<mlir::tosa::MatMulOp>(
         builder_.getUnknownLoc(),
-        mlir::ValueRange{*input_a, *input_b},
-        mlir::ValueRange{filledTensor}
-    ).getResult(0);
+        outtype,
+        *input_a,
+        *input_b
+    );
+
 
     setSSA(node.output, output);
-    std::cout << "visited matmul" << "\n";
+    MSG("VISITED MATMUL\n");
 }
 
 void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
-    std::cout << "maxpool" << " \n";
+    MSG("MAXPOOL\n");
     auto input = getSSA(node.input);
     if (!input) {
         Core::BebraWarn("no input at maxpool: " + node.input);
@@ -207,6 +278,7 @@ void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
     if (kernel_shape.size() != 2) {
         throw Core::BebraErr("Only 2D MaxPool is supported now...");
     }
+
     std::string auto_pad = node.auto_pad;
     int64_t ceil_mode = node.ceil_mode;
     std::vector<int64_t> dilations = node.dilations;
@@ -221,7 +293,6 @@ void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
     auto padsAttr = builder_.getDenseI64ArrayAttr(pads);
 
     auto outtype = createDynamicTensorType(*input);
-    mlir::Value filledTensor = createFilledTensor(outtype, *input);
     // output
     std::cout << "creating output" << std::endl;
     auto output = builder_.create<mlir::tosa::MaxPool2dOp>(
@@ -234,15 +305,16 @@ void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
     );
 
     setSSA(node.output, output);
-    std::cout << "visited maxpool" << std::endl;
+    MSG("VISITED MAXPOOL\n");
 }
 
 void MLIRPrinter::Visit(const Ops::OpReduceMean& node) {
-    std::cout << "reducemean" << "\n";
+    MSG("REDUCEMEAN\n");
+    MSG("VISITED REDUCEMEAN\n");
 }
 
 void MLIRPrinter::Visit(const Ops::OpReshape& node) {
-    std::cout << "reshape" << "\n";
+    MSG("RESHAPE\n");
     auto input = getSSA(node.input);
     if (!input) {
         Core::BebraWarn("no input at reshape: " + node.input);
@@ -251,21 +323,34 @@ void MLIRPrinter::Visit(const Ops::OpReshape& node) {
     if (!shape) {
         Core::BebraWarn("no shape at reshape: " + node.shape);
     }
-    auto shapeDense = getDenseI64ArrayAttrFromValue(*shape);
+
+    llvm::errs() << "input = " << *input << "\n";
+    llvm::errs() << "shape = " << *shape << "\n";
+
+    // auto castedShape = mlir::dyn_cast<mlir::tosa::ConstOp>(shape);
+    // if (!castedShape) {
+        // Core::BebraErr("shape input is not defined in Reshape call! -> " + node.shape);
+    // }
+    // auto attr = castedShape.getValue();
+
+    auto shapeDense = getDenseI64ArrayAttrFromValue((*shape));
+    llvm::errs() << "Got dense array of shape: " << shapeDense << "\n";
+
     llvm::ArrayRef<int64_t> shapeData = shapeDense.asArrayRef();
+    mlir::RankedTensorType outtype;
 
     auto intype = (*input).getType();
+    llvm::errs() << "Got input type: " << intype << "\n";
+
     auto inCastType = mlir::dyn_cast<mlir::RankedTensorType>(intype);
     if (!inCastType) {
-        throw Core::BebraErr("no cast to ranked tensor type in reshape!");
+        auto inCastUnrankedType = mlir::dyn_cast<mlir::UnrankedTensorType>(intype);
+        outtype = mlir::RankedTensorType::get(shapeData, inCastUnrankedType.getElementType());
+    } else {
+        outtype = mlir::RankedTensorType::get(shapeData, inCastType.getElementType());
     }
 
-    auto outtype = mlir::RankedTensorType::get(shapeData, inCastType.getElementType());
-
-    // auto outtype = mlir::dyn_cast<mlir::RankedTensorType>(*getType(node.shape));
-    // if (!outtype) {
-    //     throw Core::BebraErr("Can't dyn_cast to ranked tensor type in OpReshape");
-    // }
+    llvm::errs() << "Got outtype: " << outtype << "\n";
 
     auto output = builder_.create<mlir::tosa::ReshapeOp>(
         builder_.getUnknownLoc(),
@@ -274,40 +359,49 @@ void MLIRPrinter::Visit(const Ops::OpReshape& node) {
         shapeDense
     );
 
+    llvm::errs() << "Got output:" << output << "\n";
     setSSA(node.output, output);
-    std::cout << "visited reshape" << "\n";
+    MSG("VISITED RESHAPE\n");
 }
 
 void MLIRPrinter::Visit(const Ops::OpSigmoid& node) {
-    std::cout << "sigmoid" << "\n";
+    MSG("SIGMOID\n");
+    MSG("VISITED SIGMOID\n");
 }
 
 void MLIRPrinter::Visit(const Ops::OpFlatten& node) {
-    std::cout << "flatten" << "\n";
+    MSG("FLATTEN\n");
+    MSG("VISITED FLATTEN\n");
 }
 
 void MLIRPrinter::Visit(const Core::BebraTensor& tensor) {
+    MSG("TENSOR\n");
     auto name = tensor.getName();
     std::cout << "got tensor name " << name << "\n";
     auto ssa = getSSA(name);
 
     if (!ssa) {
         Core::BebraWarn("SSA not set for tensor " + name);
-        mlir::RankedTensorType ttype = createTensorType(tensor);
+        mlir::RankedTensorType ttype;
+        if (auto knownType = getType(name)) {
+            if (auto castedType = mlir::dyn_cast<mlir::RankedTensorType>(*knownType)) {
+                ttype = castedType;
+            }
+        } else {
+            ttype = createTensorType(tensor);
+        }
 
         auto& data = tensor.data();
 
-        // std::cout << "tensor of type := " << ttype << " // data size := " << data.size() << "\n";
         auto denseAttr = mlir::DenseElementsAttr::get(ttype, llvm::ArrayRef(data));
-        denseAttr.dump();
 
-        mlir::Value ssa_val = builder_.create<mlir::arith::ConstantOp>(builder_.getUnknownLoc(), denseAttr);
+        mlir::Value ssa_val = builder_.create<mlir::tosa::ConstOp>(builder_.getUnknownLoc(), ttype, denseAttr);
         setSSA(name, ssa_val);
-        // // std::cout << "visited tensor " << name << " // -> " << ssa_val << "\n";
+        MSG("VISITED TENSOR\n");
         return;
     }
 
-    // // std::cout << "visited tensor " << name << ssa << "\n";
+    MSG("VISITED TENSOR\n");
     return;
 }
 
@@ -325,51 +419,55 @@ MLIRPrinter::MLIRPrinter(Core::BebraGraph& graph) : builder_(&context_) {
 void MLIRPrinter::dump(const std::string& filename, const std::string& dumped) {
     std::ofstream os(filename);
     os << dumped;
-
 }
-
-mlir::LogicalResult MLIRPrinter::compileToLLVM(mlir::ModuleOp module, llvm::raw_string_ostream& stream) {
-
-    mlir::OpPrintingFlags flags;
-    // stream << "===== START OF PIPELINE ====" << "\n";
-
-    mlir::PassManager pm(&context_);
-
-    pm.addNestedPass<mlir::func::FuncOp>(
-        mlir::tosa::createTosaInferShapesPass()
-    );
-
-    // pm.addPass(mlir::createCanonicalizerPass());
-    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaOptionalDecompositions());
-    pm.addPass(mlir::createCSEPass());
-    pm.addNestedPass<mlir::func::FuncOp>(
-        mlir::tosa::createTosaToLinalgNamed()
-    );
-    pm.addNestedPass<mlir::func::FuncOp>(
-        mlir::tosa::createTosaToLinalg()
-    );
-    pm.addNestedPass<mlir::func::FuncOp>(
-        mlir::tosa::createTosaToArith()
-    );
-    pm.addPass(mlir::createConvertSCFToCFPass());
-    pm.addPass(mlir::createConvertFuncToLLVMPass());
-    pm.addPass(mlir::createArithToLLVMConversionPass());
-
-    auto result = pm.run(module);
-    if (mlir::failed(result)) {
-        llvm::errs() << "Pass pipeline failed!\n";
-        return mlir::failure();
-    }
-
-    module.print(stream, flags);
-    return mlir::success();
-}
-
 
 void MLIRPrinter::generate(const Core::BebraGraph& graph, std::string& out_str) {
+    // loading needed dialects
+    // e.g: tosa, linalg, etc.
     loadAllNeededDialects();
+
+    // getting location
+    auto loc = builder_.getUnknownLoc();
+
+    // creating a module (to create a function then...)
     auto module = mlir::ModuleOp::create(mlir::UnknownLoc::get(&context_));
+
+    // setting insert point
     builder_.setInsertionPointToStart(module.getBody());
+
+    // then i create a void function, so i can run functional passes
+    // that's a temporary solution, of course i need to set
+    // inputs as the args and return output
+    auto inputTypes  = createInputTypes(graph);
+    auto outputTypes = createOutputTypes(graph);
+
+    auto funcType = mlir::FunctionType::get(&context_, inputTypes, outputTypes); // void main()
+    auto funcOp = builder_.create<mlir::func::FuncOp>(loc, "main", funcType);
+    auto* block = funcOp.addEntryBlock();
+    builder_.setInsertionPointToStart(block);
+
+    std::cout << "Checking types before creating FunctionType..." << std::endl;
+
+    for (auto t : inputTypes) {
+        if (!t) {
+            std::cerr << "CRITICAL: Found null input type!" << std::endl;
+            abort();
+        }
+        t.dump();
+    }
+
+    for (auto t : outputTypes) {
+        if (!t) {
+            std::cerr << "CRITICAL: Found null output type!" << std::endl;
+            abort();
+        }
+        t.dump();
+    }
+
+    std::cout << "Context pointer: " << builder_.getContext() << std::endl;
+
+    llvm::raw_string_ostream ss(out_str);
+    mlir::OpPrintingFlags flags;
 
     // initializing start SSA-values
     // this can be : inputs, weights and other stuff that we
@@ -394,18 +492,83 @@ void MLIRPrinter::generate(const Core::BebraGraph& graph, std::string& out_str) 
         std::visit([this](auto&& op) { Visit(op); }, node.op_);
     }
 
-    llvm::raw_string_ostream ss(out_str);
+    // collecting return values after we finished traversing
+    // graph
+    auto returnValues = collectReturnValues(graph);
+    builder_.create<mlir::func::ReturnOp>(loc, returnValues);
+
 
     auto result = compileToLLVM(module, ss);
     if (mlir::succeeded(result)) {
         Core::BebraGreen("successfully compiled model to llvm!");
-
-        // mlir::OpPrintingFlags flags;
-        // module.print(ss, flags);
     }
 }
 
 // ================= mlir-specific ==========================
+
+
+mlir::LogicalResult MLIRPrinter::compileToLLVM(mlir::ModuleOp module, llvm::raw_string_ostream& stream) {
+    MSG("Compiling to LLVM!\n");
+
+    stream << "===== BEFORE OPT ====" << "\n";
+
+    mlir::OpPrintingFlags flags;
+    module.print(stream, flags);
+
+    mlir::PassManager pm(&context_);
+    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaInferShapesPass());
+
+    pm.addPass(mlir::createCanonicalizerPass());
+    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaOptionalDecompositions());
+    pm.addPass(mlir::createCSEPass());
+
+    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToLinalgNamed());
+    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToLinalg());
+    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToArith());
+
+    pm.addPass(mlir::createConvertSCFToCFPass());
+    pm.addPass(mlir::createConvertFuncToLLVMPass());
+    pm.addPass(mlir::createArithToLLVMConversionPass());
+
+
+    stream << "===== AFTER OPT ====" << "\n";
+    auto result = pm.run(module);
+    if (mlir::failed(result)) {
+        llvm::errs() << "Pass pipeline failed!\n";
+        module.print(stream, flags);
+        return mlir::failure();
+    }
+
+    module.print(stream, flags);
+
+    return mlir::success();
+}
+
+llvm::SmallVector<mlir::Value> MLIRPrinter::collectReturnValues(const Core::BebraGraph& graph) {
+    llvm::SmallVector<mlir::Value, 4> returnValues;
+        for (auto&& outputName : graph.outputs_) {
+            auto val = getSSA(outputName);
+            if (!val) {
+                Core::BebraErr("Error: output value not found in return values: " + outputName);
+            }
+            llvm::errs() << "Got output:" << outputName << " : " << *val << "\n";
+            returnValues.push_back(*val);
+        }
+    return returnValues;
+}
+
+mlir::RankedTensorType MLIRPrinter::broadCastType(mlir::RankedTensorType type, size_t toRank) {
+    llvm::SmallVector<int64_t, 4> newShape(toRank, 1);
+    auto curShape = type.getShape();
+
+    auto curSize = curShape.size();
+    for (size_t i = 0; i < curSize; ++i) {
+        newShape[toRank - curSize + i] = curShape[i];
+    }
+
+    auto newType = mlir::RankedTensorType::get(newShape, type.getElementType());
+    return newType;
+}
 
 void MLIRPrinter::loadAllNeededDialects() {
     context_.loadDialect<mlir::arith::ArithDialect>();
@@ -417,7 +580,7 @@ void MLIRPrinter::loadAllNeededDialects() {
 
 mlir::DenseI64ArrayAttr MLIRPrinter::getDenseI64ArrayAttrFromValue(mlir::Value value) {
     auto defOp = value.getDefiningOp();
-    auto constOp = mlir::dyn_cast<mlir::arith::ConstantOp>(defOp);
+    auto constOp = mlir::dyn_cast<mlir::tosa::ConstOp>(defOp);
     if (!constOp) {
         std::cout << " ALERT! " << "\n";
         value.dump();
@@ -439,6 +602,51 @@ mlir::DenseI64ArrayAttr MLIRPrinter::getDenseI64ArrayAttrFromValue(mlir::Value v
 
     Core::BebraWarn("can't cast to denseI64 in getDenseI64ArrayAttrFromValue");
     return nullptr;
+}
+
+llvm::SmallVector<mlir::Type> MLIRPrinter::createInputTypes(const Core::BebraGraph& graph) {
+    MSG("Creating input types...\n");
+    auto inputs = graph.inputs_;
+    auto sz = inputs.size();
+    llvm::SmallVector<mlir::Type> typeVec;
+    typeVec.reserve(sz);
+
+    for (auto&& input : inputs) {
+        LOG("Got input {}\n", input);
+        auto tensor = graph.getTensor(input);
+        auto type = createTensorType(tensor);
+
+        llvm::errs() << "=========================" << "\n";
+        llvm::errs() << "Got input type - " << type << "\n";
+        llvm::errs() << "=========================" << "\n";
+
+        setType(input, type);
+        typeVec.push_back(type);
+
+    }
+    return typeVec;
+}
+
+llvm::SmallVector<mlir::Type> MLIRPrinter::createOutputTypes(const Core::BebraGraph& graph) {
+    MSG("Creating output types..\n.");
+    auto outputs = graph.outputs_;
+    auto sz = outputs.size();
+    llvm::SmallVector<mlir::Type> typeVec;
+    typeVec.reserve(sz);
+
+    for (auto&& output : outputs) {
+        LOG("Got output {}\n", output);
+        auto tensor = graph.getTensor(output);
+        auto type = createTensorType(tensor);
+
+        llvm::errs() << "=========================" << "\n";
+        llvm::errs() << "Got output type - " << type << "\n";
+        llvm::errs() << "=========================" << "\n";
+
+        setType(output, type);
+        typeVec.push_back(type);
+    }
+    return typeVec;
 }
 
 mlir::Type MLIRPrinter::getElementType(Core::BebraType type) {
@@ -476,14 +684,42 @@ mlir::RankedTensorType MLIRPrinter::createTensorType(const Core::BebraTensor& te
     return mlir::RankedTensorType::get(tensor.getShape(), elementType);
 }
 
+mlir::RankedTensorType MLIRPrinter::createDynamicTensorType(mlir::Value& tensor, size_t ndims) {
+    auto ttype = mlir::dyn_cast<mlir::RankedTensorType>(tensor.getType());
+    if (!ttype) {
+        throw Core::BebraErr("Value is not a RankedTensor while creating dynamic tensor...");
+    }
+    auto eltype = ttype.getElementType();
+    llvm::SmallVector<int64_t> shape(ndims, mlir::ShapedType::kDynamic);
+    return mlir::RankedTensorType::get(shape, eltype);
+}
 
+mlir::UnrankedTensorType MLIRPrinter::createUnrankedTensorType(mlir::Type eltype) {
+    return mlir::UnrankedTensorType::get(eltype);
+}
+
+mlir::UnrankedTensorType MLIRPrinter::createUnrankedTensorType(mlir::Value& tensor) {
+    auto type = tensor.getType();
+    if (auto casted = mlir::dyn_cast<mlir::RankedTensorType>(type)) {
+        return mlir::UnrankedTensorType::get(casted.getElementType());
+    } else if (auto castedUnranked = mlir::dyn_cast<mlir::UnrankedTensorType>(type)) {
+        return mlir::UnrankedTensorType::get(castedUnranked.getElementType());
+    }
+
+    return mlir::UnrankedTensorType::get(builder_.getI64Type());
+}
 mlir::RankedTensorType MLIRPrinter::createDynamicTensorType(mlir::Value& tensor) {
     auto ttype = mlir::dyn_cast<mlir::RankedTensorType>(tensor.getType());
     if (!ttype) {
         throw Core::BebraErr("Value is not a RankedTensor while creating dynamic tensor...");
     }
     auto ndims = ttype.getRank();
-    auto eltype = ttype.getElementType();;
+    auto eltype = ttype.getElementType();
+    llvm::SmallVector<int64_t> shape(ndims, mlir::ShapedType::kDynamic);
+    return mlir::RankedTensorType::get(shape, eltype);
+}
+
+mlir::RankedTensorType MLIRPrinter::createDynamicTensorType(size_t ndims, mlir::Type eltype) {
     llvm::SmallVector<int64_t> shape(ndims, mlir::ShapedType::kDynamic);
     return mlir::RankedTensorType::get(shape, eltype);
 }
@@ -519,5 +755,4 @@ mlir::Value MLIRPrinter::createFilledTensor(mlir::RankedTensorType type,
 
     return filledTensor;
 }
-
 } // namespace Bebra::MLIR

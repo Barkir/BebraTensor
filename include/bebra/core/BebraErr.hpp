@@ -2,8 +2,8 @@
 
 #pragma once
 
-#include "llvm/Support/raw_ostream.h"
 #include "BebraColors.hpp"
+#include "llvm/Support/raw_ostream.h"
 #include <iostream>
 #include <stdexcept>
 #include <string>

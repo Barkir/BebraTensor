@@ -93,7 +93,7 @@ OpVariant CreateOpConv (const onnx::NodeProto& node,
             auto it = attrs.find("pads");
             op.pads = (it != attrs.end())
                 ? it->second.getValRef<std::vector<int64_t>>()
-                : std::vector<int64_t>({0, 0});
+                : std::vector<int64_t>({0, 0, 0, 0});
         }
         {
             auto it = attrs.find("strides");
