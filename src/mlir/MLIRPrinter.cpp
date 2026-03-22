@@ -324,7 +324,14 @@ void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
     auto stridesAttr = builder_.getDenseI64ArrayAttr(strides);
     auto padsAttr = builder_.getDenseI64ArrayAttr(pads);
 
-    auto outtype = createDynamicTensorType(*input);
+    auto outtype = computeMaxPool2DOutputType(
+        *input,
+        kernelAttr,
+        stridesAttr,
+        padsAttr,
+        dilationsAttr
+    );
+    // auto outtype = createDynamicTensorType(*input);
     // output
     std::cout << "creating output" << std::endl;
     auto output = builder_.create<mlir::tosa::MaxPool2dOp>(
@@ -832,13 +839,13 @@ mlir::RankedTensorType MLIRPrinter::computeConv2DOutputType(
 
     auto dilationSz = dilationValues.size();
     int64_t dilation_h = dilationSz > 0 ? dilationValues[0] : 1; LOG("dilation_h = {}\n", dilation_h);
-    int64_t dilation_w = dilationSz > 1 ? dilationValues[1] : 1; LOG("dilation_h = {}\n", dilation_w);
+    int64_t dilation_w = dilationSz > 1 ? dilationValues[1] : 1; LOG("dilation_ц = {}\n", dilation_w);
 
     auto padSz = padValues.size();
-    int64_t pad_top =    padSz > 0 ? padValues[0] : 0;
-    int64_t pad_bottom = padSz > 1 ? padValues[1] : 0;
-    int64_t pad_left =   padSz > 2 ? padValues[2] : 0;
-    int64_t pad_right =  padSz > 3 ? padValues[3] : 0;
+    int64_t pad_left =   padSz > 0 ? padValues[0] : 0;
+    int64_t pad_right =  padSz > 1 ? padValues[1] : 0;
+    int64_t pad_top =    padSz > 2 ? padValues[2] : 0;
+    int64_t pad_bottom = padSz > 3 ? padValues[3] : 0;
 
     int64_t H_out = (H_in + pad_top + pad_bottom - dilation_h * (K_h - 1) - 1) / stride_h + 1;
     int64_t W_out = (W_in + pad_left + pad_right - dilation_w * (K_w - 1) - 1) / stride_w + 1;
@@ -849,4 +856,69 @@ mlir::RankedTensorType MLIRPrinter::computeConv2DOutputType(
     MSG("Finished computing conv2d output\n");
     return mlir::RankedTensorType::get(outputShape, elementType);
 }
+
+mlir::RankedTensorType MLIRPrinter::computeMaxPool2DOutputType(
+    mlir::Value input,
+    mlir::DenseArrayAttr kernel_size,
+    mlir::DenseArrayAttr stride,
+    mlir::DenseArrayAttr pad,
+    mlir::DenseArrayAttr dilation) {
+
+    MSG("Computing maxpool2d output type...\n");
+
+    auto inputType = mlir::dyn_cast<mlir::RankedTensorType>(input.getType());
+
+    if (!inputType) {
+        MSG("Error: Input type is not RankedTensorType\n");
+        return mlir::RankedTensorType::get({}, inputType ? inputType.getElementType() :
+               mlir::Float32Type::get(input.getContext()));
+    }
+
+    auto inputShape = inputType.getShape();
+    auto kernelValues = kernel_size.getData();
+    auto padValues = pad.getData();
+    auto strideValues = stride.getData();
+    auto dilationValues = dilation.getData();
+
+    int64_t N = inputShape[0];      LOG("N = {}\n", N);
+    int64_t C_in = inputShape[1];   LOG("C = {}\n", C_in);
+    int64_t H_in = inputShape[2];   LOG("H = {}\n", H_in);
+    int64_t W_in = inputShape[3];   LOG("W = {}\n", W_in);
+
+    auto kernelSz = kernelValues.size();
+    int64_t K_h = kernelSz > 0 ? kernelValues[0] : 1; LOG("K_h = {}\n", K_h);
+    int64_t K_w = kernelSz > 1 ? kernelValues[1] : 1; LOG("K_w = {}\n", K_w);
+
+    auto strSz = strideValues.size();
+    int64_t stride_h = strSz > 0 ? strideValues[0] : 1;
+    if (!stride_h) { stride_h = 1; } LOG("stride_h = {}\n", stride_h);
+
+    int64_t stride_w = strSz > 1 ? strideValues[1] : 1;
+    if (!stride_w) { stride_w = 1; } LOG("stride_w = {}\n", stride_w);
+
+    auto dilationSz = dilationValues.size();
+    int64_t dilation_h = dilationSz > 0 ? dilationValues[0] : 1; LOG("dilation_h = {}\n", dilation_h);
+    int64_t dilation_w = dilationSz > 1 ? dilationValues[1] : 1; LOG("dilation_w = {}\n", dilation_w);
+
+    auto padSz = padValues.size();
+    int64_t pad_left =   padSz > 0 ? padValues[0] : 0;
+    int64_t pad_right =  padSz > 1 ? padValues[1] : 0;
+    int64_t pad_top =    padSz > 2 ? padValues[2] : 0;
+    int64_t pad_bottom = padSz > 3 ? padValues[3] : 0;
+
+    int64_t H_out = (H_in + pad_top + pad_bottom - dilation_h * (K_h - 1) - 1) / stride_h + 1;
+    int64_t W_out = (W_in + pad_left + pad_right - dilation_w * (K_w - 1) - 1) / stride_w + 1;
+
+    int64_t C_out = C_in;
+
+    if (H_out < 0) H_out = mlir::ShapedType::kDynamic;
+    if (W_out < 0) W_out = mlir::ShapedType::kDynamic;
+
+    llvm::SmallVector<int64_t> outputShape = {N, C_out, H_out, W_out};
+    auto elementType = inputType.getElementType();
+
+    MSG("Finished computing maxpool2d output\n");
+    return mlir::RankedTensorType::get(outputShape, elementType);
+}
+
 } // namespace Bebra::MLIR

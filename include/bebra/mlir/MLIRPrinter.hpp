@@ -95,6 +95,11 @@ private: // mlir-specific
     mlir::LogicalResult compileToLLVM(mlir::ModuleOp module, llvm::raw_string_ostream& stream);
     mlir::DenseI64ArrayAttr getDenseI64ArrayAttrFromValue(mlir::Value value);
     mlir::RankedTensorType broadCastType(mlir::RankedTensorType type, size_t toRank);
+
+    mlir::RankedTensorType computeMaxPool2DOutputType (mlir::Value input, mlir::DenseArrayAttr kernel_size,
+                                                                    mlir::DenseArrayAttr stride, mlir::DenseArrayAttr pad,
+                                                                    mlir::DenseArrayAttr dilation);
+
     mlir::RankedTensorType computeConv2DOutputType(mlir::Value input, mlir::Value weight,
                                                                 mlir::DenseArrayAttr stride, mlir::DenseArrayAttr pad,
                                                                 mlir::DenseArrayAttr dilation, mlir::Type accType);
