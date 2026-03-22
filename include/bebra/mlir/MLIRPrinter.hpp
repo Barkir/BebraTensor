@@ -90,7 +90,7 @@ private: // mlir-specific
     mlir::RankedTensorType createDynamicTensorType(mlir::Value& tensor, size_t ndims);
     mlir::UnrankedTensorType createUnrankedTensorType(mlir::Type eltype);
     mlir::UnrankedTensorType createUnrankedTensorType(mlir::Value& tensor);
-    mlir::Value createFilledTensor(mlir::RankedTensorType type, mlir::Value sourceTensor);
+    mlir::Value createFilledTensor(mlir::RankedTensorType type);
     mlir::Type getElementType(Core::BebraType type);
     mlir::LogicalResult compileToLLVM(mlir::ModuleOp module, llvm::raw_string_ostream& stream);
     mlir::DenseI64ArrayAttr getDenseI64ArrayAttrFromValue(mlir::Value value);
@@ -101,8 +101,15 @@ private: // mlir-specific
                                                                     mlir::DenseArrayAttr dilation);
 
     mlir::RankedTensorType computeConv2DOutputType(mlir::Value input, mlir::Value weight,
-                                                                mlir::DenseArrayAttr stride, mlir::DenseArrayAttr pad,
-                                                                mlir::DenseArrayAttr dilation, mlir::Type accType);
+                                                                mlir::DenseArrayAttr kernel,
+                                                                mlir::DenseArrayAttr stride,
+                                                                mlir::DenseArrayAttr pad,
+                                                                mlir::DenseArrayAttr dilation,
+                                                                mlir::Type accType);
+
+    mlir::RankedTensorType computeMatMulOutputType(mlir::Value& input_a,
+                                                   mlir::Value& input_b);
+
     llvm::SmallVector<mlir::Value> collectReturnValues(const Core::BebraGraph& graph);
 
 

@@ -212,15 +212,15 @@ def create_reshape_matmul():
 def create_pooling_stages():
     """Различные типы pooling операций"""
 
-    input_x = helper.make_tensor_value_info('input', TensorProto.FLOAT, [1, 64, 24, 24])
+    input_x = helper.make_tensor_value_info('input', TensorProto.FLOAT, [1, 16, 8, 8])
 
     # MaxPool
     maxpool_node = helper.make_node(
         'MaxPool',
         inputs=['input'],
         outputs=['maxpool_out'],
-        kernel_shape=[2, 2],
-        strides=[2, 2],
+        kernel_shape=[3, 3],
+        strides=[3, 3],
         pads=[0, 0, 0, 0]
     )
 
@@ -241,7 +241,7 @@ def create_pooling_stages():
         outputs=['gap_out']
     )
 
-    output = helper.make_tensor_value_info('output', TensorProto.FLOAT, [1, 64])
+    output = helper.make_tensor_value_info('output', TensorProto.FLOAT, [1, 256])
 
     graph = helper.make_graph(
         [maxpool_node, avgpool_node, gap_node],

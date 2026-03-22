@@ -57,6 +57,7 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     }
     auto dilations = node.dilations;
 
+    auto kernelShapeAttr = builder_.getDenseI64ArrayAttr(kernel_shape);
     auto stridesDenseAttr = builder_.getDenseI64ArrayAttr(strides);
     auto dilationsDenseAttr = builder_.getDenseI64ArrayAttr(dilations);
     auto padsDenseAttr = builder_.getDenseI64ArrayAttr(pads);
@@ -66,7 +67,7 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     auto eltype = intype.getElementType();
 
     // auto outtype = createDynamicTensorType(*input);
-    auto outtype = computeConv2DOutputType(*input, *weight,
+    auto outtype = computeConv2DOutputType(*input, *weight, kernelShapeAttr,
                                             stridesDenseAttr, padsDenseAttr,
                                             dilationsDenseAttr, eltype);
 
@@ -259,38 +260,43 @@ void MLIRPrinter::Visit(const Ops::OpMatMul& node) {
     mlir::Value processedA = *input_a;
     mlir::Value processedB = *input_b;
 
-    auto intype_a = mlir::dyn_cast<mlir::RankedTensorType>((*input_a).getType());
-    if (intype_a.getRank() != 3) {
-        LOG("Turning into a 3d tensor {}", node.input_a);
-        auto newType = broadCastType(intype_a, 3);
-        processedA = builder_.create<mlir::tosa::ReshapeOp>(
-            builder_.getUnknownLoc(),
-            newType,
-            *input_a,
-            builder_.getDenseI64ArrayAttr(newType.getShape())
-        ).getResult();
-    }
+    // auto intype_a = mlir::dyn_cast<mlir::RankedTensorType>((*input_a).getType());
+    // if (intype_a.getRank() != 3) {
+    //     LOG("Turning into a 3d tensor {}\n", node.input_a);
+    //     auto newType = broadCastType(intype_a, 3);
+    //     processedA = builder_.create<mlir::tosa::ReshapeOp>(
+    //         builder_.getUnknownLoc(),
+    //         newType,
+    //         *input_a,
+    //         builder_.getDenseI64ArrayAttr(newType.getShape())
+    //     ).getResult();
+    // }
 
-    auto intype_b = mlir::dyn_cast<mlir::RankedTensorType>((*input_b).getType());
-    if (intype_b.getRank() != 3) {
-        LOG("Turning into a 3d tensor {}", node.input_a);
-        auto newType = broadCastType(intype_b, 3);
-        processedB = builder_.create<mlir::tosa::ReshapeOp>(
-            builder_.getUnknownLoc(),
-            newType,
-            *input_b,
-            builder_.getDenseI64ArrayAttr(newType.getShape())
-        ).getResult();
-    }
+    // auto intype_b = mlir::dyn_cast<mlir::RankedTensorType>((*input_b).getType());
+    // if (intype_b.getRank() != 3) {
+    //     LOG("Turning into a 3d tensor {}", node.input_a);
+    //     auto newType = broadCastType(intype_b, 3);
+    //     processedB = builder_.create<mlir::tosa::ReshapeOp>(
+    //         builder_.getUnknownLoc(),
+    //         newType,
+    //         *input_b,
+    //         builder_.getDenseI64ArrayAttr(newType.getShape())
+    //     ).getResult();
+    // }
 
-    auto outtype = createDynamicTensorType(processedA);
+    auto outtype = computeMatMulOutputType(processedA, processedB);
+    auto filledTensor = createFilledTensor(outtype);
 
-    auto output = builder_.create<mlir::tosa::MatMulOp>(
+    llvm::errs() << "output = " << outtype << "\n";
+    // llvm::errs() << "filledTensor = " << filledTensor << "\n";
+
+    MSG("creating output...\n");
+    auto output = builder_.create<mlir::linalg::MatmulOp>(
         builder_.getUnknownLoc(),
         outtype,
-        processedA,
-        processedB
-    );
+        mlir::ValueRange{ processedA, processedB },
+        mlir::ValueRange{ filledTensor }
+    ).getResult(0);
 
 
     setSSA(node.output, output);
@@ -761,35 +767,24 @@ mlir::RankedTensorType MLIRPrinter::createDynamicTensorType(size_t ndims, mlir::
     llvm::SmallVector<int64_t> shape(ndims, mlir::ShapedType::kDynamic);
     return mlir::RankedTensorType::get(shape, eltype);
 }
-mlir::Value MLIRPrinter::createFilledTensor(mlir::RankedTensorType type,
-                                            mlir::Value sourceTensor) {
-    mlir::Location loc = builder_.getUnknownLoc();
+mlir::Value MLIRPrinter::createFilledTensor(mlir::RankedTensorType outtype) {
 
-    llvm::SmallVector<mlir::Value> dynamicDims;
-    for (int64_t i = 0; i < type.getRank(); ++i) {
-        if (type.isDynamicDim(static_cast<unsigned int>(i))) {
+    auto loc = builder_.getUnknownLoc();
+    mlir::ArrayRef<int64_t> outputShape = outtype.getShape();
 
-            auto dim = builder_.create<mlir::tensor::DimOp>(loc, sourceTensor, i);
-            dynamicDims.push_back(dim);
-        }
-    }
+    // Create output tensor with tensor.empty
+    auto emptyTensor = builder_.create<mlir::tensor::EmptyOp>(
+        loc, outputShape, outtype.getElementType());
 
-    mlir::Value emptyTensor;
-    if (dynamicDims.empty()) {
-        emptyTensor = builder_.create<mlir::tensor::EmptyOp>(loc, type.getShape(), type);
-    } else {
-        emptyTensor = builder_.create<mlir::tensor::EmptyOp>(loc, type, mlir::ValueRange{dynamicDims});
-    }
+    // Create zero constant for initialization
+    auto zero = builder_.create<mlir::arith::ConstantOp>(loc,
+        outtype.getElementType(),
+        builder_.getZeroAttr(outtype.getElementType()));
 
-    auto zero = builder_.create<mlir::arith::ConstantOp>(
-        loc,
-        type.getElementType(),
-        builder_.getZeroAttr(type.getElementType()));
-
+    // Fill the output tensor with zeros
     auto filledTensor = builder_.create<mlir::linalg::FillOp>(
-        loc,
-        mlir::ValueRange{zero},
-        mlir::ValueRange{emptyTensor}).getResult(0);
+        loc, mlir::ValueRange{zero}, mlir::ValueRange{emptyTensor})
+                             .getResult(0);
 
     return filledTensor;
 }
@@ -797,6 +792,7 @@ mlir::Value MLIRPrinter::createFilledTensor(mlir::RankedTensorType type,
 mlir::RankedTensorType MLIRPrinter::computeConv2DOutputType(
     mlir::Value input,
     mlir::Value weight,
+    mlir::DenseArrayAttr kernel,
     mlir::DenseArrayAttr stride,
     mlir::DenseArrayAttr pad,
     mlir::DenseArrayAttr dilation,
@@ -806,6 +802,7 @@ mlir::RankedTensorType MLIRPrinter::computeConv2DOutputType(
     auto inputType =  mlir::dyn_cast<mlir::RankedTensorType>(input.getType());
     auto weightType = mlir::dyn_cast<mlir::RankedTensorType>(weight.getType());
 
+    auto kernelValues = kernel.getData();
     auto padValues = pad.getData();
     auto strideValues = stride.getData();
     auto dilationValues = dilation.getData();
@@ -823,18 +820,15 @@ mlir::RankedTensorType MLIRPrinter::computeConv2DOutputType(
     int64_t W_in = inputShape[3];   LOG("W = {}\n", W_in);
 
     int64_t C_out = weightShape[0]; LOG("C_out = {}\n", C_out);
-    int64_t K_h = weightShape[2];   LOG("K_h = {}\n", K_h);
-    int64_t K_w = weightShape[3];   LOG("K_w = {}\n", K_w);
+    int64_t K_h = kernelValues[0];   LOG("K_h = {}\n", K_h);
+    int64_t K_w = kernelValues[1];   LOG("K_w = {}\n", K_w);
+    if (!K_w) { K_w = K_h; }
 
     auto strSz = strideValues.size();
     int64_t stride_h = strSz > 0 ? strideValues[0] : 1; LOG("stride_h = {}\n", stride_h);
-    if (!stride_h) {
-        stride_h = 1;
-    }
+    if (!stride_h) { stride_h = 1; }
     int64_t stride_w = strSz > 1 ? strideValues[1] : 1; LOG("stride_w = {}\n", stride_w);
-    if (!stride_w) {
-        stride_w = 1;
-    }
+    if (!stride_w) { stride_w = stride_h; }
 
 
     auto dilationSz = dilationValues.size();
@@ -847,14 +841,59 @@ mlir::RankedTensorType MLIRPrinter::computeConv2DOutputType(
     int64_t pad_top =    padSz > 2 ? padValues[2] : 0;
     int64_t pad_bottom = padSz > 3 ? padValues[3] : 0;
 
-    int64_t H_out = (H_in + pad_top + pad_bottom - dilation_h * (K_h - 1) - 1) / stride_h + 1;
-    int64_t W_out = (W_in + pad_left + pad_right - dilation_w * (K_w - 1) - 1) / stride_w + 1;
+    // int64_t H_out = (H_in - K_h + (pad_top + pad_bottom)) / stride_h + 1;
+    // int64_t W_out = (W_in - K_w +  (pad_right + pad_left)) / stride_w + 1;
+
+    auto H_out = mlir::ShapedType::kDynamic;
+    auto W_out = mlir::ShapedType::kDynamic;
 
     llvm::SmallVector<int64_t> outputShape = {N, C_out, H_out, W_out};
     auto elementType = inputType.getElementType();
 
     MSG("Finished computing conv2d output\n");
     return mlir::RankedTensorType::get(outputShape, elementType);
+}
+
+mlir::RankedTensorType MLIRPrinter::computeMatMulOutputType(mlir::Value& input_a,
+                                                            mlir::Value& input_b) {
+    MSG("Computing matmul output type\n");
+
+    llvm::errs() << "input_a = " << input_a << "\n";
+    llvm::errs() << "input_b = " << input_b << "\n";
+
+    auto typeA = input_a.getType(); llvm::errs() << "Atype = " << typeA << "\n";
+    auto typeB = input_b.getType(); llvm::errs() << "Btype = " << typeB << "\n";
+
+    auto inputAType = mlir::dyn_cast<mlir::RankedTensorType>(typeA);
+    if (!inputAType) {
+        Core::BebraErr("inputA in matmul is nor RankedTensor");
+    }
+    auto inputBType = mlir::dyn_cast<mlir::RankedTensorType>(typeB);
+    if (!inputBType) {
+        Core::BebraErr("inputB in matmul is nor RankedTensor");
+    }
+
+    llvm::errs() << "casted to rankedTensor..." << "\n";
+
+    auto inputAShape = inputAType.getShape();
+    auto inputBShape = inputBType.getShape();
+
+    llvm::errs() << "Got shapes..." << "\n";
+    if (inputAShape.size() != 2) {
+        Core::BebraErr("input shape in matmul != 2, now 2D vectors are available only!");
+    }
+
+    auto H_a = inputAShape[0]; LOG("H_a = {}\n", H_a);
+    auto W_a = inputAShape[1]; LOG("W_A = {}\n", W_a);
+
+    auto H_b = inputBShape[0]; LOG("H_b = {}\n", H_b);
+    auto W_b = inputBShape[1]; LOG("W_b = {}\n", W_b);
+
+    llvm::SmallVector<int64_t> outputShape = {H_a, W_b};
+    auto eltype = inputAType.getElementType();
+
+    MSG("returning tensor type...\n");
+    return mlir::RankedTensorType::get(outputShape, eltype);
 }
 
 mlir::RankedTensorType MLIRPrinter::computeMaxPool2DOutputType(
@@ -867,6 +906,7 @@ mlir::RankedTensorType MLIRPrinter::computeMaxPool2DOutputType(
     MSG("Computing maxpool2d output type...\n");
 
     auto inputType = mlir::dyn_cast<mlir::RankedTensorType>(input.getType());
+    llvm::errs() << "Got input type: " << inputType << "\n";
 
     if (!inputType) {
         MSG("Error: Input type is not RankedTensorType\n");
@@ -888,13 +928,14 @@ mlir::RankedTensorType MLIRPrinter::computeMaxPool2DOutputType(
     auto kernelSz = kernelValues.size();
     int64_t K_h = kernelSz > 0 ? kernelValues[0] : 1; LOG("K_h = {}\n", K_h);
     int64_t K_w = kernelSz > 1 ? kernelValues[1] : 1; LOG("K_w = {}\n", K_w);
+    if (!K_w) { K_w = K_h; }
 
     auto strSz = strideValues.size();
     int64_t stride_h = strSz > 0 ? strideValues[0] : 1;
     if (!stride_h) { stride_h = 1; } LOG("stride_h = {}\n", stride_h);
 
     int64_t stride_w = strSz > 1 ? strideValues[1] : 1;
-    if (!stride_w) { stride_w = 1; } LOG("stride_w = {}\n", stride_w);
+    if (!stride_w) { stride_w = stride_h; } LOG("stride_w = {}\n", stride_w);
 
     auto dilationSz = dilationValues.size();
     int64_t dilation_h = dilationSz > 0 ? dilationValues[0] : 1; LOG("dilation_h = {}\n", dilation_h);
@@ -906,13 +947,13 @@ mlir::RankedTensorType MLIRPrinter::computeMaxPool2DOutputType(
     int64_t pad_top =    padSz > 2 ? padValues[2] : 0;
     int64_t pad_bottom = padSz > 3 ? padValues[3] : 0;
 
-    int64_t H_out = (H_in + pad_top + pad_bottom - dilation_h * (K_h - 1) - 1) / stride_h + 1;
-    int64_t W_out = (W_in + pad_left + pad_right - dilation_w * (K_w - 1) - 1) / stride_w + 1;
+    // int64_t H_out = (H_in - K_h + 2 *(pad_top + pad_bottom)) / stride_h + 1;
+    // int64_t W_out = ((W_in - K_w + 2 *(pad_right + pad_left)) / stride_w + 1);
 
     int64_t C_out = C_in;
 
-    if (H_out < 0) H_out = mlir::ShapedType::kDynamic;
-    if (W_out < 0) W_out = mlir::ShapedType::kDynamic;
+    /* if (H_out < 0) */ auto H_out = mlir::ShapedType::kDynamic;
+    /* if (W_out < 0) */ auto W_out = mlir::ShapedType::kDynamic;
 
     llvm::SmallVector<int64_t> outputShape = {N, C_out, H_out, W_out};
     auto elementType = inputType.getElementType();
