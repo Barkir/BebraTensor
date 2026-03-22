@@ -21,44 +21,53 @@ static std::string get_dot_path(const std::string& filename) {
 int main(int argc, char* argv[]) {
     if (argc < 2) {
         std::cerr << BEBRA_DIM BEBRA_ITALIC "Please enter model to parse..." RESET_DIM << "\n";
-        std::cerr << FG_TURQUOISE BEBRA_BOLD "hint: enter `--dump` flag to get your graph image" BEBRA_RESET << "\n";
+        std::cerr << FG_TURQUOISE BEBRA_BOLD "hint: enter `--dump` flag to get your graph image\nenter `--to-mlir` flag to get .ll" BEBRA_RESET << "\n";
         return 0;
     }
 
     for (int i = 1; i < argc; ++i) {
         if (!strcmp(argv[i], "--dump")) {
-            if (i != argc - 1) {
-                std::filesystem::path model_path(argv[i + 1]);
-                std::string dot_name = model_path.stem().string() + ".dot";
-
-                Bebra::Core::BebraGraph graph(argv[i + 1]);
-                std::string dot_path = get_dot_path(dot_name);
-                std::ofstream stream;
-                stream.open(dot_path);
-                if (!stream.is_open()) {
-                    throw Bebra::Core::BebraErr("Stream " + dot_path + " not opened!");
-                }
-
-                graph.dumpBebra(stream);
-                return 0;
-            } else {
+            if (i == argc - 1) {
                 std::cerr << BEBRA_DIM BEBRA_ITALIC "No model entered to parse after --dump flag!" RESET_DIM << "\n";
                 return 0;
             }
+
+            std::filesystem::path model_path(argv[i + 1]);
+            std::string dot_name = model_path.stem().string() + ".dot";
+
+            Bebra::Core::BebraGraph graph(argv[i + 1]);
+            std::string dot_path = get_dot_path(dot_name);
+            std::ofstream stream;
+            stream.open(dot_path);
+            if (!stream.is_open()) {
+                throw Bebra::Core::BebraErr("Stream " + dot_path + " not opened!");
+            }
+
+            graph.dumpBebra(stream);
+            return 0;
         }
 
-        if (strcmp(argv[i], "--dump")) {
-            Bebra::Core::BebraGraph graph(argv[i]);
-            graph.convertToMlir("ir.ll");
-            // VerifyGraph
-
-            Bebra::Pass::BebraPassManager pm;
-
-            // need to add plugin linkage
-            // pm.registerPass(std::make_unique<Bebra::Pass::ShapeInferencePass>());
-            pm.run(graph);
-            // ... do smth here
+        if (!strcmp(argv[i], "--help")) {
+            std::cout << HELPING_MESSAGE << "\n";
             return 0;
+        }
+
+        if (!strcmp(argv[i], "--to-mlir")) {
+            if (i == argc - 1) {
+                std::cerr << BEBRA_DIM BEBRA_ITALIC "No model entered to parse after --to-mlir flag!" RESET_DIM << "\n";
+                return 0;
+            }
+
+            std::filesystem::path model_path_to_mlir(argv[i + 1]);
+            std::string ll_name = model_path_to_mlir.stem().string() + ".ll";
+
+            Bebra::Core::BebraGraph graph(argv[i+1]);
+            graph.convertToMlir(ll_name);
+            std::cerr << BOLD_GREEN << "Successfully compiled model " << model_path_to_mlir.stem() << " to " << ll_name << BEBRA_RESET << "\n";
+            return 0;
+        } else {
+            std::cerr << FG_TURQUOISE BEBRA_ITALIC << "you haven't entered any flags to compile your model" << BEBRA_RESET << "\n";
+            std::cerr << FG_YELLOW "available flags:\n" << available_flags << BEBRA_RESET "\n";
         }
     }
 }

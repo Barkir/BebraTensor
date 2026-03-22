@@ -3,6 +3,7 @@
 #pragma once
 
 #include "BebraColors.hpp"
+#include "BebraLog.hpp"
 #include "llvm/Support/raw_ostream.h"
 #include <iostream>
 #include <stdexcept>
@@ -17,13 +18,13 @@ struct BebraErr : public std::runtime_error {
 
 struct BebraWarn {
     explicit BebraWarn(const std::string& msg) {
-        std::cout << FG_GOLD << msg << BEBRA_RESET << "\n";
+        ON_DEBUG(std::cout << FG_GOLD << msg << BEBRA_RESET << "\n");
     }
 };
 
 struct BebraGreen {
     explicit BebraGreen(const std::string& msg) {
-        std::cout << BOLD_GREEN << msg << BEBRA_RESET << "\n";
+        ON_DEBUG(std::cout << BOLD_GREEN << msg << BEBRA_RESET << "\n");
     }
 };
 

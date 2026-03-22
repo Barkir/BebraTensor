@@ -63,8 +63,6 @@ public: // mlir-specific methods
     }
 
     void setSSA(const std::string& val_name, mlir::Value val) {
-        // // std::cout << "setting " << val_name << "\n";
-        // // std::cout << val << "\n";
         Core::BebraGreen("Setting ssa " + val_name);
         ssa_map_[val_name] = std::move(val);
     }

@@ -63,18 +63,20 @@ public: // helper methods
     }
 
     void convertToMlir(const std::string& file_name) {
-        std::cout << "MLIR PRINTER" << "\n";
-        std::cout << "// \t\tINITIALIZERS" << "\n";
+        MSG("MLIR PRINTER\n");
+        MSG("// \t\tINITIALIZERS\n");
+
         for (auto&& initializer : initializers_) {
-            std::cout << initializer << " ";
+            LOG("{} ", initializer);
         }
-        std::cout << "\n\t\t // // //" << "\n";
-        std::cout << "// \t\tINPUTS" << "\n";
+        MSG("\n\t\t // // //\n");
+        MSG("// \t\tINPUTS\n");
+
         for (auto&& input : inputs_) {
-            std::cout << input << " ";
+            LOG("{} ", input);
         }
 
-        std::cout << "\n\t\t // // //" << "\n";
+        MSG("\n\t\t // // //\n");
         MLIR::MLIRPrinter printer(*this);
 
         std::string result;

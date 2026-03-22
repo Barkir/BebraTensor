@@ -3,7 +3,7 @@
 #include <iostream>
 #include <format>
 
-#define ENABLE_LOGGING
+// #define ENABLE_LOGGING
 
 #define BEBRA_HAS_FORMAT 1
 
@@ -18,8 +18,11 @@
 // #  define BEBRA_HAS_FORMAT 0
 // #endif
 
+
+
 #ifdef ENABLE_LOGGING
 
+#define ON_DEBUG(msg) msg
 #include "llvm/Support/raw_ostream.h"
 
 #define MSG(msg)                                                               \
@@ -70,6 +73,8 @@
     while (false)
 
 #else
+
+#define ON_DEBUG(msg)
 
 #define MSG(msg)                                                               \
     do                                                                         \

@@ -25,7 +25,7 @@ void BebraGraph::countOutputShapes() {
     for (auto&& node : nodes_) {
         std::visit(
             [this](auto& op) {
-                std::cout << "counting output shape of op" << op.getOpType() << "\n";
+                LOG("counting output shape of op {} \n", op.getOpType());
                 op.countOutputShape(*this);
             },
 
@@ -73,10 +73,10 @@ void BebraGraph::convertOnnxToBebraNode(const onnx::GraphProto& graph) {
             for (int i = 0; i < sz; ++i) {
                 auto&& attr = onnx_node.attribute(i);
                 if (!attr.IsInitialized()) {
-                    std::cout << "attr#" << i << " not initialized!" << "\n";
+                    LOG("attr#{} not initialized!\n", i);
                     continue;
                 }
-                std::cout << "initialized attr with name " << attr.name() << "\n";
+                LOG("initialized attr with name {}\n", attr.name());
                 attrs.emplace(attr.name(), Attr(parseAttr(attr)));
             }
         }

@@ -61,7 +61,7 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     auto stridesDenseAttr = builder_.getDenseI64ArrayAttr(strides);
     auto dilationsDenseAttr = builder_.getDenseI64ArrayAttr(dilations);
     auto padsDenseAttr = builder_.getDenseI64ArrayAttr(pads);
-    std::cout << "got tensor attrs for strides and dilations for builder\n";
+    MSG("got tensor attrs for strides and dilations for builder\n");
 
     auto intype = mlir::dyn_cast<mlir::RankedTensorType>((*input).getType());
     auto eltype = intype.getElementType();
@@ -86,13 +86,13 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     }
 
     Core::BebraWarn("==================");
-    llvm::outs() << "input_type = " << (*input).getType() << "\n";
-    llvm::outs() << "weights_type =" << (*weight).getType() << "\n";
-    llvm::outs() << "bias_type =" << (*bias).getType() << "\n";
-    llvm::outs() <<  "strides_type" << stridesDenseAttr.getElementType() << "\n";
-    llvm::outs() <<  "dilations_type" << dilationsDenseAttr.getElementType() << "\n";
-    llvm::outs() <<  "pads_type = " << padsDenseAttr.getElementType() << "\n";
-    llvm::outs() <<  "outtype = " << outtype << "\n";
+    ON_DEBUG(llvm::outs() << "input_type = " << (*input).getType() << "\n");
+    ON_DEBUG(llvm::outs() << "weights_type =" << (*weight).getType() << "\n");
+    ON_DEBUG(llvm::outs() << "bias_type =" << (*bias).getType() << "\n");
+    ON_DEBUG(llvm::outs() <<  "strides_type" << stridesDenseAttr.getElementType() << "\n");
+    ON_DEBUG(llvm::outs() <<  "dilations_type" << dilationsDenseAttr.getElementType() << "\n");
+    ON_DEBUG(llvm::outs() <<  "pads_type = " << padsDenseAttr.getElementType() << "\n");
+    ON_DEBUG(llvm::outs() <<  "outtype = " << outtype << "\n");
     Core::BebraWarn("==================");
 
     auto output = builder_.create<mlir::tosa::Conv2DOp>(builder_.getUnknownLoc(),
@@ -105,7 +105,7 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
                                                                   dilationsDenseAttr,
                                                                   accTypeAttr
     );
-    std::cout << "created output\n";
+    MSG("created output\n");
 
     setSSA(node.output, output);
     MSG("VISITED CONV\n");
@@ -161,9 +161,9 @@ void MLIRPrinter::Visit(const Ops::OpAdd& node) {
     }
 
     Core::BebraWarn("==================");
-    llvm::outs() << "lhs_type = " << ltype << "\n";
-    llvm::outs() << "rhs_type = " << processedRhs.getType() << "\n";
-    llvm::outs() << "output_type = " << ltype << "\n";
+    ON_DEBUG(llvm::outs() << "lhs_type = " << ltype << "\n");
+    ON_DEBUG(llvm::outs() << "rhs_type = " << processedRhs.getType() << "\n");
+    ON_DEBUG(llvm::outs() << "output_type = " << ltype << "\n");
     Core::BebraWarn("==================");
 
     output = builder_.create<mlir::tosa::AddOp>(builder_.getUnknownLoc(),
@@ -260,35 +260,10 @@ void MLIRPrinter::Visit(const Ops::OpMatMul& node) {
     mlir::Value processedA = *input_a;
     mlir::Value processedB = *input_b;
 
-    // auto intype_a = mlir::dyn_cast<mlir::RankedTensorType>((*input_a).getType());
-    // if (intype_a.getRank() != 3) {
-    //     LOG("Turning into a 3d tensor {}\n", node.input_a);
-    //     auto newType = broadCastType(intype_a, 3);
-    //     processedA = builder_.create<mlir::tosa::ReshapeOp>(
-    //         builder_.getUnknownLoc(),
-    //         newType,
-    //         *input_a,
-    //         builder_.getDenseI64ArrayAttr(newType.getShape())
-    //     ).getResult();
-    // }
-
-    // auto intype_b = mlir::dyn_cast<mlir::RankedTensorType>((*input_b).getType());
-    // if (intype_b.getRank() != 3) {
-    //     LOG("Turning into a 3d tensor {}", node.input_a);
-    //     auto newType = broadCastType(intype_b, 3);
-    //     processedB = builder_.create<mlir::tosa::ReshapeOp>(
-    //         builder_.getUnknownLoc(),
-    //         newType,
-    //         *input_b,
-    //         builder_.getDenseI64ArrayAttr(newType.getShape())
-    //     ).getResult();
-    // }
-
     auto outtype = computeMatMulOutputType(processedA, processedB);
     auto filledTensor = createFilledTensor(outtype);
 
-    llvm::errs() << "output = " << outtype << "\n";
-    // llvm::errs() << "filledTensor = " << filledTensor << "\n";
+    ON_DEBUG(llvm::errs() << "output = " << outtype << "\n");
 
     MSG("creating output...\n");
     auto output = builder_.create<mlir::linalg::MatmulOp>(
@@ -324,7 +299,7 @@ void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
     int64_t storage_order = node.storage_order;
     std::vector<int64_t> strides = node.strides;
 
-    std::cout << "creating dilations attrs..." << "\n";
+    MSG("creating dilations attrs...\n");
     auto kernelAttr = builder_.getDenseI64ArrayAttr(kernel_shape);
     auto dilationsAttr = builder_.getDenseI64ArrayAttr(dilations);
     auto stridesAttr = builder_.getDenseI64ArrayAttr(strides);
@@ -337,9 +312,8 @@ void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
         padsAttr,
         dilationsAttr
     );
-    // auto outtype = createDynamicTensorType(*input);
-    // output
-    std::cout << "creating output" << std::endl;
+
+    MSG("creating output\n");
     auto output = builder_.create<mlir::tosa::MaxPool2dOp>(
         builder_.getUnknownLoc(),
         outtype,
@@ -369,23 +343,17 @@ void MLIRPrinter::Visit(const Ops::OpReshape& node) {
         Core::BebraWarn("no shape at reshape: " + node.shape);
     }
 
-    llvm::errs() << "input = " << *input << "\n";
-    llvm::errs() << "shape = " << *shape << "\n";
-
-    // auto castedShape = mlir::dyn_cast<mlir::tosa::ConstOp>(shape);
-    // if (!castedShape) {
-        // Core::BebraErr("shape input is not defined in Reshape call! -> " + node.shape);
-    // }
-    // auto attr = castedShape.getValue();
+    ON_DEBUG(llvm::errs() << "input = " << *input << "\n");
+    ON_DEBUG(llvm::errs() << "shape = " << *shape << "\n");
 
     auto shapeDense = getDenseI64ArrayAttrFromValue((*shape));
-    llvm::errs() << "Got dense array of shape: " << shapeDense << "\n";
+    ON_DEBUG(llvm::errs() << "Got dense array of shape: " << shapeDense << "\n");
 
     llvm::ArrayRef<int64_t> shapeData = shapeDense.asArrayRef();
     mlir::RankedTensorType outtype;
 
     auto intype = (*input).getType();
-    llvm::errs() << "Got input type: " << intype << "\n";
+    ON_DEBUG(llvm::errs() << "Got input type: " << intype << "\n");
 
     auto inCastType = mlir::dyn_cast<mlir::RankedTensorType>(intype);
     if (!inCastType) {
@@ -395,7 +363,7 @@ void MLIRPrinter::Visit(const Ops::OpReshape& node) {
         outtype = mlir::RankedTensorType::get(shapeData, inCastType.getElementType());
     }
 
-    llvm::errs() << "Got outtype: " << outtype << "\n";
+    ON_DEBUG(llvm::errs() << "Got outtype: " << outtype << "\n");
 
     auto output = builder_.create<mlir::tosa::ReshapeOp>(
         builder_.getUnknownLoc(),
@@ -404,7 +372,7 @@ void MLIRPrinter::Visit(const Ops::OpReshape& node) {
         shapeDense
     );
 
-    llvm::errs() << "Got output:" << output << "\n";
+    ON_DEBUG(llvm::errs() << "Got output:" << output << "\n");
     setSSA(node.output, output);
     MSG("VISITED RESHAPE\n");
 }
@@ -422,7 +390,7 @@ void MLIRPrinter::Visit(const Ops::OpFlatten& node) {
 void MLIRPrinter::Visit(const Core::BebraTensor& tensor) {
     MSG("TENSOR\n");
     auto name = tensor.getName();
-    std::cout << "got tensor name " << name << "\n";
+    LOG("got tensor name {}\n", name);
     auto ssa = getSSA(name);
 
     if (!ssa) {
@@ -491,14 +459,14 @@ void MLIRPrinter::generate(const Core::BebraGraph& graph, std::string& out_str) 
     auto* block = funcOp.addEntryBlock();
     builder_.setInsertionPointToStart(block);
 
-    std::cout << "Checking types before creating FunctionType..." << std::endl;
+    MSG("Checking types before creating FunctionType..."\n);
 
     for (auto t : inputTypes) {
         if (!t) {
             std::cerr << "CRITICAL: Found null input type!" << std::endl;
             abort();
         }
-        t.dump();
+        ON_DEBUG(t.dump());
     }
 
     for (auto t : outputTypes) {
@@ -506,10 +474,10 @@ void MLIRPrinter::generate(const Core::BebraGraph& graph, std::string& out_str) 
             std::cerr << "CRITICAL: Found null output type!" << std::endl;
             abort();
         }
-        t.dump();
+        ON_DEBUG(t.dump());
     }
 
-    std::cout << "Context pointer: " << builder_.getContext() << std::endl;
+    MSG("Context pointer: " << builder_.getContext());
 
     llvm::raw_string_ostream ss(out_str);
     mlir::OpPrintingFlags flags;
@@ -526,13 +494,13 @@ void MLIRPrinter::generate(const Core::BebraGraph& graph, std::string& out_str) 
     }
 
     for (auto&& input_name : graph.inputs_) {
-        std::cout << "VISITING INPUTS" << "\n";
+        MSG("VISITING INPUTS\n");
         auto&& input = graph.getTensor(input_name);
         Visit(input);
     }
 
     // ==================================================================
-    std::cout << "VISITING NODES" << "\n";
+    MSG("VISITING NODES\n");
     for (auto&& node : graph.nodes_) {
         std::visit([this](auto&& op) { Visit(op); }, node.op_);
     }
@@ -555,10 +523,10 @@ void MLIRPrinter::generate(const Core::BebraGraph& graph, std::string& out_str) 
 mlir::LogicalResult MLIRPrinter::compileToLLVM(mlir::ModuleOp module, llvm::raw_string_ostream& stream) {
     MSG("Compiling to LLVM!\n");
 
-    stream << "===== BEFORE OPT ====" << "\n";
+    // stream << "===== BEFORE OPT ====" << "\n";
 
     mlir::OpPrintingFlags flags;
-    module.print(stream, flags);
+    // module.print(stream, flags);
 
     mlir::PassManager pm(&context_);
     pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaInferShapesPass());
@@ -582,10 +550,11 @@ mlir::LogicalResult MLIRPrinter::compileToLLVM(mlir::ModuleOp module, llvm::raw_
     pm.addPass(mlir::createConvertFuncToLLVMPass());
 
 
-    stream << "===== AFTER OPT ====" << "\n";
+    // stream << "===== AFTER OPT ====" << "\n";
+
     auto result = pm.run(module);
     if (mlir::failed(result)) {
-        llvm::errs() << "Pass pipeline failed!\n";
+        ON_DEBUG(llvm::errs() << "Pass pipeline failed!\n");
         module.print(stream, flags);
         return mlir::failure();
     }
@@ -602,7 +571,7 @@ llvm::SmallVector<mlir::Value> MLIRPrinter::collectReturnValues(const Core::Bebr
             if (!val) {
                 Core::BebraErr("Error: output value not found in return values: " + outputName);
             }
-            llvm::errs() << "Got output:" << outputName << " : " << *val << "\n";
+            ON_DEBUG(llvm::errs() << "Got output:" << outputName << " : " << *val << "\n");
             returnValues.push_back(*val);
         }
     return returnValues;
@@ -667,9 +636,9 @@ llvm::SmallVector<mlir::Type> MLIRPrinter::createInputTypes(const Core::BebraGra
         auto tensor = graph.getTensor(input);
         auto type = createTensorType(tensor);
 
-        llvm::errs() << "=========================" << "\n";
-        llvm::errs() << "Got input type - " << type << "\n";
-        llvm::errs() << "=========================" << "\n";
+        ON_DEBUG(llvm::errs() << "=========================" << "\n");
+        ON_DEBUG(llvm::errs() << "Got input type - " << type << "\n");
+        ON_DEBUG(llvm::errs() << "=========================" << "\n");
 
         setType(input, type);
         typeVec.push_back(type);
@@ -690,9 +659,9 @@ llvm::SmallVector<mlir::Type> MLIRPrinter::createOutputTypes(const Core::BebraGr
         auto tensor = graph.getTensor(output);
         auto type = createTensorType(tensor);
 
-        llvm::errs() << "=========================" << "\n";
-        llvm::errs() << "Got output type - " << type << "\n";
-        llvm::errs() << "=========================" << "\n";
+        ON_DEBUG(llvm::errs() << "=========================" << "\n" );
+        ON_DEBUG(llvm::errs() << "Got output type - " << type << "\n");
+        ON_DEBUG(llvm::errs() << "=========================" << "\n" );
 
         setType(output, type);
         typeVec.push_back(type);
@@ -865,11 +834,11 @@ mlir::RankedTensorType MLIRPrinter::computeMatMulOutputType(mlir::Value& input_a
                                                             mlir::Value& input_b) {
     MSG("Computing matmul output type\n");
 
-    llvm::errs() << "input_a = " << input_a << "\n";
-    llvm::errs() << "input_b = " << input_b << "\n";
+    ON_DEBUG(llvm::errs() << "input_a = " << input_a << "\n");
+    ON_DEBUG(llvm::errs() << "input_b = " << input_b << "\n");
 
-    auto typeA = input_a.getType(); llvm::errs() << "Atype = " << typeA << "\n";
-    auto typeB = input_b.getType(); llvm::errs() << "Btype = " << typeB << "\n";
+    auto typeA = input_a.getType(); ON_DEBUG(llvm::errs() << "Atype = " << typeA << "\n");
+    auto typeB = input_b.getType(); ON_DEBUG(llvm::errs() << "Btype = " << typeB << "\n");
 
     auto inputAType = mlir::dyn_cast<mlir::RankedTensorType>(typeA);
     if (!inputAType) {
@@ -880,12 +849,12 @@ mlir::RankedTensorType MLIRPrinter::computeMatMulOutputType(mlir::Value& input_a
         Core::BebraErr("inputB in matmul is nor RankedTensor");
     }
 
-    llvm::errs() << "casted to rankedTensor..." << "\n";
+    ON_DEBUG(llvm::errs() << "casted to rankedTensor..." << "\n");
 
     auto inputAShape = inputAType.getShape();
     auto inputBShape = inputBType.getShape();
 
-    llvm::errs() << "Got shapes..." << "\n";
+    ON_DEBUG(llvm::errs() << "Got shapes..." << "\n");
     if (inputAShape.size() != 2) {
         Core::BebraErr("input shape in matmul != 2, now 2D vectors are available only!");
     }
@@ -913,7 +882,7 @@ mlir::RankedTensorType MLIRPrinter::computeMaxPool2DOutputType(
     MSG("Computing maxpool2d output type...\n");
 
     auto inputType = mlir::dyn_cast<mlir::RankedTensorType>(input.getType());
-    llvm::errs() << "Got input type: " << inputType << "\n";
+    ON_DEBUG(llvm::errs() << "Got input type: " << inputType << "\n");
 
     if (!inputType) {
         MSG("Error: Input type is not RankedTensorType\n");

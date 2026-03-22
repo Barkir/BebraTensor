@@ -12,16 +12,16 @@ BebraTensor::BebraTensor(const onnx::TensorProto& tensor)
 
     assignDataByType(tensor, dtype);
 
-    std::cout << "-----------------------------------------\n";
-    std::cout << "Created tensor: \"" << name_ << "\"\n";
-    std::cout << "  Shape: [";
+    MSG("-----------------------------------------\n");
+    LOG("Created tensor: {}\n", name_);
+    MSG("  Shape: [");
     for (size_t i = 0; i < shape_.size(); ++i) {
-        std::cout << shape_[i] << (i + 1 < shape_.size() ? ", " : "");
+        LOG("{} {}", shape_[i], (i + 1 < shape_.size() ? ", " : ""));
     }
-    std::cout << "]\n";
-    std::cout << "  Dtype: " << static_cast<int>(dtype) << "\n";
-    std::cout << "  Data size: " << data_.size() << " bytes\n";
-    std::cout << "-----------------------------------------\n";
+    MSG("]\n");
+    LOG("  Dtype: {}\n", static_cast<int>(dtype));
+    LOG("  Data size: {} bytes\n ", data_.size());
+    MSG("-----------------------------------------\n");
 }
 
 BebraTensor::BebraTensor(const std::string& name,
@@ -29,11 +29,11 @@ BebraTensor::BebraTensor(const std::string& name,
                          const std::vector<int8_t> data,
                          BebraType dtype_)
     : name_(name), shape_(shape), data_(data), dtype(dtype_) {
-    std::cout << "-----------------------------------------" << "\n";
-    std::cout << "Created tensor with name" << name << "\n";
-    std::cout << "ndims = " << shape_.size() << "\n";
-    std::cout << "dtype = " << static_cast<int>(dtype) << "\n";
-    std::cout << "-----------------------------------------" << "\n";
+    MSG("-----------------------------------------\n");
+    LOG("Created tensor with name {}\n", name);
+    LOG("ndims = {}\n", shape_.size());
+    LOG("dtype = {}\n", static_cast<int>(dtype));
+    MSG("-----------------------------------------\n");
 }
 
 BebraTensor::BebraTensor(const onnx::ValueInfoProto& value_info) : name_(value_info.name()) {
@@ -55,7 +55,7 @@ BebraTensor::BebraTensor(const onnx::ValueInfoProto& value_info) : name_(value_i
 
                     shape_.push_back(-1);
                     isDynamicShape = true;
-                    std::cout << "  [Dynamic dim: " << dim.dim_param() << "]\n";
+                    LOG("  [Dynamic dim: {}]\n", dim.dim_param());
                 } else {
                     shape_.push_back(-1);
                     isDynamicShape = true;
