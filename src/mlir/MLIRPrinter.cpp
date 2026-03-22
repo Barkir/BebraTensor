@@ -256,14 +256,40 @@ void MLIRPrinter::Visit(const Ops::OpMatMul& node) {
         Core::BebraWarn("can't get input_b: " + node.input_b);
     }
 
-    auto outtype = createDynamicTensorType(*input_a);
-    mlir::Value filledTensor = createFilledTensor(outtype, *input_a);
+    mlir::Value processedA = *input_a;
+    mlir::Value processedB = *input_b;
+
+    auto intype_a = mlir::dyn_cast<mlir::RankedTensorType>((*input_a).getType());
+    if (intype_a.getRank() != 3) {
+        LOG("Turning into a 3d tensor {}", node.input_a);
+        auto newType = broadCastType(intype_a, 3);
+        processedA = builder_.create<mlir::tosa::ReshapeOp>(
+            builder_.getUnknownLoc(),
+            newType,
+            *input_a,
+            builder_.getDenseI64ArrayAttr(newType.getShape())
+        ).getResult();
+    }
+
+    auto intype_b = mlir::dyn_cast<mlir::RankedTensorType>((*input_b).getType());
+    if (intype_b.getRank() != 3) {
+        LOG("Turning into a 3d tensor {}", node.input_a);
+        auto newType = broadCastType(intype_b, 3);
+        processedB = builder_.create<mlir::tosa::ReshapeOp>(
+            builder_.getUnknownLoc(),
+            newType,
+            *input_b,
+            builder_.getDenseI64ArrayAttr(newType.getShape())
+        ).getResult();
+    }
+
+    auto outtype = createDynamicTensorType(processedA);
 
     auto output = builder_.create<mlir::tosa::MatMulOp>(
         builder_.getUnknownLoc(),
         outtype,
-        *input_a,
-        *input_b
+        processedA,
+        processedB
     );
 
 
