@@ -567,8 +567,15 @@ mlir::LogicalResult MLIRPrinter::compileToLLVM(mlir::ModuleOp module, llvm::raw_
     pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaOptionalDecompositions());
     pm.addPass(mlir::createCSEPass());
 
-    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToLinalgNamed());
-    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToLinalg());
+    //FIXME - now it is failing on mnist model (and i guess on others)
+
+    // ----------------------------------------------------------------------------
+
+    // pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToLinalgNamed());
+    // pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToLinalg());
+
+    // ----------------------------------------------------------------------------
+
     pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToArith());
 
     pm.addPass(mlir::createConvertSCFToCFPass());

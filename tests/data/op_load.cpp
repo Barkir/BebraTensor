@@ -9,11 +9,11 @@
 #endif
 
 static std::string get_model_path(std::string path) {
-    return std::filesystem::path(TEST_DATA_DIR) / "third_party" / path;
+    return std::filesystem::path(TEST_DATA_DIR) / "tests" / path;
 }
 
 TEST(OpLoading, Conv) {
-    const std::string model_path = get_model_path("resnet50-v1-7.onnx");
+    const std::string model_path = get_model_path("third_party/resnet50-v1-7.onnx");
     Bebra::Core::BebraGraph graph(model_path);
 
     for (const auto& node : graph.nodes_) {
@@ -52,7 +52,7 @@ TEST(OpLoading, Conv) {
 
 
 TEST(OpLoading, Gemm) {
-    const std::string model_path = get_model_path("resnet50-v1-7.onnx");
+    const std::string model_path = get_model_path("third_party/resnet50-v1-7.onnx");
     Bebra::Core::BebraGraph graph(model_path);
 
     for (const auto& node : graph.nodes_) {
@@ -87,7 +87,7 @@ TEST(OpLoading, Gemm) {
 
 
 TEST(OpLoading, MaxPool) {
-    auto model_path = get_model_path("resnet50-v1-7.onnx");
+    auto model_path = get_model_path("third_party/resnet50-v1-7.onnx");
     Bebra::Core::BebraGraph graph(model_path);
     for (auto& node : graph.nodes_) {
             std::string op_type;
