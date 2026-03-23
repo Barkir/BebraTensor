@@ -65,6 +65,11 @@ public: // helper methods
         return BebraToOnnxDtype(dtype);
     }
 
+    void setEmptyData(size_t numElems) {
+        data_.resize(numElems);
+        std::fill(data_.begin(), data_.end(), 0);
+    }
+
     template <typename T>
     [[nodiscard]] const T* dataAs() const noexcept {
         return reinterpret_cast<const T*>(data_.data());
@@ -132,6 +137,7 @@ public: // helper methods
             auto nbytes = data_raw.size();
             data_.resize(nbytes);
             std::memcpy(data_.data(), data_raw.data(), nbytes);
+            LOG("DIMS IN tensor {} = {}", name_, tensor.dims_size());
         }
     }
 };

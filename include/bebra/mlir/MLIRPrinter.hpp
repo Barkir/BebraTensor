@@ -6,6 +6,7 @@
 #include "mlir/Dialect/Tensor/IR/Tensor.h"
 #include "mlir/IR/Builders.h"
 #include "mlir/IR/BuiltinOps.h"
+#include "mlir/IR/DialectRegistry.h"
 #include "mlir/IR/BuiltinTypes.h"
 #include "mlir/IR/TypeUtilities.h"
 #include <optional>
@@ -32,6 +33,8 @@ class BebraTensor;
 namespace Bebra::MLIR {
 
 class MLIRPrinter {
+
+    mlir::DialectRegistry registry;
     mlir::MLIRContext context_;
     mlir::OpBuilder builder_;
     std::unordered_map<std::string, mlir::Value> ssa_map_;

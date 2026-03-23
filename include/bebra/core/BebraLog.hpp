@@ -3,7 +3,7 @@
 #include <iostream>
 #include <format>
 
-// #define ENABLE_LOGGING
+#define ENABLE_LOGGING
 
 #define BEBRA_HAS_FORMAT 1
 

@@ -35,7 +35,29 @@ void BebraGraph::countOutputShapes() {
 
 void BebraGraph::convertOnnxToBebraInput(const onnx::GraphProto& graph) {
     for (const auto& input : graph.input()) {
+        LOG("Collecting input: {}\n", input.name());
         BebraTensor t(input);
+        LOG("Created tensor {}\n", t.getName());
+
+        auto shape = t.getShape();
+        auto sz = shape.size();
+        size_t numElems = 1;
+        ON_DEBUG(std::cout << "With shape <");
+        for (size_t k = 0; k < sz; ++k) {
+            numElems *= shape[k];
+            if (k != sz - 1) {
+                ON_DEBUG(std::cerr << shape[k] << "x");
+            } else {
+                ON_DEBUG(std::cerr << shape[k]);
+            }
+        }
+        ON_DEBUG(std::cerr << ">\n");
+
+        if (!t.hasData()) {
+            MSG("NO data in input tensor!\n");
+            t.setEmptyData(numElems);
+            LOG("Now data size is {}\n", t.data().size());
+        }
         tensor_map_.emplace(t.name_, std::move(t));
         inputs_.push_back(t.name_);
     }
@@ -98,6 +120,7 @@ void BebraGraph::convertOnnxToBebraNode(const onnx::GraphProto& graph) {
 
 void BebraGraph::convertOnnxToBebraInitializer(const onnx::GraphProto& graph) {
     for (const auto& initializer : graph.initializer()) {
+        LOG("Collecting initializers {}\n", initializer.name());
         BebraTensor t(initializer);
         tensor_map_.emplace(t.name_, std::move(t));
         initializers_.push_back(t.name_);

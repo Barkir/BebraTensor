@@ -1,11 +1,44 @@
+// ==========================================================================
+
 #include "mlir/Dialect/Arith/IR/Arith.h"
 #include "mlir/Dialect/Linalg/IR/Linalg.h"
 #include "mlir/Dialect/Tensor/IR/Tensor.h"
 #include "mlir/Dialect/Tosa/IR/TosaOps.h"
+#include "mlir/Dialect/Func/IR/FuncOps.h"
+#include "mlir/Dialect/LLVMIR/LLVMDialect.h"
+
+// ==========================================================================
+
 #include "mlir/IR/BuiltinTypes.h"
 #include "mlir/IR/PatternMatch.h"
 #include "mlir/IR/Types.h"
+#include "mlir/IR/MLIRContext.h"
+#include "mlir/IR/DialectRegistry.h"
+#include "llvm/IR/Module.h"
+
+// ==========================================================================
+
+#include "mlir/Conversion/ReconcileUnrealizedCasts/ReconcileUnrealizedCasts.h"
+#include "mlir/Conversion/LinalgToStandard/LinalgToStandard.h"
+#include "mlir/Conversion/TensorToLinalg/TensorToLinalgPass.h"
+#include "mlir/Conversion/ArithToLLVM/ArithToLLVM.h"
+#include "mlir/Conversion/MemRefToLLVM/MemRefToLLVM.h"
+#include "mlir/Conversion/FuncToLLVM/ConvertFuncToLLVM.h"
+#include "mlir/Conversion/SCFToControlFlow/SCFToControlFlow.h"
+
+// ==========================================================================
+
+#include "mlir/Target/LLVMIR/Export.h"
+#include "mlir/Target/LLVMIR/Dialect/Builtin/BuiltinToLLVMIRTranslation.h"
+#include "mlir/Target/LLVMIR/Dialect/All.h"
+
+// ==========================================================================
+
+#include "mlir/InitAllTranslations.h"
+#include "mlir/Support/LogicalResult.h"
 #include "mlir/Transforms/DialectConversion.h"
+
+// ==========================================================================
 
 #include "bebra/core/BebraColors.hpp"
 #include "bebra/core/BebraErr.hpp"
@@ -14,6 +47,8 @@
 #include "bebra/core/BebraType.hpp"
 #include "bebra/mlir/MLIRPrinter.hpp"
 #include "bebra/core/BebraLog.hpp"
+
+// ==========================================================================
 
 #include <iostream>
 
@@ -66,7 +101,6 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     auto intype = mlir::dyn_cast<mlir::RankedTensorType>((*input).getType());
     auto eltype = intype.getElementType();
 
-    // auto outtype = createDynamicTensorType(*input);
     auto outtype = computeConv2DOutputType(*input, *weight, kernelShapeAttr,
                                             stridesDenseAttr, padsDenseAttr,
                                             dilationsDenseAttr, eltype);
@@ -75,7 +109,8 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
 
     if (!bias) {
         auto zeroAttr = builder_.getZeroAttr(eltype);
-        auto biasType = createDynamicTensorType(1, eltype);
+        // auto biasType = createDynamicTensorType(1, eltype);
+        auto biasType = mlir::RankedTensorType::get({1}, eltype);
         auto denseAttr = mlir::DenseElementsAttr::get(biasType, zeroAttr);
 
         bias = builder_.create<mlir::tosa::ConstOp>(
@@ -405,10 +440,13 @@ void MLIRPrinter::Visit(const Core::BebraTensor& tensor) {
         }
 
         auto& data = tensor.data();
+        LOG("Data size for tensor {} is {}\n", name, data.size());
 
         auto denseAttr = mlir::DenseElementsAttr::get(ttype, llvm::ArrayRef(data));
+        LOG("denseAttr size = {}\n", denseAttr.getRawData().size());
 
         mlir::Value ssa_val = builder_.create<mlir::tosa::ConstOp>(builder_.getUnknownLoc(), ttype, denseAttr);
+        ON_DEBUG(llvm::errs() << "Type" << ssa_val.getType() << "\n");
         setSSA(name, ssa_val);
         MSG("VISITED TENSOR\n");
         return;
@@ -439,6 +477,20 @@ void MLIRPrinter::generate(const Core::BebraGraph& graph, std::string& out_str) 
     // e.g: tosa, linalg, etc.
     loadAllNeededDialects();
 
+    // Register the translation interfaces
+
+    registry.insert<mlir::func::FuncDialect>();
+    registry.insert<mlir::arith::ArithDialect>();
+    registry.insert<mlir::linalg::LinalgDialect>();
+    registry.insert<mlir::LLVM::LLVMDialect>();
+    registry.insert<mlir::tensor::TensorDialect>();
+    mlir::registerAllToLLVMIRTranslations(registry);
+    mlir::registerBuiltinDialectTranslation(registry);
+    mlir::registerLLVMDialectTranslation(registry);
+
+
+    context_.appendDialectRegistry(registry);
+    context_.loadAllAvailableDialects();
     // getting location
     auto loc = builder_.getUnknownLoc();
 
@@ -459,7 +511,7 @@ void MLIRPrinter::generate(const Core::BebraGraph& graph, std::string& out_str) 
     auto* block = funcOp.addEntryBlock();
     builder_.setInsertionPointToStart(block);
 
-    MSG("Checking types before creating FunctionType..."\n);
+    MSG("Checking types before creating FunctionType...\n");
 
     for (auto t : inputTypes) {
         if (!t) {
@@ -530,25 +582,30 @@ mlir::LogicalResult MLIRPrinter::compileToLLVM(mlir::ModuleOp module, llvm::raw_
 
     mlir::PassManager pm(&context_);
     pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaInferShapesPass());
+    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToLinalgNamed());
+    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToLinalg());
+    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToArith());
 
     pm.addPass(mlir::createCanonicalizerPass());
     pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaOptionalDecompositions());
     pm.addPass(mlir::createCSEPass());
 
-    //FIXME - now it is failing on mnist model (and i guess on others)
+    // ----------------------------------------------------------------------------
+
+    pm.addPass(mlir::createConvertLinalgToStandardPass());
 
     // ----------------------------------------------------------------------------
 
-    // pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToLinalgNamed());
-    // pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToLinalg());
-
-    // ----------------------------------------------------------------------------
-
-    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToArith());
-
+    pm.addPass(mlir::createConvertTensorToLinalgPass());
     pm.addPass(mlir::createConvertSCFToCFPass());
+
+    // ----------------------------------------------------------------------------
+
+    // pm.addPass(mlir::createConvertArithToLLVMPass());
+    // pm.addPass(mlir::createConvertMemRefToLLVMPass());
     pm.addPass(mlir::createConvertFuncToLLVMPass());
 
+    pm.addPass(mlir::createReconcileUnrealizedCastsPass());
 
     // stream << "===== AFTER OPT ====" << "\n";
 
@@ -561,6 +618,15 @@ mlir::LogicalResult MLIRPrinter::compileToLLVM(mlir::ModuleOp module, llvm::raw_
 
     module.print(stream, flags);
 
+//     llvm::LLVMContext llvmContext;
+//     std::unique_ptr<llvm::Module> llvmModule = mlir::translateModuleToLLVMIR(module, llvmContext);
+//
+//     if (!llvmModule) {
+//         ON_DEBUG(llvm::errs() << "Failed to create llvmModule" << "\n";);
+//         return mlir::failure();
+//     }
+//
+//     llvmModule->print(stream, nullptr);
     return mlir::success();
 }
 

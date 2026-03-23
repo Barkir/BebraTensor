@@ -162,6 +162,24 @@ target_link_libraries(bebra_core PRIVATE
     MLIRPass
     MLIRTransforms
 
+    MLIRReconcileUnrealizedCasts
+    MLIRTargetLLVMIRExport
+    MLIRBuiltinToLLVMIRTranslation
+    MLIRLLVMToLLVMIRTranslation
+    MLIRToLLVMIRTranslationRegistration
+
+    MLIRFuncDialect
+    MLIRArithDialect
+    MLIRMemRefDialect
+
+    MLIRLinalgToStandard
+    MLIRTensorToLinalg
+    MLIRArithToLLVM
+    MLIRMemRefToLLVM
+    MLIRFuncToLLVM
+    MLIRSCFToControlFlow
+
+
     MLIRTosaTransforms
     MLIRTosaToLinalg
     MLIRTosaToArith

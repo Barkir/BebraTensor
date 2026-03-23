@@ -4,6 +4,7 @@ namespace Bebra::Core {
 
 BebraTensor::BebraTensor(const onnx::TensorProto& tensor)
     : name_(tensor.name()), dtype(OnnxDtypeToBebra(tensor.data_type())) {
+    MSG("Calling tensor constructor...\n");
     auto&& dsize = tensor.dims_size();
     shape_.reserve(static_cast<size_t>(dsize));
     for (int i = 0; i < dsize; ++i) {

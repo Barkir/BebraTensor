@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
 
             Bebra::Core::BebraGraph graph(argv[i+1]);
             graph.convertToMlir(ll_name);
-            std::cerr << BOLD_GREEN << "Successfully compiled model " << model_path_to_mlir.stem() << " to " << ll_name << BEBRA_RESET << "\n";
+            // std::cerr << BOLD_GREEN << "Successfully compiled model " << model_path_to_mlir.stem() << " to " << ll_name << BEBRA_RESET << "\n";
             return 0;
         } else {
             std::cerr << FG_TURQUOISE BEBRA_ITALIC << "you haven't entered any flags to compile your model" << BEBRA_RESET << "\n";
