@@ -1,36 +1,37 @@
 digraph{
-node0x19d2c1d0["label"="{Reshape}",shape=Mrecord style=filled, fillcolor="#E17055"]
+node0x61813d0["label"="{Reshape}",shape=Mrecord style=filled, fillcolor="#E17055"]
 tensorParameter193[label=Parameter193, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorParameter193->node0x19d2c1d0
+tensorParameter193->node0x61813d0
 tensorParameter193_reshape1_shape[label=Parameter193_reshape1_shape, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorParameter193_reshape1_shape->node0x19d2c1d0
+tensorParameter193_reshape1_shape->node0x61813d0
 tensorParameter193_reshape1[label=Parameter193_reshape1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x19d2c1d0->tensorParameter193_reshape1
-node0x19d2c2f8["label"="{Conv|kernel_shape
+node0x61813d0->tensorParameter193_reshape1
+node0x6181510["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorInput3[label=Input3, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorInput3->node0x19d2c2f8
+tensorInput3->node0x6181510
 tensorParameter5[label=Parameter5, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorParameter5->node0x19d2c2f8
+tensorParameter5->node0x6181510
 tensorConvolution28_Output_0[label=Convolution28_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x19d2c2f8->tensorConvolution28_Output_0
-node0x19d2c420["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x6181510->tensorConvolution28_Output_0
+node0x6181650["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorConvolution28_Output_0[label=Convolution28_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorConvolution28_Output_0->node0x19d2c420
+tensorConvolution28_Output_0->node0x6181650
 tensorParameter6[label=Parameter6, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorParameter6->node0x19d2c420
+tensorParameter6->node0x6181650
 tensorPlus30_Output_0[label=Plus30_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x19d2c420->tensorPlus30_Output_0
-node0x19d2c548["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x6181650->tensorPlus30_Output_0
+node0x6181790["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorPlus30_Output_0[label=Plus30_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorPlus30_Output_0->node0x19d2c548
+tensorPlus30_Output_0->node0x6181790
 tensorReLU32_Output_0[label=ReLU32_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x19d2c548->tensorReLU32_Output_0
-node0x19d2c670["label"="{MaxPool|kernel_shape
+node0x6181790->tensorReLU32_Output_0
+node0x61818d0["label"="{MaxPool|kernel_shape
 |auto_pad
 |ceil_mode
 |dilations
@@ -39,34 +40,35 @@ node0x19d2c670["label"="{MaxPool|kernel_shape
 |strides
 }",shape=Mrecord style=filled, fillcolor="#96CEB4"]
 tensorReLU32_Output_0[label=ReLU32_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorReLU32_Output_0->node0x19d2c670
+tensorReLU32_Output_0->node0x61818d0
 tensorPooling66_Output_0[label=Pooling66_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x19d2c670->tensorPooling66_Output_0
-node0x19d2c798["label"="{Conv|kernel_shape
+node0x61818d0->tensorPooling66_Output_0
+node0x6181a10["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorPooling66_Output_0[label=Pooling66_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorPooling66_Output_0->node0x19d2c798
+tensorPooling66_Output_0->node0x6181a10
 tensorParameter87[label=Parameter87, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorParameter87->node0x19d2c798
+tensorParameter87->node0x6181a10
 tensorConvolution110_Output_0[label=Convolution110_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x19d2c798->tensorConvolution110_Output_0
-node0x19d2c8c0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x6181a10->tensorConvolution110_Output_0
+node0x6181b50["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorConvolution110_Output_0[label=Convolution110_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorConvolution110_Output_0->node0x19d2c8c0
+tensorConvolution110_Output_0->node0x6181b50
 tensorParameter88[label=Parameter88, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorParameter88->node0x19d2c8c0
+tensorParameter88->node0x6181b50
 tensorPlus112_Output_0[label=Plus112_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x19d2c8c0->tensorPlus112_Output_0
-node0x19d2c9e8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x6181b50->tensorPlus112_Output_0
+node0x6181c90["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorPlus112_Output_0[label=Plus112_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorPlus112_Output_0->node0x19d2c9e8
+tensorPlus112_Output_0->node0x6181c90
 tensorReLU114_Output_0[label=ReLU114_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x19d2c9e8->tensorReLU114_Output_0
-node0x19d2cb10["label"="{MaxPool|kernel_shape
+node0x6181c90->tensorReLU114_Output_0
+node0x6181dd0["label"="{MaxPool|kernel_shape
 |auto_pad
 |ceil_mode
 |dilations
@@ -75,28 +77,28 @@ node0x19d2cb10["label"="{MaxPool|kernel_shape
 |strides
 }",shape=Mrecord style=filled, fillcolor="#96CEB4"]
 tensorReLU114_Output_0[label=ReLU114_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorReLU114_Output_0->node0x19d2cb10
+tensorReLU114_Output_0->node0x6181dd0
 tensorPooling160_Output_0[label=Pooling160_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x19d2cb10->tensorPooling160_Output_0
-node0x19d2cc38["label"="{Reshape}",shape=Mrecord style=filled, fillcolor="#E17055"]
+node0x6181dd0->tensorPooling160_Output_0
+node0x6181f10["label"="{Reshape}",shape=Mrecord style=filled, fillcolor="#E17055"]
 tensorPooling160_Output_0[label=Pooling160_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorPooling160_Output_0->node0x19d2cc38
+tensorPooling160_Output_0->node0x6181f10
 tensorPooling160_Output_0_reshape0_shape[label=Pooling160_Output_0_reshape0_shape, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorPooling160_Output_0_reshape0_shape->node0x19d2cc38
+tensorPooling160_Output_0_reshape0_shape->node0x6181f10
 tensorPooling160_Output_0_reshape0[label=Pooling160_Output_0_reshape0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x19d2cc38->tensorPooling160_Output_0_reshape0
-node0x19d2cd60["label"="{MatMul}",shape=Mrecord style=filled, fillcolor="#A29BFE"]
+node0x6181f10->tensorPooling160_Output_0_reshape0
+node0x6182050["label"="{MatMul}",shape=Mrecord style=filled, fillcolor="#A29BFE"]
 tensorPooling160_Output_0_reshape0[label=Pooling160_Output_0_reshape0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorPooling160_Output_0_reshape0->node0x19d2cd60
+tensorPooling160_Output_0_reshape0->node0x6182050
 tensorParameter193_reshape1[label=Parameter193_reshape1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorParameter193_reshape1->node0x19d2cd60
+tensorParameter193_reshape1->node0x6182050
 tensorTimes212_Output_0[label=Times212_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x19d2cd60->tensorTimes212_Output_0
-node0x19d2ce88["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x6182050->tensorTimes212_Output_0
+node0x6182190["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorTimes212_Output_0[label=Times212_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorTimes212_Output_0->node0x19d2ce88
+tensorTimes212_Output_0->node0x6182190
 tensorParameter194[label=Parameter194, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorParameter194->node0x19d2ce88
+tensorParameter194->node0x6182190
 tensorPlus214_Output_0[label=Plus214_Output_0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x19d2ce88->tensorPlus214_Output_0
+node0x6182190->tensorPlus214_Output_0
 }

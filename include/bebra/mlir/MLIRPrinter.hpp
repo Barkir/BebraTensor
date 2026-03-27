@@ -9,6 +9,7 @@
 #include "mlir/IR/DialectRegistry.h"
 #include "mlir/IR/BuiltinTypes.h"
 #include "mlir/IR/TypeUtilities.h"
+
 #include <optional>
 
 #include "mlir/Conversion/ArithToLLVM/ArithToLLVM.h"
@@ -24,6 +25,7 @@
 #include "bebra/core/BebraErr.hpp"
 #include "bebra/ops/BebraOperators.hpp"
 #include "bebra/core/BebraLog.hpp"
+#include "bebra/mlir/ModifiedValue.hpp"
 
 namespace Bebra::Core {
 class BebraGraph;
@@ -38,7 +40,8 @@ class MLIRPrinter {
     mlir::MLIRContext context_;
     mlir::OpBuilder builder_;
     std::unordered_map<std::string, mlir::Value> ssa_map_;
-    std::unordered_map<std::string, mlir::Type> type_map_;
+    std::unordered_map<std::string, ModifiedValue> type_map_;
+
 
 public: // constructor
     MLIRPrinter(Core::BebraGraph& graph);
@@ -70,14 +73,65 @@ public: // mlir-specific methods
         ssa_map_[val_name] = std::move(val);
     }
 
+    std::string getNameBySSA(const mlir::Value& val) {
+        MSG("Getting name by ssa...\n");
+        for (auto&& iter : ssa_map_) {
+            if (iter.second == val) {
+                Core::BebraWarn("Got name by ssa <<<<< (:");
+                return iter.first;
+            }
+        }
+
+        return "";
+    }
+
+// ---------------------------------------------------------------------------------
+
     void setType(const std::string& val_name, mlir::Type type) {
-        type_map_[val_name] = type;
+        ModifiedValue value;
+        value.type = type;
+        auto found = type_map_.find(val_name);
+        if (found == type_map_.end()) {
+            type_map_.emplace(val_name, value);
+            return;
+        }
+
+        auto new_val = found->second;
+        new_val.type = type;
+        type_map_.insert_or_assign(val_name, new_val);
+        return;
+    }
+
+    void setStoreType(const std::string& val_name, DataStoreType type) {
+        ModifiedValue value;
+        value.dstype = type;
+        auto found = type_map_.find(val_name);
+        if (found == type_map_.end()) {
+            type_map_.insert_or_assign(val_name, value);
+            return;
+        }
+
+        auto new_val = found->second;
+        new_val.dstype = type;
+        type_map_.insert_or_assign(val_name, new_val);
+        return;
+    }
+
+// -------------------------------------------------------------------------------
+
+    DataStoreType getStoreType(const std::string& name) {
+        auto found = type_map_.find(name);
+        if (found != type_map_.end()) {
+            return (found->second.dstype);
+        }
+
+        return DataStoreType::UNDEFINED;
     }
 
     std::optional<mlir::Type> getType(const std::string& name) {
         auto found = type_map_.find(name);
         if (found != type_map_.end()) {
-            return std::optional<mlir::Type>(found->second);
+            return std::optional<mlir::Type>(found->second.type);
         }
 
         return std::nullopt;
@@ -114,6 +168,9 @@ private: // mlir-specific
     llvm::SmallVector<mlir::Value> collectReturnValues(const Core::BebraGraph& graph);
 
 
+
+    mlir::Value convertNCHWToNHWCVal(mlir::Value& val);
+    mlir::RankedTensorType convertNCHWToNHWC(mlir::Type type);
     llvm::SmallVector<mlir::Type> createInputTypes(const Core::BebraGraph& graph);
     llvm::SmallVector<mlir::Type> createOutputTypes(const Core::BebraGraph& graph);
 

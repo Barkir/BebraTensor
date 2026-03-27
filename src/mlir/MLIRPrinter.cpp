@@ -63,21 +63,27 @@ void MLIRPrinter::Visit(const Ops::OpVoid& node) {
 void MLIRPrinter::Visit(const Ops::OpConv& node) {
     MSG("CONV\n");
 
+    auto loc = builder_.getUnknownLoc();
     // inputs
     auto input = getSSA(node.input);
     if (!input) {
         Core::BebraWarn("no input provided + " + node.input);
     }
 
+    auto processedInput = convertNCHWToNHWCVal(*input);
+    llvm::errs() << "NCHW -> NHWC : " << processedInput << "\n";
+
     auto bias = getSSA(node.bias);
     if (!bias) {
-        Core::BebraWarn("no bias provided + " + node.bias);
+        Core::BebraWarn("no bias provided " + node.bias);
     }
     auto weight = getSSA(node.weight);
     if (!weight) {
         Core::BebraWarn("no weight provided + " + node.weight);
     }
 
+    auto processedWeight = convertNCHWToNHWCVal(*weight);
+    llvm::errs() << "NCHW -> NHWC : " << processedWeight << "\n";
     // attrs
     auto kernel_shape = node.kernel_shape;
     if (kernel_shape.size() != 2) {
@@ -101,7 +107,7 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     auto intype = mlir::dyn_cast<mlir::RankedTensorType>((*input).getType());
     auto eltype = intype.getElementType();
 
-    auto outtype = computeConv2DOutputType(*input, *weight, kernelShapeAttr,
+    auto outtype = computeConv2DOutputType(processedInput, processedWeight, kernelShapeAttr,
                                             stridesDenseAttr, padsDenseAttr,
                                             dilationsDenseAttr, eltype);
 
@@ -113,6 +119,12 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
         auto biasType = mlir::RankedTensorType::get({1}, eltype);
         auto denseAttr = mlir::DenseElementsAttr::get(biasType, zeroAttr);
 
+        ON_DEBUG(llvm::errs() << "==================" << "\n");
+        ON_DEBUG(llvm::errs() << "creating ConstOp" <<   "\n");
+        ON_DEBUG(llvm::errs() << "type: " << biasType << "\n");
+        ON_DEBUG(llvm::errs() << denseAttr.getType() <<  "\n");
+        ON_DEBUG(llvm::errs() << "==================" << "\n");
+
         bias = builder_.create<mlir::tosa::ConstOp>(
             builder_.getUnknownLoc(),
             biasType,
@@ -121,8 +133,8 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     }
 
     Core::BebraWarn("==================");
-    ON_DEBUG(llvm::outs() << "input_type = " << (*input).getType() << "\n");
-    ON_DEBUG(llvm::outs() << "weights_type =" << (*weight).getType() << "\n");
+    ON_DEBUG(llvm::outs() << "input_type = " << (processedInput).getType() << "\n");
+    ON_DEBUG(llvm::outs() << "weights_type =" << (processedWeight).getType() << "\n");
     ON_DEBUG(llvm::outs() << "bias_type =" << (*bias).getType() << "\n");
     ON_DEBUG(llvm::outs() <<  "strides_type" << stridesDenseAttr.getElementType() << "\n");
     ON_DEBUG(llvm::outs() <<  "dilations_type" << dilationsDenseAttr.getElementType() << "\n");
@@ -132,8 +144,8 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
 
     auto output = builder_.create<mlir::tosa::Conv2DOp>(builder_.getUnknownLoc(),
                                                                   outtype,
-                                                                  *input,
-                                                                  *weight,
+                                                                  processedInput,
+                                                                  processedWeight,
                                                                   *bias,
                                                                   padsDenseAttr,
                                                                   stridesDenseAttr,
@@ -186,6 +198,12 @@ void MLIRPrinter::Visit(const Ops::OpAdd& node) {
 
         auto maxRank = std::max(ltype.getRank(), rtype.getRank());
         auto newType = broadCastType(rtype, maxRank);
+        auto name = getNameBySSA(*lhs);
+        auto storeType = getStoreType(name);
+        if (maxRank == 4 && storeType == DataStoreType::NHWC) {
+            Core::BebraWarn("maxRank == 4, converting to NHWC type");
+            newType = convertNCHWToNHWC(newType);
+        }
 
         processedRhs = builder_.create<mlir::tosa::ReshapeOp>(
             builder_.getUnknownLoc(),
@@ -320,7 +338,7 @@ void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
         Core::BebraWarn("no input at maxpool: " + node.input);
     }
 
-
+    auto processedInput = convertNCHWToNHWCVal(*input);
     // attrs
     auto kernel_shape = node.kernel_shape;
     if (kernel_shape.size() != 2) {
@@ -341,7 +359,7 @@ void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
     auto padsAttr = builder_.getDenseI64ArrayAttr(pads);
 
     auto outtype = computeMaxPool2DOutputType(
-        *input,
+        processedInput,
         kernelAttr,
         stridesAttr,
         padsAttr,
@@ -352,7 +370,7 @@ void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
     auto output = builder_.create<mlir::tosa::MaxPool2dOp>(
         builder_.getUnknownLoc(),
         outtype,
-        *input,
+        processedInput,
         kernelAttr,
         stridesAttr,
         padsAttr
@@ -445,6 +463,13 @@ void MLIRPrinter::Visit(const Core::BebraTensor& tensor) {
         auto denseAttr = mlir::DenseElementsAttr::get(ttype, llvm::ArrayRef(data));
         LOG("denseAttr size = {}\n", denseAttr.getRawData().size());
 
+        ON_DEBUG(llvm::errs() << "==================" << "\n");
+        ON_DEBUG(llvm::errs() << "creating ConstOp"   << "\n");
+        ON_DEBUG(llvm::errs() << "type: " << ttype    << "\n");
+        ON_DEBUG(llvm::errs() << denseAttr.getType() <<  "\n");
+        ON_DEBUG(llvm::errs() << "==================" << "\n");
+
+
         mlir::Value ssa_val = builder_.create<mlir::tosa::ConstOp>(builder_.getUnknownLoc(), ttype, denseAttr);
         ON_DEBUG(llvm::errs() << "Type" << ssa_val.getType() << "\n");
         setSSA(name, ssa_val);
@@ -463,7 +488,7 @@ MLIRPrinter::MLIRPrinter(Core::BebraGraph& graph) : builder_(&context_) {
         auto&& tname = tensor.first;
         auto&& thetensor = tensor.second;
         auto&& type = createTensorType(thetensor);
-        type_map_[tname] = type;
+        setType(tname, type);
     }
 }
 
@@ -601,10 +626,7 @@ mlir::LogicalResult MLIRPrinter::compileToLLVM(mlir::ModuleOp module, llvm::raw_
 
     // ----------------------------------------------------------------------------
 
-    // pm.addPass(mlir::createConvertArithToLLVMPass());
-    // pm.addPass(mlir::createConvertMemRefToLLVMPass());
     pm.addPass(mlir::createConvertFuncToLLVMPass());
-
     pm.addPass(mlir::createReconcileUnrealizedCastsPass());
 
     // stream << "===== AFTER OPT ====" << "\n";
@@ -831,6 +853,51 @@ mlir::Value MLIRPrinter::createFilledTensor(mlir::RankedTensorType outtype) {
     return filledTensor;
 }
 
+
+mlir::Value MLIRPrinter::convertNCHWToNHWCVal(mlir::Value& val) {
+    MSG("converting value form NCHW to NHWC\n");
+
+    auto tname = getNameBySSA(val);
+    if (getStoreType(tname) == DataStoreType::NHWC) {
+        return val;
+    }
+
+    auto loc = builder_.getUnknownLoc();
+    auto newInputType = convertNCHWToNHWC((val).getType());
+    llvm::SmallVector<int32_t, 4> perms{0, 2, 3, 1};
+    auto permType = mlir::RankedTensorType::get({4}, builder_.getI32Type());
+    auto permAttr = mlir::DenseIntElementsAttr::get(permType, llvm::ArrayRef<int32_t>(perms));
+    auto permConstOp = builder_.create<mlir::tosa::ConstOp>(loc, permType, permAttr);
+    auto transOp = builder_.create<mlir::tosa::TransposeOp>(
+        loc,
+        newInputType,
+        val,
+        permConstOp.getResult()
+    );
+
+    setStoreType(tname, DataStoreType::NHWC);
+    return transOp;
+}
+
+mlir::RankedTensorType MLIRPrinter::convertNCHWToNHWC(mlir::Type type) {
+    auto casted = mlir::dyn_cast<mlir::RankedTensorType>(type);
+    auto shape = casted.getShape();
+
+    if (shape.size() != 4) {
+        Core::BebraErr("You can't convertNCHWToNHWC if your shape size is less then 4...");
+    }
+
+    auto eltype = casted.getElementType();
+
+    //                                    N         H          W         C
+    llvm::SmallVector<int64_t> outshape{shape[0], shape[2], shape[3], shape[1]};
+
+    return mlir::RankedTensorType::get(outshape, eltype);
+}
+
+
+//NOTE - conv is computed in NHWC type so
+// provide input in NHWC not in NCHW
 mlir::RankedTensorType MLIRPrinter::computeConv2DOutputType(
     mlir::Value input,
     mlir::Value weight,
@@ -857,9 +924,9 @@ mlir::RankedTensorType MLIRPrinter::computeConv2DOutputType(
     auto weightShape = weightType.getShape();
 
     int64_t N = inputShape[0];      LOG("N = {}\n", N);
-    int64_t C_in = inputShape[1];   LOG("C = {}\n", C_in);
-    int64_t H_in = inputShape[2];   LOG("H = {}\n", H_in);
-    int64_t W_in = inputShape[3];   LOG("W = {}\n", W_in);
+    int64_t C_in = inputShape[3];   LOG("C = {}\n", C_in);
+    int64_t H_in = inputShape[1];   LOG("H = {}\n", H_in);
+    int64_t W_in = inputShape[2];   LOG("W = {}\n", W_in);
 
     int64_t C_out = weightShape[0]; LOG("C_out = {}\n", C_out);
     int64_t K_h = kernelValues[0];   LOG("K_h = {}\n", K_h);
@@ -882,6 +949,7 @@ mlir::RankedTensorType MLIRPrinter::computeConv2DOutputType(
     int64_t pad_right =  padSz > 1 ? padValues[1] : 0;
     int64_t pad_top =    padSz > 2 ? padValues[2] : 0;
     int64_t pad_bottom = padSz > 3 ? padValues[3] : 0;
+    LOG("pads = [{}, {}, {}, {}]\n", pad_left, pad_right, pad_top, pad_bottom);
 
     // int64_t H_out = (H_in - K_h + (pad_top + pad_bottom)) / stride_h + 1;
     // int64_t W_out = (W_in - K_w +  (pad_right + pad_left)) / stride_w + 1;
@@ -889,7 +957,7 @@ mlir::RankedTensorType MLIRPrinter::computeConv2DOutputType(
     auto H_out = mlir::ShapedType::kDynamic;
     auto W_out = mlir::ShapedType::kDynamic;
 
-    llvm::SmallVector<int64_t> outputShape = {N, C_out, H_out, W_out};
+    llvm::SmallVector<int64_t> outputShape = {N, H_out, W_out, C_out};
     auto elementType = inputType.getElementType();
 
     MSG("Finished computing conv2d output\n");
@@ -963,9 +1031,9 @@ mlir::RankedTensorType MLIRPrinter::computeMaxPool2DOutputType(
     auto dilationValues = dilation.getData();
 
     int64_t N = inputShape[0];      LOG("N = {}\n", N);
-    int64_t C_in = inputShape[1];   LOG("C = {}\n", C_in);
-    int64_t H_in = inputShape[2];   LOG("H = {}\n", H_in);
-    int64_t W_in = inputShape[3];   LOG("W = {}\n", W_in);
+    int64_t C_in = inputShape[3];   LOG("C = {}\n", C_in);
+    int64_t H_in = inputShape[1];   LOG("H = {}\n", H_in);
+    int64_t W_in = inputShape[2];   LOG("W = {}\n", W_in);
 
     auto kernelSz = kernelValues.size();
     int64_t K_h = kernelSz > 0 ? kernelValues[0] : 1; LOG("K_h = {}\n", K_h);
@@ -988,6 +1056,7 @@ mlir::RankedTensorType MLIRPrinter::computeMaxPool2DOutputType(
     int64_t pad_right =  padSz > 1 ? padValues[1] : 0;
     int64_t pad_top =    padSz > 2 ? padValues[2] : 0;
     int64_t pad_bottom = padSz > 3 ? padValues[3] : 0;
+    LOG("pads = [{}, {}, {}, {}]\n", pad_left, pad_right, pad_top, pad_bottom);
 
     // int64_t H_out = (H_in - K_h + 2 *(pad_top + pad_bottom)) / stride_h + 1;
     // int64_t W_out = ((W_in - K_w + 2 *(pad_right + pad_left)) / stride_w + 1);
@@ -997,7 +1066,7 @@ mlir::RankedTensorType MLIRPrinter::computeMaxPool2DOutputType(
     /* if (H_out < 0) */ auto H_out = mlir::ShapedType::kDynamic;
     /* if (W_out < 0) */ auto W_out = mlir::ShapedType::kDynamic;
 
-    llvm::SmallVector<int64_t> outputShape = {N, C_out, H_out, W_out};
+    llvm::SmallVector<int64_t> outputShape = {N, H_out, W_out, C_out};
     auto elementType = inputType.getElementType();
 
     MSG("Finished computing maxpool2d output\n");

@@ -14,6 +14,7 @@ void BebraGraph::convertOnnxToBebraGraph(const onnx::GraphProto& graph) {
     convertOnnxToBebraInitializer(graph);
     convertOnnxToBebraInput(graph);
     convertOnnxToBebraOutput(graph);
+    convertOnnxToValueInfo(graph);
     convertOnnxToBebraNode(graph);
 
     // =====================================
@@ -115,6 +116,13 @@ void BebraGraph::convertOnnxToBebraNode(const onnx::GraphProto& graph) {
             node.op_);
 
         nodes_.push_back(std::move(node));
+    }
+}
+
+void BebraGraph::convertOnnxToValueInfo(const onnx::GraphProto& graph) {
+    for (const auto& info : graph.value_info()) {
+        BebraTensor t(info);
+        tensor_map_.emplace(t.name_, std::move(t));
     }
 }
 
