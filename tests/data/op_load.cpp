@@ -3,14 +3,7 @@
 
 #include "bebra/core/BebraGraph.hpp"
 #include "bebra/ops/BebraOperators.hpp"
-
-#ifndef TEST_DATA_DIR
-#define TEST_DATA_DIR "."
-#endif
-
-static std::string get_model_path(std::string path) {
-    return std::filesystem::path(TEST_DATA_DIR) / "tests" / path;
-}
+#include "helpers.hpp"
 
 TEST(OpLoading, Conv) {
     const std::string model_path = get_model_path("third_party/resnet50-v1-7.onnx");

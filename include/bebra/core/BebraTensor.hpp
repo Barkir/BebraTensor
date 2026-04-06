@@ -66,6 +66,8 @@ public: // helper methods
     }
 
     void setEmptyData(size_t numElems) {
+        LOG("setting empty data of {} elems.\n", numElems);
+
         data_.resize(numElems);
         std::fill(data_.begin(), data_.end(), 0);
     }

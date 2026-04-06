@@ -18,6 +18,8 @@
 namespace Bebra {
 namespace Core {
 
+const size_t DEFAULT_DATA_SIZE = 64;
+
 struct BebraGraph {
     onnx::ModelProto model_;
     std::vector<BebraNode> nodes_;
@@ -63,7 +65,7 @@ public: // helper methods
         throw BebraErr("No such tensor " + tensor_name + " in tensor_map_...");
     }
 
-    void convertToMlir(const std::string& file_name) {
+    std::string convertToMlir(const std::string& file_name) {
         MSG("MLIR PRINTER\n");
         MSG("// \t\tINITIALIZERS\n");
 
@@ -83,6 +85,8 @@ public: // helper methods
         std::string result;
         printer.generate(*this, result);
         printer.dump(file_name, result);
+
+        return result;
     }
 };
 

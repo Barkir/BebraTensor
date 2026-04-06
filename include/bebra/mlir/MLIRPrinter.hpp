@@ -90,6 +90,8 @@ public: // mlir-specific methods
     void setType(const std::string& val_name, mlir::Type type) {
         ModifiedValue value;
         value.type = type;
+        value.dstype = DataStoreType::UNDEFINED;
+
         auto found = type_map_.find(val_name);
         if (found == type_map_.end()) {
             type_map_.emplace(val_name, value);
@@ -104,6 +106,7 @@ public: // mlir-specific methods
 
     void setStoreType(const std::string& val_name, DataStoreType type) {
         ModifiedValue value;
+        LOG("Setting store type of {} to {}\n", val_name, static_cast<int>(type));
         value.dstype = type;
         auto found = type_map_.find(val_name);
         if (found == type_map_.end()) {
@@ -120,11 +123,17 @@ public: // mlir-specific methods
 // -------------------------------------------------------------------------------
 
     DataStoreType getStoreType(const std::string& name) {
+        if (name == "") {
+            LOG("{} got UNDEFINED STORE TYPE\n", name);
+            return DataStoreType::UNDEFINED;
+        }
         auto found = type_map_.find(name);
         if (found != type_map_.end()) {
+            LOG("{} got {} store type\n", name, static_cast<int>(found->second.dstype));
             return (found->second.dstype);
         }
 
+        LOG("{} got undefined store type\n", name);
         return DataStoreType::UNDEFINED;
     }
 

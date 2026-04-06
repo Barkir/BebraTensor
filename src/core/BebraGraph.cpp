@@ -41,10 +41,10 @@ void BebraGraph::convertOnnxToBebraInput(const onnx::GraphProto& graph) {
         LOG("Created tensor {}\n", t.getName());
 
         auto shape = t.getShape();
-        auto sz = shape.size();
-        size_t numElems = 1;
+        auto sz = static_cast<int64_t>(shape.size());
+        int64_t numElems = 1;
         ON_DEBUG(std::cout << "With shape <");
-        for (size_t k = 0; k < sz; ++k) {
+        for (int k = 0; k < sz; ++k) {
             numElems *= shape[k];
             if (k != sz - 1) {
                 ON_DEBUG(std::cerr << shape[k] << "x");
@@ -56,9 +56,12 @@ void BebraGraph::convertOnnxToBebraInput(const onnx::GraphProto& graph) {
 
         if (!t.hasData()) {
             MSG("NO data in input tensor!\n");
-            t.setEmptyData(numElems);
+            auto numElemsApproved = numElems > 0 ? numElems : DEFAULT_DATA_SIZE;
+            t.setEmptyData(numElemsApproved);
             LOG("Now data size is {}\n", t.data().size());
         }
+
+        MSG("Emplacing...\n");
         tensor_map_.emplace(t.name_, std::move(t));
         inputs_.push_back(t.name_);
     }

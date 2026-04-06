@@ -1,35 +1,36 @@
 digraph{
-node0x3ffe0890["label"="{Conv|kernel_shape
+node0x402e1840["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensordata[label=data, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensordata->node0x3ffe0890
+tensordata->node0x402e1840
 tensorresnetv17_conv0_weight[label=resnetv17_conv0_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_conv0_weight->node0x3ffe0890
+tensorresnetv17_conv0_weight->node0x402e1840
 tensorresnetv17_conv0_fwd[label=resnetv17_conv0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe0890->tensorresnetv17_conv0_fwd
-node0x3ffe09b8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e1840->tensorresnetv17_conv0_fwd
+node0x402e1980["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_conv0_fwd[label=resnetv17_conv0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_conv0_fwd->node0x3ffe09b8
+tensorresnetv17_conv0_fwd->node0x402e1980
 tensorresnetv17_batchnorm0_gamma[label=resnetv17_batchnorm0_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_batchnorm0_gamma->node0x3ffe09b8
+tensorresnetv17_batchnorm0_gamma->node0x402e1980
 tensorresnetv17_batchnorm0_beta[label=resnetv17_batchnorm0_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_batchnorm0_beta->node0x3ffe09b8
+tensorresnetv17_batchnorm0_beta->node0x402e1980
 tensorresnetv17_batchnorm0_running_mean[label=resnetv17_batchnorm0_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_batchnorm0_running_mean->node0x3ffe09b8
+tensorresnetv17_batchnorm0_running_mean->node0x402e1980
 tensorresnetv17_batchnorm0_running_var[label=resnetv17_batchnorm0_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_batchnorm0_running_var->node0x3ffe09b8
+tensorresnetv17_batchnorm0_running_var->node0x402e1980
 tensorresnetv17_batchnorm0_fwd[label=resnetv17_batchnorm0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe09b8->tensorresnetv17_batchnorm0_fwd
-node0x3ffe0ae0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e1980->tensorresnetv17_batchnorm0_fwd
+node0x402e1ac0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_batchnorm0_fwd[label=resnetv17_batchnorm0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_batchnorm0_fwd->node0x3ffe0ae0
+tensorresnetv17_batchnorm0_fwd->node0x402e1ac0
 tensorresnetv17_relu0_fwd[label=resnetv17_relu0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe0ae0->tensorresnetv17_relu0_fwd
-node0x3ffe0c08["label"="{MaxPool|kernel_shape
+node0x402e1ac0->tensorresnetv17_relu0_fwd
+node0x402e1c00["label"="{MaxPool|kernel_shape
 |auto_pad
 |ceil_mode
 |dilations
@@ -38,1747 +39,1799 @@ node0x3ffe0c08["label"="{MaxPool|kernel_shape
 |strides
 }",shape=Mrecord style=filled, fillcolor="#96CEB4"]
 tensorresnetv17_relu0_fwd[label=resnetv17_relu0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_relu0_fwd->node0x3ffe0c08
+tensorresnetv17_relu0_fwd->node0x402e1c00
 tensorresnetv17_pool0_fwd[label=resnetv17_pool0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe0c08->tensorresnetv17_pool0_fwd
-node0x3ffe0d30["label"="{Conv|kernel_shape
+node0x402e1c00->tensorresnetv17_pool0_fwd
+node0x402e1d40["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_pool0_fwd[label=resnetv17_pool0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_pool0_fwd->node0x3ffe0d30
+tensorresnetv17_pool0_fwd->node0x402e1d40
 tensorresnetv17_stage1_conv0_weight[label=resnetv17_stage1_conv0_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv0_weight->node0x3ffe0d30
+tensorresnetv17_stage1_conv0_weight->node0x402e1d40
 tensorresnetv17_stage1_conv0_bias[label=resnetv17_stage1_conv0_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv0_bias->node0x3ffe0d30
+tensorresnetv17_stage1_conv0_bias->node0x402e1d40
 tensorresnetv17_stage1_conv0_fwd[label=resnetv17_stage1_conv0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe0d30->tensorresnetv17_stage1_conv0_fwd
-node0x3ffe0e58["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e1d40->tensorresnetv17_stage1_conv0_fwd
+node0x402e1e80["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage1_conv0_fwd[label=resnetv17_stage1_conv0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv0_fwd->node0x3ffe0e58
+tensorresnetv17_stage1_conv0_fwd->node0x402e1e80
 tensorresnetv17_stage1_batchnorm0_gamma[label=resnetv17_stage1_batchnorm0_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm0_gamma->node0x3ffe0e58
+tensorresnetv17_stage1_batchnorm0_gamma->node0x402e1e80
 tensorresnetv17_stage1_batchnorm0_beta[label=resnetv17_stage1_batchnorm0_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm0_beta->node0x3ffe0e58
+tensorresnetv17_stage1_batchnorm0_beta->node0x402e1e80
 tensorresnetv17_stage1_batchnorm0_running_mean[label=resnetv17_stage1_batchnorm0_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm0_running_mean->node0x3ffe0e58
+tensorresnetv17_stage1_batchnorm0_running_mean->node0x402e1e80
 tensorresnetv17_stage1_batchnorm0_running_var[label=resnetv17_stage1_batchnorm0_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm0_running_var->node0x3ffe0e58
+tensorresnetv17_stage1_batchnorm0_running_var->node0x402e1e80
 tensorresnetv17_stage1_batchnorm0_fwd[label=resnetv17_stage1_batchnorm0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe0e58->tensorresnetv17_stage1_batchnorm0_fwd
-node0x3ffe0f80["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e1e80->tensorresnetv17_stage1_batchnorm0_fwd
+node0x402e1fc0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage1_batchnorm0_fwd[label=resnetv17_stage1_batchnorm0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm0_fwd->node0x3ffe0f80
+tensorresnetv17_stage1_batchnorm0_fwd->node0x402e1fc0
 tensorresnetv17_stage1_relu0_fwd[label=resnetv17_stage1_relu0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe0f80->tensorresnetv17_stage1_relu0_fwd
-node0x3ffe10a8["label"="{Conv|kernel_shape
+node0x402e1fc0->tensorresnetv17_stage1_relu0_fwd
+node0x402e2100["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage1_relu0_fwd[label=resnetv17_stage1_relu0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_relu0_fwd->node0x3ffe10a8
+tensorresnetv17_stage1_relu0_fwd->node0x402e2100
 tensorresnetv17_stage1_conv1_weight[label=resnetv17_stage1_conv1_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv1_weight->node0x3ffe10a8
+tensorresnetv17_stage1_conv1_weight->node0x402e2100
 tensorresnetv17_stage1_conv1_fwd[label=resnetv17_stage1_conv1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe10a8->tensorresnetv17_stage1_conv1_fwd
-node0x3ffe11d0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e2100->tensorresnetv17_stage1_conv1_fwd
+node0x402e2240["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage1_conv1_fwd[label=resnetv17_stage1_conv1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv1_fwd->node0x3ffe11d0
+tensorresnetv17_stage1_conv1_fwd->node0x402e2240
 tensorresnetv17_stage1_batchnorm1_gamma[label=resnetv17_stage1_batchnorm1_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm1_gamma->node0x3ffe11d0
+tensorresnetv17_stage1_batchnorm1_gamma->node0x402e2240
 tensorresnetv17_stage1_batchnorm1_beta[label=resnetv17_stage1_batchnorm1_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm1_beta->node0x3ffe11d0
+tensorresnetv17_stage1_batchnorm1_beta->node0x402e2240
 tensorresnetv17_stage1_batchnorm1_running_mean[label=resnetv17_stage1_batchnorm1_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm1_running_mean->node0x3ffe11d0
+tensorresnetv17_stage1_batchnorm1_running_mean->node0x402e2240
 tensorresnetv17_stage1_batchnorm1_running_var[label=resnetv17_stage1_batchnorm1_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm1_running_var->node0x3ffe11d0
+tensorresnetv17_stage1_batchnorm1_running_var->node0x402e2240
 tensorresnetv17_stage1_batchnorm1_fwd[label=resnetv17_stage1_batchnorm1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe11d0->tensorresnetv17_stage1_batchnorm1_fwd
-node0x3ffe12f8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e2240->tensorresnetv17_stage1_batchnorm1_fwd
+node0x402e2380["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage1_batchnorm1_fwd[label=resnetv17_stage1_batchnorm1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm1_fwd->node0x3ffe12f8
+tensorresnetv17_stage1_batchnorm1_fwd->node0x402e2380
 tensorresnetv17_stage1_relu1_fwd[label=resnetv17_stage1_relu1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe12f8->tensorresnetv17_stage1_relu1_fwd
-node0x3ffe1420["label"="{Conv|kernel_shape
+node0x402e2380->tensorresnetv17_stage1_relu1_fwd
+node0x402e24c0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage1_relu1_fwd[label=resnetv17_stage1_relu1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_relu1_fwd->node0x3ffe1420
+tensorresnetv17_stage1_relu1_fwd->node0x402e24c0
 tensorresnetv17_stage1_conv2_weight[label=resnetv17_stage1_conv2_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv2_weight->node0x3ffe1420
+tensorresnetv17_stage1_conv2_weight->node0x402e24c0
 tensorresnetv17_stage1_conv2_bias[label=resnetv17_stage1_conv2_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv2_bias->node0x3ffe1420
+tensorresnetv17_stage1_conv2_bias->node0x402e24c0
 tensorresnetv17_stage1_conv2_fwd[label=resnetv17_stage1_conv2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe1420->tensorresnetv17_stage1_conv2_fwd
-node0x3ffe1548["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e24c0->tensorresnetv17_stage1_conv2_fwd
+node0x402e2600["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage1_conv2_fwd[label=resnetv17_stage1_conv2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv2_fwd->node0x3ffe1548
+tensorresnetv17_stage1_conv2_fwd->node0x402e2600
 tensorresnetv17_stage1_batchnorm2_gamma[label=resnetv17_stage1_batchnorm2_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm2_gamma->node0x3ffe1548
+tensorresnetv17_stage1_batchnorm2_gamma->node0x402e2600
 tensorresnetv17_stage1_batchnorm2_beta[label=resnetv17_stage1_batchnorm2_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm2_beta->node0x3ffe1548
+tensorresnetv17_stage1_batchnorm2_beta->node0x402e2600
 tensorresnetv17_stage1_batchnorm2_running_mean[label=resnetv17_stage1_batchnorm2_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm2_running_mean->node0x3ffe1548
+tensorresnetv17_stage1_batchnorm2_running_mean->node0x402e2600
 tensorresnetv17_stage1_batchnorm2_running_var[label=resnetv17_stage1_batchnorm2_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm2_running_var->node0x3ffe1548
+tensorresnetv17_stage1_batchnorm2_running_var->node0x402e2600
 tensorresnetv17_stage1_batchnorm2_fwd[label=resnetv17_stage1_batchnorm2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe1548->tensorresnetv17_stage1_batchnorm2_fwd
-node0x3ffe1670["label"="{Conv|kernel_shape
+node0x402e2600->tensorresnetv17_stage1_batchnorm2_fwd
+node0x402e2740["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_pool0_fwd[label=resnetv17_pool0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_pool0_fwd->node0x3ffe1670
+tensorresnetv17_pool0_fwd->node0x402e2740
 tensorresnetv17_stage1_conv3_weight[label=resnetv17_stage1_conv3_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv3_weight->node0x3ffe1670
+tensorresnetv17_stage1_conv3_weight->node0x402e2740
 tensorresnetv17_stage1_conv3_fwd[label=resnetv17_stage1_conv3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe1670->tensorresnetv17_stage1_conv3_fwd
-node0x3ffe1798["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e2740->tensorresnetv17_stage1_conv3_fwd
+node0x402e2880["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage1_conv3_fwd[label=resnetv17_stage1_conv3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv3_fwd->node0x3ffe1798
+tensorresnetv17_stage1_conv3_fwd->node0x402e2880
 tensorresnetv17_stage1_batchnorm3_gamma[label=resnetv17_stage1_batchnorm3_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm3_gamma->node0x3ffe1798
+tensorresnetv17_stage1_batchnorm3_gamma->node0x402e2880
 tensorresnetv17_stage1_batchnorm3_beta[label=resnetv17_stage1_batchnorm3_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm3_beta->node0x3ffe1798
+tensorresnetv17_stage1_batchnorm3_beta->node0x402e2880
 tensorresnetv17_stage1_batchnorm3_running_mean[label=resnetv17_stage1_batchnorm3_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm3_running_mean->node0x3ffe1798
+tensorresnetv17_stage1_batchnorm3_running_mean->node0x402e2880
 tensorresnetv17_stage1_batchnorm3_running_var[label=resnetv17_stage1_batchnorm3_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm3_running_var->node0x3ffe1798
+tensorresnetv17_stage1_batchnorm3_running_var->node0x402e2880
 tensorresnetv17_stage1_batchnorm3_fwd[label=resnetv17_stage1_batchnorm3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe1798->tensorresnetv17_stage1_batchnorm3_fwd
-node0x3ffe18c0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402e2880->tensorresnetv17_stage1_batchnorm3_fwd
+node0x402e29c0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage1_batchnorm2_fwd[label=resnetv17_stage1_batchnorm2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm2_fwd->node0x3ffe18c0
+tensorresnetv17_stage1_batchnorm2_fwd->node0x402e29c0
 tensorresnetv17_stage1_batchnorm3_fwd[label=resnetv17_stage1_batchnorm3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm3_fwd->node0x3ffe18c0
+tensorresnetv17_stage1_batchnorm3_fwd->node0x402e29c0
 tensorresnetv17_stage1__plus0[label=resnetv17_stage1__plus0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe18c0->tensorresnetv17_stage1__plus0
-node0x3ffe19e8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e29c0->tensorresnetv17_stage1__plus0
+node0x402e2b00["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage1__plus0[label=resnetv17_stage1__plus0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1__plus0->node0x3ffe19e8
+tensorresnetv17_stage1__plus0->node0x402e2b00
 tensorresnetv17_stage1_activation0[label=resnetv17_stage1_activation0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe19e8->tensorresnetv17_stage1_activation0
-node0x3ffe1b10["label"="{Conv|kernel_shape
+node0x402e2b00->tensorresnetv17_stage1_activation0
+node0x402e2c40["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage1_activation0[label=resnetv17_stage1_activation0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_activation0->node0x3ffe1b10
+tensorresnetv17_stage1_activation0->node0x402e2c40
 tensorresnetv17_stage1_conv4_weight[label=resnetv17_stage1_conv4_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv4_weight->node0x3ffe1b10
+tensorresnetv17_stage1_conv4_weight->node0x402e2c40
 tensorresnetv17_stage1_conv4_bias[label=resnetv17_stage1_conv4_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv4_bias->node0x3ffe1b10
+tensorresnetv17_stage1_conv4_bias->node0x402e2c40
 tensorresnetv17_stage1_conv4_fwd[label=resnetv17_stage1_conv4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe1b10->tensorresnetv17_stage1_conv4_fwd
-node0x3ffe1c38["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e2c40->tensorresnetv17_stage1_conv4_fwd
+node0x402e2d80["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage1_conv4_fwd[label=resnetv17_stage1_conv4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv4_fwd->node0x3ffe1c38
+tensorresnetv17_stage1_conv4_fwd->node0x402e2d80
 tensorresnetv17_stage1_batchnorm4_gamma[label=resnetv17_stage1_batchnorm4_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm4_gamma->node0x3ffe1c38
+tensorresnetv17_stage1_batchnorm4_gamma->node0x402e2d80
 tensorresnetv17_stage1_batchnorm4_beta[label=resnetv17_stage1_batchnorm4_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm4_beta->node0x3ffe1c38
+tensorresnetv17_stage1_batchnorm4_beta->node0x402e2d80
 tensorresnetv17_stage1_batchnorm4_running_mean[label=resnetv17_stage1_batchnorm4_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm4_running_mean->node0x3ffe1c38
+tensorresnetv17_stage1_batchnorm4_running_mean->node0x402e2d80
 tensorresnetv17_stage1_batchnorm4_running_var[label=resnetv17_stage1_batchnorm4_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm4_running_var->node0x3ffe1c38
+tensorresnetv17_stage1_batchnorm4_running_var->node0x402e2d80
 tensorresnetv17_stage1_batchnorm4_fwd[label=resnetv17_stage1_batchnorm4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe1c38->tensorresnetv17_stage1_batchnorm4_fwd
-node0x3ffe1d60["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e2d80->tensorresnetv17_stage1_batchnorm4_fwd
+node0x402e2ec0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage1_batchnorm4_fwd[label=resnetv17_stage1_batchnorm4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm4_fwd->node0x3ffe1d60
+tensorresnetv17_stage1_batchnorm4_fwd->node0x402e2ec0
 tensorresnetv17_stage1_relu2_fwd[label=resnetv17_stage1_relu2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe1d60->tensorresnetv17_stage1_relu2_fwd
-node0x3ffe1e88["label"="{Conv|kernel_shape
+node0x402e2ec0->tensorresnetv17_stage1_relu2_fwd
+node0x402e3000["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage1_relu2_fwd[label=resnetv17_stage1_relu2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_relu2_fwd->node0x3ffe1e88
+tensorresnetv17_stage1_relu2_fwd->node0x402e3000
 tensorresnetv17_stage1_conv5_weight[label=resnetv17_stage1_conv5_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv5_weight->node0x3ffe1e88
+tensorresnetv17_stage1_conv5_weight->node0x402e3000
 tensorresnetv17_stage1_conv5_fwd[label=resnetv17_stage1_conv5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe1e88->tensorresnetv17_stage1_conv5_fwd
-node0x3ffe1fb0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e3000->tensorresnetv17_stage1_conv5_fwd
+node0x402e3140["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage1_conv5_fwd[label=resnetv17_stage1_conv5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv5_fwd->node0x3ffe1fb0
+tensorresnetv17_stage1_conv5_fwd->node0x402e3140
 tensorresnetv17_stage1_batchnorm5_gamma[label=resnetv17_stage1_batchnorm5_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm5_gamma->node0x3ffe1fb0
+tensorresnetv17_stage1_batchnorm5_gamma->node0x402e3140
 tensorresnetv17_stage1_batchnorm5_beta[label=resnetv17_stage1_batchnorm5_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm5_beta->node0x3ffe1fb0
+tensorresnetv17_stage1_batchnorm5_beta->node0x402e3140
 tensorresnetv17_stage1_batchnorm5_running_mean[label=resnetv17_stage1_batchnorm5_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm5_running_mean->node0x3ffe1fb0
+tensorresnetv17_stage1_batchnorm5_running_mean->node0x402e3140
 tensorresnetv17_stage1_batchnorm5_running_var[label=resnetv17_stage1_batchnorm5_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm5_running_var->node0x3ffe1fb0
+tensorresnetv17_stage1_batchnorm5_running_var->node0x402e3140
 tensorresnetv17_stage1_batchnorm5_fwd[label=resnetv17_stage1_batchnorm5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe1fb0->tensorresnetv17_stage1_batchnorm5_fwd
-node0x3ffe20d8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e3140->tensorresnetv17_stage1_batchnorm5_fwd
+node0x402e3280["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage1_batchnorm5_fwd[label=resnetv17_stage1_batchnorm5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm5_fwd->node0x3ffe20d8
+tensorresnetv17_stage1_batchnorm5_fwd->node0x402e3280
 tensorresnetv17_stage1_relu3_fwd[label=resnetv17_stage1_relu3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe20d8->tensorresnetv17_stage1_relu3_fwd
-node0x3ffe2200["label"="{Conv|kernel_shape
+node0x402e3280->tensorresnetv17_stage1_relu3_fwd
+node0x402e33c0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage1_relu3_fwd[label=resnetv17_stage1_relu3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_relu3_fwd->node0x3ffe2200
+tensorresnetv17_stage1_relu3_fwd->node0x402e33c0
 tensorresnetv17_stage1_conv6_weight[label=resnetv17_stage1_conv6_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv6_weight->node0x3ffe2200
+tensorresnetv17_stage1_conv6_weight->node0x402e33c0
 tensorresnetv17_stage1_conv6_bias[label=resnetv17_stage1_conv6_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv6_bias->node0x3ffe2200
+tensorresnetv17_stage1_conv6_bias->node0x402e33c0
 tensorresnetv17_stage1_conv6_fwd[label=resnetv17_stage1_conv6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe2200->tensorresnetv17_stage1_conv6_fwd
-node0x3ffe2328["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e33c0->tensorresnetv17_stage1_conv6_fwd
+node0x402e3500["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage1_conv6_fwd[label=resnetv17_stage1_conv6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv6_fwd->node0x3ffe2328
+tensorresnetv17_stage1_conv6_fwd->node0x402e3500
 tensorresnetv17_stage1_batchnorm6_gamma[label=resnetv17_stage1_batchnorm6_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm6_gamma->node0x3ffe2328
+tensorresnetv17_stage1_batchnorm6_gamma->node0x402e3500
 tensorresnetv17_stage1_batchnorm6_beta[label=resnetv17_stage1_batchnorm6_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm6_beta->node0x3ffe2328
+tensorresnetv17_stage1_batchnorm6_beta->node0x402e3500
 tensorresnetv17_stage1_batchnorm6_running_mean[label=resnetv17_stage1_batchnorm6_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm6_running_mean->node0x3ffe2328
+tensorresnetv17_stage1_batchnorm6_running_mean->node0x402e3500
 tensorresnetv17_stage1_batchnorm6_running_var[label=resnetv17_stage1_batchnorm6_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm6_running_var->node0x3ffe2328
+tensorresnetv17_stage1_batchnorm6_running_var->node0x402e3500
 tensorresnetv17_stage1_batchnorm6_fwd[label=resnetv17_stage1_batchnorm6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe2328->tensorresnetv17_stage1_batchnorm6_fwd
-node0x3ffe2450["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402e3500->tensorresnetv17_stage1_batchnorm6_fwd
+node0x402e3640["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage1_batchnorm6_fwd[label=resnetv17_stage1_batchnorm6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm6_fwd->node0x3ffe2450
+tensorresnetv17_stage1_batchnorm6_fwd->node0x402e3640
 tensorresnetv17_stage1_activation0[label=resnetv17_stage1_activation0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_activation0->node0x3ffe2450
+tensorresnetv17_stage1_activation0->node0x402e3640
 tensorresnetv17_stage1__plus1[label=resnetv17_stage1__plus1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe2450->tensorresnetv17_stage1__plus1
-node0x3ffe2578["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e3640->tensorresnetv17_stage1__plus1
+node0x402e3780["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage1__plus1[label=resnetv17_stage1__plus1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1__plus1->node0x3ffe2578
+tensorresnetv17_stage1__plus1->node0x402e3780
 tensorresnetv17_stage1_activation1[label=resnetv17_stage1_activation1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe2578->tensorresnetv17_stage1_activation1
-node0x3ffe26a0["label"="{Conv|kernel_shape
+node0x402e3780->tensorresnetv17_stage1_activation1
+node0x402e38c0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage1_activation1[label=resnetv17_stage1_activation1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_activation1->node0x3ffe26a0
+tensorresnetv17_stage1_activation1->node0x402e38c0
 tensorresnetv17_stage1_conv7_weight[label=resnetv17_stage1_conv7_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv7_weight->node0x3ffe26a0
+tensorresnetv17_stage1_conv7_weight->node0x402e38c0
 tensorresnetv17_stage1_conv7_bias[label=resnetv17_stage1_conv7_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv7_bias->node0x3ffe26a0
+tensorresnetv17_stage1_conv7_bias->node0x402e38c0
 tensorresnetv17_stage1_conv7_fwd[label=resnetv17_stage1_conv7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe26a0->tensorresnetv17_stage1_conv7_fwd
-node0x3ffe27c8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e38c0->tensorresnetv17_stage1_conv7_fwd
+node0x402e3a00["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage1_conv7_fwd[label=resnetv17_stage1_conv7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv7_fwd->node0x3ffe27c8
+tensorresnetv17_stage1_conv7_fwd->node0x402e3a00
 tensorresnetv17_stage1_batchnorm7_gamma[label=resnetv17_stage1_batchnorm7_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm7_gamma->node0x3ffe27c8
+tensorresnetv17_stage1_batchnorm7_gamma->node0x402e3a00
 tensorresnetv17_stage1_batchnorm7_beta[label=resnetv17_stage1_batchnorm7_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm7_beta->node0x3ffe27c8
+tensorresnetv17_stage1_batchnorm7_beta->node0x402e3a00
 tensorresnetv17_stage1_batchnorm7_running_mean[label=resnetv17_stage1_batchnorm7_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm7_running_mean->node0x3ffe27c8
+tensorresnetv17_stage1_batchnorm7_running_mean->node0x402e3a00
 tensorresnetv17_stage1_batchnorm7_running_var[label=resnetv17_stage1_batchnorm7_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm7_running_var->node0x3ffe27c8
+tensorresnetv17_stage1_batchnorm7_running_var->node0x402e3a00
 tensorresnetv17_stage1_batchnorm7_fwd[label=resnetv17_stage1_batchnorm7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe27c8->tensorresnetv17_stage1_batchnorm7_fwd
-node0x3ffe28f0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e3a00->tensorresnetv17_stage1_batchnorm7_fwd
+node0x402e3b40["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage1_batchnorm7_fwd[label=resnetv17_stage1_batchnorm7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm7_fwd->node0x3ffe28f0
+tensorresnetv17_stage1_batchnorm7_fwd->node0x402e3b40
 tensorresnetv17_stage1_relu4_fwd[label=resnetv17_stage1_relu4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe28f0->tensorresnetv17_stage1_relu4_fwd
-node0x3ffe2a18["label"="{Conv|kernel_shape
+node0x402e3b40->tensorresnetv17_stage1_relu4_fwd
+node0x402e3c80["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage1_relu4_fwd[label=resnetv17_stage1_relu4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_relu4_fwd->node0x3ffe2a18
+tensorresnetv17_stage1_relu4_fwd->node0x402e3c80
 tensorresnetv17_stage1_conv8_weight[label=resnetv17_stage1_conv8_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv8_weight->node0x3ffe2a18
+tensorresnetv17_stage1_conv8_weight->node0x402e3c80
 tensorresnetv17_stage1_conv8_fwd[label=resnetv17_stage1_conv8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe2a18->tensorresnetv17_stage1_conv8_fwd
-node0x3ffe2b40["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e3c80->tensorresnetv17_stage1_conv8_fwd
+node0x402e3dc0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage1_conv8_fwd[label=resnetv17_stage1_conv8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv8_fwd->node0x3ffe2b40
+tensorresnetv17_stage1_conv8_fwd->node0x402e3dc0
 tensorresnetv17_stage1_batchnorm8_gamma[label=resnetv17_stage1_batchnorm8_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm8_gamma->node0x3ffe2b40
+tensorresnetv17_stage1_batchnorm8_gamma->node0x402e3dc0
 tensorresnetv17_stage1_batchnorm8_beta[label=resnetv17_stage1_batchnorm8_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm8_beta->node0x3ffe2b40
+tensorresnetv17_stage1_batchnorm8_beta->node0x402e3dc0
 tensorresnetv17_stage1_batchnorm8_running_mean[label=resnetv17_stage1_batchnorm8_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm8_running_mean->node0x3ffe2b40
+tensorresnetv17_stage1_batchnorm8_running_mean->node0x402e3dc0
 tensorresnetv17_stage1_batchnorm8_running_var[label=resnetv17_stage1_batchnorm8_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm8_running_var->node0x3ffe2b40
+tensorresnetv17_stage1_batchnorm8_running_var->node0x402e3dc0
 tensorresnetv17_stage1_batchnorm8_fwd[label=resnetv17_stage1_batchnorm8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe2b40->tensorresnetv17_stage1_batchnorm8_fwd
-node0x3ffe2c68["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e3dc0->tensorresnetv17_stage1_batchnorm8_fwd
+node0x402e3f00["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage1_batchnorm8_fwd[label=resnetv17_stage1_batchnorm8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm8_fwd->node0x3ffe2c68
+tensorresnetv17_stage1_batchnorm8_fwd->node0x402e3f00
 tensorresnetv17_stage1_relu5_fwd[label=resnetv17_stage1_relu5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe2c68->tensorresnetv17_stage1_relu5_fwd
-node0x3ffe2d90["label"="{Conv|kernel_shape
+node0x402e3f00->tensorresnetv17_stage1_relu5_fwd
+node0x402e4040["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage1_relu5_fwd[label=resnetv17_stage1_relu5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_relu5_fwd->node0x3ffe2d90
+tensorresnetv17_stage1_relu5_fwd->node0x402e4040
 tensorresnetv17_stage1_conv9_weight[label=resnetv17_stage1_conv9_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv9_weight->node0x3ffe2d90
+tensorresnetv17_stage1_conv9_weight->node0x402e4040
 tensorresnetv17_stage1_conv9_bias[label=resnetv17_stage1_conv9_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv9_bias->node0x3ffe2d90
+tensorresnetv17_stage1_conv9_bias->node0x402e4040
 tensorresnetv17_stage1_conv9_fwd[label=resnetv17_stage1_conv9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe2d90->tensorresnetv17_stage1_conv9_fwd
-node0x3ffe2eb8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e4040->tensorresnetv17_stage1_conv9_fwd
+node0x402e4180["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage1_conv9_fwd[label=resnetv17_stage1_conv9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_conv9_fwd->node0x3ffe2eb8
+tensorresnetv17_stage1_conv9_fwd->node0x402e4180
 tensorresnetv17_stage1_batchnorm9_gamma[label=resnetv17_stage1_batchnorm9_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm9_gamma->node0x3ffe2eb8
+tensorresnetv17_stage1_batchnorm9_gamma->node0x402e4180
 tensorresnetv17_stage1_batchnorm9_beta[label=resnetv17_stage1_batchnorm9_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm9_beta->node0x3ffe2eb8
+tensorresnetv17_stage1_batchnorm9_beta->node0x402e4180
 tensorresnetv17_stage1_batchnorm9_running_mean[label=resnetv17_stage1_batchnorm9_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm9_running_mean->node0x3ffe2eb8
+tensorresnetv17_stage1_batchnorm9_running_mean->node0x402e4180
 tensorresnetv17_stage1_batchnorm9_running_var[label=resnetv17_stage1_batchnorm9_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm9_running_var->node0x3ffe2eb8
+tensorresnetv17_stage1_batchnorm9_running_var->node0x402e4180
 tensorresnetv17_stage1_batchnorm9_fwd[label=resnetv17_stage1_batchnorm9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe2eb8->tensorresnetv17_stage1_batchnorm9_fwd
-node0x3ffe2fe0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402e4180->tensorresnetv17_stage1_batchnorm9_fwd
+node0x402e42c0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage1_batchnorm9_fwd[label=resnetv17_stage1_batchnorm9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_batchnorm9_fwd->node0x3ffe2fe0
+tensorresnetv17_stage1_batchnorm9_fwd->node0x402e42c0
 tensorresnetv17_stage1_activation1[label=resnetv17_stage1_activation1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_activation1->node0x3ffe2fe0
+tensorresnetv17_stage1_activation1->node0x402e42c0
 tensorresnetv17_stage1__plus2[label=resnetv17_stage1__plus2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe2fe0->tensorresnetv17_stage1__plus2
-node0x3ffe3108["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e42c0->tensorresnetv17_stage1__plus2
+node0x402e4400["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage1__plus2[label=resnetv17_stage1__plus2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1__plus2->node0x3ffe3108
+tensorresnetv17_stage1__plus2->node0x402e4400
 tensorresnetv17_stage1_activation2[label=resnetv17_stage1_activation2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe3108->tensorresnetv17_stage1_activation2
-node0x3ffe3230["label"="{Conv|kernel_shape
+node0x402e4400->tensorresnetv17_stage1_activation2
+node0x402e4540["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage1_activation2[label=resnetv17_stage1_activation2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_activation2->node0x3ffe3230
+tensorresnetv17_stage1_activation2->node0x402e4540
 tensorresnetv17_stage2_conv0_weight[label=resnetv17_stage2_conv0_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv0_weight->node0x3ffe3230
+tensorresnetv17_stage2_conv0_weight->node0x402e4540
 tensorresnetv17_stage2_conv0_bias[label=resnetv17_stage2_conv0_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv0_bias->node0x3ffe3230
+tensorresnetv17_stage2_conv0_bias->node0x402e4540
 tensorresnetv17_stage2_conv0_fwd[label=resnetv17_stage2_conv0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe3230->tensorresnetv17_stage2_conv0_fwd
-node0x3ffe3358["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e4540->tensorresnetv17_stage2_conv0_fwd
+node0x402e4680["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv0_fwd[label=resnetv17_stage2_conv0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv0_fwd->node0x3ffe3358
+tensorresnetv17_stage2_conv0_fwd->node0x402e4680
 tensorresnetv17_stage2_batchnorm0_gamma[label=resnetv17_stage2_batchnorm0_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm0_gamma->node0x3ffe3358
+tensorresnetv17_stage2_batchnorm0_gamma->node0x402e4680
 tensorresnetv17_stage2_batchnorm0_beta[label=resnetv17_stage2_batchnorm0_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm0_beta->node0x3ffe3358
+tensorresnetv17_stage2_batchnorm0_beta->node0x402e4680
 tensorresnetv17_stage2_batchnorm0_running_mean[label=resnetv17_stage2_batchnorm0_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm0_running_mean->node0x3ffe3358
+tensorresnetv17_stage2_batchnorm0_running_mean->node0x402e4680
 tensorresnetv17_stage2_batchnorm0_running_var[label=resnetv17_stage2_batchnorm0_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm0_running_var->node0x3ffe3358
+tensorresnetv17_stage2_batchnorm0_running_var->node0x402e4680
 tensorresnetv17_stage2_batchnorm0_fwd[label=resnetv17_stage2_batchnorm0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe3358->tensorresnetv17_stage2_batchnorm0_fwd
-node0x3ffe3480["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e4680->tensorresnetv17_stage2_batchnorm0_fwd
+node0x402e47c0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage2_batchnorm0_fwd[label=resnetv17_stage2_batchnorm0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm0_fwd->node0x3ffe3480
+tensorresnetv17_stage2_batchnorm0_fwd->node0x402e47c0
 tensorresnetv17_stage2_relu0_fwd[label=resnetv17_stage2_relu0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe3480->tensorresnetv17_stage2_relu0_fwd
-node0x3ffe35a8["label"="{Conv|kernel_shape
+node0x402e47c0->tensorresnetv17_stage2_relu0_fwd
+node0x402e4900["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_relu0_fwd[label=resnetv17_stage2_relu0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_relu0_fwd->node0x3ffe35a8
+tensorresnetv17_stage2_relu0_fwd->node0x402e4900
 tensorresnetv17_stage2_conv1_weight[label=resnetv17_stage2_conv1_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv1_weight->node0x3ffe35a8
+tensorresnetv17_stage2_conv1_weight->node0x402e4900
 tensorresnetv17_stage2_conv1_fwd[label=resnetv17_stage2_conv1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe35a8->tensorresnetv17_stage2_conv1_fwd
-node0x3ffe36d0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e4900->tensorresnetv17_stage2_conv1_fwd
+node0x402e4a40["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv1_fwd[label=resnetv17_stage2_conv1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv1_fwd->node0x3ffe36d0
+tensorresnetv17_stage2_conv1_fwd->node0x402e4a40
 tensorresnetv17_stage2_batchnorm1_gamma[label=resnetv17_stage2_batchnorm1_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm1_gamma->node0x3ffe36d0
+tensorresnetv17_stage2_batchnorm1_gamma->node0x402e4a40
 tensorresnetv17_stage2_batchnorm1_beta[label=resnetv17_stage2_batchnorm1_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm1_beta->node0x3ffe36d0
+tensorresnetv17_stage2_batchnorm1_beta->node0x402e4a40
 tensorresnetv17_stage2_batchnorm1_running_mean[label=resnetv17_stage2_batchnorm1_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm1_running_mean->node0x3ffe36d0
+tensorresnetv17_stage2_batchnorm1_running_mean->node0x402e4a40
 tensorresnetv17_stage2_batchnorm1_running_var[label=resnetv17_stage2_batchnorm1_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm1_running_var->node0x3ffe36d0
+tensorresnetv17_stage2_batchnorm1_running_var->node0x402e4a40
 tensorresnetv17_stage2_batchnorm1_fwd[label=resnetv17_stage2_batchnorm1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe36d0->tensorresnetv17_stage2_batchnorm1_fwd
-node0x3ffe37f8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e4a40->tensorresnetv17_stage2_batchnorm1_fwd
+node0x402e4b80["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage2_batchnorm1_fwd[label=resnetv17_stage2_batchnorm1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm1_fwd->node0x3ffe37f8
+tensorresnetv17_stage2_batchnorm1_fwd->node0x402e4b80
 tensorresnetv17_stage2_relu1_fwd[label=resnetv17_stage2_relu1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe37f8->tensorresnetv17_stage2_relu1_fwd
-node0x3ffe3920["label"="{Conv|kernel_shape
+node0x402e4b80->tensorresnetv17_stage2_relu1_fwd
+node0x402e4cc0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_relu1_fwd[label=resnetv17_stage2_relu1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_relu1_fwd->node0x3ffe3920
+tensorresnetv17_stage2_relu1_fwd->node0x402e4cc0
 tensorresnetv17_stage2_conv2_weight[label=resnetv17_stage2_conv2_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv2_weight->node0x3ffe3920
+tensorresnetv17_stage2_conv2_weight->node0x402e4cc0
 tensorresnetv17_stage2_conv2_bias[label=resnetv17_stage2_conv2_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv2_bias->node0x3ffe3920
+tensorresnetv17_stage2_conv2_bias->node0x402e4cc0
 tensorresnetv17_stage2_conv2_fwd[label=resnetv17_stage2_conv2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe3920->tensorresnetv17_stage2_conv2_fwd
-node0x3ffe3a48["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e4cc0->tensorresnetv17_stage2_conv2_fwd
+node0x402e4e00["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv2_fwd[label=resnetv17_stage2_conv2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv2_fwd->node0x3ffe3a48
+tensorresnetv17_stage2_conv2_fwd->node0x402e4e00
 tensorresnetv17_stage2_batchnorm2_gamma[label=resnetv17_stage2_batchnorm2_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm2_gamma->node0x3ffe3a48
+tensorresnetv17_stage2_batchnorm2_gamma->node0x402e4e00
 tensorresnetv17_stage2_batchnorm2_beta[label=resnetv17_stage2_batchnorm2_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm2_beta->node0x3ffe3a48
+tensorresnetv17_stage2_batchnorm2_beta->node0x402e4e00
 tensorresnetv17_stage2_batchnorm2_running_mean[label=resnetv17_stage2_batchnorm2_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm2_running_mean->node0x3ffe3a48
+tensorresnetv17_stage2_batchnorm2_running_mean->node0x402e4e00
 tensorresnetv17_stage2_batchnorm2_running_var[label=resnetv17_stage2_batchnorm2_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm2_running_var->node0x3ffe3a48
+tensorresnetv17_stage2_batchnorm2_running_var->node0x402e4e00
 tensorresnetv17_stage2_batchnorm2_fwd[label=resnetv17_stage2_batchnorm2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe3a48->tensorresnetv17_stage2_batchnorm2_fwd
-node0x3ffe3b70["label"="{Conv|kernel_shape
+node0x402e4e00->tensorresnetv17_stage2_batchnorm2_fwd
+node0x402e4f40["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage1_activation2[label=resnetv17_stage1_activation2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage1_activation2->node0x3ffe3b70
+tensorresnetv17_stage1_activation2->node0x402e4f40
 tensorresnetv17_stage2_conv3_weight[label=resnetv17_stage2_conv3_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv3_weight->node0x3ffe3b70
+tensorresnetv17_stage2_conv3_weight->node0x402e4f40
 tensorresnetv17_stage2_conv3_fwd[label=resnetv17_stage2_conv3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe3b70->tensorresnetv17_stage2_conv3_fwd
-node0x3ffe3c98["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e4f40->tensorresnetv17_stage2_conv3_fwd
+node0x402e5080["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv3_fwd[label=resnetv17_stage2_conv3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv3_fwd->node0x3ffe3c98
+tensorresnetv17_stage2_conv3_fwd->node0x402e5080
 tensorresnetv17_stage2_batchnorm3_gamma[label=resnetv17_stage2_batchnorm3_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm3_gamma->node0x3ffe3c98
+tensorresnetv17_stage2_batchnorm3_gamma->node0x402e5080
 tensorresnetv17_stage2_batchnorm3_beta[label=resnetv17_stage2_batchnorm3_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm3_beta->node0x3ffe3c98
+tensorresnetv17_stage2_batchnorm3_beta->node0x402e5080
 tensorresnetv17_stage2_batchnorm3_running_mean[label=resnetv17_stage2_batchnorm3_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm3_running_mean->node0x3ffe3c98
+tensorresnetv17_stage2_batchnorm3_running_mean->node0x402e5080
 tensorresnetv17_stage2_batchnorm3_running_var[label=resnetv17_stage2_batchnorm3_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm3_running_var->node0x3ffe3c98
+tensorresnetv17_stage2_batchnorm3_running_var->node0x402e5080
 tensorresnetv17_stage2_batchnorm3_fwd[label=resnetv17_stage2_batchnorm3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe3c98->tensorresnetv17_stage2_batchnorm3_fwd
-node0x3ffe3dc0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402e5080->tensorresnetv17_stage2_batchnorm3_fwd
+node0x402e51c0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage2_batchnorm2_fwd[label=resnetv17_stage2_batchnorm2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm2_fwd->node0x3ffe3dc0
+tensorresnetv17_stage2_batchnorm2_fwd->node0x402e51c0
 tensorresnetv17_stage2_batchnorm3_fwd[label=resnetv17_stage2_batchnorm3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm3_fwd->node0x3ffe3dc0
+tensorresnetv17_stage2_batchnorm3_fwd->node0x402e51c0
 tensorresnetv17_stage2__plus0[label=resnetv17_stage2__plus0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe3dc0->tensorresnetv17_stage2__plus0
-node0x3ffe3ee8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e51c0->tensorresnetv17_stage2__plus0
+node0x402e5300["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage2__plus0[label=resnetv17_stage2__plus0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2__plus0->node0x3ffe3ee8
+tensorresnetv17_stage2__plus0->node0x402e5300
 tensorresnetv17_stage2_activation0[label=resnetv17_stage2_activation0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe3ee8->tensorresnetv17_stage2_activation0
-node0x3ffe4010["label"="{Conv|kernel_shape
+node0x402e5300->tensorresnetv17_stage2_activation0
+node0x402e5440["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_activation0[label=resnetv17_stage2_activation0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_activation0->node0x3ffe4010
+tensorresnetv17_stage2_activation0->node0x402e5440
 tensorresnetv17_stage2_conv4_weight[label=resnetv17_stage2_conv4_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv4_weight->node0x3ffe4010
+tensorresnetv17_stage2_conv4_weight->node0x402e5440
 tensorresnetv17_stage2_conv4_bias[label=resnetv17_stage2_conv4_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv4_bias->node0x3ffe4010
+tensorresnetv17_stage2_conv4_bias->node0x402e5440
 tensorresnetv17_stage2_conv4_fwd[label=resnetv17_stage2_conv4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe4010->tensorresnetv17_stage2_conv4_fwd
-node0x3ffe4138["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e5440->tensorresnetv17_stage2_conv4_fwd
+node0x402e5580["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv4_fwd[label=resnetv17_stage2_conv4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv4_fwd->node0x3ffe4138
+tensorresnetv17_stage2_conv4_fwd->node0x402e5580
 tensorresnetv17_stage2_batchnorm4_gamma[label=resnetv17_stage2_batchnorm4_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm4_gamma->node0x3ffe4138
+tensorresnetv17_stage2_batchnorm4_gamma->node0x402e5580
 tensorresnetv17_stage2_batchnorm4_beta[label=resnetv17_stage2_batchnorm4_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm4_beta->node0x3ffe4138
+tensorresnetv17_stage2_batchnorm4_beta->node0x402e5580
 tensorresnetv17_stage2_batchnorm4_running_mean[label=resnetv17_stage2_batchnorm4_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm4_running_mean->node0x3ffe4138
+tensorresnetv17_stage2_batchnorm4_running_mean->node0x402e5580
 tensorresnetv17_stage2_batchnorm4_running_var[label=resnetv17_stage2_batchnorm4_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm4_running_var->node0x3ffe4138
+tensorresnetv17_stage2_batchnorm4_running_var->node0x402e5580
 tensorresnetv17_stage2_batchnorm4_fwd[label=resnetv17_stage2_batchnorm4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe4138->tensorresnetv17_stage2_batchnorm4_fwd
-node0x3ffe4260["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e5580->tensorresnetv17_stage2_batchnorm4_fwd
+node0x402e56c0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage2_batchnorm4_fwd[label=resnetv17_stage2_batchnorm4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm4_fwd->node0x3ffe4260
+tensorresnetv17_stage2_batchnorm4_fwd->node0x402e56c0
 tensorresnetv17_stage2_relu2_fwd[label=resnetv17_stage2_relu2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe4260->tensorresnetv17_stage2_relu2_fwd
-node0x3ffe4388["label"="{Conv|kernel_shape
+node0x402e56c0->tensorresnetv17_stage2_relu2_fwd
+node0x402e5800["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_relu2_fwd[label=resnetv17_stage2_relu2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_relu2_fwd->node0x3ffe4388
+tensorresnetv17_stage2_relu2_fwd->node0x402e5800
 tensorresnetv17_stage2_conv5_weight[label=resnetv17_stage2_conv5_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv5_weight->node0x3ffe4388
+tensorresnetv17_stage2_conv5_weight->node0x402e5800
 tensorresnetv17_stage2_conv5_fwd[label=resnetv17_stage2_conv5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe4388->tensorresnetv17_stage2_conv5_fwd
-node0x3ffe44b0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e5800->tensorresnetv17_stage2_conv5_fwd
+node0x402e5940["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv5_fwd[label=resnetv17_stage2_conv5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv5_fwd->node0x3ffe44b0
+tensorresnetv17_stage2_conv5_fwd->node0x402e5940
 tensorresnetv17_stage2_batchnorm5_gamma[label=resnetv17_stage2_batchnorm5_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm5_gamma->node0x3ffe44b0
+tensorresnetv17_stage2_batchnorm5_gamma->node0x402e5940
 tensorresnetv17_stage2_batchnorm5_beta[label=resnetv17_stage2_batchnorm5_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm5_beta->node0x3ffe44b0
+tensorresnetv17_stage2_batchnorm5_beta->node0x402e5940
 tensorresnetv17_stage2_batchnorm5_running_mean[label=resnetv17_stage2_batchnorm5_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm5_running_mean->node0x3ffe44b0
+tensorresnetv17_stage2_batchnorm5_running_mean->node0x402e5940
 tensorresnetv17_stage2_batchnorm5_running_var[label=resnetv17_stage2_batchnorm5_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm5_running_var->node0x3ffe44b0
+tensorresnetv17_stage2_batchnorm5_running_var->node0x402e5940
 tensorresnetv17_stage2_batchnorm5_fwd[label=resnetv17_stage2_batchnorm5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe44b0->tensorresnetv17_stage2_batchnorm5_fwd
-node0x3ffe45d8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e5940->tensorresnetv17_stage2_batchnorm5_fwd
+node0x402e5a80["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage2_batchnorm5_fwd[label=resnetv17_stage2_batchnorm5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm5_fwd->node0x3ffe45d8
+tensorresnetv17_stage2_batchnorm5_fwd->node0x402e5a80
 tensorresnetv17_stage2_relu3_fwd[label=resnetv17_stage2_relu3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe45d8->tensorresnetv17_stage2_relu3_fwd
-node0x3ffe4700["label"="{Conv|kernel_shape
+node0x402e5a80->tensorresnetv17_stage2_relu3_fwd
+node0x402e5bc0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_relu3_fwd[label=resnetv17_stage2_relu3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_relu3_fwd->node0x3ffe4700
+tensorresnetv17_stage2_relu3_fwd->node0x402e5bc0
 tensorresnetv17_stage2_conv6_weight[label=resnetv17_stage2_conv6_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv6_weight->node0x3ffe4700
+tensorresnetv17_stage2_conv6_weight->node0x402e5bc0
 tensorresnetv17_stage2_conv6_bias[label=resnetv17_stage2_conv6_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv6_bias->node0x3ffe4700
+tensorresnetv17_stage2_conv6_bias->node0x402e5bc0
 tensorresnetv17_stage2_conv6_fwd[label=resnetv17_stage2_conv6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe4700->tensorresnetv17_stage2_conv6_fwd
-node0x3ffe4828["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e5bc0->tensorresnetv17_stage2_conv6_fwd
+node0x402e5d00["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv6_fwd[label=resnetv17_stage2_conv6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv6_fwd->node0x3ffe4828
+tensorresnetv17_stage2_conv6_fwd->node0x402e5d00
 tensorresnetv17_stage2_batchnorm6_gamma[label=resnetv17_stage2_batchnorm6_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm6_gamma->node0x3ffe4828
+tensorresnetv17_stage2_batchnorm6_gamma->node0x402e5d00
 tensorresnetv17_stage2_batchnorm6_beta[label=resnetv17_stage2_batchnorm6_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm6_beta->node0x3ffe4828
+tensorresnetv17_stage2_batchnorm6_beta->node0x402e5d00
 tensorresnetv17_stage2_batchnorm6_running_mean[label=resnetv17_stage2_batchnorm6_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm6_running_mean->node0x3ffe4828
+tensorresnetv17_stage2_batchnorm6_running_mean->node0x402e5d00
 tensorresnetv17_stage2_batchnorm6_running_var[label=resnetv17_stage2_batchnorm6_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm6_running_var->node0x3ffe4828
+tensorresnetv17_stage2_batchnorm6_running_var->node0x402e5d00
 tensorresnetv17_stage2_batchnorm6_fwd[label=resnetv17_stage2_batchnorm6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe4828->tensorresnetv17_stage2_batchnorm6_fwd
-node0x3ffe4950["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402e5d00->tensorresnetv17_stage2_batchnorm6_fwd
+node0x402e5e40["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage2_batchnorm6_fwd[label=resnetv17_stage2_batchnorm6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm6_fwd->node0x3ffe4950
+tensorresnetv17_stage2_batchnorm6_fwd->node0x402e5e40
 tensorresnetv17_stage2_activation0[label=resnetv17_stage2_activation0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_activation0->node0x3ffe4950
+tensorresnetv17_stage2_activation0->node0x402e5e40
 tensorresnetv17_stage2__plus1[label=resnetv17_stage2__plus1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe4950->tensorresnetv17_stage2__plus1
-node0x3ffe4a78["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e5e40->tensorresnetv17_stage2__plus1
+node0x402e5f80["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage2__plus1[label=resnetv17_stage2__plus1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2__plus1->node0x3ffe4a78
+tensorresnetv17_stage2__plus1->node0x402e5f80
 tensorresnetv17_stage2_activation1[label=resnetv17_stage2_activation1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe4a78->tensorresnetv17_stage2_activation1
-node0x3ffe4ba0["label"="{Conv|kernel_shape
+node0x402e5f80->tensorresnetv17_stage2_activation1
+node0x402e60c0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_activation1[label=resnetv17_stage2_activation1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_activation1->node0x3ffe4ba0
+tensorresnetv17_stage2_activation1->node0x402e60c0
 tensorresnetv17_stage2_conv7_weight[label=resnetv17_stage2_conv7_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv7_weight->node0x3ffe4ba0
+tensorresnetv17_stage2_conv7_weight->node0x402e60c0
 tensorresnetv17_stage2_conv7_bias[label=resnetv17_stage2_conv7_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv7_bias->node0x3ffe4ba0
+tensorresnetv17_stage2_conv7_bias->node0x402e60c0
 tensorresnetv17_stage2_conv7_fwd[label=resnetv17_stage2_conv7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe4ba0->tensorresnetv17_stage2_conv7_fwd
-node0x3ffe4cc8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e60c0->tensorresnetv17_stage2_conv7_fwd
+node0x402e6200["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv7_fwd[label=resnetv17_stage2_conv7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv7_fwd->node0x3ffe4cc8
+tensorresnetv17_stage2_conv7_fwd->node0x402e6200
 tensorresnetv17_stage2_batchnorm7_gamma[label=resnetv17_stage2_batchnorm7_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm7_gamma->node0x3ffe4cc8
+tensorresnetv17_stage2_batchnorm7_gamma->node0x402e6200
 tensorresnetv17_stage2_batchnorm7_beta[label=resnetv17_stage2_batchnorm7_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm7_beta->node0x3ffe4cc8
+tensorresnetv17_stage2_batchnorm7_beta->node0x402e6200
 tensorresnetv17_stage2_batchnorm7_running_mean[label=resnetv17_stage2_batchnorm7_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm7_running_mean->node0x3ffe4cc8
+tensorresnetv17_stage2_batchnorm7_running_mean->node0x402e6200
 tensorresnetv17_stage2_batchnorm7_running_var[label=resnetv17_stage2_batchnorm7_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm7_running_var->node0x3ffe4cc8
+tensorresnetv17_stage2_batchnorm7_running_var->node0x402e6200
 tensorresnetv17_stage2_batchnorm7_fwd[label=resnetv17_stage2_batchnorm7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe4cc8->tensorresnetv17_stage2_batchnorm7_fwd
-node0x3ffe4df0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e6200->tensorresnetv17_stage2_batchnorm7_fwd
+node0x402e6340["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage2_batchnorm7_fwd[label=resnetv17_stage2_batchnorm7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm7_fwd->node0x3ffe4df0
+tensorresnetv17_stage2_batchnorm7_fwd->node0x402e6340
 tensorresnetv17_stage2_relu4_fwd[label=resnetv17_stage2_relu4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe4df0->tensorresnetv17_stage2_relu4_fwd
-node0x3ffe4f18["label"="{Conv|kernel_shape
+node0x402e6340->tensorresnetv17_stage2_relu4_fwd
+node0x402e6480["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_relu4_fwd[label=resnetv17_stage2_relu4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_relu4_fwd->node0x3ffe4f18
+tensorresnetv17_stage2_relu4_fwd->node0x402e6480
 tensorresnetv17_stage2_conv8_weight[label=resnetv17_stage2_conv8_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv8_weight->node0x3ffe4f18
+tensorresnetv17_stage2_conv8_weight->node0x402e6480
 tensorresnetv17_stage2_conv8_fwd[label=resnetv17_stage2_conv8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe4f18->tensorresnetv17_stage2_conv8_fwd
-node0x3ffe5040["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e6480->tensorresnetv17_stage2_conv8_fwd
+node0x402e65c0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv8_fwd[label=resnetv17_stage2_conv8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv8_fwd->node0x3ffe5040
+tensorresnetv17_stage2_conv8_fwd->node0x402e65c0
 tensorresnetv17_stage2_batchnorm8_gamma[label=resnetv17_stage2_batchnorm8_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm8_gamma->node0x3ffe5040
+tensorresnetv17_stage2_batchnorm8_gamma->node0x402e65c0
 tensorresnetv17_stage2_batchnorm8_beta[label=resnetv17_stage2_batchnorm8_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm8_beta->node0x3ffe5040
+tensorresnetv17_stage2_batchnorm8_beta->node0x402e65c0
 tensorresnetv17_stage2_batchnorm8_running_mean[label=resnetv17_stage2_batchnorm8_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm8_running_mean->node0x3ffe5040
+tensorresnetv17_stage2_batchnorm8_running_mean->node0x402e65c0
 tensorresnetv17_stage2_batchnorm8_running_var[label=resnetv17_stage2_batchnorm8_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm8_running_var->node0x3ffe5040
+tensorresnetv17_stage2_batchnorm8_running_var->node0x402e65c0
 tensorresnetv17_stage2_batchnorm8_fwd[label=resnetv17_stage2_batchnorm8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe5040->tensorresnetv17_stage2_batchnorm8_fwd
-node0x3ffe5168["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e65c0->tensorresnetv17_stage2_batchnorm8_fwd
+node0x402e6700["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage2_batchnorm8_fwd[label=resnetv17_stage2_batchnorm8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm8_fwd->node0x3ffe5168
+tensorresnetv17_stage2_batchnorm8_fwd->node0x402e6700
 tensorresnetv17_stage2_relu5_fwd[label=resnetv17_stage2_relu5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe5168->tensorresnetv17_stage2_relu5_fwd
-node0x3ffe5290["label"="{Conv|kernel_shape
+node0x402e6700->tensorresnetv17_stage2_relu5_fwd
+node0x402e6840["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_relu5_fwd[label=resnetv17_stage2_relu5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_relu5_fwd->node0x3ffe5290
+tensorresnetv17_stage2_relu5_fwd->node0x402e6840
 tensorresnetv17_stage2_conv9_weight[label=resnetv17_stage2_conv9_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv9_weight->node0x3ffe5290
+tensorresnetv17_stage2_conv9_weight->node0x402e6840
 tensorresnetv17_stage2_conv9_bias[label=resnetv17_stage2_conv9_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv9_bias->node0x3ffe5290
+tensorresnetv17_stage2_conv9_bias->node0x402e6840
 tensorresnetv17_stage2_conv9_fwd[label=resnetv17_stage2_conv9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe5290->tensorresnetv17_stage2_conv9_fwd
-node0x3ffe53b8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e6840->tensorresnetv17_stage2_conv9_fwd
+node0x402e6980["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv9_fwd[label=resnetv17_stage2_conv9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv9_fwd->node0x3ffe53b8
+tensorresnetv17_stage2_conv9_fwd->node0x402e6980
 tensorresnetv17_stage2_batchnorm9_gamma[label=resnetv17_stage2_batchnorm9_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm9_gamma->node0x3ffe53b8
+tensorresnetv17_stage2_batchnorm9_gamma->node0x402e6980
 tensorresnetv17_stage2_batchnorm9_beta[label=resnetv17_stage2_batchnorm9_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm9_beta->node0x3ffe53b8
+tensorresnetv17_stage2_batchnorm9_beta->node0x402e6980
 tensorresnetv17_stage2_batchnorm9_running_mean[label=resnetv17_stage2_batchnorm9_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm9_running_mean->node0x3ffe53b8
+tensorresnetv17_stage2_batchnorm9_running_mean->node0x402e6980
 tensorresnetv17_stage2_batchnorm9_running_var[label=resnetv17_stage2_batchnorm9_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm9_running_var->node0x3ffe53b8
+tensorresnetv17_stage2_batchnorm9_running_var->node0x402e6980
 tensorresnetv17_stage2_batchnorm9_fwd[label=resnetv17_stage2_batchnorm9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe53b8->tensorresnetv17_stage2_batchnorm9_fwd
-node0x3ffe54e0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402e6980->tensorresnetv17_stage2_batchnorm9_fwd
+node0x402e6ac0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage2_batchnorm9_fwd[label=resnetv17_stage2_batchnorm9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm9_fwd->node0x3ffe54e0
+tensorresnetv17_stage2_batchnorm9_fwd->node0x402e6ac0
 tensorresnetv17_stage2_activation1[label=resnetv17_stage2_activation1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_activation1->node0x3ffe54e0
+tensorresnetv17_stage2_activation1->node0x402e6ac0
 tensorresnetv17_stage2__plus2[label=resnetv17_stage2__plus2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe54e0->tensorresnetv17_stage2__plus2
-node0x3ffe5608["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e6ac0->tensorresnetv17_stage2__plus2
+node0x402e6c00["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage2__plus2[label=resnetv17_stage2__plus2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2__plus2->node0x3ffe5608
+tensorresnetv17_stage2__plus2->node0x402e6c00
 tensorresnetv17_stage2_activation2[label=resnetv17_stage2_activation2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe5608->tensorresnetv17_stage2_activation2
-node0x3ffe5730["label"="{Conv|kernel_shape
+node0x402e6c00->tensorresnetv17_stage2_activation2
+node0x402e6d40["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_activation2[label=resnetv17_stage2_activation2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_activation2->node0x3ffe5730
+tensorresnetv17_stage2_activation2->node0x402e6d40
 tensorresnetv17_stage2_conv10_weight[label=resnetv17_stage2_conv10_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv10_weight->node0x3ffe5730
+tensorresnetv17_stage2_conv10_weight->node0x402e6d40
 tensorresnetv17_stage2_conv10_bias[label=resnetv17_stage2_conv10_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv10_bias->node0x3ffe5730
+tensorresnetv17_stage2_conv10_bias->node0x402e6d40
 tensorresnetv17_stage2_conv10_fwd[label=resnetv17_stage2_conv10_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe5730->tensorresnetv17_stage2_conv10_fwd
-node0x3ffe5858["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e6d40->tensorresnetv17_stage2_conv10_fwd
+node0x402e6e80["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv10_fwd[label=resnetv17_stage2_conv10_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv10_fwd->node0x3ffe5858
+tensorresnetv17_stage2_conv10_fwd->node0x402e6e80
 tensorresnetv17_stage2_batchnorm10_gamma[label=resnetv17_stage2_batchnorm10_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm10_gamma->node0x3ffe5858
+tensorresnetv17_stage2_batchnorm10_gamma->node0x402e6e80
 tensorresnetv17_stage2_batchnorm10_beta[label=resnetv17_stage2_batchnorm10_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm10_beta->node0x3ffe5858
+tensorresnetv17_stage2_batchnorm10_beta->node0x402e6e80
 tensorresnetv17_stage2_batchnorm10_running_mean[label=resnetv17_stage2_batchnorm10_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm10_running_mean->node0x3ffe5858
+tensorresnetv17_stage2_batchnorm10_running_mean->node0x402e6e80
 tensorresnetv17_stage2_batchnorm10_running_var[label=resnetv17_stage2_batchnorm10_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm10_running_var->node0x3ffe5858
+tensorresnetv17_stage2_batchnorm10_running_var->node0x402e6e80
 tensorresnetv17_stage2_batchnorm10_fwd[label=resnetv17_stage2_batchnorm10_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe5858->tensorresnetv17_stage2_batchnorm10_fwd
-node0x3ffe5980["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e6e80->tensorresnetv17_stage2_batchnorm10_fwd
+node0x402e6fc0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage2_batchnorm10_fwd[label=resnetv17_stage2_batchnorm10_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm10_fwd->node0x3ffe5980
+tensorresnetv17_stage2_batchnorm10_fwd->node0x402e6fc0
 tensorresnetv17_stage2_relu6_fwd[label=resnetv17_stage2_relu6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe5980->tensorresnetv17_stage2_relu6_fwd
-node0x3ffe5aa8["label"="{Conv|kernel_shape
+node0x402e6fc0->tensorresnetv17_stage2_relu6_fwd
+node0x402e7100["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_relu6_fwd[label=resnetv17_stage2_relu6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_relu6_fwd->node0x3ffe5aa8
+tensorresnetv17_stage2_relu6_fwd->node0x402e7100
 tensorresnetv17_stage2_conv11_weight[label=resnetv17_stage2_conv11_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv11_weight->node0x3ffe5aa8
+tensorresnetv17_stage2_conv11_weight->node0x402e7100
 tensorresnetv17_stage2_conv11_fwd[label=resnetv17_stage2_conv11_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe5aa8->tensorresnetv17_stage2_conv11_fwd
-node0x3ffe5bd0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e7100->tensorresnetv17_stage2_conv11_fwd
+node0x402e7240["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv11_fwd[label=resnetv17_stage2_conv11_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv11_fwd->node0x3ffe5bd0
+tensorresnetv17_stage2_conv11_fwd->node0x402e7240
 tensorresnetv17_stage2_batchnorm11_gamma[label=resnetv17_stage2_batchnorm11_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm11_gamma->node0x3ffe5bd0
+tensorresnetv17_stage2_batchnorm11_gamma->node0x402e7240
 tensorresnetv17_stage2_batchnorm11_beta[label=resnetv17_stage2_batchnorm11_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm11_beta->node0x3ffe5bd0
+tensorresnetv17_stage2_batchnorm11_beta->node0x402e7240
 tensorresnetv17_stage2_batchnorm11_running_mean[label=resnetv17_stage2_batchnorm11_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm11_running_mean->node0x3ffe5bd0
+tensorresnetv17_stage2_batchnorm11_running_mean->node0x402e7240
 tensorresnetv17_stage2_batchnorm11_running_var[label=resnetv17_stage2_batchnorm11_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm11_running_var->node0x3ffe5bd0
+tensorresnetv17_stage2_batchnorm11_running_var->node0x402e7240
 tensorresnetv17_stage2_batchnorm11_fwd[label=resnetv17_stage2_batchnorm11_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe5bd0->tensorresnetv17_stage2_batchnorm11_fwd
-node0x3ffe5cf8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e7240->tensorresnetv17_stage2_batchnorm11_fwd
+node0x402e7380["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage2_batchnorm11_fwd[label=resnetv17_stage2_batchnorm11_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm11_fwd->node0x3ffe5cf8
+tensorresnetv17_stage2_batchnorm11_fwd->node0x402e7380
 tensorresnetv17_stage2_relu7_fwd[label=resnetv17_stage2_relu7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe5cf8->tensorresnetv17_stage2_relu7_fwd
-node0x3ffe5e20["label"="{Conv|kernel_shape
+node0x402e7380->tensorresnetv17_stage2_relu7_fwd
+node0x402e74c0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_relu7_fwd[label=resnetv17_stage2_relu7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_relu7_fwd->node0x3ffe5e20
+tensorresnetv17_stage2_relu7_fwd->node0x402e74c0
 tensorresnetv17_stage2_conv12_weight[label=resnetv17_stage2_conv12_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv12_weight->node0x3ffe5e20
+tensorresnetv17_stage2_conv12_weight->node0x402e74c0
 tensorresnetv17_stage2_conv12_bias[label=resnetv17_stage2_conv12_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv12_bias->node0x3ffe5e20
+tensorresnetv17_stage2_conv12_bias->node0x402e74c0
 tensorresnetv17_stage2_conv12_fwd[label=resnetv17_stage2_conv12_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe5e20->tensorresnetv17_stage2_conv12_fwd
-node0x3ffe5f48["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e74c0->tensorresnetv17_stage2_conv12_fwd
+node0x402e7600["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage2_conv12_fwd[label=resnetv17_stage2_conv12_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_conv12_fwd->node0x3ffe5f48
+tensorresnetv17_stage2_conv12_fwd->node0x402e7600
 tensorresnetv17_stage2_batchnorm12_gamma[label=resnetv17_stage2_batchnorm12_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm12_gamma->node0x3ffe5f48
+tensorresnetv17_stage2_batchnorm12_gamma->node0x402e7600
 tensorresnetv17_stage2_batchnorm12_beta[label=resnetv17_stage2_batchnorm12_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm12_beta->node0x3ffe5f48
+tensorresnetv17_stage2_batchnorm12_beta->node0x402e7600
 tensorresnetv17_stage2_batchnorm12_running_mean[label=resnetv17_stage2_batchnorm12_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm12_running_mean->node0x3ffe5f48
+tensorresnetv17_stage2_batchnorm12_running_mean->node0x402e7600
 tensorresnetv17_stage2_batchnorm12_running_var[label=resnetv17_stage2_batchnorm12_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm12_running_var->node0x3ffe5f48
+tensorresnetv17_stage2_batchnorm12_running_var->node0x402e7600
 tensorresnetv17_stage2_batchnorm12_fwd[label=resnetv17_stage2_batchnorm12_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe5f48->tensorresnetv17_stage2_batchnorm12_fwd
-node0x3ffe6070["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402e7600->tensorresnetv17_stage2_batchnorm12_fwd
+node0x402e7740["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage2_batchnorm12_fwd[label=resnetv17_stage2_batchnorm12_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_batchnorm12_fwd->node0x3ffe6070
+tensorresnetv17_stage2_batchnorm12_fwd->node0x402e7740
 tensorresnetv17_stage2_activation2[label=resnetv17_stage2_activation2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_activation2->node0x3ffe6070
+tensorresnetv17_stage2_activation2->node0x402e7740
 tensorresnetv17_stage2__plus3[label=resnetv17_stage2__plus3, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe6070->tensorresnetv17_stage2__plus3
-node0x3ffe6198["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e7740->tensorresnetv17_stage2__plus3
+node0x402e7880["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage2__plus3[label=resnetv17_stage2__plus3, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2__plus3->node0x3ffe6198
+tensorresnetv17_stage2__plus3->node0x402e7880
 tensorresnetv17_stage2_activation3[label=resnetv17_stage2_activation3, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe6198->tensorresnetv17_stage2_activation3
-node0x3ffe62c0["label"="{Conv|kernel_shape
+node0x402e7880->tensorresnetv17_stage2_activation3
+node0x402e79c0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_activation3[label=resnetv17_stage2_activation3, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_activation3->node0x3ffe62c0
+tensorresnetv17_stage2_activation3->node0x402e79c0
 tensorresnetv17_stage3_conv0_weight[label=resnetv17_stage3_conv0_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv0_weight->node0x3ffe62c0
+tensorresnetv17_stage3_conv0_weight->node0x402e79c0
 tensorresnetv17_stage3_conv0_bias[label=resnetv17_stage3_conv0_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv0_bias->node0x3ffe62c0
+tensorresnetv17_stage3_conv0_bias->node0x402e79c0
 tensorresnetv17_stage3_conv0_fwd[label=resnetv17_stage3_conv0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe62c0->tensorresnetv17_stage3_conv0_fwd
-node0x3ffe63e8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e79c0->tensorresnetv17_stage3_conv0_fwd
+node0x402e7b00["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv0_fwd[label=resnetv17_stage3_conv0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv0_fwd->node0x3ffe63e8
+tensorresnetv17_stage3_conv0_fwd->node0x402e7b00
 tensorresnetv17_stage3_batchnorm0_gamma[label=resnetv17_stage3_batchnorm0_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm0_gamma->node0x3ffe63e8
+tensorresnetv17_stage3_batchnorm0_gamma->node0x402e7b00
 tensorresnetv17_stage3_batchnorm0_beta[label=resnetv17_stage3_batchnorm0_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm0_beta->node0x3ffe63e8
+tensorresnetv17_stage3_batchnorm0_beta->node0x402e7b00
 tensorresnetv17_stage3_batchnorm0_running_mean[label=resnetv17_stage3_batchnorm0_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm0_running_mean->node0x3ffe63e8
+tensorresnetv17_stage3_batchnorm0_running_mean->node0x402e7b00
 tensorresnetv17_stage3_batchnorm0_running_var[label=resnetv17_stage3_batchnorm0_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm0_running_var->node0x3ffe63e8
+tensorresnetv17_stage3_batchnorm0_running_var->node0x402e7b00
 tensorresnetv17_stage3_batchnorm0_fwd[label=resnetv17_stage3_batchnorm0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe63e8->tensorresnetv17_stage3_batchnorm0_fwd
-node0x3ffe6510["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e7b00->tensorresnetv17_stage3_batchnorm0_fwd
+node0x402e7c40["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3_batchnorm0_fwd[label=resnetv17_stage3_batchnorm0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm0_fwd->node0x3ffe6510
+tensorresnetv17_stage3_batchnorm0_fwd->node0x402e7c40
 tensorresnetv17_stage3_relu0_fwd[label=resnetv17_stage3_relu0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe6510->tensorresnetv17_stage3_relu0_fwd
-node0x3ffe6638["label"="{Conv|kernel_shape
+node0x402e7c40->tensorresnetv17_stage3_relu0_fwd
+node0x402e7d80["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_relu0_fwd[label=resnetv17_stage3_relu0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_relu0_fwd->node0x3ffe6638
+tensorresnetv17_stage3_relu0_fwd->node0x402e7d80
 tensorresnetv17_stage3_conv1_weight[label=resnetv17_stage3_conv1_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv1_weight->node0x3ffe6638
+tensorresnetv17_stage3_conv1_weight->node0x402e7d80
 tensorresnetv17_stage3_conv1_fwd[label=resnetv17_stage3_conv1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe6638->tensorresnetv17_stage3_conv1_fwd
-node0x3ffe6760["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e7d80->tensorresnetv17_stage3_conv1_fwd
+node0x402e7ec0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv1_fwd[label=resnetv17_stage3_conv1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv1_fwd->node0x3ffe6760
+tensorresnetv17_stage3_conv1_fwd->node0x402e7ec0
 tensorresnetv17_stage3_batchnorm1_gamma[label=resnetv17_stage3_batchnorm1_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm1_gamma->node0x3ffe6760
+tensorresnetv17_stage3_batchnorm1_gamma->node0x402e7ec0
 tensorresnetv17_stage3_batchnorm1_beta[label=resnetv17_stage3_batchnorm1_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm1_beta->node0x3ffe6760
+tensorresnetv17_stage3_batchnorm1_beta->node0x402e7ec0
 tensorresnetv17_stage3_batchnorm1_running_mean[label=resnetv17_stage3_batchnorm1_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm1_running_mean->node0x3ffe6760
+tensorresnetv17_stage3_batchnorm1_running_mean->node0x402e7ec0
 tensorresnetv17_stage3_batchnorm1_running_var[label=resnetv17_stage3_batchnorm1_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm1_running_var->node0x3ffe6760
+tensorresnetv17_stage3_batchnorm1_running_var->node0x402e7ec0
 tensorresnetv17_stage3_batchnorm1_fwd[label=resnetv17_stage3_batchnorm1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe6760->tensorresnetv17_stage3_batchnorm1_fwd
-node0x3ffe6888["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e7ec0->tensorresnetv17_stage3_batchnorm1_fwd
+node0x402e8000["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3_batchnorm1_fwd[label=resnetv17_stage3_batchnorm1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm1_fwd->node0x3ffe6888
+tensorresnetv17_stage3_batchnorm1_fwd->node0x402e8000
 tensorresnetv17_stage3_relu1_fwd[label=resnetv17_stage3_relu1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe6888->tensorresnetv17_stage3_relu1_fwd
-node0x3ffe69b0["label"="{Conv|kernel_shape
+node0x402e8000->tensorresnetv17_stage3_relu1_fwd
+node0x402e8140["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_relu1_fwd[label=resnetv17_stage3_relu1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_relu1_fwd->node0x3ffe69b0
+tensorresnetv17_stage3_relu1_fwd->node0x402e8140
 tensorresnetv17_stage3_conv2_weight[label=resnetv17_stage3_conv2_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv2_weight->node0x3ffe69b0
+tensorresnetv17_stage3_conv2_weight->node0x402e8140
 tensorresnetv17_stage3_conv2_bias[label=resnetv17_stage3_conv2_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv2_bias->node0x3ffe69b0
+tensorresnetv17_stage3_conv2_bias->node0x402e8140
 tensorresnetv17_stage3_conv2_fwd[label=resnetv17_stage3_conv2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe69b0->tensorresnetv17_stage3_conv2_fwd
-node0x3ffe6ad8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e8140->tensorresnetv17_stage3_conv2_fwd
+node0x402e8280["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv2_fwd[label=resnetv17_stage3_conv2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv2_fwd->node0x3ffe6ad8
+tensorresnetv17_stage3_conv2_fwd->node0x402e8280
 tensorresnetv17_stage3_batchnorm2_gamma[label=resnetv17_stage3_batchnorm2_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm2_gamma->node0x3ffe6ad8
+tensorresnetv17_stage3_batchnorm2_gamma->node0x402e8280
 tensorresnetv17_stage3_batchnorm2_beta[label=resnetv17_stage3_batchnorm2_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm2_beta->node0x3ffe6ad8
+tensorresnetv17_stage3_batchnorm2_beta->node0x402e8280
 tensorresnetv17_stage3_batchnorm2_running_mean[label=resnetv17_stage3_batchnorm2_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm2_running_mean->node0x3ffe6ad8
+tensorresnetv17_stage3_batchnorm2_running_mean->node0x402e8280
 tensorresnetv17_stage3_batchnorm2_running_var[label=resnetv17_stage3_batchnorm2_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm2_running_var->node0x3ffe6ad8
+tensorresnetv17_stage3_batchnorm2_running_var->node0x402e8280
 tensorresnetv17_stage3_batchnorm2_fwd[label=resnetv17_stage3_batchnorm2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe6ad8->tensorresnetv17_stage3_batchnorm2_fwd
-node0x3ffe6c00["label"="{Conv|kernel_shape
+node0x402e8280->tensorresnetv17_stage3_batchnorm2_fwd
+node0x402e83c0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage2_activation3[label=resnetv17_stage2_activation3, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage2_activation3->node0x3ffe6c00
+tensorresnetv17_stage2_activation3->node0x402e83c0
 tensorresnetv17_stage3_conv3_weight[label=resnetv17_stage3_conv3_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv3_weight->node0x3ffe6c00
+tensorresnetv17_stage3_conv3_weight->node0x402e83c0
 tensorresnetv17_stage3_conv3_fwd[label=resnetv17_stage3_conv3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe6c00->tensorresnetv17_stage3_conv3_fwd
-node0x3ffe6d28["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e83c0->tensorresnetv17_stage3_conv3_fwd
+node0x402e8500["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv3_fwd[label=resnetv17_stage3_conv3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv3_fwd->node0x3ffe6d28
+tensorresnetv17_stage3_conv3_fwd->node0x402e8500
 tensorresnetv17_stage3_batchnorm3_gamma[label=resnetv17_stage3_batchnorm3_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm3_gamma->node0x3ffe6d28
+tensorresnetv17_stage3_batchnorm3_gamma->node0x402e8500
 tensorresnetv17_stage3_batchnorm3_beta[label=resnetv17_stage3_batchnorm3_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm3_beta->node0x3ffe6d28
+tensorresnetv17_stage3_batchnorm3_beta->node0x402e8500
 tensorresnetv17_stage3_batchnorm3_running_mean[label=resnetv17_stage3_batchnorm3_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm3_running_mean->node0x3ffe6d28
+tensorresnetv17_stage3_batchnorm3_running_mean->node0x402e8500
 tensorresnetv17_stage3_batchnorm3_running_var[label=resnetv17_stage3_batchnorm3_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm3_running_var->node0x3ffe6d28
+tensorresnetv17_stage3_batchnorm3_running_var->node0x402e8500
 tensorresnetv17_stage3_batchnorm3_fwd[label=resnetv17_stage3_batchnorm3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe6d28->tensorresnetv17_stage3_batchnorm3_fwd
-node0x3ffe6e50["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402e8500->tensorresnetv17_stage3_batchnorm3_fwd
+node0x402e8640["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage3_batchnorm2_fwd[label=resnetv17_stage3_batchnorm2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm2_fwd->node0x3ffe6e50
+tensorresnetv17_stage3_batchnorm2_fwd->node0x402e8640
 tensorresnetv17_stage3_batchnorm3_fwd[label=resnetv17_stage3_batchnorm3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm3_fwd->node0x3ffe6e50
+tensorresnetv17_stage3_batchnorm3_fwd->node0x402e8640
 tensorresnetv17_stage3__plus0[label=resnetv17_stage3__plus0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe6e50->tensorresnetv17_stage3__plus0
-node0x3ffe6f78["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e8640->tensorresnetv17_stage3__plus0
+node0x402e8780["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3__plus0[label=resnetv17_stage3__plus0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3__plus0->node0x3ffe6f78
+tensorresnetv17_stage3__plus0->node0x402e8780
 tensorresnetv17_stage3_activation0[label=resnetv17_stage3_activation0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe6f78->tensorresnetv17_stage3_activation0
-node0x3ffe70a0["label"="{Conv|kernel_shape
+node0x402e8780->tensorresnetv17_stage3_activation0
+node0x402e88c0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_activation0[label=resnetv17_stage3_activation0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_activation0->node0x3ffe70a0
+tensorresnetv17_stage3_activation0->node0x402e88c0
 tensorresnetv17_stage3_conv4_weight[label=resnetv17_stage3_conv4_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv4_weight->node0x3ffe70a0
+tensorresnetv17_stage3_conv4_weight->node0x402e88c0
 tensorresnetv17_stage3_conv4_bias[label=resnetv17_stage3_conv4_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv4_bias->node0x3ffe70a0
+tensorresnetv17_stage3_conv4_bias->node0x402e88c0
 tensorresnetv17_stage3_conv4_fwd[label=resnetv17_stage3_conv4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe70a0->tensorresnetv17_stage3_conv4_fwd
-node0x3ffe71c8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e88c0->tensorresnetv17_stage3_conv4_fwd
+node0x402e8a00["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv4_fwd[label=resnetv17_stage3_conv4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv4_fwd->node0x3ffe71c8
+tensorresnetv17_stage3_conv4_fwd->node0x402e8a00
 tensorresnetv17_stage3_batchnorm4_gamma[label=resnetv17_stage3_batchnorm4_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm4_gamma->node0x3ffe71c8
+tensorresnetv17_stage3_batchnorm4_gamma->node0x402e8a00
 tensorresnetv17_stage3_batchnorm4_beta[label=resnetv17_stage3_batchnorm4_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm4_beta->node0x3ffe71c8
+tensorresnetv17_stage3_batchnorm4_beta->node0x402e8a00
 tensorresnetv17_stage3_batchnorm4_running_mean[label=resnetv17_stage3_batchnorm4_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm4_running_mean->node0x3ffe71c8
+tensorresnetv17_stage3_batchnorm4_running_mean->node0x402e8a00
 tensorresnetv17_stage3_batchnorm4_running_var[label=resnetv17_stage3_batchnorm4_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm4_running_var->node0x3ffe71c8
+tensorresnetv17_stage3_batchnorm4_running_var->node0x402e8a00
 tensorresnetv17_stage3_batchnorm4_fwd[label=resnetv17_stage3_batchnorm4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe71c8->tensorresnetv17_stage3_batchnorm4_fwd
-node0x3ffe72f0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e8a00->tensorresnetv17_stage3_batchnorm4_fwd
+node0x402e8b40["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3_batchnorm4_fwd[label=resnetv17_stage3_batchnorm4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm4_fwd->node0x3ffe72f0
+tensorresnetv17_stage3_batchnorm4_fwd->node0x402e8b40
 tensorresnetv17_stage3_relu2_fwd[label=resnetv17_stage3_relu2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe72f0->tensorresnetv17_stage3_relu2_fwd
-node0x3ffe7418["label"="{Conv|kernel_shape
+node0x402e8b40->tensorresnetv17_stage3_relu2_fwd
+node0x402e8c80["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_relu2_fwd[label=resnetv17_stage3_relu2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_relu2_fwd->node0x3ffe7418
+tensorresnetv17_stage3_relu2_fwd->node0x402e8c80
 tensorresnetv17_stage3_conv5_weight[label=resnetv17_stage3_conv5_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv5_weight->node0x3ffe7418
+tensorresnetv17_stage3_conv5_weight->node0x402e8c80
 tensorresnetv17_stage3_conv5_fwd[label=resnetv17_stage3_conv5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe7418->tensorresnetv17_stage3_conv5_fwd
-node0x3ffe7540["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e8c80->tensorresnetv17_stage3_conv5_fwd
+node0x402e8dc0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv5_fwd[label=resnetv17_stage3_conv5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv5_fwd->node0x3ffe7540
+tensorresnetv17_stage3_conv5_fwd->node0x402e8dc0
 tensorresnetv17_stage3_batchnorm5_gamma[label=resnetv17_stage3_batchnorm5_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm5_gamma->node0x3ffe7540
+tensorresnetv17_stage3_batchnorm5_gamma->node0x402e8dc0
 tensorresnetv17_stage3_batchnorm5_beta[label=resnetv17_stage3_batchnorm5_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm5_beta->node0x3ffe7540
+tensorresnetv17_stage3_batchnorm5_beta->node0x402e8dc0
 tensorresnetv17_stage3_batchnorm5_running_mean[label=resnetv17_stage3_batchnorm5_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm5_running_mean->node0x3ffe7540
+tensorresnetv17_stage3_batchnorm5_running_mean->node0x402e8dc0
 tensorresnetv17_stage3_batchnorm5_running_var[label=resnetv17_stage3_batchnorm5_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm5_running_var->node0x3ffe7540
+tensorresnetv17_stage3_batchnorm5_running_var->node0x402e8dc0
 tensorresnetv17_stage3_batchnorm5_fwd[label=resnetv17_stage3_batchnorm5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe7540->tensorresnetv17_stage3_batchnorm5_fwd
-node0x3ffe7668["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e8dc0->tensorresnetv17_stage3_batchnorm5_fwd
+node0x402e8f00["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3_batchnorm5_fwd[label=resnetv17_stage3_batchnorm5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm5_fwd->node0x3ffe7668
+tensorresnetv17_stage3_batchnorm5_fwd->node0x402e8f00
 tensorresnetv17_stage3_relu3_fwd[label=resnetv17_stage3_relu3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe7668->tensorresnetv17_stage3_relu3_fwd
-node0x3ffe7790["label"="{Conv|kernel_shape
+node0x402e8f00->tensorresnetv17_stage3_relu3_fwd
+node0x402e9040["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_relu3_fwd[label=resnetv17_stage3_relu3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_relu3_fwd->node0x3ffe7790
+tensorresnetv17_stage3_relu3_fwd->node0x402e9040
 tensorresnetv17_stage3_conv6_weight[label=resnetv17_stage3_conv6_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv6_weight->node0x3ffe7790
+tensorresnetv17_stage3_conv6_weight->node0x402e9040
 tensorresnetv17_stage3_conv6_bias[label=resnetv17_stage3_conv6_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv6_bias->node0x3ffe7790
+tensorresnetv17_stage3_conv6_bias->node0x402e9040
 tensorresnetv17_stage3_conv6_fwd[label=resnetv17_stage3_conv6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe7790->tensorresnetv17_stage3_conv6_fwd
-node0x3ffe78b8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e9040->tensorresnetv17_stage3_conv6_fwd
+node0x402e9180["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv6_fwd[label=resnetv17_stage3_conv6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv6_fwd->node0x3ffe78b8
+tensorresnetv17_stage3_conv6_fwd->node0x402e9180
 tensorresnetv17_stage3_batchnorm6_gamma[label=resnetv17_stage3_batchnorm6_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm6_gamma->node0x3ffe78b8
+tensorresnetv17_stage3_batchnorm6_gamma->node0x402e9180
 tensorresnetv17_stage3_batchnorm6_beta[label=resnetv17_stage3_batchnorm6_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm6_beta->node0x3ffe78b8
+tensorresnetv17_stage3_batchnorm6_beta->node0x402e9180
 tensorresnetv17_stage3_batchnorm6_running_mean[label=resnetv17_stage3_batchnorm6_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm6_running_mean->node0x3ffe78b8
+tensorresnetv17_stage3_batchnorm6_running_mean->node0x402e9180
 tensorresnetv17_stage3_batchnorm6_running_var[label=resnetv17_stage3_batchnorm6_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm6_running_var->node0x3ffe78b8
+tensorresnetv17_stage3_batchnorm6_running_var->node0x402e9180
 tensorresnetv17_stage3_batchnorm6_fwd[label=resnetv17_stage3_batchnorm6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe78b8->tensorresnetv17_stage3_batchnorm6_fwd
-node0x3ffe79e0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402e9180->tensorresnetv17_stage3_batchnorm6_fwd
+node0x402e92c0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage3_batchnorm6_fwd[label=resnetv17_stage3_batchnorm6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm6_fwd->node0x3ffe79e0
+tensorresnetv17_stage3_batchnorm6_fwd->node0x402e92c0
 tensorresnetv17_stage3_activation0[label=resnetv17_stage3_activation0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_activation0->node0x3ffe79e0
+tensorresnetv17_stage3_activation0->node0x402e92c0
 tensorresnetv17_stage3__plus1[label=resnetv17_stage3__plus1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe79e0->tensorresnetv17_stage3__plus1
-node0x3ffe7b08["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e92c0->tensorresnetv17_stage3__plus1
+node0x402e9400["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3__plus1[label=resnetv17_stage3__plus1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3__plus1->node0x3ffe7b08
+tensorresnetv17_stage3__plus1->node0x402e9400
 tensorresnetv17_stage3_activation1[label=resnetv17_stage3_activation1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe7b08->tensorresnetv17_stage3_activation1
-node0x3ffe7c30["label"="{Conv|kernel_shape
+node0x402e9400->tensorresnetv17_stage3_activation1
+node0x402e9540["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_activation1[label=resnetv17_stage3_activation1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_activation1->node0x3ffe7c30
+tensorresnetv17_stage3_activation1->node0x402e9540
 tensorresnetv17_stage3_conv7_weight[label=resnetv17_stage3_conv7_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv7_weight->node0x3ffe7c30
+tensorresnetv17_stage3_conv7_weight->node0x402e9540
 tensorresnetv17_stage3_conv7_bias[label=resnetv17_stage3_conv7_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv7_bias->node0x3ffe7c30
+tensorresnetv17_stage3_conv7_bias->node0x402e9540
 tensorresnetv17_stage3_conv7_fwd[label=resnetv17_stage3_conv7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe7c30->tensorresnetv17_stage3_conv7_fwd
-node0x3ffe7d58["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e9540->tensorresnetv17_stage3_conv7_fwd
+node0x402e9680["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv7_fwd[label=resnetv17_stage3_conv7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv7_fwd->node0x3ffe7d58
+tensorresnetv17_stage3_conv7_fwd->node0x402e9680
 tensorresnetv17_stage3_batchnorm7_gamma[label=resnetv17_stage3_batchnorm7_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm7_gamma->node0x3ffe7d58
+tensorresnetv17_stage3_batchnorm7_gamma->node0x402e9680
 tensorresnetv17_stage3_batchnorm7_beta[label=resnetv17_stage3_batchnorm7_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm7_beta->node0x3ffe7d58
+tensorresnetv17_stage3_batchnorm7_beta->node0x402e9680
 tensorresnetv17_stage3_batchnorm7_running_mean[label=resnetv17_stage3_batchnorm7_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm7_running_mean->node0x3ffe7d58
+tensorresnetv17_stage3_batchnorm7_running_mean->node0x402e9680
 tensorresnetv17_stage3_batchnorm7_running_var[label=resnetv17_stage3_batchnorm7_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm7_running_var->node0x3ffe7d58
+tensorresnetv17_stage3_batchnorm7_running_var->node0x402e9680
 tensorresnetv17_stage3_batchnorm7_fwd[label=resnetv17_stage3_batchnorm7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe7d58->tensorresnetv17_stage3_batchnorm7_fwd
-node0x3ffe7e80["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e9680->tensorresnetv17_stage3_batchnorm7_fwd
+node0x402e97c0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3_batchnorm7_fwd[label=resnetv17_stage3_batchnorm7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm7_fwd->node0x3ffe7e80
+tensorresnetv17_stage3_batchnorm7_fwd->node0x402e97c0
 tensorresnetv17_stage3_relu4_fwd[label=resnetv17_stage3_relu4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe7e80->tensorresnetv17_stage3_relu4_fwd
-node0x3ffe7fa8["label"="{Conv|kernel_shape
+node0x402e97c0->tensorresnetv17_stage3_relu4_fwd
+node0x402e9900["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_relu4_fwd[label=resnetv17_stage3_relu4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_relu4_fwd->node0x3ffe7fa8
+tensorresnetv17_stage3_relu4_fwd->node0x402e9900
 tensorresnetv17_stage3_conv8_weight[label=resnetv17_stage3_conv8_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv8_weight->node0x3ffe7fa8
+tensorresnetv17_stage3_conv8_weight->node0x402e9900
 tensorresnetv17_stage3_conv8_fwd[label=resnetv17_stage3_conv8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe7fa8->tensorresnetv17_stage3_conv8_fwd
-node0x3ffe80d0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e9900->tensorresnetv17_stage3_conv8_fwd
+node0x402e9a40["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv8_fwd[label=resnetv17_stage3_conv8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv8_fwd->node0x3ffe80d0
+tensorresnetv17_stage3_conv8_fwd->node0x402e9a40
 tensorresnetv17_stage3_batchnorm8_gamma[label=resnetv17_stage3_batchnorm8_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm8_gamma->node0x3ffe80d0
+tensorresnetv17_stage3_batchnorm8_gamma->node0x402e9a40
 tensorresnetv17_stage3_batchnorm8_beta[label=resnetv17_stage3_batchnorm8_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm8_beta->node0x3ffe80d0
+tensorresnetv17_stage3_batchnorm8_beta->node0x402e9a40
 tensorresnetv17_stage3_batchnorm8_running_mean[label=resnetv17_stage3_batchnorm8_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm8_running_mean->node0x3ffe80d0
+tensorresnetv17_stage3_batchnorm8_running_mean->node0x402e9a40
 tensorresnetv17_stage3_batchnorm8_running_var[label=resnetv17_stage3_batchnorm8_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm8_running_var->node0x3ffe80d0
+tensorresnetv17_stage3_batchnorm8_running_var->node0x402e9a40
 tensorresnetv17_stage3_batchnorm8_fwd[label=resnetv17_stage3_batchnorm8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe80d0->tensorresnetv17_stage3_batchnorm8_fwd
-node0x3ffe81f8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e9a40->tensorresnetv17_stage3_batchnorm8_fwd
+node0x402e9b80["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3_batchnorm8_fwd[label=resnetv17_stage3_batchnorm8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm8_fwd->node0x3ffe81f8
+tensorresnetv17_stage3_batchnorm8_fwd->node0x402e9b80
 tensorresnetv17_stage3_relu5_fwd[label=resnetv17_stage3_relu5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe81f8->tensorresnetv17_stage3_relu5_fwd
-node0x3ffe8320["label"="{Conv|kernel_shape
+node0x402e9b80->tensorresnetv17_stage3_relu5_fwd
+node0x402e9cc0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_relu5_fwd[label=resnetv17_stage3_relu5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_relu5_fwd->node0x3ffe8320
+tensorresnetv17_stage3_relu5_fwd->node0x402e9cc0
 tensorresnetv17_stage3_conv9_weight[label=resnetv17_stage3_conv9_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv9_weight->node0x3ffe8320
+tensorresnetv17_stage3_conv9_weight->node0x402e9cc0
 tensorresnetv17_stage3_conv9_bias[label=resnetv17_stage3_conv9_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv9_bias->node0x3ffe8320
+tensorresnetv17_stage3_conv9_bias->node0x402e9cc0
 tensorresnetv17_stage3_conv9_fwd[label=resnetv17_stage3_conv9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe8320->tensorresnetv17_stage3_conv9_fwd
-node0x3ffe8448["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402e9cc0->tensorresnetv17_stage3_conv9_fwd
+node0x402e9e00["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv9_fwd[label=resnetv17_stage3_conv9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv9_fwd->node0x3ffe8448
+tensorresnetv17_stage3_conv9_fwd->node0x402e9e00
 tensorresnetv17_stage3_batchnorm9_gamma[label=resnetv17_stage3_batchnorm9_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm9_gamma->node0x3ffe8448
+tensorresnetv17_stage3_batchnorm9_gamma->node0x402e9e00
 tensorresnetv17_stage3_batchnorm9_beta[label=resnetv17_stage3_batchnorm9_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm9_beta->node0x3ffe8448
+tensorresnetv17_stage3_batchnorm9_beta->node0x402e9e00
 tensorresnetv17_stage3_batchnorm9_running_mean[label=resnetv17_stage3_batchnorm9_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm9_running_mean->node0x3ffe8448
+tensorresnetv17_stage3_batchnorm9_running_mean->node0x402e9e00
 tensorresnetv17_stage3_batchnorm9_running_var[label=resnetv17_stage3_batchnorm9_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm9_running_var->node0x3ffe8448
+tensorresnetv17_stage3_batchnorm9_running_var->node0x402e9e00
 tensorresnetv17_stage3_batchnorm9_fwd[label=resnetv17_stage3_batchnorm9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe8448->tensorresnetv17_stage3_batchnorm9_fwd
-node0x3ffe8570["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402e9e00->tensorresnetv17_stage3_batchnorm9_fwd
+node0x402e9f40["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage3_batchnorm9_fwd[label=resnetv17_stage3_batchnorm9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm9_fwd->node0x3ffe8570
+tensorresnetv17_stage3_batchnorm9_fwd->node0x402e9f40
 tensorresnetv17_stage3_activation1[label=resnetv17_stage3_activation1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_activation1->node0x3ffe8570
+tensorresnetv17_stage3_activation1->node0x402e9f40
 tensorresnetv17_stage3__plus2[label=resnetv17_stage3__plus2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe8570->tensorresnetv17_stage3__plus2
-node0x3ffe8698["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402e9f40->tensorresnetv17_stage3__plus2
+node0x402ea080["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3__plus2[label=resnetv17_stage3__plus2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3__plus2->node0x3ffe8698
+tensorresnetv17_stage3__plus2->node0x402ea080
 tensorresnetv17_stage3_activation2[label=resnetv17_stage3_activation2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe8698->tensorresnetv17_stage3_activation2
-node0x3ffe87c0["label"="{Conv|kernel_shape
+node0x402ea080->tensorresnetv17_stage3_activation2
+node0x402ea1c0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_activation2[label=resnetv17_stage3_activation2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_activation2->node0x3ffe87c0
+tensorresnetv17_stage3_activation2->node0x402ea1c0
 tensorresnetv17_stage3_conv10_weight[label=resnetv17_stage3_conv10_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv10_weight->node0x3ffe87c0
+tensorresnetv17_stage3_conv10_weight->node0x402ea1c0
 tensorresnetv17_stage3_conv10_bias[label=resnetv17_stage3_conv10_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv10_bias->node0x3ffe87c0
+tensorresnetv17_stage3_conv10_bias->node0x402ea1c0
 tensorresnetv17_stage3_conv10_fwd[label=resnetv17_stage3_conv10_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe87c0->tensorresnetv17_stage3_conv10_fwd
-node0x3ffe88e8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ea1c0->tensorresnetv17_stage3_conv10_fwd
+node0x402ea300["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv10_fwd[label=resnetv17_stage3_conv10_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv10_fwd->node0x3ffe88e8
+tensorresnetv17_stage3_conv10_fwd->node0x402ea300
 tensorresnetv17_stage3_batchnorm10_gamma[label=resnetv17_stage3_batchnorm10_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm10_gamma->node0x3ffe88e8
+tensorresnetv17_stage3_batchnorm10_gamma->node0x402ea300
 tensorresnetv17_stage3_batchnorm10_beta[label=resnetv17_stage3_batchnorm10_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm10_beta->node0x3ffe88e8
+tensorresnetv17_stage3_batchnorm10_beta->node0x402ea300
 tensorresnetv17_stage3_batchnorm10_running_mean[label=resnetv17_stage3_batchnorm10_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm10_running_mean->node0x3ffe88e8
+tensorresnetv17_stage3_batchnorm10_running_mean->node0x402ea300
 tensorresnetv17_stage3_batchnorm10_running_var[label=resnetv17_stage3_batchnorm10_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm10_running_var->node0x3ffe88e8
+tensorresnetv17_stage3_batchnorm10_running_var->node0x402ea300
 tensorresnetv17_stage3_batchnorm10_fwd[label=resnetv17_stage3_batchnorm10_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe88e8->tensorresnetv17_stage3_batchnorm10_fwd
-node0x3ffe8a10["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402ea300->tensorresnetv17_stage3_batchnorm10_fwd
+node0x402ea440["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3_batchnorm10_fwd[label=resnetv17_stage3_batchnorm10_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm10_fwd->node0x3ffe8a10
+tensorresnetv17_stage3_batchnorm10_fwd->node0x402ea440
 tensorresnetv17_stage3_relu6_fwd[label=resnetv17_stage3_relu6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe8a10->tensorresnetv17_stage3_relu6_fwd
-node0x3ffe8b38["label"="{Conv|kernel_shape
+node0x402ea440->tensorresnetv17_stage3_relu6_fwd
+node0x402ea580["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_relu6_fwd[label=resnetv17_stage3_relu6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_relu6_fwd->node0x3ffe8b38
+tensorresnetv17_stage3_relu6_fwd->node0x402ea580
 tensorresnetv17_stage3_conv11_weight[label=resnetv17_stage3_conv11_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv11_weight->node0x3ffe8b38
+tensorresnetv17_stage3_conv11_weight->node0x402ea580
 tensorresnetv17_stage3_conv11_fwd[label=resnetv17_stage3_conv11_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe8b38->tensorresnetv17_stage3_conv11_fwd
-node0x3ffe8c60["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ea580->tensorresnetv17_stage3_conv11_fwd
+node0x402ea6c0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv11_fwd[label=resnetv17_stage3_conv11_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv11_fwd->node0x3ffe8c60
+tensorresnetv17_stage3_conv11_fwd->node0x402ea6c0
 tensorresnetv17_stage3_batchnorm11_gamma[label=resnetv17_stage3_batchnorm11_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm11_gamma->node0x3ffe8c60
+tensorresnetv17_stage3_batchnorm11_gamma->node0x402ea6c0
 tensorresnetv17_stage3_batchnorm11_beta[label=resnetv17_stage3_batchnorm11_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm11_beta->node0x3ffe8c60
+tensorresnetv17_stage3_batchnorm11_beta->node0x402ea6c0
 tensorresnetv17_stage3_batchnorm11_running_mean[label=resnetv17_stage3_batchnorm11_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm11_running_mean->node0x3ffe8c60
+tensorresnetv17_stage3_batchnorm11_running_mean->node0x402ea6c0
 tensorresnetv17_stage3_batchnorm11_running_var[label=resnetv17_stage3_batchnorm11_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm11_running_var->node0x3ffe8c60
+tensorresnetv17_stage3_batchnorm11_running_var->node0x402ea6c0
 tensorresnetv17_stage3_batchnorm11_fwd[label=resnetv17_stage3_batchnorm11_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe8c60->tensorresnetv17_stage3_batchnorm11_fwd
-node0x3ffe8d88["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402ea6c0->tensorresnetv17_stage3_batchnorm11_fwd
+node0x402ea800["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3_batchnorm11_fwd[label=resnetv17_stage3_batchnorm11_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm11_fwd->node0x3ffe8d88
+tensorresnetv17_stage3_batchnorm11_fwd->node0x402ea800
 tensorresnetv17_stage3_relu7_fwd[label=resnetv17_stage3_relu7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe8d88->tensorresnetv17_stage3_relu7_fwd
-node0x3ffe8eb0["label"="{Conv|kernel_shape
+node0x402ea800->tensorresnetv17_stage3_relu7_fwd
+node0x402ea940["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_relu7_fwd[label=resnetv17_stage3_relu7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_relu7_fwd->node0x3ffe8eb0
+tensorresnetv17_stage3_relu7_fwd->node0x402ea940
 tensorresnetv17_stage3_conv12_weight[label=resnetv17_stage3_conv12_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv12_weight->node0x3ffe8eb0
+tensorresnetv17_stage3_conv12_weight->node0x402ea940
 tensorresnetv17_stage3_conv12_bias[label=resnetv17_stage3_conv12_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv12_bias->node0x3ffe8eb0
+tensorresnetv17_stage3_conv12_bias->node0x402ea940
 tensorresnetv17_stage3_conv12_fwd[label=resnetv17_stage3_conv12_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe8eb0->tensorresnetv17_stage3_conv12_fwd
-node0x3ffe8fd8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ea940->tensorresnetv17_stage3_conv12_fwd
+node0x402eaa80["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv12_fwd[label=resnetv17_stage3_conv12_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv12_fwd->node0x3ffe8fd8
+tensorresnetv17_stage3_conv12_fwd->node0x402eaa80
 tensorresnetv17_stage3_batchnorm12_gamma[label=resnetv17_stage3_batchnorm12_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm12_gamma->node0x3ffe8fd8
+tensorresnetv17_stage3_batchnorm12_gamma->node0x402eaa80
 tensorresnetv17_stage3_batchnorm12_beta[label=resnetv17_stage3_batchnorm12_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm12_beta->node0x3ffe8fd8
+tensorresnetv17_stage3_batchnorm12_beta->node0x402eaa80
 tensorresnetv17_stage3_batchnorm12_running_mean[label=resnetv17_stage3_batchnorm12_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm12_running_mean->node0x3ffe8fd8
+tensorresnetv17_stage3_batchnorm12_running_mean->node0x402eaa80
 tensorresnetv17_stage3_batchnorm12_running_var[label=resnetv17_stage3_batchnorm12_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm12_running_var->node0x3ffe8fd8
+tensorresnetv17_stage3_batchnorm12_running_var->node0x402eaa80
 tensorresnetv17_stage3_batchnorm12_fwd[label=resnetv17_stage3_batchnorm12_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe8fd8->tensorresnetv17_stage3_batchnorm12_fwd
-node0x3ffe9100["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402eaa80->tensorresnetv17_stage3_batchnorm12_fwd
+node0x402eabc0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage3_batchnorm12_fwd[label=resnetv17_stage3_batchnorm12_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm12_fwd->node0x3ffe9100
+tensorresnetv17_stage3_batchnorm12_fwd->node0x402eabc0
 tensorresnetv17_stage3_activation2[label=resnetv17_stage3_activation2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_activation2->node0x3ffe9100
+tensorresnetv17_stage3_activation2->node0x402eabc0
 tensorresnetv17_stage3__plus3[label=resnetv17_stage3__plus3, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe9100->tensorresnetv17_stage3__plus3
-node0x3ffe9228["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402eabc0->tensorresnetv17_stage3__plus3
+node0x402ead00["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3__plus3[label=resnetv17_stage3__plus3, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3__plus3->node0x3ffe9228
+tensorresnetv17_stage3__plus3->node0x402ead00
 tensorresnetv17_stage3_activation3[label=resnetv17_stage3_activation3, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe9228->tensorresnetv17_stage3_activation3
-node0x3ffe9350["label"="{Conv|kernel_shape
+node0x402ead00->tensorresnetv17_stage3_activation3
+node0x402eae40["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_activation3[label=resnetv17_stage3_activation3, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_activation3->node0x3ffe9350
+tensorresnetv17_stage3_activation3->node0x402eae40
 tensorresnetv17_stage3_conv13_weight[label=resnetv17_stage3_conv13_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv13_weight->node0x3ffe9350
+tensorresnetv17_stage3_conv13_weight->node0x402eae40
 tensorresnetv17_stage3_conv13_bias[label=resnetv17_stage3_conv13_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv13_bias->node0x3ffe9350
+tensorresnetv17_stage3_conv13_bias->node0x402eae40
 tensorresnetv17_stage3_conv13_fwd[label=resnetv17_stage3_conv13_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe9350->tensorresnetv17_stage3_conv13_fwd
-node0x3ffe9478["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402eae40->tensorresnetv17_stage3_conv13_fwd
+node0x402eaf80["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv13_fwd[label=resnetv17_stage3_conv13_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv13_fwd->node0x3ffe9478
+tensorresnetv17_stage3_conv13_fwd->node0x402eaf80
 tensorresnetv17_stage3_batchnorm13_gamma[label=resnetv17_stage3_batchnorm13_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm13_gamma->node0x3ffe9478
+tensorresnetv17_stage3_batchnorm13_gamma->node0x402eaf80
 tensorresnetv17_stage3_batchnorm13_beta[label=resnetv17_stage3_batchnorm13_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm13_beta->node0x3ffe9478
+tensorresnetv17_stage3_batchnorm13_beta->node0x402eaf80
 tensorresnetv17_stage3_batchnorm13_running_mean[label=resnetv17_stage3_batchnorm13_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm13_running_mean->node0x3ffe9478
+tensorresnetv17_stage3_batchnorm13_running_mean->node0x402eaf80
 tensorresnetv17_stage3_batchnorm13_running_var[label=resnetv17_stage3_batchnorm13_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm13_running_var->node0x3ffe9478
+tensorresnetv17_stage3_batchnorm13_running_var->node0x402eaf80
 tensorresnetv17_stage3_batchnorm13_fwd[label=resnetv17_stage3_batchnorm13_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe9478->tensorresnetv17_stage3_batchnorm13_fwd
-node0x3ffe95a0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402eaf80->tensorresnetv17_stage3_batchnorm13_fwd
+node0x402eb0c0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3_batchnorm13_fwd[label=resnetv17_stage3_batchnorm13_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm13_fwd->node0x3ffe95a0
+tensorresnetv17_stage3_batchnorm13_fwd->node0x402eb0c0
 tensorresnetv17_stage3_relu8_fwd[label=resnetv17_stage3_relu8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe95a0->tensorresnetv17_stage3_relu8_fwd
-node0x3ffe96c8["label"="{Conv|kernel_shape
+node0x402eb0c0->tensorresnetv17_stage3_relu8_fwd
+node0x402eb200["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_relu8_fwd[label=resnetv17_stage3_relu8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_relu8_fwd->node0x3ffe96c8
+tensorresnetv17_stage3_relu8_fwd->node0x402eb200
 tensorresnetv17_stage3_conv14_weight[label=resnetv17_stage3_conv14_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv14_weight->node0x3ffe96c8
+tensorresnetv17_stage3_conv14_weight->node0x402eb200
 tensorresnetv17_stage3_conv14_fwd[label=resnetv17_stage3_conv14_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe96c8->tensorresnetv17_stage3_conv14_fwd
-node0x3ffe97f0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402eb200->tensorresnetv17_stage3_conv14_fwd
+node0x402eb340["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv14_fwd[label=resnetv17_stage3_conv14_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv14_fwd->node0x3ffe97f0
+tensorresnetv17_stage3_conv14_fwd->node0x402eb340
 tensorresnetv17_stage3_batchnorm14_gamma[label=resnetv17_stage3_batchnorm14_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm14_gamma->node0x3ffe97f0
+tensorresnetv17_stage3_batchnorm14_gamma->node0x402eb340
 tensorresnetv17_stage3_batchnorm14_beta[label=resnetv17_stage3_batchnorm14_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm14_beta->node0x3ffe97f0
+tensorresnetv17_stage3_batchnorm14_beta->node0x402eb340
 tensorresnetv17_stage3_batchnorm14_running_mean[label=resnetv17_stage3_batchnorm14_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm14_running_mean->node0x3ffe97f0
+tensorresnetv17_stage3_batchnorm14_running_mean->node0x402eb340
 tensorresnetv17_stage3_batchnorm14_running_var[label=resnetv17_stage3_batchnorm14_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm14_running_var->node0x3ffe97f0
+tensorresnetv17_stage3_batchnorm14_running_var->node0x402eb340
 tensorresnetv17_stage3_batchnorm14_fwd[label=resnetv17_stage3_batchnorm14_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe97f0->tensorresnetv17_stage3_batchnorm14_fwd
-node0x3ffe9918["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402eb340->tensorresnetv17_stage3_batchnorm14_fwd
+node0x402eb480["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3_batchnorm14_fwd[label=resnetv17_stage3_batchnorm14_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm14_fwd->node0x3ffe9918
+tensorresnetv17_stage3_batchnorm14_fwd->node0x402eb480
 tensorresnetv17_stage3_relu9_fwd[label=resnetv17_stage3_relu9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe9918->tensorresnetv17_stage3_relu9_fwd
-node0x3ffe9a40["label"="{Conv|kernel_shape
+node0x402eb480->tensorresnetv17_stage3_relu9_fwd
+node0x402eb5c0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_relu9_fwd[label=resnetv17_stage3_relu9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_relu9_fwd->node0x3ffe9a40
+tensorresnetv17_stage3_relu9_fwd->node0x402eb5c0
 tensorresnetv17_stage3_conv15_weight[label=resnetv17_stage3_conv15_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv15_weight->node0x3ffe9a40
+tensorresnetv17_stage3_conv15_weight->node0x402eb5c0
 tensorresnetv17_stage3_conv15_bias[label=resnetv17_stage3_conv15_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv15_bias->node0x3ffe9a40
+tensorresnetv17_stage3_conv15_bias->node0x402eb5c0
 tensorresnetv17_stage3_conv15_fwd[label=resnetv17_stage3_conv15_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe9a40->tensorresnetv17_stage3_conv15_fwd
-node0x3ffe9b68["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402eb5c0->tensorresnetv17_stage3_conv15_fwd
+node0x402eb700["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv15_fwd[label=resnetv17_stage3_conv15_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv15_fwd->node0x3ffe9b68
+tensorresnetv17_stage3_conv15_fwd->node0x402eb700
 tensorresnetv17_stage3_batchnorm15_gamma[label=resnetv17_stage3_batchnorm15_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm15_gamma->node0x3ffe9b68
+tensorresnetv17_stage3_batchnorm15_gamma->node0x402eb700
 tensorresnetv17_stage3_batchnorm15_beta[label=resnetv17_stage3_batchnorm15_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm15_beta->node0x3ffe9b68
+tensorresnetv17_stage3_batchnorm15_beta->node0x402eb700
 tensorresnetv17_stage3_batchnorm15_running_mean[label=resnetv17_stage3_batchnorm15_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm15_running_mean->node0x3ffe9b68
+tensorresnetv17_stage3_batchnorm15_running_mean->node0x402eb700
 tensorresnetv17_stage3_batchnorm15_running_var[label=resnetv17_stage3_batchnorm15_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm15_running_var->node0x3ffe9b68
+tensorresnetv17_stage3_batchnorm15_running_var->node0x402eb700
 tensorresnetv17_stage3_batchnorm15_fwd[label=resnetv17_stage3_batchnorm15_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe9b68->tensorresnetv17_stage3_batchnorm15_fwd
-node0x3ffe9c90["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402eb700->tensorresnetv17_stage3_batchnorm15_fwd
+node0x402eb840["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage3_batchnorm15_fwd[label=resnetv17_stage3_batchnorm15_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm15_fwd->node0x3ffe9c90
+tensorresnetv17_stage3_batchnorm15_fwd->node0x402eb840
 tensorresnetv17_stage3_activation3[label=resnetv17_stage3_activation3, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_activation3->node0x3ffe9c90
+tensorresnetv17_stage3_activation3->node0x402eb840
 tensorresnetv17_stage3__plus4[label=resnetv17_stage3__plus4, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe9c90->tensorresnetv17_stage3__plus4
-node0x3ffe9db8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402eb840->tensorresnetv17_stage3__plus4
+node0x402eb980["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3__plus4[label=resnetv17_stage3__plus4, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3__plus4->node0x3ffe9db8
+tensorresnetv17_stage3__plus4->node0x402eb980
 tensorresnetv17_stage3_activation4[label=resnetv17_stage3_activation4, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe9db8->tensorresnetv17_stage3_activation4
-node0x3ffe9ee0["label"="{Conv|kernel_shape
+node0x402eb980->tensorresnetv17_stage3_activation4
+node0x402ebac0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_activation4[label=resnetv17_stage3_activation4, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_activation4->node0x3ffe9ee0
+tensorresnetv17_stage3_activation4->node0x402ebac0
 tensorresnetv17_stage3_conv16_weight[label=resnetv17_stage3_conv16_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv16_weight->node0x3ffe9ee0
+tensorresnetv17_stage3_conv16_weight->node0x402ebac0
 tensorresnetv17_stage3_conv16_bias[label=resnetv17_stage3_conv16_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv16_bias->node0x3ffe9ee0
+tensorresnetv17_stage3_conv16_bias->node0x402ebac0
 tensorresnetv17_stage3_conv16_fwd[label=resnetv17_stage3_conv16_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffe9ee0->tensorresnetv17_stage3_conv16_fwd
-node0x3ffea008["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ebac0->tensorresnetv17_stage3_conv16_fwd
+node0x402ebc00["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv16_fwd[label=resnetv17_stage3_conv16_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv16_fwd->node0x3ffea008
+tensorresnetv17_stage3_conv16_fwd->node0x402ebc00
 tensorresnetv17_stage3_batchnorm16_gamma[label=resnetv17_stage3_batchnorm16_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm16_gamma->node0x3ffea008
+tensorresnetv17_stage3_batchnorm16_gamma->node0x402ebc00
 tensorresnetv17_stage3_batchnorm16_beta[label=resnetv17_stage3_batchnorm16_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm16_beta->node0x3ffea008
+tensorresnetv17_stage3_batchnorm16_beta->node0x402ebc00
 tensorresnetv17_stage3_batchnorm16_running_mean[label=resnetv17_stage3_batchnorm16_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm16_running_mean->node0x3ffea008
+tensorresnetv17_stage3_batchnorm16_running_mean->node0x402ebc00
 tensorresnetv17_stage3_batchnorm16_running_var[label=resnetv17_stage3_batchnorm16_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm16_running_var->node0x3ffea008
+tensorresnetv17_stage3_batchnorm16_running_var->node0x402ebc00
 tensorresnetv17_stage3_batchnorm16_fwd[label=resnetv17_stage3_batchnorm16_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffea008->tensorresnetv17_stage3_batchnorm16_fwd
-node0x3ffea130["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402ebc00->tensorresnetv17_stage3_batchnorm16_fwd
+node0x402ebd40["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3_batchnorm16_fwd[label=resnetv17_stage3_batchnorm16_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm16_fwd->node0x3ffea130
+tensorresnetv17_stage3_batchnorm16_fwd->node0x402ebd40
 tensorresnetv17_stage3_relu10_fwd[label=resnetv17_stage3_relu10_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffea130->tensorresnetv17_stage3_relu10_fwd
-node0x3ffea258["label"="{Conv|kernel_shape
+node0x402ebd40->tensorresnetv17_stage3_relu10_fwd
+node0x402ebe80["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_relu10_fwd[label=resnetv17_stage3_relu10_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_relu10_fwd->node0x3ffea258
+tensorresnetv17_stage3_relu10_fwd->node0x402ebe80
 tensorresnetv17_stage3_conv17_weight[label=resnetv17_stage3_conv17_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv17_weight->node0x3ffea258
+tensorresnetv17_stage3_conv17_weight->node0x402ebe80
 tensorresnetv17_stage3_conv17_fwd[label=resnetv17_stage3_conv17_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffea258->tensorresnetv17_stage3_conv17_fwd
-node0x3ffea380["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ebe80->tensorresnetv17_stage3_conv17_fwd
+node0x402ebfc0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv17_fwd[label=resnetv17_stage3_conv17_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv17_fwd->node0x3ffea380
+tensorresnetv17_stage3_conv17_fwd->node0x402ebfc0
 tensorresnetv17_stage3_batchnorm17_gamma[label=resnetv17_stage3_batchnorm17_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm17_gamma->node0x3ffea380
+tensorresnetv17_stage3_batchnorm17_gamma->node0x402ebfc0
 tensorresnetv17_stage3_batchnorm17_beta[label=resnetv17_stage3_batchnorm17_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm17_beta->node0x3ffea380
+tensorresnetv17_stage3_batchnorm17_beta->node0x402ebfc0
 tensorresnetv17_stage3_batchnorm17_running_mean[label=resnetv17_stage3_batchnorm17_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm17_running_mean->node0x3ffea380
+tensorresnetv17_stage3_batchnorm17_running_mean->node0x402ebfc0
 tensorresnetv17_stage3_batchnorm17_running_var[label=resnetv17_stage3_batchnorm17_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm17_running_var->node0x3ffea380
+tensorresnetv17_stage3_batchnorm17_running_var->node0x402ebfc0
 tensorresnetv17_stage3_batchnorm17_fwd[label=resnetv17_stage3_batchnorm17_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffea380->tensorresnetv17_stage3_batchnorm17_fwd
-node0x3ffea4a8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402ebfc0->tensorresnetv17_stage3_batchnorm17_fwd
+node0x402ec100["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3_batchnorm17_fwd[label=resnetv17_stage3_batchnorm17_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm17_fwd->node0x3ffea4a8
+tensorresnetv17_stage3_batchnorm17_fwd->node0x402ec100
 tensorresnetv17_stage3_relu11_fwd[label=resnetv17_stage3_relu11_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffea4a8->tensorresnetv17_stage3_relu11_fwd
-node0x3ffea5d0["label"="{Conv|kernel_shape
+node0x402ec100->tensorresnetv17_stage3_relu11_fwd
+node0x402ec240["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_relu11_fwd[label=resnetv17_stage3_relu11_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_relu11_fwd->node0x3ffea5d0
+tensorresnetv17_stage3_relu11_fwd->node0x402ec240
 tensorresnetv17_stage3_conv18_weight[label=resnetv17_stage3_conv18_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv18_weight->node0x3ffea5d0
+tensorresnetv17_stage3_conv18_weight->node0x402ec240
 tensorresnetv17_stage3_conv18_bias[label=resnetv17_stage3_conv18_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv18_bias->node0x3ffea5d0
+tensorresnetv17_stage3_conv18_bias->node0x402ec240
 tensorresnetv17_stage3_conv18_fwd[label=resnetv17_stage3_conv18_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffea5d0->tensorresnetv17_stage3_conv18_fwd
-node0x3ffea6f8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ec240->tensorresnetv17_stage3_conv18_fwd
+node0x402ec380["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage3_conv18_fwd[label=resnetv17_stage3_conv18_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_conv18_fwd->node0x3ffea6f8
+tensorresnetv17_stage3_conv18_fwd->node0x402ec380
 tensorresnetv17_stage3_batchnorm18_gamma[label=resnetv17_stage3_batchnorm18_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm18_gamma->node0x3ffea6f8
+tensorresnetv17_stage3_batchnorm18_gamma->node0x402ec380
 tensorresnetv17_stage3_batchnorm18_beta[label=resnetv17_stage3_batchnorm18_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm18_beta->node0x3ffea6f8
+tensorresnetv17_stage3_batchnorm18_beta->node0x402ec380
 tensorresnetv17_stage3_batchnorm18_running_mean[label=resnetv17_stage3_batchnorm18_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm18_running_mean->node0x3ffea6f8
+tensorresnetv17_stage3_batchnorm18_running_mean->node0x402ec380
 tensorresnetv17_stage3_batchnorm18_running_var[label=resnetv17_stage3_batchnorm18_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm18_running_var->node0x3ffea6f8
+tensorresnetv17_stage3_batchnorm18_running_var->node0x402ec380
 tensorresnetv17_stage3_batchnorm18_fwd[label=resnetv17_stage3_batchnorm18_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffea6f8->tensorresnetv17_stage3_batchnorm18_fwd
-node0x3ffea820["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402ec380->tensorresnetv17_stage3_batchnorm18_fwd
+node0x402ec4c0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage3_batchnorm18_fwd[label=resnetv17_stage3_batchnorm18_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_batchnorm18_fwd->node0x3ffea820
+tensorresnetv17_stage3_batchnorm18_fwd->node0x402ec4c0
 tensorresnetv17_stage3_activation4[label=resnetv17_stage3_activation4, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_activation4->node0x3ffea820
+tensorresnetv17_stage3_activation4->node0x402ec4c0
 tensorresnetv17_stage3__plus5[label=resnetv17_stage3__plus5, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffea820->tensorresnetv17_stage3__plus5
-node0x3ffea948["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402ec4c0->tensorresnetv17_stage3__plus5
+node0x402ec600["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage3__plus5[label=resnetv17_stage3__plus5, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3__plus5->node0x3ffea948
+tensorresnetv17_stage3__plus5->node0x402ec600
 tensorresnetv17_stage3_activation5[label=resnetv17_stage3_activation5, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffea948->tensorresnetv17_stage3_activation5
-node0x3ffeaa70["label"="{Conv|kernel_shape
+node0x402ec600->tensorresnetv17_stage3_activation5
+node0x402ec740["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_activation5[label=resnetv17_stage3_activation5, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_activation5->node0x3ffeaa70
+tensorresnetv17_stage3_activation5->node0x402ec740
 tensorresnetv17_stage4_conv0_weight[label=resnetv17_stage4_conv0_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv0_weight->node0x3ffeaa70
+tensorresnetv17_stage4_conv0_weight->node0x402ec740
 tensorresnetv17_stage4_conv0_bias[label=resnetv17_stage4_conv0_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv0_bias->node0x3ffeaa70
+tensorresnetv17_stage4_conv0_bias->node0x402ec740
 tensorresnetv17_stage4_conv0_fwd[label=resnetv17_stage4_conv0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeaa70->tensorresnetv17_stage4_conv0_fwd
-node0x3ffeab98["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ec740->tensorresnetv17_stage4_conv0_fwd
+node0x402ec880["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage4_conv0_fwd[label=resnetv17_stage4_conv0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv0_fwd->node0x3ffeab98
+tensorresnetv17_stage4_conv0_fwd->node0x402ec880
 tensorresnetv17_stage4_batchnorm0_gamma[label=resnetv17_stage4_batchnorm0_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm0_gamma->node0x3ffeab98
+tensorresnetv17_stage4_batchnorm0_gamma->node0x402ec880
 tensorresnetv17_stage4_batchnorm0_beta[label=resnetv17_stage4_batchnorm0_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm0_beta->node0x3ffeab98
+tensorresnetv17_stage4_batchnorm0_beta->node0x402ec880
 tensorresnetv17_stage4_batchnorm0_running_mean[label=resnetv17_stage4_batchnorm0_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm0_running_mean->node0x3ffeab98
+tensorresnetv17_stage4_batchnorm0_running_mean->node0x402ec880
 tensorresnetv17_stage4_batchnorm0_running_var[label=resnetv17_stage4_batchnorm0_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm0_running_var->node0x3ffeab98
+tensorresnetv17_stage4_batchnorm0_running_var->node0x402ec880
 tensorresnetv17_stage4_batchnorm0_fwd[label=resnetv17_stage4_batchnorm0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeab98->tensorresnetv17_stage4_batchnorm0_fwd
-node0x3ffeacc0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402ec880->tensorresnetv17_stage4_batchnorm0_fwd
+node0x402ec9c0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage4_batchnorm0_fwd[label=resnetv17_stage4_batchnorm0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm0_fwd->node0x3ffeacc0
+tensorresnetv17_stage4_batchnorm0_fwd->node0x402ec9c0
 tensorresnetv17_stage4_relu0_fwd[label=resnetv17_stage4_relu0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeacc0->tensorresnetv17_stage4_relu0_fwd
-node0x3ffeade8["label"="{Conv|kernel_shape
+node0x402ec9c0->tensorresnetv17_stage4_relu0_fwd
+node0x402ecb00["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage4_relu0_fwd[label=resnetv17_stage4_relu0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_relu0_fwd->node0x3ffeade8
+tensorresnetv17_stage4_relu0_fwd->node0x402ecb00
 tensorresnetv17_stage4_conv1_weight[label=resnetv17_stage4_conv1_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv1_weight->node0x3ffeade8
+tensorresnetv17_stage4_conv1_weight->node0x402ecb00
 tensorresnetv17_stage4_conv1_fwd[label=resnetv17_stage4_conv1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeade8->tensorresnetv17_stage4_conv1_fwd
-node0x3ffeaf10["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ecb00->tensorresnetv17_stage4_conv1_fwd
+node0x402ecc40["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage4_conv1_fwd[label=resnetv17_stage4_conv1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv1_fwd->node0x3ffeaf10
+tensorresnetv17_stage4_conv1_fwd->node0x402ecc40
 tensorresnetv17_stage4_batchnorm1_gamma[label=resnetv17_stage4_batchnorm1_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm1_gamma->node0x3ffeaf10
+tensorresnetv17_stage4_batchnorm1_gamma->node0x402ecc40
 tensorresnetv17_stage4_batchnorm1_beta[label=resnetv17_stage4_batchnorm1_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm1_beta->node0x3ffeaf10
+tensorresnetv17_stage4_batchnorm1_beta->node0x402ecc40
 tensorresnetv17_stage4_batchnorm1_running_mean[label=resnetv17_stage4_batchnorm1_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm1_running_mean->node0x3ffeaf10
+tensorresnetv17_stage4_batchnorm1_running_mean->node0x402ecc40
 tensorresnetv17_stage4_batchnorm1_running_var[label=resnetv17_stage4_batchnorm1_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm1_running_var->node0x3ffeaf10
+tensorresnetv17_stage4_batchnorm1_running_var->node0x402ecc40
 tensorresnetv17_stage4_batchnorm1_fwd[label=resnetv17_stage4_batchnorm1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeaf10->tensorresnetv17_stage4_batchnorm1_fwd
-node0x3ffeb038["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402ecc40->tensorresnetv17_stage4_batchnorm1_fwd
+node0x402ecd80["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage4_batchnorm1_fwd[label=resnetv17_stage4_batchnorm1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm1_fwd->node0x3ffeb038
+tensorresnetv17_stage4_batchnorm1_fwd->node0x402ecd80
 tensorresnetv17_stage4_relu1_fwd[label=resnetv17_stage4_relu1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeb038->tensorresnetv17_stage4_relu1_fwd
-node0x3ffeb160["label"="{Conv|kernel_shape
+node0x402ecd80->tensorresnetv17_stage4_relu1_fwd
+node0x402ecec0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage4_relu1_fwd[label=resnetv17_stage4_relu1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_relu1_fwd->node0x3ffeb160
+tensorresnetv17_stage4_relu1_fwd->node0x402ecec0
 tensorresnetv17_stage4_conv2_weight[label=resnetv17_stage4_conv2_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv2_weight->node0x3ffeb160
+tensorresnetv17_stage4_conv2_weight->node0x402ecec0
 tensorresnetv17_stage4_conv2_bias[label=resnetv17_stage4_conv2_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv2_bias->node0x3ffeb160
+tensorresnetv17_stage4_conv2_bias->node0x402ecec0
 tensorresnetv17_stage4_conv2_fwd[label=resnetv17_stage4_conv2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeb160->tensorresnetv17_stage4_conv2_fwd
-node0x3ffeb288["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ecec0->tensorresnetv17_stage4_conv2_fwd
+node0x402ed000["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage4_conv2_fwd[label=resnetv17_stage4_conv2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv2_fwd->node0x3ffeb288
+tensorresnetv17_stage4_conv2_fwd->node0x402ed000
 tensorresnetv17_stage4_batchnorm2_gamma[label=resnetv17_stage4_batchnorm2_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm2_gamma->node0x3ffeb288
+tensorresnetv17_stage4_batchnorm2_gamma->node0x402ed000
 tensorresnetv17_stage4_batchnorm2_beta[label=resnetv17_stage4_batchnorm2_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm2_beta->node0x3ffeb288
+tensorresnetv17_stage4_batchnorm2_beta->node0x402ed000
 tensorresnetv17_stage4_batchnorm2_running_mean[label=resnetv17_stage4_batchnorm2_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm2_running_mean->node0x3ffeb288
+tensorresnetv17_stage4_batchnorm2_running_mean->node0x402ed000
 tensorresnetv17_stage4_batchnorm2_running_var[label=resnetv17_stage4_batchnorm2_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm2_running_var->node0x3ffeb288
+tensorresnetv17_stage4_batchnorm2_running_var->node0x402ed000
 tensorresnetv17_stage4_batchnorm2_fwd[label=resnetv17_stage4_batchnorm2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeb288->tensorresnetv17_stage4_batchnorm2_fwd
-node0x3ffeb3b0["label"="{Conv|kernel_shape
+node0x402ed000->tensorresnetv17_stage4_batchnorm2_fwd
+node0x402ed140["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage3_activation5[label=resnetv17_stage3_activation5, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage3_activation5->node0x3ffeb3b0
+tensorresnetv17_stage3_activation5->node0x402ed140
 tensorresnetv17_stage4_conv3_weight[label=resnetv17_stage4_conv3_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv3_weight->node0x3ffeb3b0
+tensorresnetv17_stage4_conv3_weight->node0x402ed140
 tensorresnetv17_stage4_conv3_fwd[label=resnetv17_stage4_conv3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeb3b0->tensorresnetv17_stage4_conv3_fwd
-node0x3ffeb4d8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ed140->tensorresnetv17_stage4_conv3_fwd
+node0x402ed280["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage4_conv3_fwd[label=resnetv17_stage4_conv3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv3_fwd->node0x3ffeb4d8
+tensorresnetv17_stage4_conv3_fwd->node0x402ed280
 tensorresnetv17_stage4_batchnorm3_gamma[label=resnetv17_stage4_batchnorm3_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm3_gamma->node0x3ffeb4d8
+tensorresnetv17_stage4_batchnorm3_gamma->node0x402ed280
 tensorresnetv17_stage4_batchnorm3_beta[label=resnetv17_stage4_batchnorm3_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm3_beta->node0x3ffeb4d8
+tensorresnetv17_stage4_batchnorm3_beta->node0x402ed280
 tensorresnetv17_stage4_batchnorm3_running_mean[label=resnetv17_stage4_batchnorm3_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm3_running_mean->node0x3ffeb4d8
+tensorresnetv17_stage4_batchnorm3_running_mean->node0x402ed280
 tensorresnetv17_stage4_batchnorm3_running_var[label=resnetv17_stage4_batchnorm3_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm3_running_var->node0x3ffeb4d8
+tensorresnetv17_stage4_batchnorm3_running_var->node0x402ed280
 tensorresnetv17_stage4_batchnorm3_fwd[label=resnetv17_stage4_batchnorm3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeb4d8->tensorresnetv17_stage4_batchnorm3_fwd
-node0x3ffeb600["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402ed280->tensorresnetv17_stage4_batchnorm3_fwd
+node0x402ed3c0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage4_batchnorm2_fwd[label=resnetv17_stage4_batchnorm2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm2_fwd->node0x3ffeb600
+tensorresnetv17_stage4_batchnorm2_fwd->node0x402ed3c0
 tensorresnetv17_stage4_batchnorm3_fwd[label=resnetv17_stage4_batchnorm3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm3_fwd->node0x3ffeb600
+tensorresnetv17_stage4_batchnorm3_fwd->node0x402ed3c0
 tensorresnetv17_stage4__plus0[label=resnetv17_stage4__plus0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeb600->tensorresnetv17_stage4__plus0
-node0x3ffeb728["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402ed3c0->tensorresnetv17_stage4__plus0
+node0x402ed500["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage4__plus0[label=resnetv17_stage4__plus0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4__plus0->node0x3ffeb728
+tensorresnetv17_stage4__plus0->node0x402ed500
 tensorresnetv17_stage4_activation0[label=resnetv17_stage4_activation0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeb728->tensorresnetv17_stage4_activation0
-node0x3ffeb850["label"="{Conv|kernel_shape
+node0x402ed500->tensorresnetv17_stage4_activation0
+node0x402ed640["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage4_activation0[label=resnetv17_stage4_activation0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_activation0->node0x3ffeb850
+tensorresnetv17_stage4_activation0->node0x402ed640
 tensorresnetv17_stage4_conv4_weight[label=resnetv17_stage4_conv4_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv4_weight->node0x3ffeb850
+tensorresnetv17_stage4_conv4_weight->node0x402ed640
 tensorresnetv17_stage4_conv4_bias[label=resnetv17_stage4_conv4_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv4_bias->node0x3ffeb850
+tensorresnetv17_stage4_conv4_bias->node0x402ed640
 tensorresnetv17_stage4_conv4_fwd[label=resnetv17_stage4_conv4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeb850->tensorresnetv17_stage4_conv4_fwd
-node0x3ffeb978["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ed640->tensorresnetv17_stage4_conv4_fwd
+node0x402ed780["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage4_conv4_fwd[label=resnetv17_stage4_conv4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv4_fwd->node0x3ffeb978
+tensorresnetv17_stage4_conv4_fwd->node0x402ed780
 tensorresnetv17_stage4_batchnorm4_gamma[label=resnetv17_stage4_batchnorm4_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm4_gamma->node0x3ffeb978
+tensorresnetv17_stage4_batchnorm4_gamma->node0x402ed780
 tensorresnetv17_stage4_batchnorm4_beta[label=resnetv17_stage4_batchnorm4_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm4_beta->node0x3ffeb978
+tensorresnetv17_stage4_batchnorm4_beta->node0x402ed780
 tensorresnetv17_stage4_batchnorm4_running_mean[label=resnetv17_stage4_batchnorm4_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm4_running_mean->node0x3ffeb978
+tensorresnetv17_stage4_batchnorm4_running_mean->node0x402ed780
 tensorresnetv17_stage4_batchnorm4_running_var[label=resnetv17_stage4_batchnorm4_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm4_running_var->node0x3ffeb978
+tensorresnetv17_stage4_batchnorm4_running_var->node0x402ed780
 tensorresnetv17_stage4_batchnorm4_fwd[label=resnetv17_stage4_batchnorm4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffeb978->tensorresnetv17_stage4_batchnorm4_fwd
-node0x3ffebaa0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402ed780->tensorresnetv17_stage4_batchnorm4_fwd
+node0x402ed8c0["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage4_batchnorm4_fwd[label=resnetv17_stage4_batchnorm4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm4_fwd->node0x3ffebaa0
+tensorresnetv17_stage4_batchnorm4_fwd->node0x402ed8c0
 tensorresnetv17_stage4_relu2_fwd[label=resnetv17_stage4_relu2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffebaa0->tensorresnetv17_stage4_relu2_fwd
-node0x3ffebbc8["label"="{Conv|kernel_shape
+node0x402ed8c0->tensorresnetv17_stage4_relu2_fwd
+node0x402eda00["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage4_relu2_fwd[label=resnetv17_stage4_relu2_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_relu2_fwd->node0x3ffebbc8
+tensorresnetv17_stage4_relu2_fwd->node0x402eda00
 tensorresnetv17_stage4_conv5_weight[label=resnetv17_stage4_conv5_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv5_weight->node0x3ffebbc8
+tensorresnetv17_stage4_conv5_weight->node0x402eda00
 tensorresnetv17_stage4_conv5_fwd[label=resnetv17_stage4_conv5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffebbc8->tensorresnetv17_stage4_conv5_fwd
-node0x3ffebcf0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402eda00->tensorresnetv17_stage4_conv5_fwd
+node0x402edb40["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage4_conv5_fwd[label=resnetv17_stage4_conv5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv5_fwd->node0x3ffebcf0
+tensorresnetv17_stage4_conv5_fwd->node0x402edb40
 tensorresnetv17_stage4_batchnorm5_gamma[label=resnetv17_stage4_batchnorm5_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm5_gamma->node0x3ffebcf0
+tensorresnetv17_stage4_batchnorm5_gamma->node0x402edb40
 tensorresnetv17_stage4_batchnorm5_beta[label=resnetv17_stage4_batchnorm5_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm5_beta->node0x3ffebcf0
+tensorresnetv17_stage4_batchnorm5_beta->node0x402edb40
 tensorresnetv17_stage4_batchnorm5_running_mean[label=resnetv17_stage4_batchnorm5_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm5_running_mean->node0x3ffebcf0
+tensorresnetv17_stage4_batchnorm5_running_mean->node0x402edb40
 tensorresnetv17_stage4_batchnorm5_running_var[label=resnetv17_stage4_batchnorm5_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm5_running_var->node0x3ffebcf0
+tensorresnetv17_stage4_batchnorm5_running_var->node0x402edb40
 tensorresnetv17_stage4_batchnorm5_fwd[label=resnetv17_stage4_batchnorm5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffebcf0->tensorresnetv17_stage4_batchnorm5_fwd
-node0x3ffebe18["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402edb40->tensorresnetv17_stage4_batchnorm5_fwd
+node0x402edc80["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage4_batchnorm5_fwd[label=resnetv17_stage4_batchnorm5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm5_fwd->node0x3ffebe18
+tensorresnetv17_stage4_batchnorm5_fwd->node0x402edc80
 tensorresnetv17_stage4_relu3_fwd[label=resnetv17_stage4_relu3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffebe18->tensorresnetv17_stage4_relu3_fwd
-node0x3ffebf40["label"="{Conv|kernel_shape
+node0x402edc80->tensorresnetv17_stage4_relu3_fwd
+node0x402eddc0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage4_relu3_fwd[label=resnetv17_stage4_relu3_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_relu3_fwd->node0x3ffebf40
+tensorresnetv17_stage4_relu3_fwd->node0x402eddc0
 tensorresnetv17_stage4_conv6_weight[label=resnetv17_stage4_conv6_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv6_weight->node0x3ffebf40
+tensorresnetv17_stage4_conv6_weight->node0x402eddc0
 tensorresnetv17_stage4_conv6_bias[label=resnetv17_stage4_conv6_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv6_bias->node0x3ffebf40
+tensorresnetv17_stage4_conv6_bias->node0x402eddc0
 tensorresnetv17_stage4_conv6_fwd[label=resnetv17_stage4_conv6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffebf40->tensorresnetv17_stage4_conv6_fwd
-node0x3ffec068["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402eddc0->tensorresnetv17_stage4_conv6_fwd
+node0x402edf00["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage4_conv6_fwd[label=resnetv17_stage4_conv6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv6_fwd->node0x3ffec068
+tensorresnetv17_stage4_conv6_fwd->node0x402edf00
 tensorresnetv17_stage4_batchnorm6_gamma[label=resnetv17_stage4_batchnorm6_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm6_gamma->node0x3ffec068
+tensorresnetv17_stage4_batchnorm6_gamma->node0x402edf00
 tensorresnetv17_stage4_batchnorm6_beta[label=resnetv17_stage4_batchnorm6_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm6_beta->node0x3ffec068
+tensorresnetv17_stage4_batchnorm6_beta->node0x402edf00
 tensorresnetv17_stage4_batchnorm6_running_mean[label=resnetv17_stage4_batchnorm6_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm6_running_mean->node0x3ffec068
+tensorresnetv17_stage4_batchnorm6_running_mean->node0x402edf00
 tensorresnetv17_stage4_batchnorm6_running_var[label=resnetv17_stage4_batchnorm6_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm6_running_var->node0x3ffec068
+tensorresnetv17_stage4_batchnorm6_running_var->node0x402edf00
 tensorresnetv17_stage4_batchnorm6_fwd[label=resnetv17_stage4_batchnorm6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffec068->tensorresnetv17_stage4_batchnorm6_fwd
-node0x3ffec190["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402edf00->tensorresnetv17_stage4_batchnorm6_fwd
+node0x402ee040["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage4_batchnorm6_fwd[label=resnetv17_stage4_batchnorm6_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm6_fwd->node0x3ffec190
+tensorresnetv17_stage4_batchnorm6_fwd->node0x402ee040
 tensorresnetv17_stage4_activation0[label=resnetv17_stage4_activation0, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_activation0->node0x3ffec190
+tensorresnetv17_stage4_activation0->node0x402ee040
 tensorresnetv17_stage4__plus1[label=resnetv17_stage4__plus1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffec190->tensorresnetv17_stage4__plus1
-node0x3ffec2b8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402ee040->tensorresnetv17_stage4__plus1
+node0x402ee180["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage4__plus1[label=resnetv17_stage4__plus1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4__plus1->node0x3ffec2b8
+tensorresnetv17_stage4__plus1->node0x402ee180
 tensorresnetv17_stage4_activation1[label=resnetv17_stage4_activation1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffec2b8->tensorresnetv17_stage4_activation1
-node0x3ffec3e0["label"="{Conv|kernel_shape
+node0x402ee180->tensorresnetv17_stage4_activation1
+node0x402ee2c0["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage4_activation1[label=resnetv17_stage4_activation1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_activation1->node0x3ffec3e0
+tensorresnetv17_stage4_activation1->node0x402ee2c0
 tensorresnetv17_stage4_conv7_weight[label=resnetv17_stage4_conv7_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv7_weight->node0x3ffec3e0
+tensorresnetv17_stage4_conv7_weight->node0x402ee2c0
 tensorresnetv17_stage4_conv7_bias[label=resnetv17_stage4_conv7_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv7_bias->node0x3ffec3e0
+tensorresnetv17_stage4_conv7_bias->node0x402ee2c0
 tensorresnetv17_stage4_conv7_fwd[label=resnetv17_stage4_conv7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffec3e0->tensorresnetv17_stage4_conv7_fwd
-node0x3ffec508["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ee2c0->tensorresnetv17_stage4_conv7_fwd
+node0x402ee400["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage4_conv7_fwd[label=resnetv17_stage4_conv7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv7_fwd->node0x3ffec508
+tensorresnetv17_stage4_conv7_fwd->node0x402ee400
 tensorresnetv17_stage4_batchnorm7_gamma[label=resnetv17_stage4_batchnorm7_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm7_gamma->node0x3ffec508
+tensorresnetv17_stage4_batchnorm7_gamma->node0x402ee400
 tensorresnetv17_stage4_batchnorm7_beta[label=resnetv17_stage4_batchnorm7_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm7_beta->node0x3ffec508
+tensorresnetv17_stage4_batchnorm7_beta->node0x402ee400
 tensorresnetv17_stage4_batchnorm7_running_mean[label=resnetv17_stage4_batchnorm7_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm7_running_mean->node0x3ffec508
+tensorresnetv17_stage4_batchnorm7_running_mean->node0x402ee400
 tensorresnetv17_stage4_batchnorm7_running_var[label=resnetv17_stage4_batchnorm7_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm7_running_var->node0x3ffec508
+tensorresnetv17_stage4_batchnorm7_running_var->node0x402ee400
 tensorresnetv17_stage4_batchnorm7_fwd[label=resnetv17_stage4_batchnorm7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffec508->tensorresnetv17_stage4_batchnorm7_fwd
-node0x3ffec630["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402ee400->tensorresnetv17_stage4_batchnorm7_fwd
+node0x402ee540["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage4_batchnorm7_fwd[label=resnetv17_stage4_batchnorm7_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm7_fwd->node0x3ffec630
+tensorresnetv17_stage4_batchnorm7_fwd->node0x402ee540
 tensorresnetv17_stage4_relu4_fwd[label=resnetv17_stage4_relu4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffec630->tensorresnetv17_stage4_relu4_fwd
-node0x3ffec758["label"="{Conv|kernel_shape
+node0x402ee540->tensorresnetv17_stage4_relu4_fwd
+node0x402ee680["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage4_relu4_fwd[label=resnetv17_stage4_relu4_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_relu4_fwd->node0x3ffec758
+tensorresnetv17_stage4_relu4_fwd->node0x402ee680
 tensorresnetv17_stage4_conv8_weight[label=resnetv17_stage4_conv8_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv8_weight->node0x3ffec758
+tensorresnetv17_stage4_conv8_weight->node0x402ee680
 tensorresnetv17_stage4_conv8_fwd[label=resnetv17_stage4_conv8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffec758->tensorresnetv17_stage4_conv8_fwd
-node0x3ffec880["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402ee680->tensorresnetv17_stage4_conv8_fwd
+node0x402ee7c0["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage4_conv8_fwd[label=resnetv17_stage4_conv8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv8_fwd->node0x3ffec880
+tensorresnetv17_stage4_conv8_fwd->node0x402ee7c0
 tensorresnetv17_stage4_batchnorm8_gamma[label=resnetv17_stage4_batchnorm8_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm8_gamma->node0x3ffec880
+tensorresnetv17_stage4_batchnorm8_gamma->node0x402ee7c0
 tensorresnetv17_stage4_batchnorm8_beta[label=resnetv17_stage4_batchnorm8_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm8_beta->node0x3ffec880
+tensorresnetv17_stage4_batchnorm8_beta->node0x402ee7c0
 tensorresnetv17_stage4_batchnorm8_running_mean[label=resnetv17_stage4_batchnorm8_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm8_running_mean->node0x3ffec880
+tensorresnetv17_stage4_batchnorm8_running_mean->node0x402ee7c0
 tensorresnetv17_stage4_batchnorm8_running_var[label=resnetv17_stage4_batchnorm8_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm8_running_var->node0x3ffec880
+tensorresnetv17_stage4_batchnorm8_running_var->node0x402ee7c0
 tensorresnetv17_stage4_batchnorm8_fwd[label=resnetv17_stage4_batchnorm8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffec880->tensorresnetv17_stage4_batchnorm8_fwd
-node0x3ffec9a8["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402ee7c0->tensorresnetv17_stage4_batchnorm8_fwd
+node0x402ee900["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage4_batchnorm8_fwd[label=resnetv17_stage4_batchnorm8_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm8_fwd->node0x3ffec9a8
+tensorresnetv17_stage4_batchnorm8_fwd->node0x402ee900
 tensorresnetv17_stage4_relu5_fwd[label=resnetv17_stage4_relu5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffec9a8->tensorresnetv17_stage4_relu5_fwd
-node0x3ffecad0["label"="{Conv|kernel_shape
+node0x402ee900->tensorresnetv17_stage4_relu5_fwd
+node0x402eea40["label"="{Conv|kernel_shape
 |group
 |dilations
 |pads
 |strides
+|auto_pad
 }",shape=Mrecord style=filled, fillcolor="#FF6B6B"]
 tensorresnetv17_stage4_relu5_fwd[label=resnetv17_stage4_relu5_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_relu5_fwd->node0x3ffecad0
+tensorresnetv17_stage4_relu5_fwd->node0x402eea40
 tensorresnetv17_stage4_conv9_weight[label=resnetv17_stage4_conv9_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv9_weight->node0x3ffecad0
+tensorresnetv17_stage4_conv9_weight->node0x402eea40
 tensorresnetv17_stage4_conv9_bias[label=resnetv17_stage4_conv9_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv9_bias->node0x3ffecad0
+tensorresnetv17_stage4_conv9_bias->node0x402eea40
 tensorresnetv17_stage4_conv9_fwd[label=resnetv17_stage4_conv9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffecad0->tensorresnetv17_stage4_conv9_fwd
-node0x3ffecbf8["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402eea40->tensorresnetv17_stage4_conv9_fwd
+node0x402eeb80["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage4_conv9_fwd[label=resnetv17_stage4_conv9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_conv9_fwd->node0x3ffecbf8
+tensorresnetv17_stage4_conv9_fwd->node0x402eeb80
 tensorresnetv17_stage4_batchnorm9_gamma[label=resnetv17_stage4_batchnorm9_gamma, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm9_gamma->node0x3ffecbf8
+tensorresnetv17_stage4_batchnorm9_gamma->node0x402eeb80
 tensorresnetv17_stage4_batchnorm9_beta[label=resnetv17_stage4_batchnorm9_beta, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm9_beta->node0x3ffecbf8
+tensorresnetv17_stage4_batchnorm9_beta->node0x402eeb80
 tensorresnetv17_stage4_batchnorm9_running_mean[label=resnetv17_stage4_batchnorm9_running_mean, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm9_running_mean->node0x3ffecbf8
+tensorresnetv17_stage4_batchnorm9_running_mean->node0x402eeb80
 tensorresnetv17_stage4_batchnorm9_running_var[label=resnetv17_stage4_batchnorm9_running_var, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm9_running_var->node0x3ffecbf8
+tensorresnetv17_stage4_batchnorm9_running_var->node0x402eeb80
 tensorresnetv17_stage4_batchnorm9_fwd[label=resnetv17_stage4_batchnorm9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffecbf8->tensorresnetv17_stage4_batchnorm9_fwd
-node0x3ffecd20["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
+node0x402eeb80->tensorresnetv17_stage4_batchnorm9_fwd
+node0x402eecc0["label"="{Add}",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_stage4_batchnorm9_fwd[label=resnetv17_stage4_batchnorm9_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_batchnorm9_fwd->node0x3ffecd20
+tensorresnetv17_stage4_batchnorm9_fwd->node0x402eecc0
 tensorresnetv17_stage4_activation1[label=resnetv17_stage4_activation1, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_activation1->node0x3ffecd20
+tensorresnetv17_stage4_activation1->node0x402eecc0
 tensorresnetv17_stage4__plus2[label=resnetv17_stage4__plus2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffecd20->tensorresnetv17_stage4__plus2
-node0x3ffece48["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
+node0x402eecc0->tensorresnetv17_stage4__plus2
+node0x402eee00["label"="{Relu}",shape=Mrecord style=filled, fillcolor="#4ECDC4"]
 tensorresnetv17_stage4__plus2[label=resnetv17_stage4__plus2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4__plus2->node0x3ffece48
+tensorresnetv17_stage4__plus2->node0x402eee00
 tensorresnetv17_stage4_activation2[label=resnetv17_stage4_activation2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffece48->tensorresnetv17_stage4_activation2
-node0x3ffecf70["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
+node0x402eee00->tensorresnetv17_stage4_activation2
+node0x402eef40["label"="{Void}",shape=Mrecord style=filled, fillcolor="#B2BEC3"]
 tensorresnetv17_stage4_activation2[label=resnetv17_stage4_activation2, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_stage4_activation2->node0x3ffecf70
+tensorresnetv17_stage4_activation2->node0x402eef40
 tensorresnetv17_pool1_fwd[label=resnetv17_pool1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffecf70->tensorresnetv17_pool1_fwd
-node0x3ffed098["label"="{Flatten|axis
+node0x402eef40->tensorresnetv17_pool1_fwd
+node0x402ef080["label"="{Flatten|axis
 }",shape=Mrecord style=filled, fillcolor="#FDCB6E"]
 tensorresnetv17_pool1_fwd[label=resnetv17_pool1_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_pool1_fwd->node0x3ffed098
+tensorresnetv17_pool1_fwd->node0x402ef080
 tensorflatten_473[label=flatten_473, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffed098->tensorflatten_473
-node0x3ffed1c0["label"="{Gemm|alpha
+node0x402ef080->tensorflatten_473
+node0x402ef1c0["label"="{Gemm|alpha
 |beta
 |transA
 |transB
 }",shape=Mrecord style=filled, fillcolor="#6C5CE7"]
 tensorflatten_473[label=flatten_473, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorflatten_473->node0x3ffed1c0
+tensorflatten_473->node0x402ef1c0
 tensorresnetv17_dense0_weight[label=resnetv17_dense0_weight, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_dense0_weight->node0x3ffed1c0
+tensorresnetv17_dense0_weight->node0x402ef1c0
 tensorresnetv17_dense0_bias[label=resnetv17_dense0_bias, shape=cylinder, style=filled, fillcolor="#A45E72"]
-tensorresnetv17_dense0_bias->node0x3ffed1c0
+tensorresnetv17_dense0_bias->node0x402ef1c0
 tensorresnetv17_dense0_fwd[label=resnetv17_dense0_fwd, shape=cylinder, style=filled, fillcolor="#A45E72"]
-node0x3ffed1c0->tensorresnetv17_dense0_fwd
+node0x402ef1c0->tensorresnetv17_dense0_fwd
 }

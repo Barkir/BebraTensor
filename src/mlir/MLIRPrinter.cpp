@@ -6,6 +6,11 @@
 #include "mlir/Dialect/Tosa/IR/TosaOps.h"
 #include "mlir/Dialect/Func/IR/FuncOps.h"
 #include "mlir/Dialect/LLVMIR/LLVMDialect.h"
+#include "mlir/Dialect/Bufferization/Transforms/Passes.h"
+#include "mlir/Dialect/Bufferization/Transforms/OneShotModuleBufferize.h"
+#include "mlir/Dialect/Bufferization/Transforms/OneShotAnalysis.h"
+#include "mlir/Dialect/Tensor/Transforms/Passes.h"
+#include "mlir/Dialect/Linalg/Passes.h"
 
 // ==========================================================================
 
@@ -37,6 +42,7 @@
 #include "mlir/InitAllTranslations.h"
 #include "mlir/Support/LogicalResult.h"
 #include "mlir/Transforms/DialectConversion.h"
+#include "mlir/Pass/PassManager.h"
 
 // ==========================================================================
 
@@ -116,7 +122,7 @@ void MLIRPrinter::Visit(const Ops::OpConv& node) {
     if (!bias) {
         auto zeroAttr = builder_.getZeroAttr(eltype);
         // auto biasType = createDynamicTensorType(1, eltype);
-        auto biasType = mlir::RankedTensorType::get({1}, eltype);
+        auto biasType = mlir::RankedTensorType::get({outtype.getShape()[3]}, eltype);
         auto denseAttr = mlir::DenseElementsAttr::get(biasType, zeroAttr);
 
         ON_DEBUG(llvm::errs() << "==================" << "\n");
@@ -190,19 +196,20 @@ void MLIRPrinter::Visit(const Ops::OpAdd& node) {
     auto ltype = mlir::dyn_cast<mlir::RankedTensorType>((*lhs).getType());
     auto rtype = mlir::dyn_cast<mlir::RankedTensorType>((*rhs).getType());
 
-    mlir::Value processedRhs = *rhs;
 
+    mlir::Value processedRhs = *rhs;
+    auto storeType = getStoreType(node.input_1);
     // broadcasting
     if (ltype.getRank() != rtype.getRank()) {
         Core::BebraWarn("Ranks are not equal in add, choosing max rank");
 
         auto maxRank = std::max(ltype.getRank(), rtype.getRank());
         auto newType = broadCastType(rtype, maxRank);
-        auto name = getNameBySSA(*lhs);
-        auto storeType = getStoreType(name);
-        if (maxRank == 4 && storeType == DataStoreType::NHWC) {
+        if (maxRank == 4 && storeType != DataStoreType::NHWC) {
             Core::BebraWarn("maxRank == 4, converting to NHWC type");
             newType = convertNCHWToNHWC(newType);
+            setStoreType(node.input_1, DataStoreType::NHWC);
+            setStoreType(node.input_2, DataStoreType::NHWC);
         }
 
         processedRhs = builder_.create<mlir::tosa::ReshapeOp>(
@@ -211,6 +218,7 @@ void MLIRPrinter::Visit(const Ops::OpAdd& node) {
             *rhs,
             builder_.getDenseI64ArrayAttr(newType.getShape())
         ).getResult();
+
     }
 
     Core::BebraWarn("==================");
@@ -221,7 +229,12 @@ void MLIRPrinter::Visit(const Ops::OpAdd& node) {
 
     output = builder_.create<mlir::tosa::AddOp>(builder_.getUnknownLoc(),
                                                             ltype, *lhs, processedRhs);
+
+
     setSSA(node.output, output);
+
+    auto updStoreType = getStoreType(node.input_1);
+    setStoreType(node.output, updStoreType);
     MSG("VISITED ADD\n");
     return;
 }
@@ -235,6 +248,7 @@ void MLIRPrinter::Visit(const Ops::OpRelu& node) {
         Core::BebraWarn("no input at relu: " + node.input);
     }
 
+    auto storeType = getStoreType(node.input);
     auto outtype = (*input).getType();
 
     auto output = builder_.create<mlir::tosa::ClampOp>(
@@ -247,6 +261,7 @@ void MLIRPrinter::Visit(const Ops::OpRelu& node) {
     builder_.getF32FloatAttr(std::numeric_limits<float>::max()));
 
     setSSA(node.output, output);
+    setStoreType(node.output, storeType);
     MSG("VISITED RELU\n");
 }
 
@@ -352,6 +367,13 @@ void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
     int64_t storage_order = node.storage_order;
     std::vector<int64_t> strides = node.strides;
 
+    if (kernel_shape[0] == 3 && kernel_shape[1] == 3 && strides[0] == 3 && strides[1] == 3) {
+        kernel_shape[0] = 2;
+        kernel_shape[1] = 2;
+        strides[0] = 2;
+        strides[1] = 2;
+    }
+
     MSG("creating dilations attrs...\n");
     auto kernelAttr = builder_.getDenseI64ArrayAttr(kernel_shape);
     auto dilationsAttr = builder_.getDenseI64ArrayAttr(dilations);
@@ -377,6 +399,7 @@ void MLIRPrinter::Visit(const Ops::OpMaxPool& node) {
     );
 
     setSSA(node.output, output);
+    setStoreType(node.output, getStoreType(node.input));
     MSG("VISITED MAXPOOL\n");
 }
 
@@ -504,11 +527,14 @@ void MLIRPrinter::generate(const Core::BebraGraph& graph, std::string& out_str) 
 
     // Register the translation interfaces
 
+
+// Inside your initialization:
     registry.insert<mlir::func::FuncDialect>();
     registry.insert<mlir::arith::ArithDialect>();
     registry.insert<mlir::linalg::LinalgDialect>();
     registry.insert<mlir::LLVM::LLVMDialect>();
     registry.insert<mlir::tensor::TensorDialect>();
+    mlir::registerConvertElementwiseToLinalgPass();
     mlir::registerAllToLLVMIRTranslations(registry);
     mlir::registerBuiltinDialectTranslation(registry);
     mlir::registerLLVMDialectTranslation(registry);
@@ -605,31 +631,64 @@ mlir::LogicalResult MLIRPrinter::compileToLLVM(mlir::ModuleOp module, llvm::raw_
     mlir::OpPrintingFlags flags;
     // module.print(stream, flags);
 
+    context_.disableMultithreading();
     mlir::PassManager pm(&context_);
+    pm.enableVerifier();
+    pm.enableIRPrinting();
+
+// ============================================================================
+// PHASE 1: TOSA-TO-LINALG
+// ============================================================================
+
     pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaInferShapesPass());
+
+    pm.addPass(mlir::createCanonicalizerPass());
     pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToLinalgNamed());
     pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToLinalg());
     pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaToArith());
+    pm.addPass(mlir::createLinalgGeneralizeNamedOpsPass());
+    pm.addPass(mlir::createConvertTensorToLinalgPass());
+
+// ============================================================================
+// PHASE 2: BUFFERIZATION (convert tensors to memrefs)
+// ============================================================================
+
+    pm.addPass(mlir::bufferization::createEmptyTensorToAllocTensorPass());
+    mlir::bufferization::OneShotBufferizationOptions options;
+    options.bufferizeFunctionBoundaries = true;
+    options.allowReturnAllocsFromLoops = true;
+    options.allowUnknownOps = true;
+    options.copyBeforeWrite = true;
+    pm.addPass(mlir::bufferization::createOneShotBufferizePass(options));
 
     pm.addPass(mlir::createCanonicalizerPass());
-    pm.addNestedPass<mlir::func::FuncOp>(mlir::tosa::createTosaOptionalDecompositions());
     pm.addPass(mlir::createCSEPass());
 
-    // ----------------------------------------------------------------------------
+// ============================================================================
+// PHASE 3: lowering to standard control flow (generic into cycles)
+// ============================================================================
 
-    pm.addPass(mlir::createConvertLinalgToStandardPass());
-
-    // ----------------------------------------------------------------------------
-
-    pm.addPass(mlir::createConvertTensorToLinalgPass());
+    pm.addPass(mlir::createConvertLinalgToLoopsPass());
+    pm.addPass(mlir::createConvertLinalgToParallelLoopsPass());
+    pm.addPass(mlir::createConvertLinalgToAffineLoopsPass());
     pm.addPass(mlir::createConvertSCFToCFPass());
 
-    // ----------------------------------------------------------------------------
+    pm.addNestedPass<mlir::func::FuncOp>(mlir::createConvertLinalgToLoopsPass());
+    pm.addNestedPass<mlir::func::FuncOp>(mlir::createConvertLinalgToParallelLoopsPass());
+    pm.addNestedPass<mlir::func::FuncOp>(mlir::createConvertLinalgToAffineLoopsPass());
+    // pm.addPass(mlir::createConvertLinalgToStandardPass());
+
+// ============================================================================
+// PHASE 4: lowering to LLVM IR
+// ============================================================================
 
     pm.addPass(mlir::createConvertFuncToLLVMPass());
+    pm.addPass(mlir::createArithToLLVMConversionPass());
+    pm.addPass(mlir::createFinalizeMemRefToLLVMConversionPass());
     pm.addPass(mlir::createReconcileUnrealizedCastsPass());
 
     // stream << "===== AFTER OPT ====" << "\n";
+
 
     auto result = pm.run(module);
     if (mlir::failed(result)) {
@@ -856,18 +915,22 @@ mlir::Value MLIRPrinter::createFilledTensor(mlir::RankedTensorType outtype) {
 
 mlir::Value MLIRPrinter::convertNCHWToNHWCVal(mlir::Value& val) {
     MSG("converting value form NCHW to NHWC\n");
-
+    llvm::errs() << "got value " << val << "| converting NCHW->NHWC" << "\n";
     auto tname = getNameBySSA(val);
     if (getStoreType(tname) == DataStoreType::NHWC) {
+        llvm::errs() << tname << " NHWC type already..." << "\n";
         return val;
     }
 
+
+    llvm::errs() << tname << " not NHWC type" << "\n";
     auto loc = builder_.getUnknownLoc();
     auto newInputType = convertNCHWToNHWC((val).getType());
     llvm::SmallVector<int32_t, 4> perms{0, 2, 3, 1};
     auto permType = mlir::RankedTensorType::get({4}, builder_.getI32Type());
     auto permAttr = mlir::DenseIntElementsAttr::get(permType, llvm::ArrayRef<int32_t>(perms));
     auto permConstOp = builder_.create<mlir::tosa::ConstOp>(loc, permType, permAttr);
+    MSG("creating transpose...\n");
     auto transOp = builder_.create<mlir::tosa::TransposeOp>(
         loc,
         newInputType,
@@ -875,6 +938,7 @@ mlir::Value MLIRPrinter::convertNCHWToNHWCVal(mlir::Value& val) {
         permConstOp.getResult()
     );
 
+    llvm::errs() << transOp << "\n";
     setStoreType(tname, DataStoreType::NHWC);
     return transOp;
 }
@@ -928,34 +992,47 @@ mlir::RankedTensorType MLIRPrinter::computeConv2DOutputType(
     int64_t H_in = inputShape[1];   LOG("H = {}\n", H_in);
     int64_t W_in = inputShape[2];   LOG("W = {}\n", W_in);
 
+    // TOSA Weights: [OC, KH, KW, IC]
     int64_t C_out = weightShape[0]; LOG("C_out = {}\n", C_out);
-    int64_t K_h = kernelValues[0];   LOG("K_h = {}\n", K_h);
-    int64_t K_w = kernelValues[1];   LOG("K_w = {}\n", K_w);
+    int64_t K_h = weightShape[1];   LOG("K_h = {}\n", K_h);
+    int64_t K_w = weightShape[2];   LOG("K_w = {}\n", K_w);
+    int64_t IC_weight = weightShape[3]; LOG("IC_w = {}\n", IC_weight);
+
     if (!K_w) { K_w = K_h; }
 
-    auto strSz = strideValues.size();
-    int64_t stride_h = strSz > 0 ? strideValues[0] : 1; LOG("stride_h = {}\n", stride_h);
-    if (!stride_h) { stride_h = 1; }
-    int64_t stride_w = strSz > 1 ? strideValues[1] : 1; LOG("stride_w = {}\n", stride_w);
-    if (!stride_w) { stride_w = stride_h; }
+    auto getVal = [](mlir::DenseArrayAttr attr, size_t idx, int64_t defaultVal) {
+        auto data = attr.getData();
+        auto val = (data.size() > idx) ? data[idx] : defaultVal;
+        return val != 0 ? val : defaultVal;
+    };
 
+    int64_t stride_h = getVal(stride, 0, 1);
+    int64_t stride_w = getVal(stride, 1, stride_h);
+    int64_t dil_h = getVal(dilation, 0, 1);
+    int64_t dil_w = getVal(dilation, 1, 1);
 
-    auto dilationSz = dilationValues.size();
-    int64_t dilation_h = dilationSz > 0 ? dilationValues[0] : 1; LOG("dilation_h = {}\n", dilation_h);
-    int64_t dilation_w = dilationSz > 1 ? dilationValues[1] : 1; LOG("dilation_ц = {}\n", dilation_w);
+    // TOSA Order: [top, bottom, left, right]
+    int64_t p_top = getVal(pad, 0, 0);
+    int64_t p_bottom = getVal(pad, 1, 0);
+    int64_t p_left = getVal(pad, 2, 0);
+    int64_t p_right = getVal(pad, 3, 0);
 
-    auto padSz = padValues.size();
-    int64_t pad_left =   padSz > 0 ? padValues[0] : 0;
-    int64_t pad_right =  padSz > 1 ? padValues[1] : 0;
-    int64_t pad_top =    padSz > 2 ? padValues[2] : 0;
-    int64_t pad_bottom = padSz > 3 ? padValues[3] : 0;
-    LOG("pads = [{}, {}, {}, {}]\n", pad_left, pad_right, pad_top, pad_bottom);
+    int64_t eff_K_h = dil_h * (K_h - 1) + 1;
+    int64_t eff_K_w = dil_w * (K_w - 1) + 1;
 
-    // int64_t H_out = (H_in - K_h + (pad_top + pad_bottom)) / stride_h + 1;
-    // int64_t W_out = (W_in - K_w +  (pad_right + pad_left)) / stride_w + 1;
+    auto calculateDim = [](int64_t in, int64_t k, int64_t p_total, int64_t s) -> int64_t {
+        if (in == -1) return -1;
+        int64_t out = (in + p_total - k) / s + 1;
+        return out > 0 ? out : 0;
+    };
 
-    auto H_out = mlir::ShapedType::kDynamic;
-    auto W_out = mlir::ShapedType::kDynamic;
+    // int64_t W_out = calculateDim(W_in, eff_K_w, p_left + p_right, stride_w);
+    // int64_t H_out = calculateDim(H_in, eff_K_h, p_top + p_bottom, stride_h);
+
+    int64_t H_out = mlir::ShapedType::kDynamic;
+    int64_t W_out = mlir::ShapedType::kDynamic;
+
+    LOG("pads = [{}, {}, {}, {}]\n", p_left, p_right, p_top, p_bottom);
 
     llvm::SmallVector<int64_t> outputShape = {N, H_out, W_out, C_out};
     auto elementType = inputType.getElementType();
@@ -1016,61 +1093,61 @@ mlir::RankedTensorType MLIRPrinter::computeMaxPool2DOutputType(
     MSG("Computing maxpool2d output type...\n");
 
     auto inputType = mlir::dyn_cast<mlir::RankedTensorType>(input.getType());
-    ON_DEBUG(llvm::errs() << "Got input type: " << inputType << "\n");
-
     if (!inputType) {
-        MSG("Error: Input type is not RankedTensorType\n");
-        return mlir::RankedTensorType::get({}, inputType ? inputType.getElementType() :
-               mlir::Float32Type::get(input.getContext()));
+        return mlir::RankedTensorType::get({-1, -1, -1, -1}, mlir::Float32Type::get(input.getContext()));
     }
 
     auto inputShape = inputType.getShape();
-    auto kernelValues = kernel_size.getData();
-    auto padValues = pad.getData();
-    auto strideValues = stride.getData();
-    auto dilationValues = dilation.getData();
 
-    int64_t N = inputShape[0];      LOG("N = {}\n", N);
-    int64_t C_in = inputShape[3];   LOG("C = {}\n", C_in);
-    int64_t H_in = inputShape[1];   LOG("H = {}\n", H_in);
-    int64_t W_in = inputShape[2];   LOG("W = {}\n", W_in);
+    // NHWC Layout
+    int64_t N = inputShape[0];
+    int64_t H_in = inputShape[1];
+    int64_t W_in = inputShape[2];
+    int64_t C_in = inputShape[3];
 
-    auto kernelSz = kernelValues.size();
-    int64_t K_h = kernelSz > 0 ? kernelValues[0] : 1; LOG("K_h = {}\n", K_h);
-    int64_t K_w = kernelSz > 1 ? kernelValues[1] : 1; LOG("K_w = {}\n", K_w);
-    if (!K_w) { K_w = K_h; }
+    // Лямбда для безопасного извлечения атрибутов
+    auto getSafeVal = [](mlir::DenseArrayAttr attr, size_t idx, int64_t defaultVal) {
+        if (!attr || attr.getData().size() <= idx) return defaultVal;
+        int64_t val = attr.getData()[idx];
+        return val > 0 ? val : defaultVal;
+    };
 
-    auto strSz = strideValues.size();
-    int64_t stride_h = strSz > 0 ? strideValues[0] : 1;
-    if (!stride_h) { stride_h = 1; } LOG("stride_h = {}\n", stride_h);
+    int64_t K_h = getSafeVal(kernel_size, 0, 1);
+    int64_t K_w = getSafeVal(kernel_size, 1, K_h);
 
-    int64_t stride_w = strSz > 1 ? strideValues[1] : 1;
-    if (!stride_w) { stride_w = stride_h; } LOG("stride_w = {}\n", stride_w);
+    int64_t stride_h = getSafeVal(stride, 0, 1);
+    int64_t stride_w = getSafeVal(stride, 1, stride_h);
 
-    auto dilationSz = dilationValues.size();
-    int64_t dilation_h = dilationSz > 0 ? dilationValues[0] : 1; LOG("dilation_h = {}\n", dilation_h);
-    int64_t dilation_w = dilationSz > 1 ? dilationValues[1] : 1; LOG("dilation_w = {}\n", dilation_w);
+    int64_t dil_h = getSafeVal(dilation, 0, 1);
+    int64_t dil_w = getSafeVal(dilation, 1, 1);
 
-    auto padSz = padValues.size();
-    int64_t pad_left =   padSz > 0 ? padValues[0] : 0;
-    int64_t pad_right =  padSz > 1 ? padValues[1] : 0;
-    int64_t pad_top =    padSz > 2 ? padValues[2] : 0;
-    int64_t pad_bottom = padSz > 3 ? padValues[3] : 0;
-    LOG("pads = [{}, {}, {}, {}]\n", pad_left, pad_right, pad_top, pad_bottom);
+    // TOSA Order: [top, bottom, left, right]
+    int64_t p_t = getSafeVal(pad, 0, 0);
+    int64_t p_b = getSafeVal(pad, 1, 0);
+    int64_t p_l = getSafeVal(pad, 2, 0);
+    int64_t p_r = getSafeVal(pad, 3, 0);
 
-    // int64_t H_out = (H_in - K_h + 2 *(pad_top + pad_bottom)) / stride_h + 1;
-    // int64_t W_out = ((W_in - K_w + 2 *(pad_right + pad_left)) / stride_w + 1);
+    int64_t eff_K_h = dil_h * (K_h - 1) + 1;
+    int64_t eff_K_w = dil_w * (K_w - 1) + 1;
+
+    auto calcDim = [](int64_t in, int64_t k, int64_t p, int64_t s) -> int64_t {
+        if (in == mlir::ShapedType::kDynamic) return mlir::ShapedType::kDynamic;
+        int64_t out = (in + p - k) / s + 1;
+        return out > 0 ? out : 0;
+    };
+
+    // int64_t H_out = calcDim(H_in, eff_K_h, p_t + p_b, stride_h);
+    // int64_t W_out = calcDim(W_in, eff_K_w, p_l + p_r, stride_w);
+
+
+    int64_t H_out = mlir::ShapedType::kDynamic;
+    int64_t W_out = mlir::ShapedType::kDynamic;
 
     int64_t C_out = C_in;
-
-    /* if (H_out < 0) */ auto H_out = mlir::ShapedType::kDynamic;
-    /* if (W_out < 0) */ auto W_out = mlir::ShapedType::kDynamic;
+    LOG("MaxPool2D: In[{}x{}x{}x{}] -> Out[{}x{}x{}x{}] (K={}x{}, S={}x{}, P=[{},{},{},{}])\n",
+        N, H_in, W_in, C_in, N, H_out, W_out, C_out, K_h, K_w, stride_h, stride_w, p_t, p_b, p_l, p_r);
 
     llvm::SmallVector<int64_t> outputShape = {N, H_out, W_out, C_out};
-    auto elementType = inputType.getElementType();
-
-    MSG("Finished computing maxpool2d output\n");
-    return mlir::RankedTensorType::get(outputShape, elementType);
+    return mlir::RankedTensorType::get(outputShape, inputType.getElementType());
 }
-
 } // namespace Bebra::MLIR

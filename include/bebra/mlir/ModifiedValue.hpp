@@ -8,9 +8,9 @@
 
 namespace Bebra::MLIR {
 enum class DataStoreType {
-    NHWC,
-    NCHW,
-    UNDEFINED
+    UNDEFINED = 0,
+    NHWC = 1,
+    NCHW = 2
 };
 
 struct ModifiedValue {
